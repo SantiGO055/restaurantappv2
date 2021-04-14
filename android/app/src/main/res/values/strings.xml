@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Aprendum</string>
-    <string name="title_activity_main">Aprendum</string>
-    <string name="package_name">ar.com.github.aprendum</string>
-    <string name="custom_url_scheme">ar.com.github.aprendum</string>
+    <string name="app_name">usuarium</string>
+    <string name="title_activity_main">Usuarium</string>
+    <string name="package_name">ar.com.github.usuarium</string>
+    <string name="custom_url_scheme">ar.com.github.usuarium</string>
 </resources>

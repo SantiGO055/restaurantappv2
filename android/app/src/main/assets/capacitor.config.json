@@ -1,6 +1,6 @@
 {
-  "appId": "ar.com.github.aprendum",
-  "appName": "aprendum",
+  "appId": "ar.com.github.usuarium",
+  "appName": "usuarium",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
