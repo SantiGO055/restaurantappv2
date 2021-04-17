@@ -6,10 +6,18 @@
   "webDir": "www",
   "linuxAndroidStudioPath": "/opt/android-studio/bin/studio.sh",
   "plugins": {
-    "SplashScreen": {
+     "SplashScreen": {
       "launchShowDuration": 0,
+      "launchAutoHide": true,
+      "backgroundColor": "#000000",
+      "androidSplashResourceName": "splash",
+      "androidScaleType": "CENTER_CROP",
+      "androidSpinnerStyle": "large",
+      "iosSpinnerStyle": "small",
+      "spinnerColor": "#999999",
       "showSpinner": false,
-      "launchAutoHide": true
+      "splashFullScreen": true,
+      "splashImmersive": true
     }
   },
   "cordova": {}
