@@ -1,178 +1,50 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="1024"
-   height="1024"
-   viewBox="0 0 270.93333 270.93334"
-   version="1.1"
-   id="svg1016"
-   inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="icon.svg"
-   inkscape:export-filename="/home/lavila/ppt-2021/loginApp/resources/icon.png"
-   inkscape:export-xdpi="120.16069"
-   inkscape:export-ydpi="120.16069">
-  <defs
-     id="defs1010" />
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="0.35"
-     inkscape:cx="480.5373"
-     inkscape:cy="746.64174"
-     inkscape:document-units="mm"
-     inkscape:current-layer="layer2"
-     showgrid="false"
-     inkscape:window-width="1920"
-     inkscape:window-height="1014"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:object-nodes="true"
-     units="px"
-     inkscape:pagecheckerboard="true" />
-  <metadata
-     id="metadata1013">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <g
-     inkscape:groupmode="layer"
-     id="layer1"
-     inkscape:label="Logo 1"
-     transform="translate(0,-26.06665)">
-    <g
-       inkscape:groupmode="layer"
-       id="layer7"
-       inkscape:label="fondo" />
-    <g
-       inkscape:groupmode="layer"
-       id="layer2"
-       inkscape:label="Logo">
-      <g
-         id="g52"
-         transform="translate(626.65398,756.06616)">
-        <g
-           id="g28">
-          <ellipse
-             style="fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:0.3329739;stroke-opacity:1"
-             id="path6418"
-             cx="-477.97614"
-             cy="-607.00604"
-             rx="106.92883"
-             ry="108.0718"
-             transform="matrix(0.99980087,-0.01995534,0.02408885,0.99970982,0,0)" />
-        </g>
-        <g
-           transform="matrix(1.270839,0,0,-1.270839,-1194.243,-408.38686)"
-           id="g1204">
-          <path
-             inkscape:connector-curvature="0"
-             id="path306"
-             style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-opacity:1"
-             d="m 599.425,121.785 v 67.647 l -58.583,33.823 -58.584,-33.823 v -67.647 l 58.584,-33.823 z" />
-          <g
-             id="g1149"
-             style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-opacity:1">
-            <path
-               inkscape:export-ydpi="72"
-               inkscape:export-xdpi="72"
-               inkscape:export-filename="/home/lavila/Descargas/iconoa.png"
-               d="m 599.425,121.785 v 67.647 l -58.583,33.823 -58.584,-33.823 v -67.647 l 58.584,-33.823 z"
-               style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-               id="path308"
-               inkscape:connector-curvature="0" />
-          </g>
-          <path
-             inkscape:connector-curvature="0"
-             id="path314"
-             style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-opacity:1"
-             d="m 498.006,180.068 -15.748,9.092" />
-          <path
-             inkscape:connector-curvature="0"
-             id="path316"
-             style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-             d="m 498.006,180.068 -15.748,9.092" />
-          <path
-             inkscape:connector-curvature="0"
-             id="path310"
-             style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-opacity:1"
-             d="m 576.023,135.296 v 40.625 l -35.181,20.312 -35.183,-20.312 v -40.625 l 35.183,-20.313 z" />
-          <path
-             inkscape:connector-curvature="0"
-             id="path312"
-             style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-             d="m 576.023,135.296 v 40.625 l -35.181,20.312 -35.183,-20.312 v -40.625 l 35.183,-20.313 z" />
-          <path
-             inkscape:connector-curvature="0"
-             id="path318"
-             style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-opacity:1"
-             d="m 576.023,135.296 v 40.625 l -35.181,20.312 -35.183,-20.312 v -40.625 l 35.183,-20.313 z" />
-          <path
-             inkscape:connector-curvature="0"
-             id="path320"
-             style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-             d="m 576.023,135.296 v 40.625 l -35.181,20.312 -35.183,-20.312 v -40.625 l 35.183,-20.313 z" />
-          <path
-             inkscape:connector-curvature="0"
-             id="path322"
-             style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-opacity:1"
-             d="m 505.659,175.9 v -40.604 l 35.183,-20.313 v 40.605 z" />
-          <path
-             inkscape:connector-curvature="0"
-             id="path324"
-             style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-             d="m 505.659,175.9 v -40.604 l 35.183,-20.313 v 40.605 z" />
-          <path
-             inkscape:connector-curvature="0"
-             id="path326"
-             style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-opacity:1"
-             d="m 540.842,114.983 v 40.605 l 35.181,20.312 v -40.604 z" />
-          <path
-             inkscape:connector-curvature="0"
-             id="path328"
-             style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-             d="m 540.842,114.983 v 40.605 l 35.181,20.312 v -40.604 z" />
-          <path
-             inkscape:connector-curvature="0"
-             id="path330"
-             style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-opacity:1"
-             d="m 599.425,189.16 -15.748,-9.092" />
-          <path
-             inkscape:connector-curvature="0"
-             id="path332"
-             style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-             d="m 599.425,189.16 -15.748,-9.092" />
-          <path
-             inkscape:connector-curvature="0"
-             id="path334"
-             style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-opacity:1"
-             d="M 540.842,106.146 V 87.724" />
-          <path
-             inkscape:connector-curvature="0"
-             id="path336"
-             style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-             d="M 540.842,106.146 V 87.724" />
-        </g>
-      </g>
-    </g>
-  </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1024 1024" style="enable-background:new 0 0 1024 1024;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:url(#SVGID_1_);}
+	.st1{opacity:0.32;}
+	.st2{fill:#FFFFFF;}
+</style>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="0" y1="511.9984" x2="1024" y2="511.9984">
+	<stop  offset="0" style="stop-color:#00A99D"/>
+	<stop  offset="1" style="stop-color:#662D91"/>
+</linearGradient>
+<path class="st0" d="M826.2,0H197.8C88.6,0,0,88.6,0,197.8v628.4C0,935.4,88.6,1024,197.8,1024h628.4
+	c109.2,0,197.8-88.6,197.8-197.8V197.8C1024,88.6,935.4,0,826.2,0z"/>
+<g class="st1">
+	<path class="st2" d="M775.5,70.7c47.5,0,92.1,18.5,125.7,52.1s52.1,78.2,52.1,125.7v527c0,47.5-18.5,92.1-52.1,125.7
+		c-33.6,33.6-78.2,52.1-125.7,52.1h-527c-47.5,0-92.1-18.5-125.7-52.1C89.2,867.6,70.7,823,70.7,775.5v-527
+		c0-47.5,18.5-92.1,52.1-125.7S201,70.7,248.5,70.7H775.5 M775.5,50.7h-527c-109.2,0-197.8,88.6-197.8,197.8v527
+		c0,109.2,88.6,197.8,197.8,197.8h527c109.2,0,197.8-88.6,197.8-197.8v-527C973.3,139.3,884.7,50.7,775.5,50.7L775.5,50.7z"/>
+</g>
+<path class="st2" d="M881.3,699.9c-0.2-6.8-5.9-12-12.7-11.6h0c-6.2,0.4-11.1,5.7-11,11.9c0.5,37-12.1,74.1-38,103.9
+	c-8.1-31.6-36.6-53.8-69.3-53.8h-11.9v-9.6c22.1-12.8,35.7-36.4,35.8-61.9v-47.7c0-0.3,0-0.7,0-1c-0.6-18.2-8-35.6-20.8-48.7
+	c-13.2-13.9-31.5-21.8-50.7-21.8c-39.5,0-71.5,32-71.5,71.5v47.7c0,25.5,13.6,49.1,35.8,61.9v9.6H655c-32.7,0-61.2,22.2-69.3,53.8
+	c-56-64.5-49.3-162,14.9-218.2c60.7-53.1,158-49,213.8,9.3c14.3,15,25.1,32.1,32.3,50.3c2.2,5.7,8.4,8.8,14.3,7.1h0
+	c6.8-1.9,10.5-9.2,7.9-15.8c-24.9-62.9-84.3-107.9-154.3-112.5V406.5c0-0.2,0-0.3,0-0.5c0-0.1,0-0.2,0-0.2v-38.3
+	c25.5-6.6,40.8-32.6,34.2-58.1c-6.6-25.5-32.6-40.8-58.1-34.2c-16.8,4.3-29.9,17.4-34.2,34.2H499.7
+	c-6.5-97.9-90.8-172.2-188.6-166.6c-62,3.6-115.1,38.7-144.3,88.9c-3.6,6.3-1,14.3,5.8,17h0c5.4,2.2,11.7,0.1,14.6-5
+	c26.8-46.3,76.8-77.4,134.1-77.5c85.6-0.1,155,69.2,155,154.8c0,37.4-13.5,73.5-38,101.7c-8.1-31.6-36.6-53.8-69.3-53.8h-11.9v-9.6
+	c22.1-12.8,35.7-36.4,35.8-61.9v-47.7c0-0.3,0-0.7,0-1c-0.6-18.2-8-35.6-20.8-48.7c-13.2-13.9-31.5-21.8-50.7-21.8
+	c-39.5,0-71.5,32-71.5,71.5v47.7c0,25.5,13.6,49.1,35.8,61.9v9.6h-11.9c-32.7,0-61.2,22.2-69.3,53.8c-24.5-28.1-38-64.2-38-101.5
+	c0-8.2,0.6-16.2,1.8-24.1c1-6.3-3.1-12.3-9.4-13.6c-6.6-1.4-13.1,3.1-14.1,9.7c-1.8,11.3-2.5,23-2,34.9
+	c3.6,91.6,75.7,165.3,166.7,171.4v156.8c-25.5,6.6-40.8,32.6-34.2,58.1s32.6,40.8,58.1,34.2c16.8-4.3,29.9-17.4,34.2-34.2h71.9
+	c6.6,0,11.9-5.3,11.9-11.9v0c0-6.6-5.3-11.9-11.9-11.9h-71.9c-4.4-16.8-17.5-29.9-34.2-34.2V499.7c89.3-6.1,160.4-77.2,166.4-166.4
+	h156.8c4.4,16.8,17.5,29.9,34.2,34.2v29v9.3v118.6c-88.6,6-160.3,76.6-166.4,166.4h-37.7c-6.5,0-11.9,5.3-11.9,11.8v0
+	c-0.1,6.6,5.3,12,11.9,12h37.7c6.6,98.3,91.4,172.7,189.6,166.5c92.5-5.8,164-80.2,167.4-171.3C881.4,707.8,881.4,703.9,881.3,699.9
+	z M273.7,249.8c0-26.3,21.4-47.6,47.7-47.7c18.8,0,35.5,12,43.2,28.8c-29.6,13.2-53.8,17.5-69.6,18.8
+	C287.9,250.4,280.7,250.4,273.7,249.8L273.7,249.8z M273.7,297.5v-23.7c2.8,0.2,5.9,0.3,9.5,0.3c19.3,0,49.1-3.5,85.9-19.1v42.5
+	c0,26.3-21.4,47.6-47.7,47.7C295,345.1,273.7,323.8,273.7,297.5z M333.2,368v12.9c0,6.6-5.3,11.9-11.9,11.9
+	c-6.6,0-11.9-5.3-11.9-11.9V368C317.3,369.3,325.4,369.3,333.2,368z M345.2,702.7c0,13.2-10.7,23.8-23.8,23.8
+	c-13.2,0-23.8-10.7-23.8-23.8s10.7-23.8,23.8-23.8C334.5,678.8,345.2,689.5,345.2,702.7z M226.4,443.7l-0.4-3.2
+	c0-26.3,21.4-47.6,47.7-47.7h14c6.6,18.6,27,28.4,45.6,21.8c10.2-3.6,18.2-11.6,21.8-21.8h14c26.3,0,47.6,21.4,47.7,47.7l-0.6,3.3
+	C360.3,487.1,282.2,487,226.4,443.7z M678.8,321.3c0-13.2,10.7-23.8,23.8-23.8c13.2,0,23.8,10.7,23.8,23.8s-10.7,23.8-23.8,23.8
+	C689.5,345.2,678.8,334.5,678.8,321.3z M655,631.2c0-26.3,21.4-47.6,47.7-47.7c18.8,0,35.5,12,43.2,28.8
+	c-29.6,13.2-53.8,17.5-69.6,18.8C669.2,631.7,662.1,631.7,655,631.2L655,631.2z M655,678.8v-23.7c2.8,0.2,5.9,0.3,9.5,0.3
+	c19.3,0,49.1-3.5,85.9-19.1v42.5c0,26.3-21.3,47.7-47.7,47.7C676.4,726.5,655,705.2,655,678.8z M714.6,749.3v12.9
+	c0,6.6-5.3,11.9-11.9,11.9c-6.6,0-11.9-5.3-11.9-11.9v-12.9C698.6,750.7,706.7,750.7,714.6,749.3z M702.7,857.6
+	c-34.6,0-68.1-11.6-95.3-32.8l-0.1-2.9c0-26.3,21.4-47.6,47.7-47.7h14c6.6,18.6,27,28.4,45.6,21.8c10.2-3.6,18.2-11.6,21.8-21.8h14
+	c26.3,0,47.6,21.4,47.7,47.7l-0.4,3.2C770.5,846.1,737.1,857.6,702.7,857.6z"/>
 </svg>
