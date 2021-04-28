@@ -16,7 +16,7 @@ const routes: Routes = [
   },  
   {
     path: 'dashboard',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
+    loadChildren: () => import('./dashboard/tabs.module').then(m => m.TabsPageModule),
     canLoad:[AuthGuard],
   },
   {

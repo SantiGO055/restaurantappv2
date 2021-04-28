@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import { ListarPageModule } from '../listar/listar.module';
 
 const routes: Routes = [
   {
@@ -8,20 +9,16 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
-        loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+        path: 'listar',
+        loadChildren: () => import('../listar/listar.module').then(m => m.ListarPageModule)
       },
       {
-        path: 'tab2',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
-      },
-      {
-        path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
-      },
+        path: 'crear',
+        loadChildren: () => import('../crear/crear.module').then(m => m.CrearPageModule)
+      },    
       {
         path: '',
-        redirectTo: '/dashboard/tab1',
+        redirectTo: '/dashboard/listar',
         pathMatch: 'full'
       }
     ]
