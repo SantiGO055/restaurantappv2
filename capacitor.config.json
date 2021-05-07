@@ -6,7 +6,7 @@
   "webDir": "www",
   "linuxAndroidStudioPath": "/opt/android-studio/bin/studio.sh",
   "plugins": {
-     "SplashScreen": {
+    "SplashScreen": {
       "launchShowDuration": 0,
       "launchAutoHide": true,
       "backgroundColor": "#000000",

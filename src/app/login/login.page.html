@@ -1,39 +1,61 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Ingresar</ion-title>
+    <ion-title>Ingresar al gestor de usuarios</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-row>
-    <ion-col>
-      <form [formGroup]="ionicForm" (ngSubmit)="login()" novalidate>
-        <div class="input-group">
-          <ion-item >
-            <ion-label position="floating">Email</ion-label>
+
+  <form [formGroup]="ionicForm" (ngSubmit)="login()" novalidate>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          
+            <ion-label>Correo</ion-label>
             <ion-input type="email" formControlName="username" required></ion-input>
-          </ion-item>
+          
           <!-- user error messages -->
           <div *ngIf="(username.dirty || username.touched) && username.errors" class="errors ion-padding">
-          <span *ngIf="username.errors?.required"> El email es requerido.</span>
-          <span *ngIf="username.errors?.minlength"> El email debe tener al menos cuatro caracteres.</span>
-          <span *ngIf="username.errors?.email"> Debe agregar un email valido.</span>
+            <span *ngIf="username.errors?.required"> El correo es requerido.</span>
+            <span *ngIf="username.errors?.minlength"> El correo debe tener al menos cuatro carácteres.</span>
+            <span *ngIf="username.errors?.email"> Debe agregar un correo valido.</span>
           </div>
-        </div>
-        <div class="input-group">
-          <ion-item >
-            <ion-label position="floating">Password</ion-label>
-            <ion-input type="password" formControlName="password" required></ion-input>
-          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>          
+          <ion-label>Contraseña</ion-label>
+          <ion-input type="password" formControlName="password" required></ion-input>          
           <!-- password Error messages -->
           <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors ion-padding">
-            <span *ngIf="password.errors?.required"> El password es requerido.</span>
-            <span *ngIf="password.errors?.minlength"> El password debe tener al menos cuatro caracteres.</span>
+            <span *ngIf="password.errors?.required"> La contraseña es requerida.</span>
+            <span *ngIf="password.errors?.minlength"> La contraseña debe tener al menos cuatro carácteres.</span>
           </div>
-        </div>
-        <ion-button type="submit" expand="block">Ingresar</ion-button>
-        <ion-button type="button" expand="block" color="secondary"  [routerLink]="['/register']" >¡ Crear una cuenta !</ion-button>
-      </form>
-    </ion-col>
-  </ion-row>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" expand="block" color="dark" >Ingresar</ion-button>
+          <!--
+        <ion-button type="button" expand="block" color="secondary"  [routerLink]="['/register']" >¡ Crear una cuenta !</ion-button>      
+        -->
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 </ion-content>
+
+<ion-footer class="ion-no-border ion-text-center ">
+  <ion-list>
+    <ion-item>
+      <ion-label>Accesos</ion-label>
+      <ion-select [(ngModel)]="tester" (ionChange)="selectedTester(tester)" okText="Seleccionar" cancelText="Cancelar">
+        <ion-select-option value="admin">ADMIN</ion-select-option>
+        <ion-select-option value="invitado">INIVITADO</ion-select-option>
+        <ion-select-option value="usuario">USUARIO</ion-select-option>
+        <ion-select-option value="anonimo">ANONIMO</ion-select-option>
+        <ion-select-option value="tester">TESTER</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+</ion-footer>
