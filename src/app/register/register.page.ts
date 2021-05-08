@@ -27,9 +27,9 @@ export class RegisterPage implements OnInit {
     this.errorMessage = '';
     this.isSubmitted = false;
     this.ionicRegister = this.formBuilder.group({
-      username: ['tst@tester.com', [Validators.required, Validators.minLength(4), Validators.email]],
-      password: ['tester', [Validators.required, Validators.minLength(4)]],
-      confirm: ['tester', [Validators.required, Validators.minLength(4)]]
+      username: ['', [Validators.required, Validators.minLength(4), Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(4)]],
+      confirm: ['', [Validators.required, Validators.minLength(4)]]
     })
   }
 

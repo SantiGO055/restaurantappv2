@@ -22,6 +22,9 @@ export class ListarPage implements OnInit {
     public router:Router
   ) {
    }
+   scanearQR(){
+     this.router.navigateByUrl('qrcode');
+   }
 
    async loadUsers(page:number) {
     const loading = await this.loadingController.create();

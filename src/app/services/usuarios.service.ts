@@ -15,10 +15,18 @@ export class UsuariosService {
     private httpService: HttpService
   ) { }
 
-  crear(postData : { nombre:string , apellido:string , dni:string , username:string , password:string } ): Observable<any> {  
-    //@todo sacar los datos completos , cargar el sexo
-    const user = {username:postData.username, password:postData.password,name:postData.nombre,surname:postData.apellido,sexo:'F',role:'admin',dni:postData.dni } as ApiUser;
-    return  this.httpService.post(this.ENDPOINT_URL, postData);
+  crear(postData  ): Observable<any> {  
+    const user = {
+      "username":postData.username,
+       "password":postData.password,
+       "name":postData.nombre,
+       "surname":postData.apellidos,
+       "sexo":'F',
+       "role":'usuario',
+       "dni":postData.dni,
+       "avatar":postData.avatar
+       } ;
+    return  this.httpService.post(this.ENDPOINT_URL, user);
   }
 
   get(page:number): Observable<any> {          

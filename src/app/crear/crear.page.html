@@ -5,8 +5,17 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="ionicForm" (ngSubmit)="crear()" novalidate>
+  
+  <form [formGroup]="ionicForm"  (ngSubmit)="crear()" novalidate>
     <ion-list>
+      <!--
+      <ion-button *ngIf="!avatar" expand="block" class="foto"   (click)="presentModal()" >
+        <ion-icon slot="start" name="camera-outline"></ion-icon>
+        Tomar Foto
+      </ion-button>
+       <ion-img *ngIf="avatar" [src]="avatar" alt="Tomar foto"></ion-img>
+      -->
+      <ion-img src="assets/avatar/noexist.png" alt="Tomar foto"></ion-img>
       <!-- nombre -->
       <ion-item>
         <ion-label>Nombre</ion-label>
@@ -48,7 +57,7 @@
         <span *ngIf="username.errors?.email"> Debe agregar un correo valido.</span>
       </div>
 
-      <!-- nombre -->
+      <!-- password -->
       <ion-item>
         <ion-label>Contraseña</ion-label>
         <ion-input type="password" formControlName="password" required></ion-input>
@@ -57,10 +66,19 @@
       <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors ion-padding">
         <span *ngIf="password.errors?.required"> La contraseña es requerida.</span>
         <span *ngIf="password.errors?.minlength">La contraseña debe tener al menos cuatro carácteres.</span>
+      </div>                 
+      <!-- confirm -->
+      <ion-item>
+        <ion-label>Confirmar contraseña</ion-label>
+        <ion-input formControlName="confirm" type="password" ngModel required (keyup)="checkPassSame()"></ion-input>        
+      </ion-item>
+      <!-- password Error messages -->
+      <div *ngIf="(confirm.dirty || confirm.touched) && confirm.errors" class="errors ion-padding">
+        <span *ngIf="confirm.errors?.required"> La confirmaci&oacute;n de contraseña es requerida.</span>
+        <span *ngIf="errorMessage != ''"> La confirmaci&oacute;n de contraseña debe ser igual al password.</span>
+        <span *ngIf="confirm.errors?.minlength">La confirmaci&oacute;n de contraseña debe tener al menos cuatro carácteres.</span>        
       </div>      
     </ion-list>
-    
-      <ion-button type="submit" expand="block" color="success"    >Crear usuario</ion-button>
-    
+    <ion-button type="submit" expand="block" color="success"    >Crear usuario</ion-button>      
   </form>
 </ion-content>

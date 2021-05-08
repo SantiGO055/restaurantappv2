@@ -1,0 +1,30 @@
+ion-content.site{
+    --padding-top: 10%;    
+ --background:white;
+}
+ion-content.scan{
+    --background:#00000000;
+}
+ion-content ion-grid {
+    margin-top:15vh;
+    text-align: center;
+}
+ion-content ion-button{
+    --background:rgb(107, 223, 107);
+    height: 12vh;
+    margin-top:18px;    
+}
+
+
+.scanbox{
+    border:2px solid #fff;
+    box-shadow: 0 0 0 100vmax rgba(0,0,0,0.5);
+    content:'';
+    display:block;
+    left: 50%;
+    height: 300px;
+    position:absolute;
+    top:50%;
+    transform: translate(-50%, -50%);
+    width:300px;
+}

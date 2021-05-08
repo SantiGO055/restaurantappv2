@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import {  Observable } from 'rxjs';
 import { HttpService } from './http.service';
-import { ApiPhoto } from '../entities/apiPhoto';
-import { ApiPhotoList } from '../entities/apiPhotoList';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,17 +14,26 @@ export class PhotoapiService {
     
   ) { }
 
-  upload(photo:ApiPhoto): Observable<any> {      
-    return  this.httpService.post(this.PATH, photo);
+  //@todo subir a storage subir a s
+  uploadImageFile(file: File) {
+    const ext = file.name.split('.').pop();
+    const formData = new FormData();
+    formData.append('file', file, `avatar.${ext}`);
+    formData.append('name', file.name);
+    //@todo cargar la imagen en storage
+    return new Observable;
+    //return this.http.post(`${this.url}/image`, formData);
   }
-
-  get(page:number): Observable<any> {          
-    return  this.httpService.get(this.PATH+'/'+page).pipe(
-      map( 
-        (list:ApiPhotoList) => {
-        return list.list;
-      }
-    )
-    );
-  }  
+  
+  uploadImage(blobData, name, ext) {
+    const formData = new FormData();
+    formData.append('file', blobData, `myimage.${ext}`);
+    formData.append('name', name);
+    return new Observable;
+  //  return this.http.post(`${this.url}/image`, formData);
+  }
+  /*
+  upload(photo:any): Observable<any> {      
+    return  this.httpService.post(this.PATH, photo);
+  }*/
 }

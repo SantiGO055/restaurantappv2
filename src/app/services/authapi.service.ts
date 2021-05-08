@@ -4,8 +4,7 @@ import { HttpService } from './http.service';
 import { AuthConstants } from '../config/auth-constants';
 import {map, tap, switchMap } from 'rxjs/operators';
 import { StorageService } from './storage.service';
-import { ApiUser } from '../entities/apiUser';
-import { ResolveStart } from '@angular/router';
+import { LoginResponse } from '../entities/loginResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -32,13 +31,18 @@ export class AuthapiService {
     }
   }
 
+  async comparePassword(password:string){
+    const pass = await this.storageService.get(AuthConstants.ADMIN_CODE);
+    return pass == password;
+  }
+
   login(postData : { username:string , password:string } ): Observable<any> {  
     return  this.httpService.post(AuthConstants.LOGIN_PATH, postData).pipe(
-      map( (data:any) =>  data.token),
+      map( (data:LoginResponse) =>  data),
       switchMap(
-        token=>{ 
+        (data:LoginResponse)=>{ 
           return from(
-            this.storageService.set(AuthConstants.AUTH, token)            
+            this.storageService.setLoginData(data)
           );                     
         }
       ),
@@ -48,10 +52,8 @@ export class AuthapiService {
     );    
   }
 
-  register(postData: {username:string, password:string,}): Observable<any> { 
-    //@todo agregar al registro
-      const user = {username:postData.username, password:postData.password,name:'name',surname:'surname',sexo:'F',role:'admin',dni:'123123123123' } as ApiUser;
-      return  this.httpService.post(AuthConstants.REGISTER_PATH, user);    
+  register(postData: {username:string, password:string}): Observable<any> { 
+      return  this.httpService.post(AuthConstants.REGISTER_PATH, {username:postData.username,password:postData.password});    
   }
 
   logout() {

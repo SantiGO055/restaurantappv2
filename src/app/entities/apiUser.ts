@@ -6,5 +6,6 @@ export interface ApiUser {
     sexo:string
     role:String
     dni:string    
+    avatar?:string
 }
 
