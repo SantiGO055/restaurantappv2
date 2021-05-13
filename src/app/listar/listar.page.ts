@@ -5,6 +5,7 @@ import { ApiUser } from '../entities/apiUser';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { UsuariosService } from '../services/usuarios.service';
 import { Router } from '@angular/router';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-listar',
@@ -14,14 +15,18 @@ import { Router } from '@angular/router';
 export class ListarPage implements OnInit {
 
   private _users:ApiUser[];
+  isAdmin:boolean;
   
   constructor(
     public loadingController:LoadingController,
     public userService:UsuariosService,
     public toastController:ToastController,
-    public router:Router
+    public router:Router,
+    public storageService:StorageService
   ) {
+    this.loadUsers(1);      
    }
+
    scanearQR(){
      this.router.navigateByUrl('qrcode');
    }
@@ -32,6 +37,8 @@ export class ListarPage implements OnInit {
     this.userService.get(page).subscribe((data)=>{         
       loading.dismiss();               
       this._users = data;      
+    },(error)=>{
+      loading.dismiss();               
     });        
   }
 
@@ -49,8 +56,9 @@ export class ListarPage implements OnInit {
      return this._users;
    }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.loadUsers(1);  
+    this.isAdmin = await this.storageService.isAdmin();
   }
 
   crear()

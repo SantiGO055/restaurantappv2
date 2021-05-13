@@ -7,6 +7,8 @@
 1. `ionic capacitor add android`
 2. `ionic capacitor copy android`
 3. `ionic capacitor run android -l --host=YOUR_IP_ADDRESS`
+ionic cap copy
+ionic cap open android
 ## Ubicar los dispositivos conectados
 1. `adb devices` 
 2. `ionic capacitor run android --livereload --external`

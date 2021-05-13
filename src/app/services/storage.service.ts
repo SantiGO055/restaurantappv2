@@ -21,6 +21,7 @@ export class StorageService {
   }
 
   async isAdmin(){
+    console.log(this.get(AuthConstants.IS_ADMIN));
     return this.get(AuthConstants.IS_ADMIN);
   }
 

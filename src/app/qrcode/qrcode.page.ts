@@ -33,7 +33,7 @@ export class QrcodePage implements OnInit {
        this.router.navigateByUrl('dashboard/listar');
      }
    
-     ngOnDestroy() {
+     ngOnDestroy() { 
        this.lectorqrService.stopScan();
      }
    

@@ -17,10 +17,13 @@
       </ion-label>
     </ion-item>
   </ion-list>
-</ion-content> 
-<ion-footer>
-  <ion-button (click)="crear()" expand="full" color="success" >Crear Usuario</ion-button>
-  <ion-button (click)="scanearQR()" expand="full" color="success" >Scanear DNI</ion-button>
-</ion-footer>
-
+  <ion-fab horizontal="end" vertical="top" slot="fixed" *ngIf="isAdmin">
+    <ion-fab-button  color="light">
+      <ion-icon name="add"  (click)="crear()" ></ion-icon>
+    </ion-fab-button>      
+    <ion-fab-button  color="light"  >
+      <ion-icon name="qr-code"  (click)="scanearQR()" ></ion-icon>
+    </ion-fab-button>    
+  </ion-fab>  
+</ion-content>
 
