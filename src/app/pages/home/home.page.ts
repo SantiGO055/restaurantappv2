@@ -30,7 +30,7 @@ export class HomePage implements OnInit {
     let usuario:Usuario= {
       id: 1,
       name: 'Santi Prueba',
-      email: 'asd@asd.asd',
+      email: 'santigonzalez05@gmail.com',
       photo: 'asd'
     }
     this.emailjs.sendEmail(usuario,'El usuario ha sido activado');

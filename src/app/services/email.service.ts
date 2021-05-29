@@ -9,19 +9,23 @@ import { Usuario } from '../entities/usuario';
 export class EmailService {
 
   
-  constructor() { }
+  constructor() {
+    init("user_E6lUfQNLblPkdsA4OSKpD");
+   }
 
   public sendEmail(user: Usuario,mensaje: string) {
     let templateParams =  {
       from_name: 'Lo de Tito',
       to_name: user.name,
       message: mensaje,
-      reply_to: user.email,
+      to_email: user.email,
 
     }
       console.log(user);
+      console.log(templateParams);
+      
 
-    emailjs.send('service_r4gna47', 'template_v3mqgrm', templateParams,"user_E6lUfQNLblPkdsA4OSKpD")
+    emailjs.send('service_r4gna47', 'template_v3mqgrm', templateParams)
       .then((result: EmailJSResponseStatus) => {
 
         console.log(result.text);
