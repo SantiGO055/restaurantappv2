@@ -5,37 +5,40 @@ import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [  
   {
-    path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),    
-    canLoad:[AutoLoginGuard],
-  },    
-  {
-    path: 'register',
-    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule),
-    canLoad:[AutoLoginGuard],
-  },  
-  {
-    path: 'dashboard',
-    loadChildren: () => import('./dashboard/tabs.module').then(m => m.TabsPageModule),
-    canLoad:[AuthGuard],
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
   },
   {
-    path:'',
-    redirectTo:'/login',
-    pathMatch:'full'
+    path: 'login',
+    loadChildren: () =>
+      import('./pages/login/login.module').then((m) => m.LoginPageModule),
+      canLoad:[AutoLoginGuard],
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./pages/dashboard/dashboard.module').then(
+        (m) => m.DashboardPageModule
+      ),
+     canLoad:[AuthGuard],
+  },
+  {
+    path: 'register',
+    loadChildren: () =>
+      import('./pages/register/register.module').then(
+        (m) => m.RegisterPageModule
+      ),
+  },
+  {
+    path: 'olvido',
+    loadChildren: () =>
+      import('./pages/olvido/olvido.module').then((m) => m.OlividoPageModule),
   },
   {
     path: 'splash',
-    loadChildren: () => import('./splash/splash.module').then( m => m.SplashPageModule)
+    loadChildren: () => import('./pages/splash/splash.module').then( m => m.SplashPageModule)
   },
-  {
-    path: 'avatar',
-    loadChildren: () => import('./avatar/avatar.module').then( m => m.AvatarPageModule)
-  },
-  {
-    path: 'qrcode',
-    loadChildren: () => import('./qrcode/qrcode.module').then( m => m.QrcodePageModule)
-  }
 ];
 @NgModule({
   imports: [

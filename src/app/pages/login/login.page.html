@@ -1,0 +1,56 @@
+<ion-content>  
+  
+  <form [formGroup]="ionicForm"  novalidate (ngSubmit)="login()">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-img src="assets/logo/logo_white_large.png"  alt="Lo de tito"></ion-img>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>          
+            <ion-label>Correo</ion-label>
+            <ion-input type="email" formControlName="username" required></ion-input>          
+          <!-- user error messages -->
+          <div *ngIf="(username.dirty || username.touched) && username.errors" class="errors ion-padding">
+            <span *ngIf="username.errors?.required"> El correo es requerido.</span>
+            <span *ngIf="username.errors?.minlength"> El correo debe tener al menos cuatro carácteres.</span>
+            <span *ngIf="username.errors?.email"> Debe agregar un correo valido.</span>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>          
+          <ion-label>Contraseña</ion-label>
+          <ion-input type="password" formControlName="password" required></ion-input>          
+          <!-- password Error messages -->
+          <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors ion-padding">
+            <span *ngIf="password.errors?.required"> La contraseña es requerida.</span>
+            <span *ngIf="password.errors?.minlength"> La contraseña debe tener al menos cuatro carácteres.</span>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" expand="block" color="tertiary" [disabled]="!ionicForm.valid" >Ingresar</ion-button>          
+          <ion-button type="button" expand="block" color="tertiary"  [routerLink]="['/register']" >¡ Registrarse como cliente !</ion-button>              
+          <ion-button type="button" expand="block" color="tertiary"  [routerLink]="['/olvido']" >¡ Olvidé mi contraseña !</ion-button>              
+          <!-- @todo Corregir esto 
+          <ion-button type="submit" expand="block" color="tertiary" (click)="loginGoogle()"  ><ion-icon slot="start" name="logo-google"></ion-icon>Ingresar con Google</ion-button>                    
+          -->
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
+
+<ion-footer class="ion-no-border ion-text-center ">
+  <ion-list>
+    <ion-item>
+      <ion-label>Accesos</ion-label>
+      <ion-select [(ngModel)]="tester" (ionChange)="selectedTester(tester)" okText="Seleccionar" cancelText="Cancelar">
+        <ion-select-option *ngFor="let usuario of loginService.getUsuariosTest()"  value="{{ usuario.uid}}">{{ usuario.nombre}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+</ion-footer>

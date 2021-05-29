@@ -1,0 +1,38 @@
+<ion-split-pane contentId="content">
+  <ion-menu contentId="content" menuId="first">
+    <!--
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title> </ion-title>
+      </ion-toolbar>
+    </ion-header>
+    -->
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle auto-hide="false" menu="first">
+          <!-- alta dueño -->
+          <ion-item
+            routerLink="/dashboard/home"
+            routerDirection="root"
+            routerLinkActive="active-item"
+          >
+            <ion-label>Home </ion-label>
+          </ion-item>
+          <!-- alta empleado-->
+          <ion-item
+            routerLink="/dashboard/alta-duenio"
+            routerDirection="root"
+            routerLinkActive="active-item"
+          >
+            <ion-label> Alta dueño </ion-label>
+          </ion-item>
+          <!-- logout -->
+          <ion-item (click)="logout()"  routerLinkActive="active-item" routerDirection="root" >            
+            <ion-label> Cerrar sesion </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="content"></ion-router-outlet>
+</ion-split-pane>

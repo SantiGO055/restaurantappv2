@@ -1,0 +1,103 @@
+<ion-content>
+  <form [formGroup]="ionicRegister" (ngSubmit)="register()" novalidate>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-img
+            src="assets/logo/logo_white_large.png"
+            alt="Lo de tito"
+          ></ion-img>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-label>Correo</ion-label>
+          <ion-input
+            formControlName="username"
+            type="email"
+            placeholder="Email"
+            required
+          ></ion-input>
+
+          <!-- user error messages -->
+          <div
+            *ngIf="(username.dirty || username.touched) && username.errors"
+            class="errors ion-padding"
+          >
+            <span *ngIf="username.errors?.required">
+              El correo es requerido.</span
+            >
+            <span *ngIf="username.errors?.minlength">
+              El correo debe tener al menos cuatro caracteres.</span
+            >
+            <span *ngIf="username.errors?.email">
+              Debe agregar un correo valido.</span
+            >
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-label>Contraseña</ion-label>
+          <ion-input
+            formControlName="password"
+            type="password"
+            placeholder="Password"
+            required
+          ></ion-input>
+
+          <!-- Error messages -->
+          <!-- password Error messages -->
+          <div
+            *ngIf="(password.dirty || password.touched) && password.errors"
+            class="errors ion-padding"
+          >
+            <span *ngIf="password.errors?.required">
+              La contraseña es requerida.</span
+            >
+            <span *ngIf="password.errors?.minlength">
+              La contraseña debe tener al menos cuatro carácteres.</span
+            >
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-label>Confirmación de contraseña</ion-label>
+          <ion-input
+            formControlName="confirm"
+            type="password"
+            placeholder="Repetir Password"
+            required
+            (keyup)="checkPassSame()"
+          ></ion-input>
+
+          <!-- Error messages -->
+          <div
+            *ngIf="(confirm.dirty || confirm.touched) && confirm.errors"
+            class="errors ion-padding"
+          >
+            <span *ngIf="password.errors?.required">
+              La confirmación es requerida.</span
+            >
+            <span *ngIf="password.errors?.minlength">
+              La confirmación debe tener al menos cuatro carácteres.</span
+            >
+            <span *ngIf="errorMessage != ''">
+              La confirmación de contraseña debe ser igual a la
+              contraseña.</span
+            >
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" expand="block" color="tertiary">Crear cuenta</ion-button>
+          <ion-button type="button" expand="block" color="tertiary" [routerLink]="['/login']">¡ Ya tengo una cuenta  !</ion-button
+          >
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

@@ -1,4 +1,9 @@
 export interface ScanResult{
-    code:string
-    credit:number
+    nombre:string
+    apellidos:string
+    dni:string
+    sexo:string
+    role:string
+
 }
+

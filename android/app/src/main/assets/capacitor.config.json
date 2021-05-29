@@ -1,6 +1,6 @@
 {
-  "appId": "ar.com.github.usuarium",
-  "appName": "usuarium",
+  "appId": "ar.com.github.lodetito",
+  "appName": "lodetito",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

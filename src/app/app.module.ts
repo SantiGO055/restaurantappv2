@@ -14,7 +14,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TokenInterceptor } from './interceptor/token';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,15 +23,14 @@ import { TokenInterceptor } from './interceptor/token';
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig, 'mytestapp'),
+    AngularFireModule.initializeApp(environment.firebase, 'mytestapp'),
     AngularFireAuthModule,
     AngularFirestoreModule, 
     IonicStorageModule.forRoot(),
     HttpClientModule,
   ],
   providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: HTTP_INTERCEPTORS, useClass:TokenInterceptor, multi:true}
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }    
   ],
   bootstrap: [AppComponent],
 })

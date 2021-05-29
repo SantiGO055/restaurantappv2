@@ -1,5 +1,5 @@
 {
-  "name": "loginApp",
+  "name": "usuarium",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
@@ -23,6 +23,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/animations": "^12.0.2",
     "@angular/common": "~11.2.0",
     "@angular/core": "~11.2.0",
     "@angular/fire": "^6.1.4",
@@ -34,18 +35,18 @@
     "@capacitor/android": "^2.4.7",
     "@capacitor/core": "2.4.7",
     "@ionic/angular": "^5.5.2",
-    "@ionic/pwa-elements": "^3.0.2",
     "@ionic/storage": "^3.0.2",
     "@ionic/storage-angular": "^3.0.2",
     "admin-lte": "^3.0.5",
     "capacitor-resources": "^2.0.5",
     "firebase": "^8.3.1",
+    "ngx-spinner": "^11.0.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.901.15",
+    "@angular-devkit/build-angular": "^12.0.2",
     "@angular/cli": "~11.2.4",
     "@angular/compiler": "~11.2.0",
     "@angular/compiler-cli": "~11.2.0",
