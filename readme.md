@@ -5,11 +5,8 @@
 1. `capacitor-resources`
 ## ANDROID 
 1. `ionic capacitor add android`
-2. `ionic capacitor copy android`
-3. `ionic capacitor run android -l --host=YOUR_IP_ADDRESS`
-ionic cap copy
-ionic cap open android
+2. `ionic capacitor sync android`
+3. `ionic capacitor run android` 
+4. `ionic cap open android`
 ## Ubicar los dispositivos conectados
-1. `adb devices` 
-2. `ionic capacitor run android --livereload --external`
-3. `ionic capacitor run android --livereload --external --public-host=192.168.0.32`
+1. `adb devices`  para encontrar los dispositivos conectados
