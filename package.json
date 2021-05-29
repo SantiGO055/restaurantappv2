@@ -37,6 +37,7 @@
     "@ionic/angular": "^5.5.2",
     "@ionic/storage": "^3.0.2",
     "@ionic/storage-angular": "^3.0.2",
+    "@sweetalert2/ngx-sweetalert2": "^10.0.0",
     "admin-lte": "^3.0.5",
     "capacitor-resources": "^2.0.5",
     "emailjs": "^3.4.0",
@@ -44,6 +45,7 @@
     "firebase": "^8.3.1",
     "ngx-spinner": "^11.0.1",
     "rxjs": "~6.6.0",
+    "sweetalert2": "^11.0.14",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },
