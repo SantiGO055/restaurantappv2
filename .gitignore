@@ -37,4 +37,3 @@ npm-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
-/src/environments/**
