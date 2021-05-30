@@ -72,7 +72,7 @@ export class RegisterPage implements OnInit {
         );        
       } else {
         this.spinnerService.mostrarSpinner();
-        //
+        // en vez de pasar el form, crear el objeto usuario antes y pasarlo al servicio, asi de paso se crea la coleccion de apiUser con su rol y todos sus datos
         this.loginService.register(this.ionicRegister.value).then(
           async (res) => {
             this.spinnerService.ocultarSpinner();
