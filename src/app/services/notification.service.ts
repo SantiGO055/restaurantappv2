@@ -22,6 +22,9 @@ const { PushNotifications } = Plugins;
 export class NotificationService {
   token: PushNotificationToken;
 
+
+  /** al momento de loguear un usuario, guardar en la base el token con la data del usuario logueado, 
+   * entonces cuando se quiera enviar una notificacion obtengo a que rol quiero enviarla y obtengo el token de ese celu segun el rol */
   tokenNotifCollection: AngularFirestoreCollection<TokenNotification>;
   private dbpath = '/tokenNotification';
   public tokenNotif: Observable<TokenNotification[]>;
