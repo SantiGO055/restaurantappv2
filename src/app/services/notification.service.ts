@@ -1,5 +1,6 @@
 import { HttpClient, HttpEvent, HttpHandler, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
 import {
   Plugins,
@@ -8,7 +9,9 @@ import {
   PushNotificationActionPerformed,
 } from '@capacitor/core';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
+import { TokenNotification } from '../entities/tokennotification';
+import { User } from '../entities/user';
 import { ToastService } from './toast.service';
 
 const { PushNotifications } = Plugins;
@@ -18,8 +21,27 @@ const { PushNotifications } = Plugins;
 })
 export class NotificationService {
   token: PushNotificationToken;
+
+  tokenNotifCollection: AngularFirestoreCollection<TokenNotification>;
+  private dbpath = '/tokenNotification';
+  public tokenNotif: Observable<TokenNotification[]>;
   constructor(private http: HttpClient,
-    private toast: ToastService) {
+    private toast: ToastService,
+    public db: AngularFirestore
+    ) {
+
+      this.tokenNotifCollection = db.collection(this.dbpath);
+      this.tokenNotif = this.tokenNotifCollection.snapshotChanges().pipe(map(actions=>{
+        return actions.map(a=>{
+          const data = a.payload.doc.data() as TokenNotification;
+          data.id = a.payload.doc.id;
+          return data;
+        });
+      }));
+
+
+
+
     PushNotifications.requestPermission().then( result => {
       if (result.granted) {
         // Register with Apple / Google to receive push via APNS/FCM
@@ -57,6 +79,14 @@ export class NotificationService {
         console.log(notification);
       }
     );
+   }
+   guardarTokenFirebase(user: User, token: string){
+    let tokenObj:TokenNotification = {
+      token: token,
+      usuario: user
+    }
+
+    return this.tokenNotifCollection.add(JSON.parse( JSON.stringify(tokenObj)));
    }
 
   public push(title:string,mensaje:string,token?: string){
