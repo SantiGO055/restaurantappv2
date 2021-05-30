@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Lo de Tito</string>
-    <string name="title_activity_main">Lo de Tito</string>
+    <string name="app_name">lodetito</string>
+    <string name="title_activity_main">lodetito</string>
     <string name="package_name">ar.com.github.lodetito</string>
     <string name="custom_url_scheme">ar.com.github.lodetito</string>
 </resources>
