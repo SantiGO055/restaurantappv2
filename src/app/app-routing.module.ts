@@ -39,6 +39,14 @@ const routes: Routes = [
     path: 'splash',
     loadChildren: () => import('./pages/splash/splash.module').then( m => m.SplashPageModule)
   },
+  {
+    path: 'register-anonimo',
+    loadChildren: () => import('./pages/register-anonimo/register-anonimo.module').then( m => m.RegisterAnonimoPageModule)
+  },
+  {
+    path: 'avatar',
+    loadChildren: () => import('./pages/avatar/avatar.module').then( m => m.AvatarPageModule)
+  },
 ];
 @NgModule({
   imports: [

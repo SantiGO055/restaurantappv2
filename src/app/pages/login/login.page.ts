@@ -85,7 +85,8 @@ export class LoginPage implements OnInit {
     }
   }
 */
-  selectedTester(selectedUserId: string) {
+
+  defineTester(selectedUserId: string) {
     const loginData = this.loginService.getUsuarioTest(selectedUserId);
     this.ionicForm.get('username').setValue(loginData.username);
     this.ionicForm.get('password').setValue(loginData.password);

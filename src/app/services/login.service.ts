@@ -60,6 +60,19 @@ export class LoginService {
     }
   }
 */
+async loginAnonimo(nombre: string, photoURL:string): Promise<User> {
+  try {
+    const { user } = await this.fireAuth.signInAnonymously();      
+    user.displayName = nombre;
+    user.photoURL = photoURL;
+    this.updateUserData(user);
+    return user;
+  } catch (error) {
+    throw new SysError('Ocurrio al comunicarse con el servidor', error);
+  }
+}
+
+
   async sendVerificationEmail(): Promise<void> {
     try {
       return (await this.fireAuth.currentUser).sendEmailVerification();
