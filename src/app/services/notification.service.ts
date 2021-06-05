@@ -1,4 +1,4 @@
-import { HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHandler, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
@@ -83,8 +83,14 @@ export class NotificationService {
       }
     );
    }
-   
-   
+   guardarTokenFirebase(user: User, token: string){
+    let tokenObj:TokenNotification = {
+      token: token,
+      usuario: user
+    }
+
+    return this.tokenNotifCollection.add(JSON.parse( JSON.stringify(tokenObj)));
+   }
 
   public push(title:string,mensaje:string,token?: string){
     
@@ -113,18 +119,16 @@ export class NotificationService {
   
   
 }
-export class Interception implements HttpInterceptor{
+export class Interception{
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     req = req.clone({
-      headers: req.headers.append('Authorization', 'key=AAAAN0j23hU:APA91bFk2jgXEeTMutQMqKjkB5s5dkEuWZh5YSWzuq1GPZZA6cf051pRUH2B0fbNEINxzf_XSMP0k3b0ASa5GzBB5Rjl5doFy5NCtjH34w6fvtzg-kTCQrvHm2vUpeprJ7Auw7X-lxV7')
-      // setHeaders: {
-      //   'Content-Type' : 'application/json; charset=utf-8',
-      //   'Accept'       : 'application/json',
-      //   'Authorization': `key=AAAAN0j23hU:APA91bFk2jgXEeTMutQMqKjkB5s5dkEuWZh5YSWzuq1GPZZA6cf051pRUH2B0fbNEINxzf_XSMP0k3b0ASa5GzBB5Rjl5doFy5NCtjH34w6fvtzg-kTCQrvHm2vUpeprJ7Auw7X-lxV7`,
-      // },
+      setHeaders: {
+        'Content-Type' : 'application/json; charset=utf-8',
+        'Accept'       : 'application/json',
+        'Authorization': `key=AAAAN0j23hU:APA91bFk2jgXEeTMutQMqKjkB5s5dkEuWZh5YSWzuq1GPZZA6cf051pRUH2B0fbNEINxzf_XSMP0k3b0ASa5GzBB5Rjl5doFy5NCtjH34w6fvtzg-kTCQrvHm2vUpeprJ7Auw7X-lxV7`,
+      },
       
     });
-    console.log(req)
     return next.handle(req);
   }
 }
