@@ -30,7 +30,7 @@ export class NotificationService {
   public tokenNotif: Observable<TokenNotification[]>;
   constructor(private http: HttpClient,
     private toast: ToastService,
-    public db: AngularFirestore
+    public db: AngularFirestore,
     ) {
 
       this.tokenNotifCollection = db.collection(this.dbpath);
@@ -108,7 +108,7 @@ export class NotificationService {
       "to": token,
       
     }
-    ).pipe(tap(asd=>{
+    ).subscribe((asd=>{
       console.log(asd);
     }))
     console.log(res);
