@@ -11,8 +11,6 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/firestore';
 import { first, switchMap } from 'rxjs/operators';
-import { PhotoapiService } from './photoapi.service';
-import auth from 'firebase/firebase-auth';
 
 @Injectable({
   providedIn: 'root',
@@ -36,11 +34,11 @@ export class LoginService {
         return of(null);
       })
     );
-  }  
+  }
+
   isLoggedIn() {
     return this.fireAuth.authState.pipe(first()).toPromise();
- }
- 
+  } 
 
   async resetPassword(postData: {username: string}): Promise<void> {
     try {
