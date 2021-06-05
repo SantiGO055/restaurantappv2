@@ -8,6 +8,7 @@ export const environment = {
       storageBucket: "restauranteapp-bffc6.appspot.com",
       messagingSenderId: "237447339541",
       appId: "1:237447339541:web:9927e7b8e8785a1c98781c",
-      measurementId: "G-SJ5WL6P57J"
+      measurementId: "G-SJ5WL6P57J",
+      vapidKey: 'BCg5WV_dyK49YLm_lrfhOwh7PJ1mt9eDXvq8HrRfpJPfpke4fIJoXN63eqBUijlYlgG2Tt9id8kGgjSaQf6d1eM'
     }
   };

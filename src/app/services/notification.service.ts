@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { TokenNotification } from '../entities/tokennotification';
 import { User } from '../entities/user';
+import { LoginService } from './login.service';
 import { ToastService } from './toast.service';
 
 const { PushNotifications } = Plugins;
@@ -31,6 +32,7 @@ export class NotificationService {
   constructor(private http: HttpClient,
     private toast: ToastService,
     public db: AngularFirestore,
+    private loginSvc: LoginService
     ) {
 
       this.tokenNotifCollection = db.collection(this.dbpath);
@@ -83,13 +85,20 @@ export class NotificationService {
       }
     );
    }
-   guardarTokenFirebase(user: User, token: string){
-    let tokenObj:TokenNotification = {
-      token: token,
-      usuario: user
-    }
-
-    return this.tokenNotifCollection.add(JSON.parse( JSON.stringify(tokenObj)));
+   guardarTokenFirebase(token: string){
+    this.loginSvc.user$.subscribe(user=>{
+      let tokenObj:TokenNotification = {
+        token: token,
+        usuario: {
+          uid: user.uid,
+          displayName: user.displayName,
+          email: user.email,
+          emailVerified: user.emailVerified
+        }
+      }
+      console.log(user)
+      this.tokenNotifCollection.add(JSON.parse( JSON.stringify(tokenObj)));
+    })
    }
 
   public push(title:string,mensaje:string,token?: string){
