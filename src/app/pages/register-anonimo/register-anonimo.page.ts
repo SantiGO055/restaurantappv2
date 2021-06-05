@@ -70,12 +70,12 @@ export class RegisterAnonimoPage implements OnInit {
         const name =this.ionicRegister.get('nombre').value;
         this.loginService.loginAnonimo(name, this.avatarUrl).then(
           async (res) => {
-            this.spinnerService.ocultarSpinner();
-            this.toastService.presentSuccess('El usuario pudo ser creado.');
+            this.spinnerService.ocultarSpinner();            
             this.resetForm();
             this.router.navigateByUrl('dashboard/home');
           },
           async (error) => {
+            console.log(error);
             this.spinnerService.ocultarSpinner();
             this.toastService.presentDanger('El usuario no pudo ser creado.');
           }
