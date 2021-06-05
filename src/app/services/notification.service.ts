@@ -97,13 +97,16 @@ export class NotificationService {
     let res = this.http.post("https://fcm.googleapis.com/fcm/send",
     {
       "notification":{
+        
           "title":title,
           "body": mensaje,
           "sound": true,
           "data":{
               "google.delivered_priority": "high",
-              "google.original_priority": "high"
-          }
+              "google.original_priority": "high",
+              "collapse_key": "ar.com.github.lodetito",
+          },
+          "id": "0:1622866068474675%7f8128f57f8128f5"
       },
       "to": token,
       
