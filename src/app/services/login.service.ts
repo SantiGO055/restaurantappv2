@@ -11,6 +11,7 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/firestore';
 import { first, switchMap } from 'rxjs/operators';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,8 @@ export class LoginService {
 
   constructor(    
     private fireAuth: AngularFireAuth,
-    private fireStore: AngularFirestore
+    private fireStore: AngularFirestore,
+    private notifSvc: NotificationService
   ) {
     this.user$ = this.fireAuth.authState.pipe(
       switchMap((user) => {
@@ -87,7 +89,9 @@ export class LoginService {
         postData.username,
         postData.password
       );      
+      
       this.updateUserData(user);      
+      console.log(user);
       return user;
     } catch (error) {
       //@todo agregar todos los codigos de error https://firebase.google.com/docs/auth/admin/errors
@@ -111,12 +115,17 @@ export class LoginService {
     const userRef: AngularFirestoreDocument<User> = this.fireStore.doc(
       `users/${user.uid}`
     );
-    const data: User = {
+    var data: User = {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
       emailVerified: user.emailVerified,
+      
     };
+    if(this.notifSvc.token != null){
+      console.log("estoy en web");
+      data.tokenNotification = this.notifSvc.token
+    }
 
     return userRef.set(data, { merge: true });
   }
