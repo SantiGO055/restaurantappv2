@@ -1,7 +1,7 @@
 import { User } from "./user";
 
 export class TokenNotification {
-    id?:string;
+    uid?:string;
     token: string;
     usuario: User
 }

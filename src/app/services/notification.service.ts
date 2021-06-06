@@ -1,21 +1,24 @@
 import { HttpClient, HttpEvent, HttpHandler, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 import {
   Plugins,
   PushNotification,
   PushNotificationToken,
   PushNotificationActionPerformed,
+  Capacitor,
 } from '@capacitor/core';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { first, map, tap } from 'rxjs/operators';
 import { TokenNotification } from '../entities/tokennotification';
 import { User } from '../entities/user';
 import { LoginService } from './login.service';
 import { ToastService } from './toast.service';
 
 const { PushNotifications } = Plugins;
+
+const isPushNotificationsAvailable = Capacitor.isPluginAvailable('PushNotifications');
 
 @Injectable({
   providedIn: 'root'
@@ -24,11 +27,16 @@ export class NotificationService {
   token: PushNotificationToken;
 
 
+  
   /** al momento de loguear un usuario, guardar en la base el token con la data del usuario logueado, 
    * entonces cuando se quiera enviar una notificacion obtengo a que rol quiero enviarla y obtengo el token de ese celu segun el rol */
   tokenNotifCollection: AngularFirestoreCollection<TokenNotification>;
+  notifDoc: AngularFirestoreDocument<TokenNotification> | undefined;
+  
   private dbpath = '/tokenNotification';
   public tokenNotif: Observable<TokenNotification[]>;
+  public tokens: TokenNotification[] = [];
+  tokenArr: string[] = [];
   constructor(private http: HttpClient,
     private toast: ToastService,
     public db: AngularFirestore,
@@ -39,14 +47,18 @@ export class NotificationService {
       this.tokenNotif = this.tokenNotifCollection.snapshotChanges().pipe(map(actions=>{
         return actions.map(a=>{
           const data = a.payload.doc.data() as TokenNotification;
-          data.id = a.payload.doc.id;
+          data.uid = a.payload.doc.id;
           return data;
         });
       }));
+      if (isPushNotificationsAvailable) {
+        this.initPushNotifications();
+     }
+   }
 
-
-
-
+   initPushNotifications(){
+     
+    
     PushNotifications.requestPermission().then( result => {
       if (result.granted) {
         // Register with Apple / Google to receive push via APNS/FCM
@@ -85,46 +97,124 @@ export class NotificationService {
       }
     );
    }
-   guardarTokenFirebase(token: string){
-    this.loginSvc.user$.subscribe(user=>{
-      let tokenObj:TokenNotification = {
-        token: token,
-        usuario: {
-          uid: user.uid,
-          displayName: user.displayName,
-          email: user.email,
-          emailVerified: user.emailVerified
-        }
+
+   getTokenDevice(){
+    PushNotifications.addListener('registration',
+      (token: PushNotificationToken) => {
+        console.log(token);
+        this.token = token;
+        
       }
-      console.log(user)
-      this.tokenNotifCollection.add(JSON.parse( JSON.stringify(tokenObj)));
-    })
+    );
+    return this.token;
    }
 
-  public push(title:string,mensaje:string,token?: string){
-    
-    let res = this.http.post("https://fcm.googleapis.com/fcm/send",
-    {
-      "notification":{
-        
-          "title":title,
-          "body": mensaje,
-          "sound": true,
-          "data":{
-              "google.delivered_priority": "high",
-              "google.original_priority": "high",
-              "collapse_key": "ar.com.github.lodetito",
-          },
-          "id": "0:1622866068474675%7f8128f57f8128f5"
-      },
-      "to": token,
-      
+   guardarTokenFirebase(user: User){
+     let rol: string = '';
+     if(user.email === 'avillucas+duenio1@gmail.com'){
+      rol = "dueño";
+     }
+     else if(user.email === 'avillucas+mozo1@gmail.com'){
+      rol = "mozo";
+     }
+     else if(user.email === 'avillucas+testermozo2@gmail.com'){
+      rol = "mozo";
+
+     }
+     else if(user.email === 'avillucas+cocinero1@gmail.com'){
+      rol = "cocinero";
+     }
+    if(this.getTokenDevice() != null){
+      // this.loginSvc.isLoggedIn().then(userBase=>{
+        console.log(user.uid);
+  
+        let tokenObj:TokenNotification = {
+          token: this.getTokenDevice().value,
+          usuario: {
+            uid: user.uid,
+            displayName: user.displayName,
+            email: user.email,
+            emailVerified: user.emailVerified,
+            rol: rol
+          }
+        }
+        this.addToken(tokenObj).then(result=>{
+          console.log(result);
+          
+        });
+      // })
+
     }
-    ).subscribe((asd=>{
-      console.log(asd);
-    }))
-    console.log(res);
-    return res;
+   }
+
+   addToken(token: TokenNotification){
+    return this.tokenNotifCollection.add(JSON.parse(JSON.stringify(token)));
+   }
+   updateToken(token: TokenNotification){
+     this.tokenNotif.subscribe(data=>{
+       console.log(data);
+     })
+    this.notifDoc = this.db.doc(`tokenNotification/${token.uid}`)
+    // return this.notifDoc.update(token);
+    return this.notifDoc.set(token, { merge: true });
+   }
+   getAllTokens(){
+     
+   }
+   obtenerToken(rol:string){
+
+     
+
+   }
+
+  public push(title:string,mensaje:string,rol: string){
+    
+    
+    this.tokenNotif.pipe(first()).toPromise().then(tokens=>{
+      console.log(tokens);
+      if(tokens.length != 0){
+        tokens.forEach(token=>{
+          console.log(token);
+         if(token.usuario.rol == rol){
+           this.tokenArr.push(token.token)
+            
+
+
+
+            //  let arryToken = this.obtenerToken(rol);
+            console.log(token.token)
+            var res:any;
+            // this.tokenArr.forEach(token => {
+                res = this.http.post("https://fcm.googleapis.com/fcm/send",
+                {
+                  "notification":{
+                    
+                      "title":title,
+                      "body": mensaje,
+                      "sound": true,
+                      "data":{
+                          "google.delivered_priority": "high",
+                          "google.original_priority": "high",
+                          "collapse_key": "ar.com.github.lodetito",
+                      },
+                      "id": "0:1622866068474675%7f8128f57f8128f5"
+                  },
+                  "to": token.token,
+                  
+                }
+                ).subscribe((asd=>{
+                  console.log(asd);
+                }));
+                
+                console.log(res);
+            // });
+
+
+
+         }
+       })
+      }
+   });
     
     // this.http.post("https://fcm.googleapis.com/fcm/send")
   }

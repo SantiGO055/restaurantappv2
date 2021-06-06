@@ -3,4 +3,5 @@ export interface LoginTestData{
     nombre:string
     username:string
     password:string
+    rol:string;
 }

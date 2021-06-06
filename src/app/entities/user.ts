@@ -3,4 +3,6 @@ export interface User {
   email: string;
   displayName: string;
   emailVerified: boolean;
+  photoURL?:string;
+  rol?: string;
 }
