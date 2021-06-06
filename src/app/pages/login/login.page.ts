@@ -62,30 +62,8 @@ export class LoginPage implements OnInit {
       throw new SysError(error);
     }
   }
-/*
-  async loginGoogle() {
-    try {      
-      this.SpinnerService.mostrarSpinner();
-      if (!this.ionicForm.valid) {
-        this.toastService.presentSuccess('Por favor revise los datos ingresados.');        
-        this.password.setValue('');
-      } else {
-        this.loginService.loginGoogle().then(
-          async (res) => {
-            this.SpinnerService.ocultarSpinner();
-            this.router.navigateByUrl('/home', { replaceUrl: true });
-          },
-          async (error) => {
-            this.toastService.presentDanger('Usuario o password incorrecto.');            
-          }
-        );
-      }
-    } catch (error) {
-      throw error;
-    }
-  }
-*/
-  selectedTester(selectedUserId: string) {
+  
+  defineTester(selectedUserId: string) {
     const loginData = this.loginService.getUsuarioTest(selectedUserId);
     this.ionicForm.get('username').setValue(loginData.username);
     this.ionicForm.get('password').setValue(loginData.password);

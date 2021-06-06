@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
 import { SysError } from '../entities/sysError';
+import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlertService {
 
-  constructor() { }
+  constructor( 
+    public alertController:AlertController,
+    public router: Router,
+  ) { }
 
 
   showSysError(error:SysError){
@@ -23,6 +28,33 @@ export class AlertService {
     //@todo pasar a alert estetico
     alert(message);
   }
+
+
+
+//@todo pasar a servicio
+async presentAlert(header:string) {
+  const alert = await this.alertController.create({
+    cssClass: 'alert-photos',
+    header: header,          
+    buttons: [
+      {
+        text: 'Inicio',
+        handler: () => {
+          this.router.navigateByUrl('/dashboard');
+        }
+      },
+      {
+        text: 'Ir a galería',          
+        cssClass: 'secondary',
+        handler: (blah) => {
+          this.router.navigateByUrl('/dashboard/home');
+        }
+      }
+    ]    
+  });
+  await alert.present();
+  const { role } = await alert.onDidDismiss();    
+}
 
 
 }

@@ -6,3 +6,6 @@ export interface User {
   photoURL?:string;
   rol?: string;
 }
+
+
+

@@ -5,7 +5,7 @@ import { SysError } from '../entities/sysError';
 import { USUARIOS_TEST } from '../../seed/usuarios';
 import { User } from '../entities/user';
 import { AngularFireAuth } from '@angular/fire/auth';
-//import auth from 'firebase/firebase-auth';
+
 import {
   AngularFirestore,
   AngularFirestoreDocument,
@@ -25,6 +25,7 @@ export class LoginService {
     private fireAuth: AngularFireAuth,
     private fireStore: AngularFirestore
   ) {
+    //@todo tomar del servicio de usuario
     this.user$ = this.fireAuth.authState.pipe(
       switchMap((user) => {
         if (user) {
@@ -33,12 +34,11 @@ export class LoginService {
         return of(null);
       })
     );
-  }  
+  }
 
   isLoggedIn() {
     return this.fireAuth.authState.pipe(first()).toPromise();
- }
- 
+  } 
 
   async resetPassword(postData: {username: string}): Promise<void> {
     try {
@@ -47,56 +47,42 @@ export class LoginService {
       throw new SysError('Ocurrio al comunicarse con el servidor', error);
     }
   }
-/*
-  async loginGoogle(): Promise<User> {
-    try {
-      const { user } = await this.fireAuth.signInWithPopup(
-        new auth.GoogleAuthProvider()        
-      );      
-      this.updateUserData(user);
-      return user;
-    } catch (error) {
-      throw new SysError('Ocurrio al comunicarse con el servidor', error);
-    }
+
+async loginAnonimo(displayName: string, photoURL:string): Promise<User> {
+  try {    
+    const  authData  = await this.fireAuth.signInAnonymously();                  
+    const user =  {
+      uid: authData.user.uid,
+      displayName,      
+      emailVerified: authData.user.emailVerified, 
+      photoURL ,
+    } as User; 
+    this.updateUserData(user);
+    return user;
+  } catch (error) {
+    throw new SysError('Ocurrio al comunicarse con el servidor', error);
   }
-*/
-  async sendVerificationEmail(): Promise<void> {
+}
+
+
+  async login(postData: { username: string; password: string }) {
     try {
-      return (await this.fireAuth.currentUser).sendEmailVerification();
-    } catch (error) {
-      throw new SysError('Ocurrio al comunicarse con el servidor', error);
+      const authData = await this.fireAuth.signInWithEmailAndPassword(postData.username,postData.password);                  
+    } catch (error) {                    
+      throw new SysError(this.handleErrorMessage(error.code));
     }
   }
 
-  async register(postData: {username: string;password: string;}): Promise<User> {
-    try {
-      const { user } = await this.fireAuth.createUserWithEmailAndPassword(
-        postData.username,
-        postData.password
-      );
-      this.sendVerificationEmail();
-      return user;
-    } catch (error) {
-      throw new SysError('Ocurrio al comunicarse con el servidor', error);
+  
+   //@todo agregar todos los codigos de error https://firebase.google.com/docs/auth/admin/errors  
+  handleErrorMessage( code:string ):string{
+    let msg = 'error no identificado';
+    if(code == 'auth/user-not-found'){
+      msg = 'El usuario no existe';
     }
+    return  msg;
   }
-
-  async login(postData: { username: string; password: string }): Promise<User> {
-    try {
-      const { user } = await this.fireAuth.signInWithEmailAndPassword(
-        postData.username,
-        postData.password
-      );      
-      this.updateUserData(user);      
-      return user;
-    } catch (error) {
-      //@todo agregar todos los codigos de error https://firebase.google.com/docs/auth/admin/errors
-      if(error.code == 'auth/user-not-found'){
-        throw  'El usuario no existe ';
-      }
-      throw error;
-    }
-  }
+  
 
   async logout(): Promise<void> {
     try {
@@ -106,19 +92,12 @@ export class LoginService {
     }
   }
 
-
-  private updateUserData(user: User) {
+// @todo PASAR AL SERVICIO DE USUARIO
+  private updateUserData(user:User) {
     const userRef: AngularFirestoreDocument<User> = this.fireStore.doc(
       `users/${user.uid}`
     );
-    const data: User = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      emailVerified: user.emailVerified,
-    };
-
-    return userRef.set(data, { merge: true });
+    return userRef.set(user, { merge: true });
   }
 
   isEmailVerified(user:User):boolean

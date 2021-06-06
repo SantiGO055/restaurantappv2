@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { LoginService } from '../../services/login.service';
 import { ToastService } from '../../services/toast.service';
 import { SpinnerService } from '../../services/spinner.service';
+import { ModalController } from '@ionic/angular';
+import { AvatarPage } from '../avatar/avatar.page';
+import { RegistrosService } from '../../services/registros.service';
+import { Registro } from '../../entities/registro';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -13,30 +17,32 @@ export class RegisterPage implements OnInit {
   isSubmitted: boolean;
   ionicRegister: FormGroup;
   errorMessage: string;
+  avatarUrl: string;
 
   constructor(
-    private loginService: LoginService,
+    private registrosService: RegistrosService,
     public formBuilder: FormBuilder,
     public toastService: ToastService,
-    public spinnerService: SpinnerService
+    public spinnerService: SpinnerService,
+    public modalController: ModalController,
+    private router: Router
   ) {
     this.isSubmitted = false;
+    this.avatarUrl = null;
   }
 
   ngOnInit() {
     this.errorMessage = '';
     this.isSubmitted = false;
     this.ionicRegister = this.formBuilder.group({
-      username: ['',[Validators.required, Validators.minLength(6), Validators.email]],
+      name: ['', [Validators.required, Validators.minLength(6)]],
+      username: [
+        '',
+        [Validators.required, Validators.minLength(6), Validators.email],
+      ],
       password: ['', [Validators.required, Validators.minLength(4)]],
       confirm: ['', [Validators.required, Validators.minLength(6)]],
     });
-  }
-
-  resetForm(){
-    this.username.setValue('');
-    this.password.setValue('');
-    this.confirm.setValue('');
   }
 
   checkPassSame() {
@@ -49,6 +55,28 @@ export class RegisterPage implements OnInit {
       this.errorMessage = 'Las contraseñas no coinciden.';
       return true;
     }
+  }
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: AvatarPage,
+      cssClass: 'upload-image',
+    });
+    modal.onDidDismiss().then((data) => {
+      this.avatarUrl = data['data']['avatarUrl'];
+      console.log(this.avatarUrl);
+    });
+    return await modal.present();
+  }
+
+  resetForm() {
+    this.name.setValue('');
+    this.username.setValue('');
+    this.password.setValue('');
+    this.avatarUrl = null;
+  }
+
+  get name() {
+    return this.ionicRegister.get('name');
   }
 
   get username() {
@@ -69,19 +97,34 @@ export class RegisterPage implements OnInit {
       if (!this.ionicRegister.valid) {
         this.toastService.presentDanger(
           'Por favor revise los datos ingresados.'
-        );        
+        );
       } else {
         this.spinnerService.mostrarSpinner();
-        //
-        this.loginService.register(this.ionicRegister.value).then(
+        const formData = this.ionicRegister.value;
+        const email = formData.username;
+        //@todo revisar si existe o capturar el error particular
+        const registro = {
+          email,
+          displayName: formData.name,
+          emailVerified: false,
+          photoURL: this.avatarUrl,
+          password: formData.password,
+          aprobado: false,
+        } as Registro;
+        console.log(registro);
+        this.registrosService.save(registro, null).then(
           async (res) => {
             this.spinnerService.ocultarSpinner();
-            this.toastService.presentSuccess('El usuario pudo ser creado.');
-            this.resetForm();
+            this.toastService.presentSuccess(
+              'Su registro fue creado con exito. Un supervisor se comunicara con usted'
+            );
+            this.ionicRegister.reset();
           },
           async (error) => {
             this.spinnerService.ocultarSpinner();
-            this.toastService.presentDanger('El usuario no pudo ser creado.');
+            this.toastService.presentDanger(
+              'Ocurrio un error al generar su registro'
+            );
           }
         );
       }

@@ -1,0 +1,49 @@
+<ion-content>
+  <form [formGroup]="ionicRegister" (ngSubmit)="register()" novalidate>
+    <ion-grid>      
+      <ion-row>
+        <ion-col>
+          <ion-img *ngIf="avatarUrl" [src]="avatarUrl" alt="Tomar foto"></ion-img>
+          <ion-img *ngIf="!avatarUrl" src="assets/avatar/noexist.png" alt="Tomar foto"></ion-img>          
+          <ion-button expand="block" class="foto"   color="tertiary" (click)="presentModal()" >
+            <ion-icon slot="start" name="camera-outline"></ion-icon>
+            Sacarme una foto
+          </ion-button>          
+          <!-- user error messages -->
+          <div *ngIf="!avatarUrl" class="errors ion-padding" >            
+            <span >
+              Debe tomar una foto
+            </span>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-label>Nombre</ion-label>
+          <ion-input
+            formControlName="nombre"
+            type="text"
+            placeholder="Nombre y apellido"
+            required
+          ></ion-input>
+
+          <!-- user error messages -->
+          <div *ngIf="(nombre.dirty || nombre.touched) && nombre.errors" class="errors ion-padding" >
+            <span *ngIf="nombre.errors?.required">
+              El nombre es requerido.</span
+            >
+            <span *ngIf="nombre.errors?.minlength">
+              El nombre debe tener al menos cuatro caracteres.</span
+            >
+          </div>
+          <ion-button type="submit" expand="block" color="tertiary" [disabled]="!avatarUrl || ionicRegister.invalid">Solicitar cuenta</ion-button>          
+        </ion-col>
+      </ion-row>            
+      <ion-row>
+        <ion-col>          
+          <ion-button type="button" expand="block" color="tertiary" [routerLink]="['/login']">¡ Volver  !</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
