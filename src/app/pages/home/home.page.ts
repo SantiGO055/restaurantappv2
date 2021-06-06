@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { asapScheduler } from 'rxjs';
+import { User } from 'src/app/entities/user';
 import { Usuario } from 'src/app/entities/usuario';
 import { EmailService } from 'src/app/services/email.service';
 import { LoginService } from 'src/app/services/login.service';
@@ -29,7 +30,7 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-    this.spinnerService.mostrarSpinner();
+    
     this.folder = this.activatedRoute.snapshot.paramMap.get('id');
     this.notification.getAllTokens();
     this.loginSvc.isLoggedIn().then(user=>{
@@ -52,11 +53,12 @@ export class HomePage implements OnInit {
     
   }
   enviarMail(){
-    let usuario:Usuario= {
-      id: 1,
-      name: 'Santi Prueba',
+    let usuario:User= {
+      uid: '1',
+      displayName: 'Santi Prueba',
       email: 'santigonzalez05@gmail.com',
-      photo: 'asd'
+      photoURL: 'asd',
+      emailVerified: true
     }
     this.emailjs.sendEmail(usuario,'El usuario ha sido activado');
   }

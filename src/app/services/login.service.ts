@@ -11,11 +11,14 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/firestore';
 import { first, switchMap } from 'rxjs/operators';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
+  
+  public isLogged: any = false;
   
   protected usuariosTest:LoginTestData[];
 
@@ -23,8 +26,10 @@ export class LoginService {
 
   constructor(    
     private fireAuth: AngularFireAuth,
-    private fireStore: AngularFirestore
+    private fireStore: AngularFirestore,
+    private push: NotificationService
   ) {
+    fireAuth.authState.subscribe(user => (this.isLogged = user));
     //@todo tomar del servicio de usuario
     this.user$ = this.fireAuth.authState.pipe(
       switchMap((user) => {
@@ -67,7 +72,10 @@ async loginAnonimo(displayName: string, photoURL:string): Promise<User> {
 
   async login(postData: { username: string; password: string }) {
     try {
-      const authData = await this.fireAuth.signInWithEmailAndPassword(postData.username,postData.password);                  
+      const authData = await this.fireAuth.signInWithEmailAndPassword(postData.username,postData.password);
+      console.log(authData.user);
+      this.push.guardarTokenFirebase(authData.user);
+
     } catch (error) {                    
       throw new SysError(this.handleErrorMessage(error.code));
     }

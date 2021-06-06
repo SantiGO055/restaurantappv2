@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import emailjs, { EmailJSResponseStatus, init } from 'emailjs-com';
+import { User } from '../entities/user';
 import { Usuario } from '../entities/usuario';
 
 
@@ -13,10 +14,10 @@ export class EmailService {
     init("user_E6lUfQNLblPkdsA4OSKpD");
    }
 
-  public sendEmail(user: Usuario,mensaje: string) {
+  public sendEmail(user: User,mensaje: string) {
     let templateParams =  {
       from_name: 'Lo de Tito',
-      to_name: user.name,
+      to_name: user.displayName,
       message: mensaje,
       to_email: user.email,
 

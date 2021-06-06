@@ -16,7 +16,7 @@ import { IonicStorageModule } from '@ionic/storage-angular';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Interception, NotificationService } from './services/notification.service';
 import { environment } from '../environments/environment';
-
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,6 +30,7 @@ import { environment } from '../environments/environment';
     AngularFirestoreModule, 
     IonicStorageModule.forRoot(),
     HttpClientModule,
+    NgxSpinnerModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

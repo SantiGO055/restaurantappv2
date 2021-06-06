@@ -40,7 +40,8 @@ export class NotificationService {
   constructor(private http: HttpClient,
     private toast: ToastService,
     public db: AngularFirestore,
-    private loginSvc: LoginService
+    private loginSvc: LoginService,
+    private fireStore:AngularFirestore
     ) {
 
       this.tokenNotifCollection = db.collection(this.dbpath);
@@ -71,7 +72,7 @@ export class NotificationService {
     // On success, we should be able to receive notifications
     PushNotifications.addListener('registration',
       (token: PushNotificationToken) => {
-        console.log(token);
+        // console.log(token);
         this.token = token;
       }
     );
@@ -85,7 +86,7 @@ export class NotificationService {
 
     // Show us the notification payload if the app is open on our device
     PushNotifications.addListener('pushNotificationReceived',async(notification: PushNotification) => {
-        console.log("notificacion recibida: " + JSON.stringify(notification));
+        // console.log("notificacion recibida: " + JSON.stringify(notification));
         this.toast.presentSuccess("Notificacion recibida");
       }
     );
@@ -93,7 +94,7 @@ export class NotificationService {
     // Method called when tapping on a notification
     PushNotifications.addListener('pushNotificationActionPerformed',
       (notification: PushNotificationActionPerformed) => {
-        console.log(notification);
+        // console.log(notification);
       }
     );
    }
@@ -101,17 +102,20 @@ export class NotificationService {
    getTokenDevice(){
     PushNotifications.addListener('registration',
       (token: PushNotificationToken) => {
-        console.log(token);
+        // console.log(token);
         this.token = token;
         
       }
     );
     return this.token;
    }
+   getAllTokens(){
+     return this.tokenNotif;
+   }
 
    guardarTokenFirebase(user: User){
-     let rol: string = '';
-     if(user.email === 'avillucas+duenio1@gmail.com'){
+    let rol: string = '';
+    if(user.email === 'avillucas+duenio1@gmail.com'){
       rol = "dueño";
      }
      else if(user.email === 'avillucas+mozo1@gmail.com'){
@@ -119,62 +123,113 @@ export class NotificationService {
      }
      else if(user.email === 'avillucas+testermozo2@gmail.com'){
       rol = "mozo";
-
+ 
      }
      else if(user.email === 'avillucas+cocinero1@gmail.com'){
       rol = "cocinero";
      }
-    if(this.getTokenDevice() != null){
-      // this.loginSvc.isLoggedIn().then(userBase=>{
-        console.log(user.uid);
+
+     this.getAllTokens().pipe(first()).toPromise().then((tokens)=>{
+      //  console.log(tokens);
+       if(tokens.length > 0){
+         tokens.forEach(tokenAux => {
+          if(tokenAux.token != this.token.value){
   
-        let tokenObj:TokenNotification = {
-          token: this.getTokenDevice().value,
-          usuario: {
-            uid: user.uid,
-            displayName: user.displayName,
-            email: user.email,
-            emailVerified: user.emailVerified,
-            rol: rol
+            if(this.getTokenDevice() != null){
+              // this.loginSvc.isLoggedIn().then(userBase=>{
+                // console.log(user.uid);
+          
+                let tokenObj:TokenNotification = {
+                  token: this.getTokenDevice().value,
+                  usuario: {
+                    uid: user.uid,
+                    displayName: user.displayName,
+                    email: user.email,
+                    emailVerified: user.emailVerified,
+                    rol: rol
+                  }
+                }
+                
+                this.addToken(tokenObj).then(result=>{
+                  // console.log(result);
+                  
+                });
+              // })
+         
+            }
+          }
+          else{
+            // console.log("token de este celular ya registrado")
+            tokenAux.usuario = {
+              uid: user.uid,
+              displayName: user.displayName,
+              email: user.email,
+              emailVerified: user.emailVerified,
+              rol: rol
+            }
+            this.updateToken(tokenAux);
+          }
+         });
+
+        }
+        else{
+          if(this.getTokenDevice() != null){
+            // this.loginSvc.isLoggedIn().then(userBase=>{
+              // console.log(user.uid);
+        
+              let tokenObj:TokenNotification = {
+                token: this.getTokenDevice().value,
+                usuario: {
+                  uid: user.uid,
+                  displayName: user.displayName,
+                  email: user.email,
+                  emailVerified: user.emailVerified,
+                  rol: rol
+                }
+              }
+              
+              this.addToken(tokenObj).then(result=>{
+                // this.updateToken(tokenObj);
+                
+              });
+            // })
+       
           }
         }
-        this.addToken(tokenObj).then(result=>{
-          console.log(result);
-          
-        });
-      // })
-
-    }
+     })
+    //  .pipe(first()).toPromise().then((tokens)=>{
+    //   console.log(tokens);
+    //  })
+    
+     
    }
 
    addToken(token: TokenNotification){
     return this.tokenNotifCollection.add(JSON.parse(JSON.stringify(token)));
    }
    updateToken(token: TokenNotification){
-     this.tokenNotif.subscribe(data=>{
-       console.log(data);
-     })
-    this.notifDoc = this.db.doc(`tokenNotification/${token.uid}`)
-    // return this.notifDoc.update(token);
-    return this.notifDoc.set(token, { merge: true });
-   }
-   getAllTokens(){
      
+     const userRef: AngularFirestoreDocument<TokenNotification> = this.fireStore.doc(
+      `tokenNotification/${token.uid}`
+    );
+    return userRef.set(token, { merge: true });
    }
+   
    obtenerToken(rol:string){
 
      
 
    }
+   deleteToken(token : TokenNotification){
+    this.notifDoc = this.db.doc(`mensajes/${token.uid}`);
+    this.notifDoc.delete();
+   }
 
   public push(title:string,mensaje:string,rol: string){
     
-    
     this.tokenNotif.pipe(first()).toPromise().then(tokens=>{
-      console.log(tokens);
       if(tokens.length != 0){
         tokens.forEach(token=>{
-          console.log(token);
          if(token.usuario.rol == rol){
            this.tokenArr.push(token.token)
             
@@ -182,7 +237,7 @@ export class NotificationService {
 
 
             //  let arryToken = this.obtenerToken(rol);
-            console.log(token.token)
+            // console.log(token.token)
             var res:any;
             // this.tokenArr.forEach(token => {
                 res = this.http.post("https://fcm.googleapis.com/fcm/send",
@@ -202,11 +257,13 @@ export class NotificationService {
                   "to": token.token,
                   
                 }
-                ).subscribe((asd=>{
-                  console.log(asd);
-                }));
-                
-                console.log(res);
+                );
+                if(res.pipe(first()).toPromise().then(a=>{
+                  if(a.success == 1){
+                    return true;
+                  }
+                }))
+                return true
             // });
 
 
