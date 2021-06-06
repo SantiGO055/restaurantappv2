@@ -7,7 +7,9 @@ import { EmailService } from 'src/app/services/email.service';
 import { LoginService } from 'src/app/services/login.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { SpinnerService } from '../../services/spinner.service';
-
+import { ModalController } from '@ionic/angular';
+import { ChatComponent } from 'src/app/components/chat/chat.component';
+import { ChatService } from 'src/app/services/chat.service';
 
 
 @Component({
@@ -18,17 +20,18 @@ import { SpinnerService } from '../../services/spinner.service';
 export class HomePage implements OnInit {
   
   public folder: string;
-  
+  mostrarChat: boolean = true;
   constructor(
     private activatedRoute: ActivatedRoute,
     public spinnerService:SpinnerService,
     private emailjs: EmailService,
     public notification: NotificationService,
-    private loginSvc: LoginService
+    private loginSvc: LoginService,
+    private modal: ModalController,
+    public chatSvc:ChatService
     ) { 
     
   }
-
   ngOnInit() {
     
     this.folder = this.activatedRoute.snapshot.paramMap.get('id');

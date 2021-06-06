@@ -5,6 +5,7 @@ export interface User {
   emailVerified: boolean;
   photoURL?:string;
   rol?: string;
+  mesa?:string;
 }
 
 

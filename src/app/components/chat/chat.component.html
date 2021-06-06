@@ -1,0 +1,73 @@
+<ion-content>
+
+  
+  <ion-button (click)="dismiss()" color="tertiary">
+    Cerrar chat
+  </ion-button>
+  <div class="contenedorBotonYChat" >  
+    <div >
+      <div class="contenedor">
+        <div class="">
+          <div class="">
+            
+            <div class="panel panel-primary">
+              
+              <div class="panel-body" #scroller>
+                <!-- <div *ngIf="this.sala4a === 'sala4a'"> -->
+                  
+                  <ul class="chat" *ngFor="let mensj of listadoMensajes; let i = index"
+                  [class.scrollBody]="mensj != null"
+                  [class.active]="i == currentIndex"
+                  >
+                  
+                  <li class="left clearfix" ><span class="chat-img pull-left" >
+                  </span>
+                </li>
+                <div class="chat-message">
+                  <div class="right-bubble" [ngClass]="{'right-bubble': mensj.usuario.uid === user.uid, 'left-bubble': mensj.usuario.uid !== user.uid}">
+                    
+                    <!-- <span class="msg-name" *ngIf="mensaje.usuario.username === localStorageUsername">Yo</span> -->
+                    <span class="msg-name" *ngIf="mensj.usuario.perfil !== localStorageUsername"><strong></strong></span>
+                    <span class="msg-name" *ngIf="mensj.usuario.rol == 'mozo'"><strong>Mozo:</strong></span>
+                    <span class="msg-name" *ngIf="mensj.usuario.rol == 'cocinero'"><strong>Cocinero:</strong></span>
+                    <span class="msg-name" *ngIf="mensj.usuario.rol == 'duenio'"><strong>Dueño:</strong></span>
+                    <span class="msg-name" *ngIf="mensj.usuario.rol == null"><strong>Mesa: {{mensj.usuario.mesa}}</strong></span>
+                    
+                    <div class="messageContent">
+                      {{ mensj.mensaje }}
+                    </div>
+                    <span class="timestamp" >
+                      {{ mensj.hora | date:'medium' }}
+                    </span> 
+                    
+                  </div>
+                  
+                </div>
+                
+              </ul>
+            </div>
+            
+            
+            <div class="panel-footer" >
+              <div class="input-group" >
+                <ion-input id="btn-input" type="text" class="form-control input-sm" placeholder="Ingrese mensaje..." [(ngModel)]="mensaje"></ion-input>
+                <span class="botonSubmit">
+                  
+                  <!-- <button type="submit" class="acceso-rapido-button" (click)="enviarMensaje()"><ion-icon size="large" name="arrow-redo-outline"></ion-icon></button> -->
+                  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+                    <ion-fab-button (click)="enviarMensaje()">
+                      <ion-icon name="arrow-forward-circle"></ion-icon>
+                    </ion-fab-button>
+                  </ion-fab>
+                  
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+</ion-content>

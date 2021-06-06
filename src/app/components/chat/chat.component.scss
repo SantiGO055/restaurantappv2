@@ -1,0 +1,257 @@
+
+.chat
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.chat li
+{
+    /* margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #B3A9A9; */
+    
+}
+.chat-message{
+    
+    flex-wrap: wrap;
+    flex-flow: column wrap;
+    margin-top: 5px;
+    
+    
+}
+
+
+.chat-message .right-bubble {
+    position: relative;
+    margin-left: 45%;
+    margin-right: 10%;
+    background: #dcf8c6;
+    border-top-left-radius: .4em;
+    border-bottom-left-radius: .4em;
+    border-bottom-right-radius: .4em;
+    padding: 10px 10px 10px;
+    flex-direction: column;
+    flex-wrap: wrap ;
+    word-wrap: break-word;
+
+
+  }
+  .chat-message .left-bubble {
+    position: relative;
+    margin-right: 10%;
+    background: rgb(153, 214, 235);
+    border-top-right-radius: .4em;
+    border-bottom-left-radius: .4em;
+    border-bottom-right-radius: .4em;
+    padding: 5px 10px 10px;
+    left: 3%;
+    flex-direction: column;
+    flex-wrap: wrap ;
+    word-wrap: break-word;
+
+  }
+
+.chat li .chat-body p
+{
+    margin: 0;
+    color: #777777;
+}
+
+.panel .slidedown .glyphicon, .chat .glyphicon
+{
+    margin-right: 5px;
+}
+
+.panel-body
+{
+    overflow-y: scroll;
+    height: 700px;
+    width: 350px;
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 1px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+    width: 4px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: rgb(61, 59, 59);
+}
+.scrollBody{
+    scroll-margin: 0 0 50% 0;
+}
+
+/**/
+.close{
+    bottom: 2%;
+}
+.contenedorBotonYChat{
+    bottom: 5%;
+	right: 0%;
+    left: 10%;
+	position: relative;
+    float:left;
+    top:0;
+    
+}
+ion-content{
+    --background: transparent;
+    font-family: 'Varela Round';
+}
+.btn{
+    background-color: #4b778d;
+    color: #faffb8 !important;
+    border: 0 !important;
+}
+.btn:hover{
+    background-color: #35b0ab !important;
+    
+}
+.btn:active{
+    background: #35b0ab!important;
+}
+.btn:focus{
+    background: #35b0ab!important;
+}
+
+
+.messageData{
+    flex: 1;
+    padding: 10px;
+    font-size: 0.7em;
+}
+
+.sender{
+    display: block;
+    color: #222;
+    font-weight: bold;
+}
+
+.isOwnSender{
+    color: #89f1aa;
+}
+
+.timestamp {
+    font-size: 13px;
+    color: #555;
+    font-style: italic;
+}
+
+
+.messageContent{
+    height: auto;
+    /* flex: 9; */
+    background-color: #fff;
+    padding: 10px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    flex-wrap: wrap;
+    margin-right: 10%;
+    flex-direction: column;
+    flex-basis: 100%;
+
+}
+
+.isOwnMessageContent{
+    background-color: #53f561;
+    color: #01579B;
+}
+.imagen{
+    width: 100%;
+    background-color: transparent;
+    
+}
+.btnDesplegarChat{
+    // display: flex;
+    width: 10%;
+    background-color: transparent;
+    border:none;
+}
+
+.btnDesplegarChat:active{
+    background: transparent !important;
+    outline: none !important;
+    
+    border-color: tomato !important;
+}
+.btnDesplegarChat:focus{
+    background: transparent !important;
+    outline: none !important;
+    
+}
+
+.logo {
+    padding: 15px 0;
+    font-size: 25px;
+    color: #ffffff;
+    font-weight: bold;
+  }
+.acceso-rapido-button {
+    position: absolute;
+    right: -25px;
+    
+    background: #ffffff;
+    color: #999999;
+    
+    width: 50px;
+    height: 50px;
+    
+    border: 5px solid #efefef;
+    border-radius: 50%;
+    transition: all ease-in-out 500ms;
+}
+.botonSubmit{
+    margin-bottom: 2%;
+    margin-right: 2%;
+}
+.buttonCustom{
+    background: #ffffff;
+      color: #999999;
+border: 5px solid #efefef;
+      border-radius: 50%;
+      transition: all ease-in-out 500ms;
+}
+.acceso-rapido-button:hover {
+    color: #555555;
+//   transform: rotate(630deg);
+}
+.acceso-rapido-button.clicked {
+    color: #555555;
+}
+.acceso-rapido-button.clicked:hover {
+    transform: none;
+}
+.acceso-rapido-button.clicked.success {
+    color: #2ecc71;
+}
+.acceso-rapido-button.clicked.error {
+    color: #e74c3c;
+}
+.input-sm{
+    width: 93.7%;
+    background-color: rgb(204, 204, 204);
+    color:rgb(2, 2, 2);
+}
+.input-group{
+    display:block;
+}
+
+ion-content{
+    --ion-grid-column-padding:        5px;
+    --padding-top:10%;
+    --background: var(--ion-color-primary, #546192) ;
+}

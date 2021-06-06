@@ -17,6 +17,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Interception, NotificationService } from './services/notification.service';
 import { environment } from '../environments/environment';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,13 +31,15 @@ import { NgxSpinnerModule } from "ngx-spinner";
     AngularFirestoreModule, 
     IonicStorageModule.forRoot(),
     HttpClientModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    AngularFireDatabaseModule,
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     {provide: HTTP_INTERCEPTORS,useClass: Interception, multi: true}
   ],
   bootstrap: [AppComponent],
+
   
 })
 export class AppModule {}

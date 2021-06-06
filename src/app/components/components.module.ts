@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-
+import { ChatComponent } from './chat/chat.component';
 
 
 @NgModule({
@@ -12,8 +12,14 @@ import { IonicModule } from '@ionic/angular';
     FormsModule,
     IonicModule,
     
+    
+    
   ],
-  declarations: [],
-  exports:[]
+  declarations: [
+    ChatComponent
+  ],
+  exports:[ 
+    ChatComponent
+   ]
 })
 export class ComponentsPageModule {}
