@@ -1,0 +1,22 @@
+<ion-content>  
+    <ion-grid>      
+      <ion-row *ngIf="this.mostrarQrListaEspera" >
+        <ion-col>          
+          <p> Agregate a lista de espera escaneando el QR que encontraras en la puerta  </p>
+          <ion-button type="button" expand="block" color="tertiary"  (click)="escanearQRListaEspera()" >Escanear QR Lista Espera </ion-button>                        
+        </ion-col>
+      </ion-row>
+      <ion-row  *ngIf="this.mostrarQrMesa">
+        <ion-col>          
+          <p> Elegí la mesa que te guste, escaneá su QR para reservarla  </p>
+          <ion-button type="button" expand="block" color="tertiary"  (click)="escanearQRAsginarMesa()" >Escanear QR  de la mesa</ion-button>                        
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>                    
+          <p> Conocé las opiniones acerca de nosotros </p>
+          <ion-button type="button" expand="block" color="tertiary"  [routerLink]="['/resultados-encuesta']" >Ver resultados de encuesta</ion-button>                        
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-content>

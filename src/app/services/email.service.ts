@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import emailjs, { EmailJSResponseStatus, init } from 'emailjs-com';
 import { User } from '../entities/user';
-import { Usuario } from '../entities/usuario';
 
 
 @Injectable({

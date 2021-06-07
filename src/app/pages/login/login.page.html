@@ -50,8 +50,8 @@
 <ion-fab vertical="top"  horizontal="end" >
   <ion-fab-button color="tertiary" >Accesos</ion-fab-button>
   <ion-fab-list side="bottom">    
-    <ion-fab-button  *ngFor="let usuario of loginService.getUsuariosTest()"  (click)="defineTester( usuario.uid)" color="tertiary">
-      {{ usuario.nombre}}
+    <ion-fab-button  *ngFor="let usuario of loginService.getUsuariosTest()"  (click)="defineTester( usuario.username)" color="tertiary">
+      {{ usuario.username}}
     </ion-fab-button>
   </ion-fab-list>    
 </ion-fab>

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { SysError } from '../../entities/sysError';
+import { User } from '../../entities/user';
 
 @Component({
   selector: 'app-login',
@@ -48,9 +49,15 @@ export class LoginPage implements OnInit {
         this.toastService.presentSuccess('Por favor revise los datos ingresados.');        
       } else {
         this.loginService.login(this.ionicForm.value).then(
-          async (res) => {
-            this.SpinnerService.ocultarSpinner();
-            this.router.navigateByUrl('/dashboard/home', { replaceUrl: true });
+          async (usuario:User) => {
+            this.SpinnerService.ocultarSpinner();            
+            //Si es cliente 
+            let route = '/pagina-ingreso';            
+            if(User.perteneceAEmpresa(usuario)){
+              //si pertenece a la empresa
+              route = '/dashboard/home';
+            }
+            this.router.navigateByUrl(route, { replaceUrl: true });
           },
           async (error) => {            
             this.SpinnerService.ocultarSpinner();

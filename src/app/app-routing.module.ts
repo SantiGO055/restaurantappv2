@@ -47,6 +47,14 @@ const routes: Routes = [
     path: 'avatar',
     loadChildren: () => import('./pages/avatar/avatar.module').then( m => m.AvatarPageModule)
   },
+  {
+    path: 'pagina-ingreso',
+    loadChildren: () => import('./pages/pagina-ingreso/pagina-ingreso.module').then( m => m.PaginaIngresoPageModule)
+  },
+  {
+    path: 'resultados-encuesta',
+    loadChildren: () => import('./pages/resultados-encuesta/resultados-encuesta.module').then( m => m.ResultadosEncuestaPageModule)
+  },
 
 ];
 @NgModule({

@@ -29,6 +29,9 @@ export class AlertService {
     alert(message);
   }
 
+  confirm(message:string):boolean{
+    return this.confirm(message);
+  }
 
 
 //@todo pasar a servicio

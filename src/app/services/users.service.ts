@@ -1,46 +1,72 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import {AngularFirestore,AngularFirestoreCollection, } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { first, map } from 'rxjs/operators';
+import { waitForAsync } from '@angular/core/testing';
 import { User } from '../entities/user';
-
-
+import { first, map } from 'rxjs/operators';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UsersService {
-  private dbpath = '/users';
-  usuariosCollection: AngularFirestoreCollection<User>;
-  public usuarios: Observable<User[]>;
+  readonly COLLECTION = 'users';
 
+  usuarios: Observable<User[]>;
+  private usuariosCollection: AngularFirestoreCollection<User>;
 
-  constructor(public db: AngularFirestore) {
-    this.usuariosCollection = db.collection(this.dbpath);
-    this.usuarios = this.usuariosCollection.snapshotChanges().pipe(map(actions=>{
-      return actions.map(a=>{
-        const data = a.payload.doc.data() as User;
-        data.uid = a.payload.doc.id;
-        return data;
+  constructor(private readonly fireStore: AngularFirestore) {
+    this.usuariosCollection = fireStore.collection<User>(this.COLLECTION);
+    this.getRegistros();
+  }
+
+  delete(registroId: string): Promise<void> {
+    return new Promise(
+      waitForAsync((resolve, rejects) => {
+        try {
+          const result = this.usuariosCollection.doc(registroId).delete();
+          resolve(result);
+        } catch (err) {
+          rejects(err.message);
+        }
+      })
+    );
+  }
+  
+  //@todo revisar si eliminarlo
+  async getUser(uid: string) {
+    return this.getOne(uid);
+  }
+
+  async getOne(uid: string) {
+    let userAux: User;
+    await this.usuarios
+      .pipe(first())
+      .toPromise()
+      .then((usuarios) => {
+        usuarios.forEach((user) => {
+          if (user.uid == uid) {
+            userAux = user;
+          }
+        });
       });
-    }));
-   }
-   getAllUsers(){
-    return this.usuarios;
-   }
-   async getUser(uid: string){
-     let userAux: User;
-     console.log(uid)
+    return userAux;
+  }
 
-     await this.getAllUsers().pipe(first()).toPromise().then(usuarios=>{
-      usuarios.forEach(user => {
-         if(user.uid == uid){
-          userAux = user;
-          console.log(user)
-         }
-       });
+  save(user: User, userId: string): Promise<void> {
+    return new Promise((resolve, rejects) => {
+      try {
+        const id = userId || this.fireStore.createId();
+        const data = { id, ...user };
+        const result = this.usuariosCollection.doc(id).set(data);
+        resolve(result);
+      } catch (err) {
+        rejects(err.message);
+      }
+    });
+  }
 
-     });
-     return userAux;
-
-   }
+  private getRegistros(): void {
+    this.usuarios = this.usuariosCollection
+      .snapshotChanges()
+      .pipe(map((actions) => actions.map((a) => a.payload.doc.data() as User)));
+  }
 }
