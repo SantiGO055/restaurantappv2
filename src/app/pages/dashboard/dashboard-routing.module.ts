@@ -13,10 +13,10 @@ const routes: Routes = [
           import('../home/home.module').then((m) => m.HomePageModule),
       },
       {
-        path: 'alta-duenio',
+        path: 'registros',
         loadChildren: () =>
-          import('../alta-duenio/alta-duenio.module').then((m) => m.AltaDuenioPageModule),
-      },            
+          import('../registros/registros.module').then((m) => m.RegistrosPageModule),
+      },
       {
         path: '',
         redirectTo: 'home',

@@ -19,8 +19,11 @@ export class LectorQrListaEsperaService  extends LectorqrService{
   }
 
   async escanear(){
-    const codigo = super.scan();
-    return true;
+    const codigo = await super.scan();
+    const json = JSON.parse( codigo);
+    console.log('codigo:',json);
+    //@todo probar esto para ver si se lo puede leer asi 
+    return (json.agregarListaEspera == true);
   }
 
   

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -18,9 +18,11 @@ import { Interception, NotificationService } from './services/notification.servi
 import { environment } from '../environments/environment';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { SysErrorHandler } from './services/sysErrorHandler';
+import { UserNamePipe } from './pipes/user-name.pipe';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, UserNamePipe],
   entryComponents: [],
   imports: [
     BrowserModule, 
@@ -36,7 +38,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    {provide: HTTP_INTERCEPTORS,useClass: Interception, multi: true}
+    {provide: HTTP_INTERCEPTORS,useClass: Interception, multi: true},
+    { provide: ErrorHandler, useClass: SysErrorHandler },
   ],
   bootstrap: [AppComponent],
 

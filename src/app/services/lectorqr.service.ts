@@ -40,7 +40,7 @@ export abstract class LectorqrService {
       throw new SysError('El codigo no posee contenido');    
     }    
   }
-
+  
   preapare(){
     const { BarcodeScanner } = Plugins;
     BarcodeScanner.prepare();  

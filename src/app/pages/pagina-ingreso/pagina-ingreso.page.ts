@@ -3,9 +3,7 @@ import { TurnosService } from '../../services/turnos.service';
 import { LoginService } from '../../services/login.service';
 import { Cliente } from '../../entities/cliente';
 import { Turno } from '../../entities/turno';
-import { clienteEstado } from '../../enums/clienteEstados';
 import { User } from '../../entities/user';
-import { LectorQRMesaService } from '../../services/lectorqrmesa.service';
 import {  LectorQrListaEsperaService } from '../../services/lectorqrlistaespera.service';
 import { Router } from '@angular/router';
 
@@ -16,11 +14,10 @@ import { Router } from '@angular/router';
 })
 export class PaginaIngresoPage implements OnInit {
 
-  public mostrarQrListaEspera:boolean;
-  
+  public mostrarQrListaEspera:boolean;  
 
   constructor(
-    public lectorqrListaEsperaService:LectorQrListaEsperaService,
+    public lectorqrService:LectorQrListaEsperaService,
     public turnosService:TurnosService,
     public loginService:LoginService,
     public router:Router,
@@ -43,25 +40,20 @@ export class PaginaIngresoPage implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.lectorqrListaEsperaService.preapare();    
-  }  
-  
+    this.lectorqrService.preapare();    
+  }    
 
-  async escanearQRListaEspera()
+  async escanearQr()
   {
-    const resultado = await this.lectorqrListaEsperaService.escanear();               
+    const resultado = await this.lectorqrService.escanear();               
     if(resultado){
         this.mostrarQrListaEspera = false;        
     }
   }
 
   deternerScaner(){
-    this.lectorqrListaEsperaService.stopScan();
-  }
-  
-  async escanearQRAsginarMesa(){
-    //@todo completar con la lectura y demas 
-  }
+    this.lectorqrService.stopScan();
+  }  
 
   protected agregarAListaEspera(){    
     //@todo revisar esto , pero entiendo que pasaria el cliente 

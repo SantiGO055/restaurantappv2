@@ -101,17 +101,14 @@ export class RegisterPage implements OnInit {
       } else {
         this.spinnerService.mostrarSpinner();
         const formData = this.ionicRegister.value;
-        const email = formData.username;
-        //@todo revisar si existe o capturar el error particular
+        const email = formData.username;        
         const registro = {
           email,
           displayName: formData.name,
           emailVerified: false,
           photoURL: this.avatarUrl,
-          password: formData.password,
-          aprobado: false,
-        } as Registro;
-        console.log(registro);
+          password: formData.password          
+        } as Registro;        
         this.registrosService.save(registro, null).then(
           async (res) => {
             this.spinnerService.ocultarSpinner();

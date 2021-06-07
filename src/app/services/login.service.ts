@@ -38,6 +38,19 @@ export class LoginService {
       })
     );
   }
+  
+  async registerUser(user:User, password:string): Promise<User> {
+    try {
+      const authData = await this.fireAuth.createUserWithEmailAndPassword(
+        user.email,
+        password
+      );           
+      return user;
+    } catch (error) {
+      throw new SysError('Ocurrio al comunicarse con el servidor', error);
+    }
+  }
+
 
   get loguedUser(): Observable<User> {
     return this.user$;

@@ -18,13 +18,14 @@
           >
             <ion-label>Home </ion-label> <ion-icon name="home-outline"></ion-icon>
           </ion-item>
-          <!-- alta empleado-->
+          <!-- registros de clientes -->
           <ion-item
-            routerLink="/dashboard/alta-duenio"
+            *ngIf="this.accesosDuenio"
+            routerLink="/dashboard/registros"
             routerDirection="root"
             routerLinkActive="active-item"
           >
-            <ion-label> Alta dueño </ion-label><ion-icon name="person-add-outline"></ion-icon>
+            <ion-label> Registros Solicitados </ion-label><ion-icon name="person-add-outline"></ion-icon>
           </ion-item>
           <!-- logout -->
           <ion-item (click)="logout()"  routerLinkActive="active-item" routerDirection="root" >            

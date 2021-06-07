@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Registro } from '../entities/registro';
 import { AngularFirestore, AngularFirestoreCollection,} from '@angular/fire/firestore';
-import { map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import {  waitForAsync } from '@angular/core/testing';
 
@@ -31,6 +31,7 @@ export class RegistrosService {
       })
     );
   }
+  
 
   save(registro: Registro, registroId: string): Promise<void> {
     return new Promise((resolve, rejects) => {

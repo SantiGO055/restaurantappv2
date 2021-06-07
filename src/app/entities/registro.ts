@@ -5,5 +5,5 @@ export interface Registro {
     displayName: string;    
     photoURL:string;    
     password:string;
-    aprobado:boolean;
+    aprobado?:boolean;
 }
