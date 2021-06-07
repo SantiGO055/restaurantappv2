@@ -51,12 +51,7 @@ export class LoginPage implements OnInit {
         this.loginService.login(this.ionicForm.value).then(
           async (usuario:User) => {
             this.SpinnerService.ocultarSpinner();            
-            //Si es cliente 
-            let route = '/pagina-ingreso';            
-            if(User.perteneceAEmpresa(usuario)){
-              //si pertenece a la empresa
-              route = '/dashboard/home';
-            }
+            const route = this.definirRutaAcceso(usuario);
             this.router.navigateByUrl(route, { replaceUrl: true });
           },
           async (error) => {            
@@ -70,6 +65,19 @@ export class LoginPage implements OnInit {
     }
   }
   
+  protected definirRutaAcceso(usuario:User):string{
+    //Si es cliente 
+    let route = '/pagina-ingreso';            
+    if(User.perteneceAEmpresa(usuario)){
+      //si pertenece a la empresa
+      route = '/dashboard/home';
+    }else if(User.puedeAccederAsignarMesa(usuario)){
+      //si es cliente  que ya paso la lista de espera
+      let route = '/asignacion-mesa';            
+    }
+    return route;
+  }
+
   defineTester(selectedUserId: string) {
     const loginData = this.loginService.getUsuarioTest(selectedUserId);
     this.ionicForm.get('username').setValue(loginData.username);
