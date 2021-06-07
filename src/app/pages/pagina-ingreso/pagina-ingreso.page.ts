@@ -5,6 +5,9 @@ import { Cliente } from '../../entities/cliente';
 import { Turno } from '../../entities/turno';
 import { clienteEstado } from '../../enums/clienteEstados';
 import { User } from '../../entities/user';
+import { LectorQRMesaService } from '../../services/lectorqrmesa.service';
+import {  LectorQrListaEsperaService } from '../../services/lectorqrlistaespera.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pagina-ingreso',
@@ -13,38 +16,50 @@ import { User } from '../../entities/user';
 })
 export class PaginaIngresoPage implements OnInit {
 
-  public mostrarQrMesa:boolean;
   public mostrarQrListaEspera:boolean;
+  
 
   constructor(
+    public lectorqrListaEsperaService:LectorQrListaEsperaService,
     public turnosService:TurnosService,
     public loginService:LoginService,
-  ) { 
+    public router:Router,
+  ) {   
     this.mostrarQrListaEspera = true;
-    this.mostrarQrListaEspera = false;    
   }
 
   //en esta pagina se ve los botones de encuesta o de scanear eq
 
   ngOnInit() {
-    this.loginService.loguedUser.subscribe(
-      user =>{
-        this.mostrarQrListaEspera = User.puedeAccederAListaEspera(user);
-        this.mostrarQrMesa = User.puedeAccederAListaEspera(user);
+    this.loginService.loguedUser.subscribe(user=>{
+      if(User.puedeAccederAsignarMesa(user)){
+        // ya lo aceptaron
+        this.router.navigateByUrl('/asignacion-mesa');
+      }else{
+        //debe esperar 
+        this.mostrarQrListaEspera = User.puedeAccederAListaEspera(user);      
       }
-    );
-    
+    })
   }
 
+  ngAfterViewInit() {
+    this.lectorqrListaEsperaService.preapare();    
+  }  
+  
 
-  escanearQRListaEspera()
+  async escanearQRListaEspera()
   {
-    // @todo completar 
-    this.mostrarQrListaEspera = false;
-    this.mostrarQrMesa = true;
+    const resultado = await this.lectorqrListaEsperaService.escanear();               
+    if(resultado){
+        this.mostrarQrListaEspera = false;        
+    }
   }
 
-  escanearQRAsginarMesa(){
+  deternerScaner(){
+    this.lectorqrListaEsperaService.stopScan();
+  }
+  
+  async escanearQRAsginarMesa(){
     //@todo completar con la lectura y demas 
   }
 

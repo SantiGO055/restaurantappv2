@@ -6,12 +6,19 @@
           <ion-button type="button" expand="block" color="tertiary"  (click)="escanearQRListaEspera()" >Escanear QR Lista Espera </ion-button>                        
         </ion-col>
       </ion-row>
+      <ion-row *ngIf="!this.mostrarQrListaEspera" >
+        <ion-col>          
+          <p> El maitre te notificará cuando puedas seleccionar tu mesa </p>          
+        </ion-col>
+      </ion-row>
+      <!--
       <ion-row  *ngIf="this.mostrarQrMesa">
         <ion-col>          
           <p> Elegí la mesa que te guste, escaneá su QR para reservarla  </p>
           <ion-button type="button" expand="block" color="tertiary"  (click)="escanearQRAsginarMesa()" >Escanear QR  de la mesa</ion-button>                        
         </ion-col>
       </ion-row>
+      -->
       <ion-row>
         <ion-col>                    
           <p> Conocé las opiniones acerca de nosotros </p>

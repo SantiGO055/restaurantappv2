@@ -6,10 +6,9 @@ import { AlertService } from './alert.service';
 @Injectable({
   providedIn: 'root'
 })
-export class LectorQRMesaService  extends LectorqrService{
+export class LectorQrListaEsperaService  extends LectorqrService{
 
   constructor(
-
     alertService:AlertService
     ) { 
     super(alertService);    
@@ -17,6 +16,11 @@ export class LectorQRMesaService  extends LectorqrService{
 
   protected traerFormatosAceptados(): [SupportedFormat] {
     return [SupportedFormat.QR_CODE];
+  }
+
+  async escanear(){
+    const codigo = super.scan();
+    return true;
   }
 
   

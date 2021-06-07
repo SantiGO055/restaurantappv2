@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SupportedFormat } from '@capacitor-community/barcode-scanner';
 import { Plugins } from '@capacitor/core';
-import { EMPTY } from 'rxjs';
-import { ScanResult } from '../entities/scanResult';
 import { SysError } from '../entities/sysError';
 import { AlertService } from './alert.service';
 
@@ -28,10 +26,8 @@ export abstract class LectorqrService {
     return [SupportedFormat.QR_CODE];
   }
   
-  async escanear():Promise<string>{
+  protected  async scan():Promise<string>{
     const allow = this.checkPermition();
-    let acreditado = 0;
-    let codigo = '';
     if(allow){   
       this.scanActive = true;
       const { BarcodeScanner } = Plugins;  
@@ -42,8 +38,7 @@ export abstract class LectorqrService {
         return  result.content.trim();            
       }
       throw new SysError('El codigo no posee contenido');    
-    }
-    return ''; 
+    }    
   }
 
   preapare(){
