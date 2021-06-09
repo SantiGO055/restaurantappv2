@@ -45,15 +45,21 @@ export class PaginaIngresoPage implements OnInit {
 
   async escanearQr()
   {
-    const resultado = await this.lectorqrService.escanear();               
+    //const resultado = await this.lectorqrService.escanear();               
+    const resultado = true;
     if(resultado){
-        this.mostrarQrListaEspera = false;        
+        this.mostrarQrListaEspera = false;  
+        this.router.navigateByUrl('/clientes/asignacion-mesa')      ;
     }
   }
 
   deternerScaner(){
     this.lectorqrService.stopScan();
   }  
+
+  irAResultadosEncuestas(){
+    this.router.navigateByUrl('/cliente/resultados-encuesta');
+  }
 
   protected agregarAListaEspera(){    
     //@todo revisar esto , pero entiendo que pasaria el cliente 

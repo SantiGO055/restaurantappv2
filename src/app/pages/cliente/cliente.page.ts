@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../services/login.service';
 import { Router } from '@angular/router';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-cliente',
@@ -9,10 +10,14 @@ import { Router } from '@angular/router';
 })
 export class ClientePage implements OnInit {
 
+  public ocultarTabs:boolean;
   constructor(
     public loginService: LoginService,
     public router:Router,
-  ) { }
+  ) { 
+    this.ocultarTabs = false;
+  }
+  
 
   ngOnInit() {
   }

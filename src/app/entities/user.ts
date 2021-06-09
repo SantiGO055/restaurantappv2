@@ -55,6 +55,12 @@ export class User {
     );
   }
 
+  static puedeAccederMenu(user: User): boolean {    
+    return (
+      user.rol == Rol.CLIENTE && user.estado == clienteEstado.SELECCIONANDO_MESA
+    );
+  }
+  
   static fromAuth(user: firebase.User, rol: Rol, photoURL: string) {
     return {
       uid: user.uid,

@@ -14,11 +14,11 @@ const routes: Routes = [
         loadChildren: () => import('../pagina-ingreso/pagina-ingreso.module').then( m => m.PaginaIngresoPageModule)
       },
       {
-        path: '/resultados-encuesta',
+        path: 'resultados-encuesta',
         loadChildren: () => import('../resultados-encuesta/resultados-encuesta.module').then( m => m.ResultadosEncuestaPageModule)
       },
       {
-        path: '/cliente/asignacion-mesa',
+        path: 'asignacion-mesa',
         loadChildren: () => import('../asignacion-mesa/asignacion-mesa.module').then( m => m.AsignacionMesaPageModule)
       },
       {

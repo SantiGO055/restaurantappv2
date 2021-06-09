@@ -4,7 +4,7 @@
     <ion-row>
       <ion-col>                    
         <p> Conocé las opiniones acerca de nosotros </p>
-        <ion-button type="button" expand="block" color="tertiary"  [routerLink]="['/clientes/resultados-encuesta']" >Ver resultados de encuesta</ion-button>                                            
+        <ion-button type="button" expand="block" color="tertiary"  (click)="irAResultadosEncuestas()" >Ver resultados de encuesta</ion-button>                                            
       </ion-col>
     </ion-row>
 <!-- lista de espera  -->
@@ -26,9 +26,9 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-button fill="solid" class="scanear" size="large" expand="full"  (click)="escanearQr()" [hidden]="lectorqrService.scanActive">
+        <ion-button fill="solid" class="scanear" size="large" expand="full" class="qrlista" (click)="escanearQr()" [hidden]="lectorqrService.scanActive">
           <ion-icon name="qr-code-sharp" slot="start"></ion-icon>          
-          <ion-label>Scanear QR Lista de espera</ion-label>
+          <ion-label>Scanear QR </ion-label>
         </ion-button>
         <ion-button fill="solid"  class="scanear"  size="large" expand="full"  (click)="deternerScaner()" [hidden]="!lectorqrService.scanActive" >
           <ion-icon name="qr-code-sharp" slot="start"></ion-icon>          

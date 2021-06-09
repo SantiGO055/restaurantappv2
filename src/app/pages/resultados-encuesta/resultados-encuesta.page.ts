@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-resultados-encuesta',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResultadosEncuestaPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    public router:Router
+  ) { }
 
   ngOnInit() {
+  }
+
+  volverAPaginaPrevia(){
+    this.router.navigateByUrl('/clientes/pagina-ingreso');
   }
 
 }
