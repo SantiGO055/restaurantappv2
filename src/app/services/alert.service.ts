@@ -27,6 +27,7 @@ export class AlertService {
   showDanger(message:string){
     //@todo pasar a alert estetico
     alert(message);
+    //@todo levantar la vibracion    
   }
 
   confirm(message:string):boolean{
