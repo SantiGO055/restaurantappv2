@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="first"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Clientes en lista espera</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-virtual-scroll  approxItemHeight="320px">
+      <ion-item *virtualItem="let turno">      
+        <ion-label>
+          <h2>{{ turno.uid }}</h2>          
+          <div *ngIf="turno.aprobado === undefined " >
+            <ion-button   expand="full">Aceptar</ion-button>
+          </div>         
+        </ion-label>
+      </ion-item>
+    </ion-virtual-scroll>
+  </ion-list>
+</ion-content>
