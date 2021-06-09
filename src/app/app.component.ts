@@ -20,7 +20,7 @@ export class AppComponent {
   initialiceApp(){
     SplashScreen.hide()
     this.platform.ready().then(()=>{
-      this.router.navigateByUrl('dashboard/home');
+      this.router.navigateByUrl('splash');
     });
   }
 }

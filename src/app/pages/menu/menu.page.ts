@@ -58,6 +58,8 @@ export class MenuPage implements OnInit {
 
     }
   }
+  //TODO validar si el cliente ya pidio o no al momento de apretar el boton enviar pedido.
+  
   agregarProductoLista(producto: Producto){
     this.disableBotonQuitar = false;
     this.productos.forEach(prod => {
