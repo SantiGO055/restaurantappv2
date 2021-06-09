@@ -43,6 +43,7 @@ export class UsersService {
       .toPromise()
       .then((usuarios) => {
         usuarios.forEach((user) => {
+          console.log(user.uid , uid);
           if (user.uid == uid) {
             userAux = user;
           }
@@ -54,9 +55,9 @@ export class UsersService {
   save(user: User, userId: string): Promise<void> {
     return new Promise((resolve, rejects) => {
       try {
-        const id = userId || this.fireStore.createId();
-        const data = { id, ...user };
-        const result = this.usuariosCollection.doc(id).set(data);
+        const uid = userId || this.fireStore.createId();
+        const data = { uid, ...user };
+        const result = this.usuariosCollection.doc(uid).set(data);
         resolve(result);
       } catch (err) {
         rejects(err.message);

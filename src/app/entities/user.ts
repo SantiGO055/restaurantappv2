@@ -4,7 +4,7 @@ import { clienteEstado } from '../enums/clienteEstados';
 import { Registro } from './registro';
 
 export class User {
-  uid: string;
+  uid?: string;
   email: string;
   displayName: string;
   emailVerified: boolean;
@@ -44,12 +44,16 @@ export class User {
   }
 
   static puedeAccederAListaEspera(user: User): boolean {
+    console.log(user.rol == Rol.CLIENTE , user.estado == clienteEstado.EN_LISTA_ESPERA);
     return (
       user.rol == Rol.CLIENTE && user.estado == clienteEstado.EN_LISTA_ESPERA
     );
   }
 
   static puedeAccederAsignarMesa(user: User): boolean {
+    //@todo tomar de la lista de espera
+    return true;    
+
     return (
       user.rol == Rol.CLIENTE && user.estado == clienteEstado.SELECCIONANDO_MESA
     );

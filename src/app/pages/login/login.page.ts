@@ -52,11 +52,13 @@ export class LoginPage implements OnInit {
           async (usuario:User) => {
             this.SpinnerService.ocultarSpinner();            
             const route = this.definirRutaAcceso(usuario);
+            console.log(route);
             this.router.navigateByUrl(route, { replaceUrl: true });
           },
           async (error) => {            
             this.SpinnerService.ocultarSpinner();
-            this.toastService.presentDanger('Usuario o password incorrecto.');            
+            console.log(error);
+           // this.toastService.presentDanger('Usuario o password incorrecto.');            
           }
         );
       }
