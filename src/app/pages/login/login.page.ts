@@ -75,13 +75,13 @@ export class LoginPage implements OnInit {
   
   protected definirRutaAcceso(usuario:User):string{
     //Si es cliente 
-    let route = '/pagina-ingreso';            
+    let route = '/cliente/pagina-ingreso';            
     if(User.perteneceAEmpresa(usuario)){
       //si pertenece a la empresa
       route = '/dashboard/home';
     }else if(User.puedeAccederAsignarMesa(usuario)){
       //si es cliente  que ya paso la lista de espera
-      let route = '/asignacion-mesa';            
+      let route = '/cliente/asignacion-mesa';            
     }
     return route;
   }

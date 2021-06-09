@@ -51,9 +51,7 @@ export class User {
   }
 
   static puedeAccederAsignarMesa(user: User): boolean {
-    //@todo tomar de la lista de espera
-    return true;    
-
+    console.log(user.rol == Rol.CLIENTE , user.estado ,clienteEstado.SELECCIONANDO_MESA,user.rol == Rol.CLIENTE && user.estado == clienteEstado.SELECCIONANDO_MESA);
     return (
       user.rol == Rol.CLIENTE && user.estado == clienteEstado.SELECCIONANDO_MESA
     );
