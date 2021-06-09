@@ -20,6 +20,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { SysErrorHandler } from './services/sysErrorHandler';
 import { UserNamePipe } from './pipes/user-name.pipe';
+import { Vibration } from '@ionic-native/vibration/ngx';
 
 @NgModule({
   declarations: [AppComponent, UserNamePipe],
@@ -40,6 +41,7 @@ import { UserNamePipe } from './pipes/user-name.pipe';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     {provide: HTTP_INTERCEPTORS,useClass: Interception, multi: true},
     { provide: ErrorHandler, useClass: SysErrorHandler },
+    Vibration
   ],
   bootstrap: [AppComponent],
 
