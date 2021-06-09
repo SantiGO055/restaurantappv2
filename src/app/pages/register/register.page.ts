@@ -116,6 +116,7 @@ export class RegisterPage implements OnInit {
               'Su registro fue creado con exito. Un supervisor se comunicara con usted'
             );
             this.ionicRegister.reset();
+            this.avatarUrl = null;
           },
           async (error) => {
             this.spinnerService.ocultarSpinner();
