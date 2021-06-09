@@ -1,0 +1,16 @@
+.botones{
+    display: flex;
+    flex-direction: row;
+}
+ion-footer{
+    position: fixed;
+    bottom: 1%;
+    width: 100%;
+    justify-content : center;
+    border-color: black;
+
+}
+.consultar{
+    bottom: 8%;
+
+}

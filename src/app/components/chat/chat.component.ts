@@ -34,7 +34,7 @@ export class ChatComponent implements OnInit {
   sala4a: string;
   sala4b: string;
   // $:any;
-  
+  uid:string;
 
   @ViewChild('scroller') private divMensaje!: ElementRef;
   items:Array<string>=[];
@@ -48,7 +48,8 @@ export class ChatComponent implements OnInit {
     private spinner: SpinnerService
     
     ) {
-
+      this.cargarMensajes();
+      this.uid = localStorage.getItem('uidLogueado');
      }
   dismiss() {
   this.viewCtrl.dismiss();
@@ -64,13 +65,16 @@ export class ChatComponent implements OnInit {
     // $(document).ready(function(){
     //   $('[data-toggle="tooltip"]').tooltip();
     //   });
-    this.cargarMensajes();
+    // this.cargarMensajes();
     this.loginSvc.isLoggedIn().then(logueado=>{
     console.log(logueado);
     if(logueado != null){
+      
       let prom = this.userSvc.getUser(logueado.uid);
       prom.then(usr=>{
         console.log(usr)
+        localStorage.setItem('uidLogueado',logueado.uid);
+        this.uid = logueado.uid;
         this.user = usr;
         if(this.user.email != null)
         this.ownEmail = this.user.email;
