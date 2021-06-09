@@ -10,11 +10,11 @@ const routes: Routes = [
     component: ClientePage,
     children: [
       {
-        path: '/cliente/pagina-ingreso',
+        path: 'pagina-ingreso',
         loadChildren: () => import('../pagina-ingreso/pagina-ingreso.module').then( m => m.PaginaIngresoPageModule)
       },
       {
-        path: '/cliente/resultados-encuesta',
+        path: 'resultados-encuesta',
         loadChildren: () => import('../resultados-encuesta/resultados-encuesta.module').then( m => m.ResultadosEncuestaPageModule)
       },
       {
@@ -23,15 +23,10 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/cliente/pagina-ingreso',
+        redirectTo: 'pagina-ingreso',
         pathMatch: 'full'
       }
     ]
-  },
-  {
-    path: '',
-    redirectTo: '/cliente/pagina-ingreso',
-    pathMatch: 'full'
   }
 ];
 

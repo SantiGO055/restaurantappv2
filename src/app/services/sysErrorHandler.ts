@@ -2,7 +2,7 @@ import { ErrorHandler, Injectable } from '@angular/core';
 import { SpinnerService } from './spinner.service';
 import { AlertService } from './alert.service';
 import { SysError } from '../entities/sysError';
-//import { VibrationService } from './vibration.service';
+import { VibrationService } from './vibration.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +12,7 @@ export class SysErrorHandler implements ErrorHandler {
   constructor(
     private spinnerService: SpinnerService,
     private alertService: AlertService,
-  //  private vibration: VibrationService
+    private vibration: VibrationService,
   ) {}
 
   handleError(err: any): void {    
@@ -27,7 +27,7 @@ export class SysErrorHandler implements ErrorHandler {
     //disparar la accion de error 
     this.alertService.showSysError(err);        
     this.spinnerService.ocultarSpinner();
-    //this.vibration.on20Seconds();    
+    this.vibration.on20Seconds();    
 
   } 
   

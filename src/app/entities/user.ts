@@ -44,14 +44,12 @@ export class User {
   }
 
   static puedeAccederAListaEspera(user: User): boolean {
-    console.log(user.rol == Rol.CLIENTE , user.estado == clienteEstado.EN_LISTA_ESPERA);
     return (
       user.rol == Rol.CLIENTE && user.estado == clienteEstado.EN_LISTA_ESPERA
     );
   }
 
-  static puedeAccederAsignarMesa(user: User): boolean {
-    console.log(user.rol == Rol.CLIENTE , user.estado ,clienteEstado.SELECCIONANDO_MESA,user.rol == Rol.CLIENTE && user.estado == clienteEstado.SELECCIONANDO_MESA);
+  static puedeAccederAsignarMesa(user: User): boolean {    
     return (
       user.rol == Rol.CLIENTE && user.estado == clienteEstado.SELECCIONANDO_MESA
     );

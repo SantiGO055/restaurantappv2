@@ -54,8 +54,7 @@ export class LoginPage implements OnInit {
         this.loginService.login(this.ionicForm.value).then(
           async (usuario:User) => {
             this.SpinnerService.ocultarSpinner();            
-            const route = this.definirRutaAcceso(usuario);
-            console.log(route);
+            const route = this.definirRutaAcceso(usuario);            
             this.router.navigateByUrl(route, { replaceUrl: true });
           },
           async (error) => {            

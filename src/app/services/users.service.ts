@@ -30,8 +30,7 @@ export class UsersService {
       })
     );
   }
-  
-  //@todo revisar si eliminarlo
+    
   async getUser(uid: string) {
     return this.getOne(uid);
   }
@@ -42,8 +41,7 @@ export class UsersService {
       .pipe(first())
       .toPromise()
       .then((usuarios) => {
-        usuarios.forEach((user) => {
-          console.log(user.uid , uid , user.uid == uid);
+        usuarios.forEach((user) => {          
           if (user.uid == uid) {
             userAux = user;
           }
