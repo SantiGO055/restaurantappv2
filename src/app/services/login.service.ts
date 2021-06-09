@@ -44,7 +44,8 @@ export class LoginService {
       const authData = await this.fireAuth.createUserWithEmailAndPassword(
         user.email,
         password
-      );           
+      );    
+      user.uid = authData.user.uid;       
       return user;
     } catch (error) {
       throw new SysError('Ocurrio al comunicarse con el servidor', error);
@@ -85,7 +86,7 @@ export class LoginService {
         postData.username,
         postData.password
       );
-      const usuario = await this.usersService.getOne(authData.user.uid);
+      const usuario = await this.usersService.getOne(authData.user.uid);      
       this.push.guardarTokenFirebase(usuario);
       return usuario;
     } catch (error) {

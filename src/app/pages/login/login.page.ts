@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { SysError } from '../../entities/sysError';
 import { User } from '../../entities/user';
+import { RegistrosService } from '../../services/registros.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ export class LoginPage implements OnInit {
   public ionicForm: FormGroup;
 
   constructor(
+    private registroService: RegistrosService,
     private toastService: ToastService,
     public loginService: LoginService,
     private router: Router,
@@ -48,6 +50,7 @@ export class LoginPage implements OnInit {
       if (!this.ionicForm.valid) {
         this.toastService.presentSuccess('Por favor revise los datos ingresados.');        
       } else {
+        //revisar si existe desaprobado en registros         
         this.loginService.login(this.ionicForm.value).then(
           async (usuario:User) => {
             this.SpinnerService.ocultarSpinner();            
@@ -56,9 +59,12 @@ export class LoginPage implements OnInit {
             this.router.navigateByUrl(route, { replaceUrl: true });
           },
           async (error) => {            
-            this.SpinnerService.ocultarSpinner();
-            console.log(error);
-           // this.toastService.presentDanger('Usuario o password incorrecto.');            
+            this.SpinnerService.ocultarSpinner();                        
+            if(!this.registroService.getEstadoRegistroByEmail(this.username.value)){
+              this.toastService.presentDanger('Su registro aun no fue aceptado.');            
+            }else{
+              this.toastService.presentDanger('Usuario o password incorrecto.');            
+            }
           }
         );
       }

@@ -49,7 +49,7 @@ export class RegistrosPage implements OnInit {
       .registerUser(user, registro.password)
       .then((user) => {
         this.usersService
-          .save(user, null)
+          .save(user, user.uid)
           .then((response) => {            
             //enviar email
             this.emailService.sendEmail(

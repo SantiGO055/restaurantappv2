@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Registro } from '../entities/registro';
 import { AngularFirestore, AngularFirestoreCollection,} from '@angular/fire/firestore';
-import { map, filter } from 'rxjs/operators';
+import { map, filter, first } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import {  waitForAsync } from '@angular/core/testing';
 
@@ -44,6 +44,27 @@ export class RegistrosService {
           rejects(err.message);
         }
       });
+  }
+
+  async getEstadoRegistroByEmail(email: string) {
+    const registro = await this.getByEmail(email);
+    return (registro.aprobado === true);
+  }
+
+  
+  async getByEmail(email: string) {
+    let aux: Registro;
+    await this.registros
+      .pipe(first())
+      .toPromise()
+      .then((registros) => {
+        registros.forEach((registro) => {          
+          if (registro.email == email) {
+            aux = registro;
+          }
+        });
+      });
+    return aux;
   }
 
   private getRegistros(): void {

@@ -43,13 +43,17 @@ export class UsersService {
       .toPromise()
       .then((usuarios) => {
         usuarios.forEach((user) => {
-          console.log(user.uid , uid);
+          console.log(user.uid , uid , user.uid == uid);
           if (user.uid == uid) {
             userAux = user;
           }
         });
       });
     return userAux;
+  }
+
+  async getOne2(uid: string) {
+    return this.usuariosCollection.doc(uid).valueChanges().pipe(first());
   }
 
   save(user: User, userId: string): Promise<void> {
