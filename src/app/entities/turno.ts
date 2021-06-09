@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 import Timestamp = firebase.firestore.Timestamp;
 
 export class Turno {
+    id:string;
     uid:string;
     createdAt:Timestamp;    
     

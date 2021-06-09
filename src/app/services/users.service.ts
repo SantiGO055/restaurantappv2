@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { waitForAsync } from '@angular/core/testing';
 import { User } from '../entities/user';
 import { first, map } from 'rxjs/operators';
+import { SysError } from '../entities/sysError';
+import { clienteEstado } from '../enums/clienteEstados';
 @Injectable({
   providedIn: 'root',
 })
@@ -29,6 +31,22 @@ export class UsersService {
         }
       })
     );
+  }
+
+  async moverAListaEspera(uid:string):Promise<User>{
+    return this.getUser(uid).then(user => {
+      if(!User.esCliente(user)) {
+        throw new SysError('Debe ser cliente para ingresar a la lista de espera.');
+      }
+      if(user.estado != clienteEstado.EN_LISTA_ESPERA){
+        throw new SysError('Debe estar en lista de espera');
+      }
+      user.estado = clienteEstado.SELECCIONANDO_MESA;
+      this.save(user,user.uid);      
+      return user;
+    });
+    
+
   }
     
   async getUser(uid: string) {

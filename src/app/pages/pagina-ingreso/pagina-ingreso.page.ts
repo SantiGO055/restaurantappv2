@@ -31,7 +31,7 @@ export class PaginaIngresoPage implements OnInit {
     this.loginService.loguedUser.subscribe(user=>{
       if(User.puedeAccederAsignarMesa(user)){
         // ya lo aceptaron
-        this.router.navigateByUrl('/asignacion-mesa');
+        this.router.navigateByUrl('/cliente/asignacion-mesa');
       }else{
         //debe esperar 
         this.mostrarQrListaEspera = User.puedeAccederAListaEspera(user);      

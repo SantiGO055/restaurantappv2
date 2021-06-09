@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Registro } from '../entities/registro';
 import { AngularFirestore, AngularFirestoreCollection,} from '@angular/fire/firestore';
-import { map } from 'rxjs/operators';
+import { map, first } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import {  waitForAsync } from '@angular/core/testing';
 import { Turno } from '../entities/turno';
@@ -31,6 +31,28 @@ export class TurnosService {
         }
       })
     );
+  }
+
+  async getOneByUId(uid: string): Promise<Turno>{
+    let aux: Turno;
+    await this.turnos
+      .pipe(first())
+      .toPromise()
+      .then((turnos) => {
+        turnos.forEach((turno) => {          
+          if (turno.uid == uid) {
+            aux = turno;
+          }
+        });
+      });
+    return aux;
+  }
+
+  aceptarCliente(uid:string):Promise<Turno>{
+    return  this.getOneByUId(uid).then( turno => {
+      this.delete(turno.id);
+      return turno;
+    });
   }
 
   save(turno: Turno, turnoId: string): Promise<void> {
