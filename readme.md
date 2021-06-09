@@ -10,3 +10,4 @@
 4. `ionic cap open android`
 ## Ubicar los dispositivos conectados
 1. `adb devices`  para encontrar los dispositivos conectados
+2. npm i  despues de cualquiercosa 
