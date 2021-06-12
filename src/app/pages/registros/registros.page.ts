@@ -44,7 +44,10 @@ export class RegistrosPage implements OnInit {
     this.spinnerService.mostrarSpinner();
     const user = User.fromRegistro(registro);
     registro.aprobado = true;
-    this.registroService.save(registro, registro.id);
+    this.registroService.save(registro, registro.id).then(()=>{
+      this.spinnerService.ocultarSpinner();
+    });
+    console.log(user)
     this.loginService
       .registerUser(user, registro.password)
       .then((user) => {
@@ -52,6 +55,7 @@ export class RegistrosPage implements OnInit {
           .save(user, user.uid)
           .then((response) => {            
             //enviar email
+            console.log(response);
             this.emailService.sendEmail(
               user,
               'Bienvenido a Lo de tito! ya tenes tu cuenta de usuario.'
