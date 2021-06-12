@@ -116,7 +116,7 @@ export class NotificationService {
    guardarTokenFirebase(user: User){
     let rol: string = '';
     if(user.email === 'avillucas+duenio1@gmail.com'){
-      rol = "dueño";
+      rol = "duenio";
      }
      else if(user.email === 'avillucas+mozo1@gmail.com'){
       rol = "mozo";
@@ -226,7 +226,7 @@ export class NotificationService {
    }
 
   public push(title:string,mensaje:string,rol: string){
-    
+    console.log(title)
     this.tokenNotif.pipe(first()).toPromise().then(tokens=>{
       if(tokens.length != 0){
         tokens.forEach(token=>{
