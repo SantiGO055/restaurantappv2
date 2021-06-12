@@ -7,6 +7,7 @@ import { AvatarPage } from '../avatar/avatar.page';
 import { RegistrosService } from '../../services/registros.service';
 import { Registro } from '../../entities/registro';
 import { Router } from '@angular/router';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-register',
@@ -25,7 +26,8 @@ export class RegisterPage implements OnInit {
     public toastService: ToastService,
     public spinnerService: SpinnerService,
     public modalController: ModalController,
-    private router: Router
+    private router: Router,
+    private notification: NotificationService
   ) {
     this.isSubmitted = false;
     this.avatarUrl = null;
@@ -115,6 +117,7 @@ export class RegisterPage implements OnInit {
             this.toastService.presentSuccess(
               'Su registro fue creado con exito. Un supervisor se comunicara con usted por email.'
             );
+            this.notification.push('Registro nuevo','Registro nuevo pendiende de aprobacion','duenio');
             this.ionicRegister.reset();
             this.avatarUrl = null;
           },
