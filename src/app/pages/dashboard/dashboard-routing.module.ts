@@ -20,6 +20,10 @@ const routes: Routes = [
         loadChildren: () => import('../lista-espera/lista-espera.module').then( m => m.ListaEsperaPageModule)
       },
       {
+        path: 'menu',
+        loadChildren: () => import('../menu/menu.module').then( m => m.MenuPageModule)
+      },
+      {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full'

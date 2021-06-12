@@ -29,6 +29,12 @@
   },
   "server": {
     "url": "http://192.168.1.5:8100",
+<<<<<<< HEAD
     "cleartext": true
+=======
+    "cleartext": true,
+    "originalUrl": "http://192.168.1.5:8100",
+    "originalCleartext": true
+>>>>>>> menu
   }
 }

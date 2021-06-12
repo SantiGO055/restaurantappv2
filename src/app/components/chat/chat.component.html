@@ -1,5 +1,6 @@
 <ion-content>
-
+  
+ 
   
   <ion-button (click)="dismiss()" color="tertiary">
     Cerrar chat
@@ -24,7 +25,7 @@
                   </span>
                 </li>
                 <div class="chat-message">
-                  <div class="right-bubble" [ngClass]="{'right-bubble': mensj.usuario.uid === user.uid, 'left-bubble': mensj.usuario.uid !== user.uid}">
+                  <div class="right-bubble" [ngClass]="{'right-bubble': mensj.usuario.uid === this.uid, 'left-bubble': mensj.usuario.uid !== this.uid}">
                     
                     <!-- <span class="msg-name" *ngIf="mensaje.usuario.username === localStorageUsername">Yo</span> -->
                     <span class="msg-name" *ngIf="mensj.usuario.perfil !== localStorageUsername"><strong></strong></span>
