@@ -7,10 +7,20 @@ ion-footer{
     bottom: 1%;
     width: 100%;
     justify-content : center;
-    border-color: black;
-
+    --border-color: rgb(0, 0, 0);
+    border-width: .01em;
+    border-style:solid;
 }
 .consultar{
     bottom: 8%;
 
+}
+.footerPrecio{
+    --ion-background-color: #9a9fd1;
+    
+}
+ion-card{
+    --border-color: rgb(0, 0, 0);
+    border-width: .01em;
+    border-style:solid;
 }

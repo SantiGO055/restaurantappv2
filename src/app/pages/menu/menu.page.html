@@ -9,35 +9,6 @@
 <ion-content>
   <ion-list>
 
-    <!-- <ion-virtual-scroll [items]="this.productos" approxItemHeight="320px"> -->
-      
-
-      <!-- <ion-item *virtualItem="let producto">
-        
-
-          <ion-thumbnail slot="start">
-            <ion-img 
-            [src]="producto.foto"
-            [alt]="producto.nombre"
-            ></ion-img>
-          </ion-thumbnail>
-
-            <ion-label>
-              <h2>{{ producto.nombre }}</h2>
-              <h3>{{ producto.descripcion }}</h3>
-              <h1>$ {{ producto.precio }}</h1>
-              <ion-label>Cantidad: {{producto.cantidad}}</ion-label>
-            </ion-label>
-        
-          <ion-fab-button size="small"><ion-icon name="add-circle-outline" (click)="agregarProductoLista(producto)"></ion-icon></ion-fab-button >
-          <ion-fab-button size="small"><ion-icon name="remove-outline" (click)="quitarProductoLista(producto)"></ion-icon></ion-fab-button>
-          <ion-label>{{producto.cantidad}}</ion-label>
-
-
-        
-        
-      </ion-item> -->
-    <!-- </ion-virtual-scroll> -->
 
     <ion-virtual-scroll [items]="this.productos" approxItemHeight="320px">
 
@@ -53,16 +24,6 @@
             <img [src]="img">
          </ion-slide>
      </ion-slides>
-     
-      <!-- <ion-card-header>
-        
-        <ion-card-title>{{ producto.nombre }}</ion-card-title>
-        <ion-card-subtitle><strong>{{ producto.descripcion }}</strong></ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        
-       
-      </ion-card-content> -->
     
       <ion-footer>
         
@@ -91,15 +52,17 @@
       <br>
     </ion-card-content>
   </ion-card>
-  <ion-footer>
-    <ion-toolbar>
-      <ion-title>Total: $ {{total.toFixed(2)}}</ion-title>
-      
-      <ion-button expand="full">Pedir</ion-button>
-    </ion-toolbar>
+  <div class="footerPrecio">
     
-
-  </ion-footer>
+    <ion-footer >
+      <ion-toolbar>
+        <ion-title><strong>Total: $ {{total.toFixed(2)}}</strong></ion-title>
+        
+        <ion-button expand="full">Pedir</ion-button>
+        
+      </ion-toolbar> 
+    </ion-footer>
+  </div>
   <ion-fab class="consultar" vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="chatSvc.mostrarChat()">
       <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
