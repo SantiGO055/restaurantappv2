@@ -205,55 +205,6 @@ export class NotificationService {
             this.addToken(tokenObj)
           }
           
-  
-  
-          // if (tokens.length > 0) {
-          //   for(let tokenAux of tokens){
-          //     // console.log(tokenAux)
-          //     // console.log(this.token.value)
-          //     if(!diAlta){
-  
-              
-          //       if (tokenAux.token != this.token.value) {
-          //         if (this.getTokenDevice() != null) {
-          //           let tokenObj: TokenNotification = {
-          //             token: this.getTokenDevice().value,
-          //             usuario: user,
-          //           };
-          //           //@todo ver si esto se tiene que borrar
-          //           this.addToken(tokenObj).then((result) => {
-          //             // console.log(result);
-          //             diAlta = true;
-          //           });
-          //         }
-          //       }
-          //       else{
-          //         tokenAux.usuario = user;
-          //         this.updateToken(tokenAux);
-          //         break;
-          //       }
-          //     }
-          //     else {
-          //       // console.log("token de este celular ya registrado")
-          //       tokenAux.usuario = user;
-          //       this.updateToken(tokenAux);
-          //     }
-  
-          //   };
-  
-  
-          // } else {
-          //   if (this.getTokenDevice() != null) {
-          //     let tokenObj: TokenNotification = {
-          //       token: this.getTokenDevice().value,
-          //       usuario: user,
-          //     };
-          //     //@todo ver si esto se tiene que borrar
-          //     this.addToken(tokenObj).then((result) => {
-          //       // this.updateToken(tokenObj);
-          //     });
-          //   }
-          // }
         });
     } catch (error) {
       
