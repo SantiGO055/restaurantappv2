@@ -105,45 +105,159 @@ export class NotificationService {
   getAllTokens() {
     return this.tokenNotif;
   }
+  obtenerTokenIgual(token: TokenNotification[]){
+    
+    
+    // let retorno = false;
+    // for (let i = 0; i < token.length; i++) {
+     
+    //   if(token[i].token == this.token.value){
+    //     retorno = false;
+    //     return false;
+    //   }
+    //   else{
+    //     retorno = true;
+    //   }
+      
+    // }
+    // return retorno;
+  }
 
-  guardarTokenFirebase(user: User) {    
-    this.getAllTokens()
-      .pipe(first())
-      .toPromise()
-      .then((tokens) => {
-        //  console.log(tokens);
-        if (tokens.length > 0) {
-          tokens.forEach((tokenAux) => {
-            if (tokenAux.token != this.token.value) {
-              if (this.getTokenDevice() != null) {
-                let tokenObj: TokenNotification = {
-                  token: this.getTokenDevice().value,
-                  usuario: user,
-                };
-                //@todo ver si esto se tiene que borrar
-                this.addToken(tokenObj).then((result) => {
-                  // console.log(result);
-                });
-              }
-            } else {
-              // console.log("token de este celular ya registrado")
-              tokenAux.usuario = user;
-              this.updateToken(tokenAux);
-            }
-          });
-        } else {
-          if (this.getTokenDevice() != null) {
+  // guardarTokenFirebase(user: User){
+    // let asd = this.db.collection(this.dbpath,ref=>ref.where('token','==',this.token.value)).valueChanges()
+    //     asd.pipe(first())
+    //     .toPromise()
+    //     .then((tokensBase)=>{
+          
+    //       if(tokensBase.length>0){
+    //         console.log("no tengo que agregar sino updatear")
+    //         let tokenObj: TokenNotification = {
+    //           token: this.getTokenDevice().value,
+    //           usuario: user,
+    //         };
+    //         tokensBase.forEach(tok => {
+    //           console.log(tok)
+    //         });
+    //       }
+    //       else{
+    //         console.log("tengo que agregar");
+    //         let tokenObj: TokenNotification = {
+    //           token: this.getTokenDevice().value,
+    //           usuario: user,
+    //         };
+    //         //@todo ver si esto se tiene que borrar
+    //         this.addToken(tokenObj).then(result=>{
+    //           tokenObj.uid = result.id;
+    //           this.updateToken(tokenObj);
+    //         })
+    //       }
+    //     })
+  // }
+  buscarToken(token: TokenNotification[]){
+    // let asd = this.db.collection(this.dbpath,ref=>ref.where('token','==',this.token.value)).valueChanges()
+    //     asd.pipe(first())
+    //     .toPromise()
+    //     .then((tokensBase)=>{
+    //     });
+    let objAux = {
+      retorno: false,
+      token: null
+    };
+   for(let tok of token){
+      if(tok.token == this.getTokenDevice().value){
+        objAux = {
+          retorno: true,
+          token: <TokenNotification>tok
+        }
+
+        break;
+      }
+      else{
+        objAux = {
+          retorno: false,
+          token: null
+        }
+      }
+    };
+    return objAux;
+  }
+  guardarTokenFirebase(user: User) {  
+    try {
+      
+      let diAlta: boolean = false;
+      this.getAllTokens()
+        .pipe(first())
+        .toPromise()
+        .then((tokens) => {
+          let obj = this.buscarToken(tokens);
+
+          if(obj.retorno){
+            obj.token.usuario = user;
+            console.log(obj);
+            this.updateToken(obj.token);
+
+          }
+          else{
             let tokenObj: TokenNotification = {
               token: this.getTokenDevice().value,
               usuario: user,
             };
-            //@todo ver si esto se tiene que borrar
-            this.addToken(tokenObj).then((result) => {
-              // this.updateToken(tokenObj);
-            });
+            this.addToken(tokenObj)
           }
-        }
-      });
+          
+  
+  
+          // if (tokens.length > 0) {
+          //   for(let tokenAux of tokens){
+          //     // console.log(tokenAux)
+          //     // console.log(this.token.value)
+          //     if(!diAlta){
+  
+              
+          //       if (tokenAux.token != this.token.value) {
+          //         if (this.getTokenDevice() != null) {
+          //           let tokenObj: TokenNotification = {
+          //             token: this.getTokenDevice().value,
+          //             usuario: user,
+          //           };
+          //           //@todo ver si esto se tiene que borrar
+          //           this.addToken(tokenObj).then((result) => {
+          //             // console.log(result);
+          //             diAlta = true;
+          //           });
+          //         }
+          //       }
+          //       else{
+          //         tokenAux.usuario = user;
+          //         this.updateToken(tokenAux);
+          //         break;
+          //       }
+          //     }
+          //     else {
+          //       // console.log("token de este celular ya registrado")
+          //       tokenAux.usuario = user;
+          //       this.updateToken(tokenAux);
+          //     }
+  
+          //   };
+  
+  
+          // } else {
+          //   if (this.getTokenDevice() != null) {
+          //     let tokenObj: TokenNotification = {
+          //       token: this.getTokenDevice().value,
+          //       usuario: user,
+          //     };
+          //     //@todo ver si esto se tiene que borrar
+          //     this.addToken(tokenObj).then((result) => {
+          //       // this.updateToken(tokenObj);
+          //     });
+          //   }
+          // }
+        });
+    } catch (error) {
+      
+    }  
   }
 
   addToken(token: TokenNotification) {
@@ -155,7 +269,7 @@ export class NotificationService {
     return userRef.set(token, { merge: true });
   }
 
-  obtenerToken(rol: string) {}
+  
   deleteToken(token: TokenNotification) {
     this.notifDoc = this.db.doc(`mensajes/${token.uid}`);
     this.notifDoc.delete();
