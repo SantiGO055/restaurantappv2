@@ -20,7 +20,17 @@
       "splashImmersive": true
     },
     "PushNotifications": {
-      "presentationOptions": ["badge", "sound", "alert"]
+      "presentationOptions": [
+        "badge",
+        "sound",
+        "alert"
+      ]
     }
+  },
+  "server": {
+    "url": "http://192.168.1.5:8100",
+    "cleartext": true,
+    "originalUrl": "http://192.168.1.5:8100",
+    "originalCleartext": true
   }
 }
