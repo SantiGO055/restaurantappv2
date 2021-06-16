@@ -24,6 +24,11 @@ const routes: Routes = [
         loadChildren: () => import('../menu/menu.module').then( m => m.MenuPageModule)
       },
       {
+        path: 'listadopedido',
+        loadChildren: () => import('../listadopedido/listadopedido.module').then( m => m.ListadopedidoPageModule)
+      },
+      
+      {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full'

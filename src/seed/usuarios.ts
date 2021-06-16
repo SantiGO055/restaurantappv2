@@ -28,5 +28,10 @@ export const USUARIOS_TEST :LoginTestData[]= [
   {
     "username":"avillucas+enchufin1@gmail.com",
     "password":"qwerty"    
+  },
+  {
+    "username":"dluyqyxuzw@the23app.com",
+    "password":"123456"    
   }
+
 ];

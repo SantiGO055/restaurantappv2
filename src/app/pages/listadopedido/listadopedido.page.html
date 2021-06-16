@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="first"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Listado de pedidos</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <div approxItemHeight="320px">
+      <div *ngFor="let pedido of pedidos">
+
+        <h1>Pedido de la mesa: </h1>
+
+        <div *ngFor="let pedidoDetalle of pedido.producto">
+          <ion-item  >
+
+            
+            <ion-avatar slot="start">
+              
+              <ion-img
+                [src]="pedidoDetalle.fotos[0]"
+                [alt]="pedidoDetalle.nombre"
+              ></ion-img>
+            </ion-avatar>
+            
+            <ion-label>
+              <h2>{{ pedidoDetalle.nombre }}</h2>
+              <h3>{{ pedidoDetalle.descripcion }}</h3>
+              Estado de pedido
+              <strong> {{pedido.estadoPedido}}</strong>
+            </ion-label>
+            
+              
+          </ion-item>
+        </div>
+        <div *ngFor=" let pedidoDetalle of pedido.producto | slice:0:1 ">
+          <div *ngIf="pedido.estadoPedido == 'PENDIENTE' && usuarioLogueado.rol == 'mozo' ">
+            <!-- *ngIf="usuarioLogueado.rol == 'mozo'&&-->
+            <!-- <ion-button   expand="full"></ion-button> -->
+              <ion-fab-button (click)="this.aceptarPedido(pedido)">Aceptar</ion-fab-button>
+  
+  
+          </div>
+        </div>
+        <ion-item>
+          </ion-item>
+          
+      </div>
+          
+    </div>
+  </ion-list>
+
+</ion-content>

@@ -119,7 +119,7 @@ export class MenuPage implements OnInit {
       precioFinal: this.total
     }
     console.log(this.productoAgregado);
-    this.alerta.showSucess('Tu pedido esta pendiente','Aviso!','dashboard/home')
+    this.alerta.showSucess('Tu pedido esta pendiente','Aviso!','dashboard/listadopedido')
       this.productoSvc.addPedido(this.pedido);
       
   }

@@ -11,6 +11,7 @@ import { ModalController } from '@ionic/angular';
 import { ChatComponent } from 'src/app/components/chat/chat.component';
 import { ChatService } from 'src/app/services/chat.service';
 import { AlertService } from 'src/app/services/alert.service';
+import { UsersService } from 'src/app/services/users.service';
 
 
 @Component({
@@ -30,32 +31,15 @@ export class HomePage implements OnInit {
     private loginSvc: LoginService,
     private modal: ModalController,
     public chatSvc:ChatService,
-    public alerta: AlertService
+    public alerta: AlertService,
+    private userSvc: UsersService
     
     ) { 
     
   }
   ngOnInit() {
     
-    this.folder = this.activatedRoute.snapshot.paramMap.get('id');
-    this.notification.getAllTokens();
-    this.loginSvc.isLoggedIn().then(user=>{
-      console.log(user);
-      
-      // if(user.uid == '')
-      // let tokenObj:TokenNotification = {
-      //   token: token,
-      //   usuario: {
-      //     uid: user.uid,
-      //     displayName: user.displayName,
-      //     email: user.email,
-      //     emailVerified: user.emailVerified,
-      //     rol: user.
-      //   }
-      // }
-      // this.updateToken(tokenObj);
-    })
-    
+    this.folder = this.activatedRoute.snapshot.paramMap.get('id');    
     
   }
   enviarMail(){

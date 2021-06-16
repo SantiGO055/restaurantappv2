@@ -24,7 +24,8 @@ export class MenuService {
   
   constructor(
     public db: AngularFirestore,
-    private alerta: AlertService
+    private alerta: AlertService,
+    
   ) {
     this.productosCollection = db.collection(this.dbpath);
     this.productos = this.productosCollection.snapshotChanges().pipe(map(actions=>{
@@ -49,7 +50,15 @@ export class MenuService {
      return this.productos;
    }
    addPedido(pedido: Pedido){
+     pedido.uid = this.db.createId();
     return this.pedidosCollection.add(JSON.parse(JSON.stringify(pedido)));
+   }
+   getAllPedidos(){
+     return this.pedidos;
+   }
+   updatePedido(pedido: Pedido){
+    this.pedidosDoc = this.db.doc(`pedidos/${pedido.uid}`);
+    return this.pedidosDoc.update(pedido);
    }
 
 
