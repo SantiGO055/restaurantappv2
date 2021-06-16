@@ -25,7 +25,7 @@ export class SysErrorHandler implements ErrorHandler {
     } 
     
     //disparar la accion de error 
-    this.alertService.showSysError(err);        
+    this.alertService.showSysError(err,'Error');        
     this.spinnerService.ocultarSpinner();
     this.vibration.on20Seconds();    
 

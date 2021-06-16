@@ -24,7 +24,7 @@ export class MenuPage implements OnInit {
   constructor(
     private productoSvc:MenuService,
     public chatSvc:ChatService,
-    private alerta: AlertService
+    public alerta: AlertService
 
   ) {
     this.productoSvc.getAllProductos().pipe(first())
@@ -43,11 +43,11 @@ export class MenuPage implements OnInit {
 
   ngOnInit() {
     
-
   }
   
   
   agregarProductoLista(producto: Producto){
+    
     this.disableBotonQuitar = false;
     
     this.productos.forEach(prod => {
@@ -95,6 +95,7 @@ export class MenuPage implements OnInit {
     this.productoAgregado.forEach(productoAux => {
       if(Object.is(productoAux,producto)){
         if(productoAux.cantidad == 0){
+          this.tiempoElaboracion = 0;
           var index = this.productoAgregado.indexOf(producto);
           if (index > -1) {
             this.productoAgregado.splice(index, 1);
@@ -106,6 +107,7 @@ export class MenuPage implements OnInit {
 
       }
     });
+    
     console.log(this.productoAgregado);
   }
   enviarPedido(){
@@ -117,9 +119,9 @@ export class MenuPage implements OnInit {
       precioFinal: this.total
     }
     console.log(this.productoAgregado);
-
+    this.alerta.showSucess('Tu pedido esta pendiente','Aviso!','dashboard/home')
       this.productoSvc.addPedido(this.pedido);
-      this.alerta.showSucess("Tu pedido esta pendiende","Confirmacion")
+      
   }
 
 

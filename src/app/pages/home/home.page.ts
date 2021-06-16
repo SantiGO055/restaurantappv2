@@ -10,6 +10,7 @@ import { SpinnerService } from '../../services/spinner.service';
 import { ModalController } from '@ionic/angular';
 import { ChatComponent } from 'src/app/components/chat/chat.component';
 import { ChatService } from 'src/app/services/chat.service';
+import { AlertService } from 'src/app/services/alert.service';
 
 
 @Component({
@@ -28,7 +29,9 @@ export class HomePage implements OnInit {
     public notification: NotificationService,
     private loginSvc: LoginService,
     private modal: ModalController,
-    public chatSvc:ChatService
+    public chatSvc:ChatService,
+    public alerta: AlertService
+    
     ) { 
     
   }
