@@ -119,7 +119,7 @@ export class MenuPage implements OnInit {
     console.log(this.productoAgregado);
 
       this.productoSvc.addPedido(this.pedido);
-      this.alerta.confirm("Tu pedido se esta realizando")
+      this.alerta.showSucess("Tu pedido esta pendiende","Confirmacion")
   }
 
 
