@@ -45,8 +45,7 @@ export class PaginaIngresoPage implements OnInit {
 
   async escanearQr()
   {
-    //const resultado = await this.lectorqrService.escanear();               
-    const resultado = true;
+    const resultado = await this.lectorqrService.escanear();                   
     if(resultado){
         this.mostrarQrListaEspera = false;  
         this.router.navigateByUrl('/clientes/asignacion-mesa')      ;

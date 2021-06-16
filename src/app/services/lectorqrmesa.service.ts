@@ -9,7 +9,6 @@ import { AlertService } from './alert.service';
 export class LectorQRMesaService  extends LectorqrService{
 
   constructor(
-
     alertService:AlertService
     ) { 
     super(alertService);    

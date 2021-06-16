@@ -1,40 +1,35 @@
 {
-  "appId": "ar.com.github.lodetito",
-  "appName": "lodetito",
-  "bundledWebRuntime": false,
-  "npmClient": "npm",
-  "webDir": "www",
-  "linuxAndroidStudioPath": "/opt/android-studio/bin/studio.sh",
-  "plugins": {
-    "SplashScreen": {
-      "launchShowDuration": 0,
-      "launchAutoHide": true,
-      "backgroundColor": "#000000",
-      "androidSplashResourceName": "splash",
-      "androidScaleType": "CENTER_CROP",
-      "androidSpinnerStyle": "large",
-      "iosSpinnerStyle": "small",
-      "spinnerColor": "#999999",
-      "showSpinner": false,
-      "splashFullScreen": true,
-      "splashImmersive": true
-    },
-    "PushNotifications": {
-      "presentationOptions": [
-        "badge",
-        "sound",
-        "alert"
-      ]
-    }
-  },
-  "server": {
-    "url": "http://192.168.1.5:8100",
-<<<<<<< HEAD
-    "cleartext": true
-=======
-    "cleartext": true,
-    "originalUrl": "http://192.168.1.5:8100",
-    "originalCleartext": true
->>>>>>> menu
-  }
+	"appId": "ar.com.github.lodetito",
+	"appName": "lodetito",
+	"bundledWebRuntime": false,
+	"npmClient": "npm",
+	"webDir": "www",
+	"linuxAndroidStudioPath": "/opt/android-studio/bin/studio.sh",
+	"plugins": {
+		"SplashScreen": {
+			"launchShowDuration": 0,
+			"launchAutoHide": true,
+			"backgroundColor": "#000000",
+			"androidSplashResourceName": "splash",
+			"androidScaleType": "CENTER_CROP",
+			"androidSpinnerStyle": "large",
+			"iosSpinnerStyle": "small",
+			"spinnerColor": "#999999",
+			"showSpinner": false,
+			"splashFullScreen": true,
+			"splashImmersive": true
+		},
+		"PushNotifications": {
+			"presentationOptions": [
+				"badge",
+				"sound",
+				"alert"
+			]
+		}
+	},
+	"server": {
+		"url": "http://localhost:8100",
+		"cleartext": true,
+		"originalUrl": "http://192.168.1.5:8100"
+	}
 }
