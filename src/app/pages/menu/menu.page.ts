@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
+import { Estado, Pedido } from 'src/app/entities/pedido';
 import { Producto } from 'src/app/entities/producto';
+import { AlertService } from 'src/app/services/alert.service';
 import { ChatService } from 'src/app/services/chat.service';
 import { MenuService } from 'src/app/services/menu.service';
 
@@ -17,9 +19,12 @@ export class MenuPage implements OnInit {
   productoAgregado: Producto[] = [];
   disableBotonQuitar:boolean = true;
   slideOptsOne: any;
+  pedido: Pedido  = new Pedido();
+  tiempoElaboracion: number = 0;
   constructor(
     private productoSvc:MenuService,
-    public chatSvc:ChatService
+    public chatSvc:ChatService,
+    private alerta: AlertService
 
   ) {
     this.productoSvc.getAllProductos().pipe(first())
@@ -40,63 +45,82 @@ export class MenuPage implements OnInit {
     
 
   }
-  asd={
-    descripcion: "Doble carne 180g, queso cheddar",
-    foto: "https://hamburguesa.net/wp-content/uploads/carne_rellena_con_queso_cheddar-1024x768.jpg",
-    nombre: "Hamburguesa",
-    precio: 450.6,
-    tiempoPromedioElaboracion: 30,
-    tipo: "COMIDA",
-    uid: "fRFCuzHGDOSpIQeQURd8",
-    empleadoPrepara:{
-      displayName:"Cocinero 1",
-      email: "avillucas+cocinero1@gmail.com",
-      emailVerified: false,
-      photoUrl: "https://firebasestorage.googleapis.com/v0/b/restauranteapp-bffc6.appspot.com/o/img_1623015816557.png?alt=media&token=db8be8af-acac-416d-94aa-1a40ae87d7de",
-      rol: "cocinero",
-      uid: "Y73PxpMoEEUJqdaSEsA7xEdASqz2",
-
-    }
-  }
-  //TODO validar si el cliente ya pidio o no al momento de apretar el boton enviar pedido.
+  
   
   agregarProductoLista(producto: Producto){
     this.disableBotonQuitar = false;
+    
     this.productos.forEach(prod => {
       if(Object.is(prod,producto)){
-        prod.cantidad +=1;
+        producto.cantidad +=1;
+        
       }
     });
+    for(let productoAgreg of this.productoAgregado){
+      if(Object.is(productoAgreg,producto)){
+        
+        var index = this.productoAgregado.indexOf(producto);
+        if (index > -1) {
+          this.productoAgregado.splice(index, 1);
+          
+          break;
+        }
+      }
+    }
+    if(this.tiempoElaboracion <= producto.tiempoPromedioElaboracion){
+      this.tiempoElaboracion = producto.tiempoPromedioElaboracion;
+
+    }
     this.productoAgregado.push(producto);
     this.total += producto.precio;
+    console.log(this.total)
     console.log(this.productoAgregado)
+    console.log(this.tiempoElaboracion)
+
+    
   }
-quitarProductoLista(producto: Producto){
-  this.productos.forEach(prod => {
-    if(Object.is(prod,producto)){
-      if(prod.cantidad> 0){
-        prod.cantidad -=1;
+  quitarProductoLista(producto: Producto){
+    this.productos.forEach(prod => {
+      if(Object.is(prod,producto)){
+        if(prod.cantidad> 0){
+          prod.cantidad -=1;
+
+        }
+        if(prod.cantidad == 0)
+          this.disableBotonQuitar = true;
+        
+      }
+    });
+
+    this.productoAgregado.forEach(productoAux => {
+      if(Object.is(productoAux,producto)){
+        if(productoAux.cantidad == 0){
+          var index = this.productoAgregado.indexOf(producto);
+          if (index > -1) {
+            this.productoAgregado.splice(index, 1);
+            this.total -= producto.precio;
+            return
+          }
+
+        }
 
       }
-      if(prod.cantidad == 0)
-        this.disableBotonQuitar = true;
-      
-    }
-  });
+    });
+    console.log(this.productoAgregado);
+  }
+  enviarPedido(){
 
-  this.productoAgregado.forEach(productoAux => {
-    if(Object.is(productoAux,producto)){
-      var index = this.productoAgregado.indexOf(producto);
-      if (index > -1) {
-        this.productoAgregado.splice(index, 1);
-        this.total -= producto.precio;
-        return
-      }
-
+    this.pedido = {
+      estadoPedido: Estado.PENDIENTE,
+      producto: this.productoAgregado,
+      tiempoElaboracionFinal: this.tiempoElaboracion,
+      precioFinal: this.total
     }
-  });
-  console.log(this.productoAgregado);
-}
+    console.log(this.productoAgregado);
+
+      this.productoSvc.addPedido(this.pedido);
+  }
+
 
 
 }
