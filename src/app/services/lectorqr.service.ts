@@ -35,6 +35,7 @@ export abstract class LectorqrService {
       const result = await BarcodeScanner.startScan({ targetedFormats: this.traerFormatosAceptados() });      
       if (result.hasContent) {                
         this.scanActive = false;      
+        console.log(result.content);
         return  result.content.trim();            
       }
       throw new SysError('El codigo no posee contenido');    
