@@ -48,10 +48,12 @@ const routes: Routes = [
   {
     path: 'registros',
     loadChildren: () => import('./pages/registros/registros.module').then( m => m.RegistrosPageModule)
-  },  {
+  },
+  {
     path: 'menu',
     loadChildren: () => import('./pages/menu/menu.module').then( m => m.MenuPageModule)
   },
+  
 
 
 ];

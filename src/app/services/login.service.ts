@@ -20,7 +20,7 @@ export class LoginService {
   protected usuariosTest: LoginTestData[];
 
   protected user$: Observable<User>;
-
+  public usuarioLogueado: Promise<User>;
   constructor(
     private fireAuth: AngularFireAuth,
     private fireStore: AngularFirestore,
@@ -86,7 +86,9 @@ export class LoginService {
         postData.username,
         postData.password
       );
-      const usuario = await this.usersService.getOne(authData.user.uid);      
+      const usuario = await this.usersService.getOne(authData.user.uid);   
+      this.usuarioLogueado = this.usersService.getOne(usuario.uid);
+
       this.push.guardarTokenFirebase(usuario);
       return usuario;
     } catch (error) {

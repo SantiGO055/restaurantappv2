@@ -19,6 +19,7 @@ export class DashboardPage {
     private router:Router,
     private loginService:LoginService
   ) { 
+
     this.accesosDuenio = false;
     this.accesosBartender = false;
     this.accesosCocinero = false;

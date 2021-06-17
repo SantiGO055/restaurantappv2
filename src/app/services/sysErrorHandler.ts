@@ -27,7 +27,7 @@ export class SysErrorHandler implements ErrorHandler {
 console.error(error.message);
 
     //disparar la accion de error 
-   // this.alertService.showSysError(err);        
+   // this.alertService.showSysError(err);            
     this.spinnerService.ocultarSpinner();
     this.vibration.on20Seconds();    
 
