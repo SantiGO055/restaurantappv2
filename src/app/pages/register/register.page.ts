@@ -8,6 +8,8 @@ import { RegistrosService } from '../../services/registros.service';
 import { Registro } from '../../entities/registro';
 import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/services/notification.service';
+import { LectorQrListaEsperaService } from '../../services/lectorqrlistaespera.service';
+import { LectorQrDniService } from '../../services/lectorqrdni.service';
 
 @Component({
   selector: 'app-register',
@@ -25,9 +27,9 @@ export class RegisterPage implements OnInit {
     public formBuilder: FormBuilder,
     public toastService: ToastService,
     public spinnerService: SpinnerService,
-    public modalController: ModalController,
-    private router: Router,
-    private notification: NotificationService
+    public modalController: ModalController,    
+    private notification: NotificationService,
+    public lectorqrService:LectorQrDniService,
   ) {
     this.isSubmitted = false;
     this.avatarUrl = null;
@@ -46,6 +48,22 @@ export class RegisterPage implements OnInit {
       confirm: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
+
+
+  ngAfterViewInit() {
+    this.lectorqrService.preapare();    
+  }    
+
+  async escanearQr()
+  {
+    const resultado = await this.lectorqrService.escanear();                       
+    this.name.setValue(resultado.apellido+' '+resultado.nombre);    
+  }
+
+  deternerScaner(){
+    this.lectorqrService.stopScan();
+  }  
+
 
   checkPassSame() {
     let pass = this.ionicRegister.value.password;

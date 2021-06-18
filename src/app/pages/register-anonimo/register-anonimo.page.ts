@@ -6,6 +6,7 @@ import { SpinnerService } from '../../services/spinner.service';
 import { Router } from '@angular/router';
 import {  ModalController } from '@ionic/angular';
 import { AvatarPage } from '../avatar/avatar.page';
+import { LectorQrDniService } from '../../services/lectorqrdni.service';
 
 @Component({
   selector: 'app-register-anonimo',
@@ -26,10 +27,13 @@ export class RegisterAnonimoPage implements OnInit {
     public spinnerService: SpinnerService,
     public router: Router,
     public modalController: ModalController ,
+    public lectorqrService:LectorQrDniService,        
   ) {
     this.isSubmitted = false;
     this.avatarUrl = null;
   }
+ 
+
 
   ngOnInit() {
     this.errorMessage = '';
@@ -38,6 +42,21 @@ export class RegisterAnonimoPage implements OnInit {
       nombre: ['',[Validators.required, Validators.minLength(6)]],
     });
   }
+
+  
+  ngAfterViewInit() {
+    this.lectorqrService.preapare();    
+  }    
+
+  async escanearQr()
+  {
+    const resultado = await this.lectorqrService.escanear();                       
+    this.nombre.setValue(resultado.apellido+' '+resultado.nombre);    
+  }
+
+  deternerScaner(){
+    this.lectorqrService.stopScan();
+  }  
 
   async presentModal() {
     const modal = await this.modalController.create({

@@ -1,5 +1,5 @@
-<ion-content>
-  <form [formGroup]="ionicRegister" (ngSubmit)="register()" novalidate>
+<ion-content  [class]="lectorqrService.scanActive ? 'scan':'site'">
+  <form [formGroup]="ionicRegister" (ngSubmit)="register()" novalidate  [hidden]="lectorqrService.scanActive"  >
     <ion-grid>
       <ion-row>
         <ion-col>
@@ -81,3 +81,19 @@
     </ion-grid>
   </form>
 </ion-content>
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button fill="solid" class="scanear" size="large" expand="full" class="qrlista" (click)="escanearQr()" [hidden]="lectorqrService.scanActive">
+          <ion-icon name="qr-code-sharp" slot="start"></ion-icon>          
+          <ion-label>Scanear QR </ion-label>
+        </ion-button>
+        <ion-button fill="solid"  class="scanear"  size="large" expand="full"  (click)="deternerScaner()" [hidden]="!lectorqrService.scanActive" >
+          <ion-icon name="qr-code-sharp" slot="start"></ion-icon>          
+          <ion-label>Detener</ion-label>
+        </ion-button>            
+      </ion-col>
+    </ion-row>
+  </ion-grid>  
+</ion-footer>
