@@ -1,96 +1,165 @@
 
 /** plugins usados:
  * import { Chart } from 'angular-highcharts';
- * import Canvg from 'canvg';
- * import * as CanvasJS from './../../canvasjs.min';
- * import * as html2canvas from 'html2canvas';
+ * import { Axis, ChartOptions, PointOptionsType, SeriesOptionsType } from 'highcharts';
+ * import { Point } from 'angular-highcharts/lib/chart';
  */
-descargarCantTurnosPorDiaAPdf(){
-    let v = null;
-    
-    var doc = new jsPDF();
-    
-    let svg = window.document.getElementById("chart1").children[0].innerHTML;
+ agregarChartTurnosPorDia(){
+    if(this.usuarioLogueado.admin){
+      this.chartCantPorDia = new Chart({
+        chart: {
+          type: 'line'
+        },
+        title: {
+          text: 'Cantidad de turnos por dia'
+        },
+        credits: {
+          enabled: false
+        },
+        
+      });
   
-    if (svg)
-    svg = svg.replace(/\r?\n|\r/g, '').trim();
-    var canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-
-    v = Canvg.from(ctx, svg).then(v=>{
-      v.start()
-      var imgData = canvas.toDataURL('image/png');
-      // Generate PDF
-      var doc = new jsPDF('l', 'mm', 'a4');
-      doc.addImage(imgData, 'PNG', 40, 40, 250, 150);
-      doc.save('cantidadTurnosPorDia.pdf');
+      this.fireSvc.getAllTurnos().subscribe(turnos=>{
+        this.turnos = turnos;
+        
+        
+        let arrayOcurrencias = this.getOcurrencia(this.turnos,'fecha');
+        // console.log(arrayOcurrencias);
+        arrayOcurrencias.sort(function(a, b) {
+          return a.occurrence - b.occurrence;
+        });
+        
+  
+        
+      arrayOcurrencias.forEach(ocurr=>{
+        let data:SeriesOptionsType = {
+          type: "column",
+          colorByPoint: true,
+          name: ocurr.fecha,
+          data: [{y: ocurr.occurrence, name: ocurr.fecha, drilldown: ocurr.fecha}],
+        }
+        this.chartCantPorDia.addSeries(data,true,true)
+      }); 
     });
-
-    console.log(svg)
+      
+    }
+  
   }
-  
-  descargarCantEspPorTurno(){
-    let v = null;
+  getOcurrencia(array:any[], key: string){
+    let arr2 = [];
     
-    var doc = new jsPDF();
+    array.forEach((x)=>{
+       
+    // Checking if there is any object in arr2
+    // which contains the key value
+     if(arr2.some((val)=>{ return val[key] == x[key] })){
+         
+       // If yes! then increase the occurrence by 1
+       arr2.forEach((k)=>{
+         if(k[key] === x[key]){ 
+           k["occurrence"]++
+         }
+      })
+         
+     }else{
+       // If not! Then create a new object initialize 
+       // it with the present iteration key's value and 
+       // set the occurrence to 1
+       let a = {}
+       a[key] = x[key]
+       a["occurrence"] = 1
+       arr2.push(a);
+     }
+  })
     
-    let svg = window.document.getElementById("chart2").children[0].innerHTML;
-    var width = doc.internal.pageSize.getWidth();
-    var height = doc.internal.pageSize.getHeight();
-    if (svg)
-    svg = svg.replace(/\r?\n|\r/g, '').trim();
-    var canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-
-    v = Canvg.from(ctx, svg).then(v=>{
-      v.start()
-      var imgData = canvas.toDataURL('image/png');
-      // Generate PDF
-      var doc = new jsPDF('l', 'mm', 'a4');
-      doc.addImage(imgData, 'PNG', 40, 40, 250, 80);
-      doc.save('cantidadEspecialidadPorTurno.pdf');
-    });
+  return arr2
   }
-  descargarCantTurnosSolicitados(){
-    let v = null;
+  agregarChartEspPorTurnos(){
+    // console.log(this.usuarioLogueado)
+    if(this.usuarioLogueado.admin){
+      let data= [];
     
-    var doc = new jsPDF();
-    
-    let svg = window.document.getElementById("chart3").children[0].innerHTML;
-  
-    if (svg)
-    svg = svg.replace(/\r?\n|\r/g, '').trim();
-    var canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
+    let x = 0
+      let count = 0;
+      
+      
+      // this.chartEspPorTurno.ref.xAxis.forEach((cat)=>{
+      //   cat.setCategories([]);
+      // })
+      
+      this.fireSvc.getEspecialidades().pipe(first())
+      .toPromise()
+      .then(esp=>{
+        
 
-    v = Canvg.from(ctx, svg).then(v=>{
-      v.start()
-      var imgData = canvas.toDataURL('image/png');
-      // Generate PDF
-      var doc = new jsPDF('l', 'mm', 'a4');
-      doc.addImage(imgData, 'PNG', 40, 40, 250, 150);
-      doc.save('cantidadTurnosSolicitadosFecha.pdf');
-    });
+        this.especialidades = esp;
+        this.especialidades.forEach(especialidad => {
+          count = 0;
+          for (let i = 0; i < this.turnos.length; i++) {
+            if(this.turnos[i].especialidad == especialidad.nombre){
+              count++;
+            }
+            
+            
+          }
+
+          data.push({y: count, name: especialidad.nombre});
+        });
+        this.chartEspPorTurno = new Chart({
+          chart: {
+            type: 'pie'
+          },
+          title: {
+            text: 'Cantidad de especialidad por turnos'
+          },
+          credits: {
+            // enabled: false
+          },
+          plotOptions: {
+            pie:{
+              allowPointSelect: true
+            }
+          },
+          series: [{
+            type: 'pie',
+            name: 'Cantidad',
+            data: data
+          }]
+          
+        });
+
+
+      });
+
+
+    }
   }
-
-  descargarCantTurnosFinalizados(){
-    let v = null;
+  getOcurrenciaEstado(array : EstadoTurno[],key:any){
+    let arr2 = [];
     
-    var doc = new jsPDF();
+    array.forEach((turno)=>{
+       
+    // Checking if there is any object in arr2
+    // which contains the key value
+     if(arr2.some((val)=>{ return val[key] == turno[key] })){
+         
+       // If yes! then increase the occurrence by 1
+       arr2.forEach((k)=>{
+         if(k[key] === turno[key]){ 
+           k["occurrence"]++
+         }
+      })
+         
+     }else{
+       // If not! Then create a new object initialize 
+       // it with the present iteration key's value and 
+       // set the occurrence to 1
+       let a = {}
+       a[key] = turno[key]
+       a["occurrence"] = 1
+       arr2.push(a);
+     }
+  })
     
-    let svg = window.document.getElementById("chart4").children[0].innerHTML;
-  
-    if (svg)
-    svg = svg.replace(/\r?\n|\r/g, '').trim();
-    var canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-
-    v = Canvg.from(ctx, svg).then(v=>{
-      v.start()
-      var imgData = canvas.toDataURL('image/png');
-      // Generate PDF
-      var doc = new jsPDF('l', 'mm', 'a4');
-      doc.addImage(imgData, 'PNG', 40, 40, 250, 150);
-      doc.save('cantidadTurnosFinalizadosFecha.pdf');
-    });
+  return arr2
   }
