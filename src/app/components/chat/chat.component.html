@@ -1,10 +1,13 @@
 <ion-content>
   
  
-  
+<ion-fab vertical="top" horizontal="start" slot="fixed">
+
   <ion-button (click)="dismiss()" color="tertiary">
     Cerrar chat
   </ion-button>
+
+</ion-fab>
   <div class="contenedorBotonYChat" >  
     <div >
       <div class="contenedor">
@@ -55,11 +58,6 @@
                 <span class="botonSubmit">
                   
                   <!-- <button type="submit" class="acceso-rapido-button" (click)="enviarMensaje()"><ion-icon size="large" name="arrow-redo-outline"></ion-icon></button> -->
-                  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-                    <ion-fab-button (click)="enviarMensaje()">
-                      <ion-icon name="arrow-forward-circle"></ion-icon>
-                    </ion-fab-button>
-                  </ion-fab>
                   
                 </span>
               </div>
@@ -71,4 +69,9 @@
   </div>
   
 </div>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="enviarMensaje()">
+    <ion-icon name="arrow-forward-circle"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
 </ion-content>
