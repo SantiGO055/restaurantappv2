@@ -34,7 +34,7 @@ export class ChatComponent implements OnInit {
   sala4a: string;
   sala4b: string;
   // $:any;
-  uid:string;
+  uid:string = null;
 
   @ViewChild('scroller') private divMensaje!: ElementRef;
   items:Array<string>=[];
@@ -49,7 +49,7 @@ export class ChatComponent implements OnInit {
     
     ) {
       this.cargarMensajes();
-      this.uid = localStorage.getItem('uidLogueado');
+      // this.uid = localStorage.getItem('uidLogueado');
      }
   dismiss() {
   this.viewCtrl.dismiss();
