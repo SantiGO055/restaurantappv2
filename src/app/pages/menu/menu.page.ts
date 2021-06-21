@@ -80,34 +80,47 @@ export class MenuPage implements OnInit {
     
   }
   quitarProductoLista(producto: Producto){
-    this.productos.forEach(prod => {
-      if(Object.is(prod,producto)){
-        if(prod.cantidad> 0){
-          prod.cantidad -=1;
-
-        }
-        if(prod.cantidad == 0)
-          this.disableBotonQuitar = true;
+    // this.productos.forEach(prod => {
+    //   if(Object.is(prod,producto)){
+    //     if(prod.cantidad> 0){
+    //       prod.cantidad -=1;
+          
+    //     }
+    //     if(prod.cantidad == 0)
+    //       this.disableBotonQuitar = true;
         
-      }
-    });
+    //   }
+    // });
 
     this.productoAgregado.forEach(productoAux => {
       if(Object.is(productoAux,producto)){
-        if(productoAux.cantidad == 0){
-          this.tiempoElaboracion = 0;
-          var index = this.productoAgregado.indexOf(producto);
+        if(productoAux.cantidad >= 0){
+          
+          var index = this.productoAgregado.indexOf(productoAux);
+          productoAux.cantidad -=1;
           if (index > -1) {
+            if(productoAux.cantidad == 0)
             this.productoAgregado.splice(index, 1);
-            this.total -= producto.precio;
+            this.total -= productoAux.precio;
+            
             return
           }
 
         }
+        else{
+          this.tiempoElaboracion = producto.tiempoPromedioElaboracion;
+        }
+        
 
       }
     });
-    
+    if(this.total == 0){
+
+        this.tiempoElaboracion = 0;
+      
+    }
+
+    console.log(this.tiempoElaboracion)
     console.log(this.productoAgregado);
   }
   enviarPedido(){

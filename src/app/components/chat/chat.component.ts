@@ -64,8 +64,9 @@ export class ChatComponent implements OnInit {
 
     // $(document).ready(function(){
     //   $('[data-toggle="tooltip"]').tooltip();
-    //   });
+    // });
     // this.cargarMensajes();
+    
     this.loginSvc.isLoggedIn().then(logueado=>{
     console.log(logueado);
     if(logueado != null){
@@ -98,11 +99,10 @@ export class ChatComponent implements OnInit {
     this.mostrarChat = event;
   }
   scrollToBottom(): void {
-    
-    if(this.divMensaje != undefined){
+    if(this.divMensaje.nativeElement != undefined){
 
-      this.divMensaje.nativeElement.scrollTop
-      = this.divMensaje.nativeElement.scrollHeight;
+      this.divMensaje.nativeElement.scrollTop = this.divMensaje.nativeElement.scrollHeight;
+      console.log(this.divMensaje)
 
     }
   }
