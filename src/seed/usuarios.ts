@@ -37,5 +37,8 @@ export const USUARIOS_TEST :LoginTestData[]= [
     "username":"gpikd3bw9k@inscriptio.in",
     "password":"1q2w3e4r5t6y"    
   },
-
+  {
+    "username":"avillucas+manycliente@gmail.com",
+    "password":"1q2w3e4r5t6y"    
+  },
 ];

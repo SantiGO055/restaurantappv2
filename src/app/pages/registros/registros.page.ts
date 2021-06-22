@@ -18,6 +18,7 @@ import { SpinnerService } from '../../services/spinner.service';
 export class RegistrosPage implements OnInit {
 
   registros:Observable<Registro[]>;
+  registrosPendientes:Observable<Registro[]>;
 
   constructor(
     public registroService: RegistrosService,
@@ -27,16 +28,16 @@ export class RegistrosPage implements OnInit {
     public toastService:ToastService,
     private spinnerService:SpinnerService,
   ) {
-    this.registros = this.registroService.registros;
+    this.registros = this.registroService.registros;    
   }
 
   ngOnInit() {}
 
   rechazarRegistro(registro: Registro) {
-    this.spinnerService.mostrarSpinner();
-    registro.aprobado = false;
+    this.spinnerService.mostrarSpinner();    
     this.registroService.save(registro, registro.id).then( response =>{      
       this.emailService.sendRegistro( registro, 'Bienvenido a Lo de tito! lamentamos tener que rechazar tu solicitud .');
+      this.registroService.delete(registro.id);
       this.spinnerService.ocultarSpinner();
       this.toastService.presentSuccess('Se nego el usuario correctamente.');
     });
@@ -45,10 +46,6 @@ export class RegistrosPage implements OnInit {
   aceptarRegistro(registro: Registro) {
     this.spinnerService.mostrarSpinner();
     const user = User.fromRegistro(registro);
-    registro.aprobado = true;
-    this.registroService.save(registro, registro.id).then(()=>{
-      this.spinnerService.ocultarSpinner();
-    });    
     this.loginService
       .registerUser(user, registro.password)
       .then((user) => {
@@ -56,6 +53,7 @@ export class RegistrosPage implements OnInit {
           .save(user, user.uid)
           .then((response) => {            
             this.emailService.sendEmail( user, 'Bienvenido a Lo de tito! ya tenes tu cuenta de usuario.');
+            this.registroService.delete(registro.id);
             this.spinnerService.ocultarSpinner();
             this.toastService.presentSuccess('El usuario se creo correctamente');
           })
