@@ -59,7 +59,9 @@ export class LoginPage implements OnInit {
           },
           async (error) => {            
             this.SpinnerService.ocultarSpinner();                        
-            if(!this.registroService.getEstadoRegistroByEmail(this.username.value)){
+            console.log(error);
+            console.log(this.username.value, );            
+            if(! await this.registroService.getEstadoRegistroByEmail(this.username.value)){
               this.toastService.presentDanger('Su registro aun no fue aceptado.');            
             }else{
               this.toastService.presentDanger('Usuario o password incorrecto.');            
