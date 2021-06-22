@@ -32,12 +32,12 @@ export class ListaEsperaPage implements OnInit {
   ngOnInit() {
   }
 
-  aceptarCliente(turno: Turno) {
+
+  eliminarCliente(turno: Turno) {
     this.spinnerService.mostrarSpinner();
-    this.turnosService.aceptarCliente(turno.uid).then( turnos => {        
-        this.usersService.moverAListaEspera(turno.uid);
+    this.turnosService.sacarCliente(turno.uid).then( turnos => {                
         this.spinnerService.ocultarSpinner();        
-        this.toastService.presentSuccess('El usuario fue movido a la lista de espera.');
+        this.toastService.presentSuccess('El usuario fue eliminado de la lista de espera.');
     }).catch((error) => {
       throw new SysError('No pudo autenticarse al nuevo usuario.');
     });    

@@ -10,7 +10,7 @@ import { Turno } from '../entities/turno';
   providedIn: 'root',
 })
 export class TurnosService {
-  readonly COLLECTION = 'waiting-list';
+  readonly COLLECTION = 'waitingList';
 
   turnos: Observable<Turno[]>;
   private turnosCollection: AngularFirestoreCollection<Turno>;
@@ -48,7 +48,8 @@ export class TurnosService {
     return aux;
   }
 
-  aceptarCliente(uid:string):Promise<Turno>{
+
+  sacarCliente(uid:string):Promise<Turno>{
     return  this.getOneByUId(uid).then( turno => {
       this.delete(turno.id);
       return turno;

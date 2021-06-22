@@ -31,10 +31,12 @@ export class RegistrosPage implements OnInit {
   }
 
   ngOnInit() {}
+
   rechazarRegistro(registro: Registro) {
     this.spinnerService.mostrarSpinner();
     registro.aprobado = false;
-    this.registroService.save(registro, registro.id).then( registro =>{
+    this.registroService.save(registro, registro.id).then( response =>{      
+      this.emailService.sendRegistro( registro, 'Bienvenido a Lo de tito! lamentamos tener que rechazar tu solicitud .');
       this.spinnerService.ocultarSpinner();
       this.toastService.presentSuccess('Se nego el usuario correctamente.');
     });
@@ -46,8 +48,7 @@ export class RegistrosPage implements OnInit {
     registro.aprobado = true;
     this.registroService.save(registro, registro.id).then(()=>{
       this.spinnerService.ocultarSpinner();
-    });
-    console.log(user)
+    });    
     this.loginService
       .registerUser(user, registro.password)
       .then((user) => {
@@ -56,10 +57,7 @@ export class RegistrosPage implements OnInit {
           .then((response) => {            
             //enviar email
             console.log(response);
-            this.emailService.sendEmail(
-              user,
-              'Bienvenido a Lo de tito! ya tenes tu cuenta de usuario.'
-            );
+            this.emailService.sendEmail( user, 'Bienvenido a Lo de tito! ya tenes tu cuenta de usuario.');
             this.spinnerService.ocultarSpinner();
             this.toastService.presentSuccess('El usuario se creo correctamente');
           })

@@ -13,7 +13,7 @@
         <ion-label>
           <h2>{{ turno.uid }}</h2>          
           <div *ngIf="turno.aprobado === undefined " >
-            <ion-button  (click)="this.aceptarCliente(turno)" expand="full">Aceptar</ion-button>
+            <ion-button  (click)="this.eliminarCliente(turno)" expand="full">Eliminar</ion-button>
           </div>         
         </ion-label>
       </ion-item>

@@ -37,6 +37,17 @@ export class UsersService {
     return this.getUser(uid).then(user => {
       if(!User.esCliente(user)) {
         throw new SysError('Debe ser cliente para ingresar a la lista de espera.');
+      }      
+      user.estado = clienteEstado.EN_LISTA_ESPERA;
+      this.save(user,user.uid);      
+      return user;
+    });
+  }
+
+  async moverASeleccionando(uid:string):Promise<User>{
+    return this.getUser(uid).then(user => {
+      if(!User.esCliente(user)) {
+        throw new SysError('Debe ser cliente para ingresar a la lista de espera.');
       }
       if(user.estado != clienteEstado.EN_LISTA_ESPERA){
         throw new SysError('Debe estar en lista de espera');
@@ -45,8 +56,6 @@ export class UsersService {
       this.save(user,user.uid);      
       return user;
     });
-    
-
   }
     
   async getUser(uid: string) {
