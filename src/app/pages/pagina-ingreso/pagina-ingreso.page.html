@@ -12,20 +12,16 @@
     <ion-row>
       <ion-col>                    
         <p> Conocé las opiniones acerca de nosotros </p>
-        <ion-button type="button" expand="block" color="tertiary"  (click)="irAResultadosEncuestas()" >Ver resultados de encuesta</ion-button>                                            
+        <ion-button type="button" expand="block" color="tertiary" (click)="irAResultadosEncuestas()" >Ver resultados de encuesta</ion-button>                                            
+        <ion-button type="button" expand="block" color="tertiary" (click)="testQRValido()" >Como si escaneo el QR valido</ion-button>
       </ion-col>
     </ion-row>
-<!-- lista de espera  -->
-      <ion-row *ngIf="this.mostrarQrListaEspera" >
+    <!-- lista de espera  -->
+      <ion-row  >
         <ion-col>          
           <p> Agregate a lista de espera escaneando el QR que encontraras en la puerta  </p>          
         </ion-col>
-      </ion-row>
-      <ion-row *ngIf="!this.mostrarQrListaEspera" >
-        <ion-col>          
-          <p> El maitre te notificará cuando puedas seleccionar tu mesa </p>          
-        </ion-col>
-      </ion-row>
+      </ion-row>      
     </ion-grid>
     <div class="scanbox" [hidden]="!lectorqrService.scanActive">
     </div>
@@ -34,13 +30,9 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-button fill="solid" class="scanear" size="large" expand="full" class="qrlista" (click)="testQRValido()" >
-          <ion-icon name="qr-code-sharp" slot="start"></ion-icon>          
-          <ion-label>Como si escaneo el QR valido </ion-label>
-        </ion-button>
         <ion-button fill="solid" class="scanear" size="large" expand="full" class="qrlista" (click)="escanearQr()" [hidden]="lectorqrService.scanActive">
           <ion-icon name="qr-code-sharp" slot="start"></ion-icon>          
-          <ion-label>QR de la lista de espera </ion-label>
+          <ion-label>QR lista de espera </ion-label>
         </ion-button>
         <ion-button fill="solid"  class="scanear"  size="large" expand="full"  (click)="deternerScaner()" [hidden]="!lectorqrService.scanActive" >
           <ion-icon name="qr-code-sharp" slot="start"></ion-icon>          

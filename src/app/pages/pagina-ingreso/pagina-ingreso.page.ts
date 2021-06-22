@@ -14,8 +14,7 @@ import { UsersService } from '../../services/users.service';
   styleUrls: ['./pagina-ingreso.page.scss'],
 })
 export class PaginaIngresoPage implements OnInit {
-
-  public mostrarQrListaEspera:boolean;  
+  
 
   constructor(
     public lectorqrService:LectorQrListaEsperaService,
@@ -23,8 +22,7 @@ export class PaginaIngresoPage implements OnInit {
     public loginService:LoginService,
     public userService:UsersService,
     public router:Router,
-  ) {   
-    this.mostrarQrListaEspera = true;
+  ) {       
   }
 
   //en esta pagina se ve los botones de encuesta o de scanear eq
@@ -32,13 +30,13 @@ export class PaginaIngresoPage implements OnInit {
   ngOnInit() {
     this.loginService.loguedUser.subscribe(user=>{
       if(User.puedeAccederAsignarMesa(user)){
-        // ya lo aceptaron
-        this.router.navigateByUrl('/dashboard/asignacion-mesa');
-      }else{
-        //debe esperar 
-        this.mostrarQrListaEspera = User.puedeAccederAListaEspera(user);      
+        this.redireccionAMesa();
       }
     })
+  }
+
+  protected redireccionAMesa(){
+    this.router.navigateByUrl('/dashboard/asignacion-mesa');
   }
 
   ngAfterViewInit() {
@@ -49,14 +47,12 @@ export class PaginaIngresoPage implements OnInit {
   {
     const resultado = await this.lectorqrService.escanear();                   
     if(resultado){    
-      this.agregarAListaEspera();
-      this.router.navigateByUrl('/dashboard/asignacion-mesa')      ;
+      this.agregarAListaEspera();      
     }
   }
 
   async testQRValido(){
-    this.agregarAListaEspera();
-    this.router.navigateByUrl('/dashboard/asignacion-mesa')      ;
+    this.agregarAListaEspera();    
   }
 
   deternerScaner(){
@@ -74,6 +70,7 @@ export class PaginaIngresoPage implements OnInit {
         this.userService.moverAListaEspera(cliente);
         const turno = Turno.fromUser(cliente);
         this.turnosService.save(turno,null);
+        this.redireccionAMesa();
       }
     );
   }
