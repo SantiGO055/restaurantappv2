@@ -35,7 +35,7 @@ export class ListaEsperaPage implements OnInit {
 
   eliminarCliente(turno: Turno) {
     this.spinnerService.mostrarSpinner();
-    this.turnosService.sacarCliente(turno.uid).then( turnos => {                
+    this.turnosService.sacarCliente(turno).then( response => {                              
         this.spinnerService.ocultarSpinner();        
         this.toastService.presentSuccess('El usuario fue eliminado de la lista de espera.');
     }).catch((error) => {

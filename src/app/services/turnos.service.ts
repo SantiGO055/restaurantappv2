@@ -50,11 +50,8 @@ export class TurnosService {
   }
 
 
-  sacarCliente(uid:string):Promise<Turno>{
-    return  this.getOneByUId(uid).then( turno => {
-      this.delete(turno.id);
-      return turno;
-    });
+  sacarCliente(turno:Turno):Promise<void>{
+    return  this.turnosCollection.doc(turno.id).delete();;      
   }
 
   save(turno: Turno, turnoId: string): Promise<void> {

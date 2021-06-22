@@ -11,9 +11,23 @@
   <ion-list>
     <ion-virtual-scroll [items]="this.turnos|async" approxItemHeight="320px">
       <ion-item *virtualItem="let turno">        
-        <ion-label>
-          {{ turno.uid }}
-        </ion-label>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              nombre: {{ turno.displayName }}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              email: {{ turno.email }}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-button  (click)="this.eliminarCliente(turno)" expand="full">Eliminar</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-item>
     </ion-virtual-scroll>
   </ion-list>
