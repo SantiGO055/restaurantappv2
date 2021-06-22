@@ -27,6 +27,15 @@
           >
             <ion-label> Registros Solicitados </ion-label><ion-icon name="person-add-outline"></ion-icon>
           </ion-item>
+          <!-- Lista espera  -->
+          <ion-item
+          routerLink="/dashboard/lista-espera"
+          routerDirection="root"
+          routerLinkActive="active-item"
+           >
+            <ion-label> Lista de espera </ion-label><ion-icon name="time-outline"></ion-icon>
+          </ion-item>
+          <!-- menu -->
           <ion-item
             routerLink="/dashboard/menu"
             routerDirection="root"
@@ -34,6 +43,7 @@
           >
             <ion-label> Menu </ion-label><ion-icon name="fast-food-outline"></ion-icon>
           </ion-item>
+          <!-- listado de pedidos -->
           <ion-item
             routerLink="/dashboard/listadopedido"
             routerDirection="root"
@@ -41,7 +51,6 @@
           >
             <ion-label> Listado de pedidos </ion-label><ion-icon name="list-outline"></ion-icon>
           </ion-item>
-
           <!-- logout -->
           <ion-item (click)="logout()"  routerLinkActive="active-item" routerDirection="root" >            
             <ion-label> Cerrar sesion  </ion-label>  <ion-icon name="exit-outline"></ion-icon>

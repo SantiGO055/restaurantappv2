@@ -14,7 +14,6 @@ export class User {
   estado?: string;
 
   static perteneceAEmpresa(user: User): boolean {
-    //@todo buscar si existe algun metodo in
     return (
       user.rol == Rol.DUENIO ||
       user.rol == Rol.SUPERVISOR ||

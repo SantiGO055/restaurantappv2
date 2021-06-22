@@ -17,7 +17,7 @@ export class RouterService {
       route = '/dashboard/home';
     }else if(User.puedeAccederAsignarMesa(usuario)){
       //si es cliente  que ya paso la lista de espera
-      let route = '/cliente/asignacion-mesa';            
+      route = '/cliente/asignacion-mesa';            
     }
     return route;
   }

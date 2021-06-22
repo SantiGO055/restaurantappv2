@@ -15,11 +15,16 @@ export class AutoLoginGuard implements CanLoad {
     ) {}
 
   async canLoad(): Promise<boolean> {
-    const user = await this.loginService.isLoggedIn();    
-    if (user) {            
-      const route =   this.routes.definirRutaUsuario(user);      
-      this.router.navigateByUrl(route, { replaceUrl: true });      
-    }
+    const user = await this.loginService.loguedUser.subscribe(
+      user => {
+        if (user) {            
+          const route =   this.routes.definirRutaUsuario(user);            
+          this.router.navigateByUrl(route, { replaceUrl: true });      
+          return true;
+        }
+        return false;        
+      }
+    );       
     return true;
   }
 
