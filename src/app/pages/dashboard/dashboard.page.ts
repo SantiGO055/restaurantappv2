@@ -14,6 +14,9 @@ export class DashboardPage {
   public accesosMaitre :boolean;
   public accesosCocinero :boolean;
   public accesosBartender :boolean;
+  public accesosCliente :boolean;
+  public accesosAsociados :boolean;
+  public accesosMozo :boolean;
 
   constructor(
     private router:Router,
@@ -29,6 +32,9 @@ export class DashboardPage {
       this.accesosMaitre= User.esMaitre(user);
       this.accesosCocinero= User.esCocinero(user);
       this.accesosBartender= User.esBartender(user);
+      this.accesosCliente = User.esCliente(user);
+      this.accesosMozo = User.esMozo(user);
+      this.accesosAsociados = User.perteneceAEmpresa(user);
     });
   }
 

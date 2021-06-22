@@ -32,6 +32,10 @@ export const USUARIOS_TEST :LoginTestData[]= [
   {
     "username":"dluyqyxuzw@the23app.com",
     "password":"123456"    
-  }
+  },
+  {
+    "username":"gpikd3bw9k@inscriptio.in",
+    "password":"1q2w3e4r5t6y"    
+  },
 
 ];

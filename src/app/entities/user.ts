@@ -23,7 +23,7 @@ export class User {
       user.rol == Rol.COCINERO ||
       user.rol == Rol.BARTENDER
     );
-  }
+  }  
 
   static esDuenio(user: User): boolean {
     return user.rol == Rol.DUENIO;
@@ -42,6 +42,9 @@ export class User {
   static esCliente(user: User): boolean {
     return user.rol == Rol.CLIENTE;
   }
+  static esMozo(user: User): boolean {
+    return user.rol == Rol.MOZO;
+  }  
 
   static puedeAccederAListaEspera(user: User): boolean {
     return (
