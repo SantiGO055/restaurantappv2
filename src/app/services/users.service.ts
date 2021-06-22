@@ -6,6 +6,7 @@ import { User } from '../entities/user';
 import { first, map } from 'rxjs/operators';
 import { SysError } from '../entities/sysError';
 import { clienteEstado } from '../enums/clienteEstados';
+import { Cliente } from '../entities/cliente';
 @Injectable({
   providedIn: 'root',
 })
@@ -33,29 +34,23 @@ export class UsersService {
     );
   }
 
-  async moverAListaEspera(uid:string):Promise<User>{
-    return this.getUser(uid).then(user => {
-      if(!User.esCliente(user)) {
-        throw new SysError('Debe ser cliente para ingresar a la lista de espera.');
-      }      
-      user.estado = clienteEstado.EN_LISTA_ESPERA;
-      this.save(user,user.uid);      
-      return user;
-    });
+  async moverAListaEspera(user:User):Promise<void>{
+    if(!User.esCliente(user)) {
+      throw new SysError('Debe ser cliente para ingresar a la lista de espera.');
+    } 
+    user.estado = clienteEstado.EN_LISTA_ESPERA;     
+    return this.save(user,user.uid);                
   }
 
-  async moverASeleccionando(uid:string):Promise<User>{
-    return this.getUser(uid).then(user => {
-      if(!User.esCliente(user)) {
-        throw new SysError('Debe ser cliente para ingresar a la lista de espera.');
-      }
-      if(user.estado != clienteEstado.EN_LISTA_ESPERA){
-        throw new SysError('Debe estar en lista de espera');
-      }
-      user.estado = clienteEstado.SELECCIONANDO_MESA;
-      this.save(user,user.uid);      
-      return user;
-    });
+  async moverASeleccionarMesa(user:User):Promise<void>{
+    if(!User.esCliente(user)) {
+      throw new SysError('Debe ser cliente para ingresar a la lista de espera.');
+    }
+    if(user.estado != clienteEstado.EN_LISTA_ESPERA){
+      throw new SysError('Debe estar en lista de espera');
+    }
+    user.estado = clienteEstado.SELECCIONANDO_MESA;
+    return this.save(user,user.uid);      
   }
     
   async getUser(uid: string) {

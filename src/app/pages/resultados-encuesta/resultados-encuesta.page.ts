@@ -16,7 +16,7 @@ export class ResultadosEncuestaPage implements OnInit {
   }
 
   volverAPaginaPrevia(){
-    this.router.navigateByUrl('/clientes/pagina-ingreso');
+    this.router.navigateByUrl('/dashboard/pagina-ingreso');
   }
 
 }

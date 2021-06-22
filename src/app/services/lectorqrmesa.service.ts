@@ -20,11 +20,11 @@ export class LectorQRMesaService  extends LectorqrService{
   }
 
   
-  async escanear():Promise<number>{
+  async escanear():Promise<string>{
     try{
       const codigo = await super.scan();
       const json = JSON.parse( codigo);
-      return parseInt(json.mesaId);
+      return json.mesaId;
     }catch( error ){
       throw new SysError('Codigo QR invalido')
     }

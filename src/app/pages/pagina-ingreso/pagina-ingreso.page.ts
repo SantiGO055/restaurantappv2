@@ -6,6 +6,7 @@ import { Turno } from '../../entities/turno';
 import { User } from '../../entities/user';
 import {  LectorQrListaEsperaService } from '../../services/lectorqrlistaespera.service';
 import { Router } from '@angular/router';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-pagina-ingreso',
@@ -20,6 +21,7 @@ export class PaginaIngresoPage implements OnInit {
     public lectorqrService:LectorQrListaEsperaService,
     public turnosService:TurnosService,
     public loginService:LoginService,
+    public userService:UsersService,
     public router:Router,
   ) {   
     this.mostrarQrListaEspera = true;
@@ -47,14 +49,14 @@ export class PaginaIngresoPage implements OnInit {
   {
     const resultado = await this.lectorqrService.escanear();                   
     if(resultado){    
-       this.agregarAListaEspera();
-        this.router.navigateByUrl('/clientes/asignacion-mesa')      ;
+      this.agregarAListaEspera();
+      this.router.navigateByUrl('/dashboard/asignacion-mesa')      ;
     }
   }
 
   async testQRValido(){
     this.agregarAListaEspera();
-    this.router.navigateByUrl('/clientes/asignacion-mesa')      ;
+    this.router.navigateByUrl('/dashboard/asignacion-mesa')      ;
   }
 
   deternerScaner(){
@@ -69,6 +71,7 @@ export class PaginaIngresoPage implements OnInit {
     this.loginService.loguedUser.subscribe(
       user => {
         const cliente = Cliente.fromUser(user);
+        this.userService.moverAListaEspera(cliente);
         const turno = Turno.fromUser(cliente);
         this.turnosService.save(turno,null);
       }

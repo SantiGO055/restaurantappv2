@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { User } from '../../entities/user';
 import { Mesa } from '../../entities/mesa';
 import { Cliente } from '../../entities/cliente';
+import { MesasService } from '../../services/mesas.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-asignacion-mesa',
@@ -13,15 +15,14 @@ import { Cliente } from '../../entities/cliente';
 })
 export class AsignacionMesaPage implements OnInit {
 
- 
-  public mostrarQrMesa:boolean;  
 
   constructor(
     public lectorqrService:LectorQRMesaService,    
     public loginService:LoginService,
+    public mesaService : MesasService,
     public router:Router,
+    public toastService:ToastService, 
   ) {   
-    this.mostrarQrMesa = true;
   }
 
   //en esta pagina se ve los botones de encuesta o de scanear eq
@@ -31,9 +32,6 @@ export class AsignacionMesaPage implements OnInit {
       if(User.puedeAccederMenu(user)){
         // ya lo aceptaron
         this.router.navigateByUrl('/dashboard/menu');
-      }else{
-        //debe esperar 
-        this.mostrarQrMesa = User.puedeAccederAsignarMesa(user);      
       }
     })
   }
@@ -45,17 +43,35 @@ export class AsignacionMesaPage implements OnInit {
   async escanearQr()
   {
     this.lectorqrService.escanear().then(
-      mesaId => {
-         //@todo revisar esto , pero entiendo que pasaria el cliente 
-         this.loginService.loguedUser.subscribe(user => {
-            const cliente  =  Cliente.fromUser(user);
-            //@todo asignar el cliente a la mesa 
-             this.mostrarQrMesa = false;  
-            // this.router.navigateByUrl('/clientes/asignacion-mesa')      ;                    
-          });
+      mesaUid => {    
+         this.solicitarAsignarMesa(mesaUid);
       }
     );                       
   }
+  protected solicitarAsignarMesa(mesaUid:string){
+    this.loginService.loguedUser.subscribe(user => {
+      const cliente  =  Cliente.fromUser(user);            
+      try{
+        this.mesaService.asignarMesa(mesaUid,cliente);
+        this.router.navigateByUrl('/dashboard/menu');
+      }catch(error){
+        // informar del error 
+        this.toastService.presentDanger(error);
+      }      
+    });
+  }
+
+
+  async suponerEscaneoMesa1()
+  { 
+      this.solicitarAsignarMesa('swUDyLwV8OFFxZnJORp5');
+  }
+
+  async suponerEscaneoMesa2()
+  { 
+      this.solicitarAsignarMesa('xkbC3DQSKxibJ9KzAOG2');
+  }
+
 
   deternerScaner(){
     this.lectorqrService.stopScan();

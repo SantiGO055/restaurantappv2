@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Mesa } from '../entities/mesa';
 import { AngularFirestore, AngularFirestoreCollection,} from '@angular/fire/firestore';
-import { map } from 'rxjs/operators';
+import { map, first } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import {  waitForAsync } from '@angular/core/testing';
+import { Cliente } from '../entities/cliente';
+import { SysError } from '../entities/sysError';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MesasService {
-  readonly COLLECTION = 'tables';
+  
+  readonly COLLECTION = 'mesas';
 
   mesas: Observable<Mesa[]>;
   private mesasCollection: AngularFirestoreCollection<Mesa>;
@@ -53,5 +56,41 @@ export class MesasService {
       .pipe(
         map((actions) => actions.map((a) => a.payload.doc.data() as Mesa))
       );
+  }
+
+  async getOneByUId(uid: string): Promise<Mesa>{
+    let aux: Mesa;
+    await this.mesas
+      .pipe(first())
+      .toPromise()
+      .then((mesas) => {
+        mesas.forEach((mesa) => {          
+          if (mesa.uid == uid) {
+            aux = mesa;
+          }
+        });
+      });
+    return aux;
+  }
+
+
+  async asignarMesa(mesaUid:string, cliente:Cliente)
+  {
+    //@todo revisar si no existe otra mesa para este usuario 
+    if(Cliente.tieneMesa(cliente)){
+      throw new SysError('Ya tiene una mesa asignada');
+    }
+    let mesa =  await this.getOneByUId(mesaUid);    
+    if(!mesa){
+      throw new SysError('No existe la mesa');
+    }    
+    //@todo revisar si esta mesa no es de otra persona 
+    if(mesa.uid.length > 0){
+      throw new SysError('La mesa se encuentra asignada');
+    }    
+       
+    //asignar la mesa 
+    mesa.uid = cliente.uid;
+    this.save(mesa,mesa.id);
   }
 }

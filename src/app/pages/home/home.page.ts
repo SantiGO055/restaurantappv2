@@ -48,6 +48,7 @@ export class HomePage implements OnInit {
       displayName: 'Santi Prueba',
       email: 'santigonzalez05@gmail.com',
       photoURL: 'asd',
+      dni:'12345678',
       emailVerified: true
     }
     this.emailjs.sendEmail(usuario,'El usuario ha sido activado');
