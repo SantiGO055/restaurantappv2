@@ -39,6 +39,7 @@ export class RegisterAnonimoPage implements OnInit {
     this.errorMessage = '';
     this.isSubmitted = false;
     this.ionicRegister = this.formBuilder.group({
+      dni: ['',[Validators.required, Validators.minLength(8)]],
       nombre: ['',[Validators.required, Validators.minLength(6)]],
     });
   }
@@ -52,6 +53,7 @@ export class RegisterAnonimoPage implements OnInit {
   {
     const resultado = await this.lectorqrService.escanear();                       
     this.nombre.setValue(resultado.apellido+' '+resultado.nombre);    
+    this.dni.setValue(resultado.numero);
   }
 
   deternerScaner(){
@@ -79,6 +81,11 @@ export class RegisterAnonimoPage implements OnInit {
     return this.ionicRegister.get('nombre');
   }
 
+  get dni() {
+    return this.ionicRegister.get('dni');
+  }
+  
+
   async register() {
     try {
       this.isSubmitted = true;
@@ -87,7 +94,8 @@ export class RegisterAnonimoPage implements OnInit {
       } else {
         this.spinnerService.mostrarSpinner();                
         const name =this.ionicRegister.get('nombre').value;
-        this.loginService.loginAnonimo(name, this.avatarUrl).then(
+        const dni = this.ionicRegister.get('dni').value;
+        this.loginService.loginAnonimo(name, dni, this.avatarUrl).then(
           async (res) => {
             this.spinnerService.ocultarSpinner();            
             this.resetForm();

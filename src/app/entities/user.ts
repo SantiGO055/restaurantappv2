@@ -5,6 +5,7 @@ import { Registro } from './registro';
 
 export class User {
   uid?: string;
+  dni: string;
   email: string;
   displayName: string;
   emailVerified: boolean;

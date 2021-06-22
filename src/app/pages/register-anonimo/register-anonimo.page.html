@@ -17,6 +17,17 @@
           </div>
         </ion-col>
       </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-label>DNI</ion-label>
+          <ion-input formControlName="dni" type="text" placeholder="DNI" required ></ion-input>
+          <!-- user error messages -->
+          <div *ngIf="(dni.dirty || dni.touched) && dni.errors" class="errors ion-padding" >
+            <span *ngIf="dni.errors?.required">El DNI es requerido.</span >
+            <span *ngIf="dni.errors?.minlength">El DNI debe tener al menos 8 caracteres.</span>            
+          </div>
+        </ion-col>
+      </ion-row>
       <ion-row >
         <ion-col>
           <ion-label>Nombre</ion-label>

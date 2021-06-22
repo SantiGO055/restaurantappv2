@@ -69,10 +69,12 @@ export class LoginService {
     }
   }
 
-  async loginAnonimo(displayName: string, photoURL: string): Promise<User> {
+  async loginAnonimo(displayName: string, dni:string, photoURL: string): Promise<User> {
     try {
       const authData = await this.fireAuth.signInAnonymously();
-      const user = User.fromAuth(authData.user, Rol.CLIENTE, photoURL);
+      let user = User.fromAuth(authData.user, Rol.CLIENTE, photoURL);
+      user.displayName = displayName;
+      user.dni = dni;
       this.usersService.save(user, user.uid);
       return user;
     } catch (error) {
