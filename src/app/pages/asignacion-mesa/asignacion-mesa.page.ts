@@ -30,7 +30,7 @@ export class AsignacionMesaPage implements OnInit {
     this.loginService.loguedUser.subscribe(user=>{
       if(User.puedeAccederMenu(user)){
         // ya lo aceptaron
-        this.router.navigateByUrl('/cliente/menu');
+        this.router.navigateByUrl('/dashboard/menu');
       }else{
         //debe esperar 
         this.mostrarQrMesa = User.puedeAccederAsignarMesa(user);      

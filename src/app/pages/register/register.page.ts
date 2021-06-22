@@ -40,10 +40,8 @@ export class RegisterPage implements OnInit {
     this.isSubmitted = false;
     this.ionicRegister = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(6)]],
-      username: [
-        '',
-        [Validators.required, Validators.minLength(6), Validators.email],
-      ],
+      dni: ['', [Validators.required, Validators.minLength(8)]],
+      username: ['',[Validators.required, Validators.minLength(6), Validators.email]],
       password: ['', [Validators.required, Validators.minLength(4)]],
       confirm: ['', [Validators.required, Validators.minLength(6)]],
     });
@@ -58,6 +56,7 @@ export class RegisterPage implements OnInit {
   {
     const resultado = await this.lectorqrService.escanear();                       
     this.name.setValue(resultado.apellido+' '+resultado.nombre);    
+    this.dni.setValue(resultado.numero);    
   }
 
   deternerScaner(){
@@ -92,7 +91,12 @@ export class RegisterPage implements OnInit {
     this.name.setValue('');
     this.username.setValue('');
     this.password.setValue('');
+    this.dni.setValue('');
     this.avatarUrl = null;
+  }
+  
+  get dni() {
+    return this.ionicRegister.get('dni');
   }
 
   get name() {
@@ -124,6 +128,7 @@ export class RegisterPage implements OnInit {
         const email = formData.username;        
         const registro = {
           email,
+          dni:formData.dni,
           displayName: formData.name,
           emailVerified: false,
           photoURL: this.avatarUrl,

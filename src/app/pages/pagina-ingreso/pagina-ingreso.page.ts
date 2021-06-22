@@ -31,7 +31,7 @@ export class PaginaIngresoPage implements OnInit {
     this.loginService.loguedUser.subscribe(user=>{
       if(User.puedeAccederAsignarMesa(user)){
         // ya lo aceptaron
-        this.router.navigateByUrl('/cliente/asignacion-mesa');
+        this.router.navigateByUrl('/dashboard/asignacion-mesa');
       }else{
         //debe esperar 
         this.mostrarQrListaEspera = User.puedeAccederAListaEspera(user);      
@@ -62,7 +62,7 @@ export class PaginaIngresoPage implements OnInit {
   }  
 
   irAResultadosEncuestas(){
-    this.router.navigateByUrl('/cliente/resultados-encuesta');
+    this.router.navigateByUrl('/dashboard/resultados-encuesta');
   }
 
   protected agregarAListaEspera(){    

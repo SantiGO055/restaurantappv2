@@ -11,13 +11,13 @@ export class RouterService {
 
   public definirRutaUsuario(usuario:User):string{
     //Si es cliente 
-    let route = '/cliente/pagina-ingreso';            
+    let route = '/dashboard/pagina-ingreso';            
     if(User.perteneceAEmpresa(usuario)){
       //si pertenece a la empresa
       route = '/dashboard/home';
     }else if(User.puedeAccederAsignarMesa(usuario)){
       //si es cliente  que ya paso la lista de espera
-      route = '/cliente/asignacion-mesa';            
+      route = '/dashboard/asignacion-mesa';            
     }
     return route;
   }

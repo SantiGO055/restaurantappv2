@@ -27,7 +27,18 @@ const routes: Routes = [
         path: 'listadopedido',
         loadChildren: () => import('../listadopedido/listadopedido.module').then( m => m.ListadopedidoPageModule)
       },
-      
+      {
+        path: 'pagina-ingreso',
+        loadChildren: () => import('../pagina-ingreso/pagina-ingreso.module').then( m => m.PaginaIngresoPageModule)
+      },
+      {
+        path: 'resultados-encuesta',
+        loadChildren: () => import('../resultados-encuesta/resultados-encuesta.module').then( m => m.ResultadosEncuestaPageModule)
+      },
+      {
+        path: 'asignacion-mesa',
+        loadChildren: () => import('../asignacion-mesa/asignacion-mesa.module').then( m => m.AsignacionMesaPageModule)
+      },
       {
         path: '',
         redirectTo: 'home',

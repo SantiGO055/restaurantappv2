@@ -78,6 +78,7 @@ export class User {
         emailVerified: false,
         photoURL:registro.photoURL,
         rol:Rol.CLIENTE,
+        dni:registro.dni,
       } as User;
     }
 }

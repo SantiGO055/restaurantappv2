@@ -13,12 +13,7 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then((m) => m.LoginPageModule),
     canLoad:[AutoLoginGuard],
-  },
-  {
-    path: 'cliente',
-    loadChildren: () => import('./pages/cliente/cliente.module').then( m => m.ClientePageModule),
-  //  canLoad:[AuthGuard],
-  },
+  },  
   {
     path: 'dashboard',
     loadChildren: () => import('./pages/dashboard/dashboard.module').then((m) => m.DashboardPageModule ),
