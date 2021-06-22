@@ -25,7 +25,10 @@ export class AsignacionMesaPage implements OnInit {
   ) {   
   }
 
-  //en esta pagina se ve los botones de encuesta o de scanear eq
+  
+  irAResultadosEncuestas(){
+    this.router.navigateByUrl('/dashboard/resultados-encuesta');
+  }
 
   ngOnInit() {
     this.loginService.loguedUser.subscribe(user=>{
@@ -48,6 +51,7 @@ export class AsignacionMesaPage implements OnInit {
       }
     );                       
   }
+
   protected solicitarAsignarMesa(mesaUid:string){
     this.loginService.loguedUser.subscribe(user => {
       const cliente  =  Cliente.fromUser(user);            

@@ -45,6 +45,7 @@
     "emailjs": "^3.4.0",
     "emailjs-com": "^2.6.4",
     "firebase": "^8.3.1",
+    "highcharts": "^9.1.2",
     "jquery": "^3.6.0",
     "ngx-spinner": "^11.0.1",
     "rxjs": "~6.6.0",
