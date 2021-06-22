@@ -46,9 +46,8 @@ export class RegistrosService {
       });
   }
 
-  async getEstadoRegistroByEmail(email: string) {
-    const registro = await this.getByEmail(email);
-    return (registro.aprobado === true);
+  async getRegistroByEmail(email: string):Promise<Registro>{
+    return await this.getByEmail(email);    
   }
 
   

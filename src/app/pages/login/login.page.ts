@@ -58,13 +58,13 @@ export class LoginPage implements OnInit {
             this.router.navigateByUrl(route, { replaceUrl: true });
           },
           async (error) => {            
-            this.SpinnerService.ocultarSpinner();                        
-            console.log(error);
-            console.log(this.username.value, );            
-            if(! await this.registroService.getEstadoRegistroByEmail(this.username.value)){
-              this.toastService.presentDanger('Su registro aun no fue aceptado.');            
-            }else{
+            this.SpinnerService.ocultarSpinner();                                                
+            const registro = await this.registroService.getRegistroByEmail(this.username.value);
+            console.log(error, this.username.value, registro);
+            if( !registro ){
               this.toastService.presentDanger('Usuario o password incorrecto.');            
+            }else if(!registro.aprobado){
+              this.toastService.presentDanger('Su registro aun no fue aceptado.');            
             }
           }
         );
