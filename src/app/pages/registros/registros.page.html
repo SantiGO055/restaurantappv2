@@ -11,9 +11,7 @@
     <ion-virtual-scroll [items]="this.registros|async" approxItemHeight="320px">
       <ion-item *virtualItem="let registro">
         <ion-avatar slot="start">
-          <ion-img
-            [src]="registro.photoURL"
-            [alt]="registro.displayName"
+          <ion-img [src]="registro.photoURL" [alt]="registro.displayName"
           ></ion-img>
         </ion-avatar>
         <ion-label>

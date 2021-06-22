@@ -10,14 +10,15 @@ import { Turno } from '../entities/turno';
   providedIn: 'root',
 })
 export class TurnosService {
-  readonly COLLECTION = 'waitingList';
+
+  readonly COLLECTION = 'awaitList';
 
   turnos: Observable<Turno[]>;
   private turnosCollection: AngularFirestoreCollection<Turno>;
 
   constructor(private readonly fireStore: AngularFirestore) {
     this.turnosCollection = fireStore.collection<Turno>(this.COLLECTION);
-    this.getRegistros();
+    this.getTurnos();
   }
   
   delete(turnoId: string): Promise<void> {
@@ -69,7 +70,7 @@ export class TurnosService {
       });
   }
 
-  private getRegistros(): void {
+  private getTurnos(): void {
     this.turnos = this.turnosCollection
       .snapshotChanges()
       .pipe(

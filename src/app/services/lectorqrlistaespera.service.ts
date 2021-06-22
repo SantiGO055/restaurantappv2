@@ -23,8 +23,7 @@ export class LectorQrListaEsperaService  extends LectorqrService{
       const codigo = await super.scan();    
       const json = JSON.parse( codigo);        
       return (json.agregarListaEspera == true);
-    }catch( error ){
-      console.error(error);
+    }catch( error ){      
       return false;
     }    
   }

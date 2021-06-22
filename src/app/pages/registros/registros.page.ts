@@ -55,8 +55,6 @@ export class RegistrosPage implements OnInit {
         this.usersService
           .save(user, user.uid)
           .then((response) => {            
-            //enviar email
-            console.log(response);
             this.emailService.sendEmail( user, 'Bienvenido a Lo de tito! ya tenes tu cuenta de usuario.');
             this.spinnerService.ocultarSpinner();
             this.toastService.presentSuccess('El usuario se creo correctamente');

@@ -6,17 +6,16 @@
     <ion-title>Clientes en lista espera</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content>  
+
   <ion-list>
     <ion-virtual-scroll [items]="this.turnos|async" approxItemHeight="320px">
-      <ion-item *virtualItem="let turno">      
+      <ion-item *virtualItem="let turno">        
         <ion-label>
-          <h2>{{ turno.uid }}</h2>          
-          <div *ngIf="turno.aprobado === undefined " >
-            <ion-button  (click)="this.eliminarCliente(turno)" expand="full">Eliminar</ion-button>
-          </div>         
+          {{ turno.uid }}
         </ion-label>
       </ion-item>
     </ion-virtual-scroll>
   </ion-list>
+
 </ion-content>

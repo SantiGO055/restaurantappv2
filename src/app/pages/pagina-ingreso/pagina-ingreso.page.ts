@@ -46,10 +46,15 @@ export class PaginaIngresoPage implements OnInit {
   async escanearQr()
   {
     const resultado = await this.lectorqrService.escanear();                   
-    if(resultado){
-        this.mostrarQrListaEspera = false;  
+    if(resultado){    
+       this.agregarAListaEspera();
         this.router.navigateByUrl('/clientes/asignacion-mesa')      ;
     }
+  }
+
+  async testQRValido(){
+    this.agregarAListaEspera();
+    this.router.navigateByUrl('/clientes/asignacion-mesa')      ;
   }
 
   deternerScaner(){
@@ -61,11 +66,10 @@ export class PaginaIngresoPage implements OnInit {
   }
 
   protected agregarAListaEspera(){    
-    //@todo revisar esto , pero entiendo que pasaria el cliente 
     this.loginService.loguedUser.subscribe(
       user => {
-        const cliente  =  Cliente.fromUser(user);
-        const turno = new Turno(cliente.uid);
+        const cliente = Cliente.fromUser(user);
+        const turno = Turno.fromUser(cliente);
         this.turnosService.save(turno,null);
       }
     );
