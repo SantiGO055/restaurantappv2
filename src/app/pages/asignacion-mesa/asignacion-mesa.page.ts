@@ -24,7 +24,6 @@ export class AsignacionMesaPage implements OnInit {
     public toastService:ToastService, 
   ) {   
   }
-
   
   irAResultadosEncuestas(){
     this.router.navigateByUrl('/dashboard/resultados-encuesta');
@@ -65,7 +64,6 @@ export class AsignacionMesaPage implements OnInit {
     });
   }
 
-
   async suponerEscaneoMesa1()
   { 
       this.solicitarAsignarMesa('swUDyLwV8OFFxZnJORp5');
@@ -76,10 +74,7 @@ export class AsignacionMesaPage implements OnInit {
       this.solicitarAsignarMesa('xkbC3DQSKxibJ9KzAOG2');
   }
 
-
   deternerScaner(){
     this.lectorqrService.stopScan();
   }  
-
-
 }
