@@ -3,8 +3,10 @@ import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { Estado, Pedido } from 'src/app/entities/pedido';
 import { Producto } from 'src/app/entities/producto';
+import { User } from 'src/app/entities/user';
 import { AlertService } from 'src/app/services/alert.service';
 import { ChatService } from 'src/app/services/chat.service';
+import { LoginService } from 'src/app/services/login.service';
 import { MenuService } from 'src/app/services/menu.service';
 
 @Component({
@@ -21,12 +23,21 @@ export class MenuPage implements OnInit {
   slideOptsOne: any;
   pedido: Pedido  = new Pedido();
   tiempoElaboracion: number = 0;
+
+  usuarioLogueado:User = new User();
   constructor(
     private productoSvc:MenuService,
     public chatSvc:ChatService,
-    public alerta: AlertService
+    public alerta: AlertService,
+    private loginSvc: LoginService
 
   ) {
+    this.loginSvc.usuarioLogueado.then(usr=>{
+      this.usuarioLogueado = usr;
+      console.log(this.usuarioLogueado);
+    });
+
+
     this.productoSvc.getAllProductos().pipe(first())
     .toPromise()
     .then(producto=>{

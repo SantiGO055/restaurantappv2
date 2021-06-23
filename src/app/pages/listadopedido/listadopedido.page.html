@@ -39,7 +39,9 @@
           <div *ngIf="pedido.estadoPedido == 'PENDIENTE' && usuarioLogueado.rol == 'mozo' ">
             <!-- *ngIf="usuarioLogueado.rol == 'mozo'&&-->
             <!-- <ion-button   expand="full"></ion-button> -->
-              <ion-fab-button (click)="this.aceptarPedido(pedido)">Aceptar</ion-fab-button>
+            
+            <ion-button type="button" expand="block" color="tertiary" (click)="this.aceptarPedido(pedido)">Aceptar</ion-button>
+            <!-- <ion-fab-button  >Aceptar</ion-fab-button> -->
   
   
           </div>
