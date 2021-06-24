@@ -15,6 +15,7 @@ import { EncuestaPage } from './encuesta.page';
     FormsModule,
     IonicModule,
     EncuestaPageRoutingModule,
+    
   ],
   declarations: [EncuestaPage]
 })

@@ -25,6 +25,15 @@ export class EncuestaPage implements OnInit {
   mostrarFoto = false;
   countFotos:number = 0;
   arrayPhotos = [];
+  range: number = 1;
+  calidadComida: boolean;
+  usabilidadApp: boolean;
+  ubicacionMesa: boolean;
+  limpiezaLugar: boolean;
+  atencionMozos: boolean;
+  radioSi: boolean;
+  radioNo: boolean;
+
   constructor(
     public modalController: ModalController,
     public storage: AngularFireStorage   ,
@@ -72,7 +81,7 @@ export class EncuestaPage implements OnInit {
         this.arrayPhotos.push(this.urlAux);   
       }
     );         
-  }  
+  }
 
   async tomarFoto() {
     if(this.countFotos < 3){
@@ -102,9 +111,21 @@ export class EncuestaPage implements OnInit {
       this.alert.showDanger('Alcanzaste el limite de subida de fotos','Error');
     }
   }
-
+  changeRange(e){
+    this.range = e.detail.value;
+    console.log(this.range);
+  }
   publicar(){         
     this.createUploadTask(this.filePath);
   }
+  ok(){
+    console.log(this.calidadComida)
+    console.log(this.usabilidadApp)
+    console.log(this.ubicacionMesa)
+    console.log("radio SI "+this.radioSi)
+    console.log("radio NO "+this.radioNo)
+    
+  }
+
 
 }

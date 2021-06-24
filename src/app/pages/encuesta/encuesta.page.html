@@ -1,15 +1,97 @@
 
 
 <ion-content>
-  <ion-button expand="block" class="foto"  color="tertiary" (click)="tomarFoto()" >
-    <ion-icon slot="start" name="camera-outline"></ion-icon>
-    Subir una foto
-  </ion-button>
-    <ion-content>
+  
+  <!-- Con mínimo un tipo de cada uno de estos controles
+   (range -, input -, radio -, check -, select -). -->
+
+  
+    <ion-item lines="none">
+      <ion-text class="ion-text-wrap" >
+          Del 1 al 10, ¿ Cómo calificas la atencion recibida en "Lo de Tito"?
+      </ion-text>
+    </ion-item>
+    <ion-item >
+      <ion-range min="1" max="10" color="primary" pin="true" (ionChange)="changeRange($event)">
+        <ion-label slot="start">1</ion-label>
+        <ion-label slot="end">10</ion-label>
+  
+      </ion-range>
+      </ion-item>
+    <ion-item lines="none">
+      <ion-text>
+        ¿ Qué fue lo que mas te gustó de "Lo de Tito" ?
+      </ion-text>
+      </ion-item>
+
+      <ion-item>
+      <ion-list>
+        <ion-item lines="none">
+          <ion-label>Calidad de los productos</ion-label>
+          <ion-checkbox slot="end" [(ngModel)]="calidadComida"></ion-checkbox>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>Usabilidad de la aplicacion</ion-label>
+          <ion-checkbox slot="end" [(ngModel)]="usabilidadApp"></ion-checkbox>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>Ubicación de la mesa</ion-label>
+          <ion-checkbox slot="end" [(ngModel)]="ubicacionMesa"></ion-checkbox>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>Limpieza del lugar</ion-label>
+          <ion-checkbox slot="end" [(ngModel)]="limpiezaLugar"></ion-checkbox>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>Atencion de los mozos</ion-label>
+          <ion-checkbox slot="end" [(ngModel)]="atencionMozos"></ion-checkbox>
+        </ion-item>
+        
+      </ion-list>
+    </ion-item>
+    <ion-list>
+      <ion-radio-group value="biff">
+        <ion-list-header>
+          <ion-label>¿ Recomendarías "Lo de Tito" a un amigo ?</ion-label>
+        </ion-list-header>
+    
+        <ion-item>
+          <ion-label>Si</ion-label>
+          <ion-radio slot="start" value="si" (click)="radioSi = true;radioNo = false "></ion-radio>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label>No</ion-label>
+          <ion-radio slot="start" value="no" (click)="radioSi = false;radioNo = true"></ion-radio>
+        </ion-item>
+    
+      </ion-radio-group>
+    </ion-list>
+
+    <ion-button (click)="ok()">ok</ion-button>
+
+
+
+    <ion-item lines="none">
+      <ion-text class="ion-text-wrap" >
+        Dejenos una breve opinión acerca de la aplicación
+      </ion-text>
+    </ion-item>
+    <ion-item >
+      <ion-input placeholder="Ingrese opinión">
+
+      </ion-input>
+
+    </ion-item>
+    
+
+
+  
+    <ion-item *ngIf="mostrarFoto">
       <ion-grid>
         <ion-row>
           <ion-col size="12" *ngFor="let fotos of arrayPhotos" >    
-            <ion-img width="10" height="10" *ngIf="fotos" [src]="fotos"></ion-img>         
+            <ion-img width="10" height="10" *ngIf="fotos" [src]="fotos"></ion-img>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -32,6 +114,14 @@
          </ion-row>
         </ion-grid>    
       </ion-toolbar> -->
-    </ion-content>
+    </ion-item>
+    <ion-button *ngIf="mostrarFoto" expand="block" class="foto"  color="tertiary" (click)="tomarFoto()" >
+      <ion-icon slot="start" name="camera-outline"></ion-icon>
+      Subir otra foto
+    </ion-button>
+    <ion-button *ngIf="!mostrarFoto" expand="block" class="foto"  color="tertiary" (click)="tomarFoto()" >
+      <ion-icon slot="start" name="camera-outline"></ion-icon>
+      Subir una foto
+    </ion-button>
     
 </ion-content>
