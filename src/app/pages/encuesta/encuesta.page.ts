@@ -17,18 +17,21 @@ import { last, switchMap } from 'rxjs/operators';
 export class EncuestaPage implements OnInit {
   avatarUrl1: string;
   task: AngularFireUploadTask;
-
+  urlAux: string;
   progress: any;  // Observable 0 to 100
   photoBase64:string;
   filePath:string 
   mostrarFoto = false;
+  countFotos:number = 0;
+  arrayPhotos = [];
   constructor(
     public modalController: ModalController,
     public storage: AngularFireStorage   ,
     public photoService:PhotoapiService ,     
     public spinnerService:SpinnerService,    
     public alertService: AlertService,
-    public router: Router  
+    public router: Router,
+    private alert: AlertService
   ) {
     this.avatarUrl1 = null;
    }
@@ -76,34 +79,44 @@ export class EncuestaPage implements OnInit {
     ).subscribe(
       url =>{
         this.spinnerService.ocultarSpinner();
-        console.log(url);    
+        this.urlAux = url; 
+        this.arrayPhotos.push(this.urlAux);   
       }
     );         
   }  
 
   async tomarFoto() {
-    const photo =  this.captureImage()
-    .then(photo => {
-      console.info(photo) ;
-      this.filePath = `img_${ new Date().getTime() }.`+photo.format;
-      this.photoBase64 = 'data:image/'+photo.format+';base64,' + photo.base64String;
-      
-    })
-    .catch(error => {
-       console.error(error);
-       if(!this.photoBase64){
-         this.router.navigateByUrl('dashboard');
-        }
-    }).then(()=>{
-    this.mostrarFoto = true;
+    console.log(this.countFotos)
+    if(this.countFotos < 3){
 
-      console.log("asd")
+    
+      const photo =  this.captureImage()
+      .then(photo => {
+        console.info(photo) ;
+        this.filePath = `img_${ new Date().getTime() }.`+photo.format;
+        this.photoBase64 = 'data:image/'+photo.format+';base64,' + photo.base64String;
+        
+      })
+      .catch(error => {
+        console.error(error);
+        if(!this.photoBase64){
+          this.router.navigateByUrl('dashboard');
+          }
+      }).then(()=>{
+        this.mostrarFoto = true;
+        this.countFotos = this.countFotos + 1;
+        this.createUploadTask(this.filePath);
+        console.log("asd")
 
-    });    
+      }); 
+    }
+    else{
+      this.alert.showDanger('Alcanzaste el limite de subida de fotos','Error')
+    }
   }
 
   publicar(){         
-    this.createUploadTask(this.filePath);           
+    this.createUploadTask(this.filePath);
   }
 
 }

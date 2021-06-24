@@ -1,19 +1,15 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>encuesta</ion-title>
-  </ion-toolbar>
-</ion-header>
+
 
 <ion-content>
   <ion-button expand="block" class="foto"  color="tertiary" (click)="tomarFoto()" >
     <ion-icon slot="start" name="camera-outline"></ion-icon>
-    Sacarme una foto
+    Subir una foto
   </ion-button>
     <ion-content>
       <ion-grid>
         <ion-row>
-          <ion-col size="12"  >    
-            <ion-img width="10" height="10" *ngIf="photoBase64" [src]="photoBase64"></ion-img>         
+          <ion-col size="12" *ngFor="let fotos of arrayPhotos" >    
+            <ion-img width="10" height="10" *ngIf="fotos" [src]="fotos"></ion-img>         
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -24,7 +20,7 @@
           <ion-button ion-button (click)="task.resume()" color="green" >Continuar</ion-button>
         </ion-buttons>  
       </div>
-      <ion-toolbar class="ion-no-border ion-text-center " *ngIf="photoBase64" >    
+      <!-- <ion-toolbar class="ion-no-border ion-text-center " *ngIf="photoBase64" >    
         <ion-grid  >    
           <ion-row >
             <ion-col class="ion-align-self-end" >
@@ -35,7 +31,7 @@
            </ion-col>                       
          </ion-row>
         </ion-grid>    
-      </ion-toolbar>
+      </ion-toolbar> -->
     </ion-content>
     
 </ion-content>
