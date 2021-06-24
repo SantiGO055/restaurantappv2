@@ -23,7 +23,7 @@ export class EncuestaPage implements OnInit {
   photoBase64:string;
   filePath:string 
   mostrarFoto = false;
-  countFotos:number = 4;
+  countFotos:number = 0;
   arrayPhotos = [];
   constructor(
     public modalController: ModalController,
