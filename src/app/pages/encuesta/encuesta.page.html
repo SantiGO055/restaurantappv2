@@ -123,5 +123,9 @@
       <ion-icon slot="start" name="camera-outline"></ion-icon>
       Subir una foto
     </ion-button>
+    <ion-button *ngIf="mostrarFoto" expand="block" class="foto"  color="tertiary" (click)="enviarEncuesta()" >
+      <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+      Enviar encuesta
+    </ion-button>
     
 </ion-content>

@@ -118,7 +118,7 @@ export class EncuestaPage implements OnInit {
   publicar(){         
     this.createUploadTask(this.filePath);
   }
-  ok(){
+  enviarEncuesta(){
     console.log(this.calidadComida)
     console.log(this.usabilidadApp)
     console.log(this.ubicacionMesa)
