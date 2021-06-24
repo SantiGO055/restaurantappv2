@@ -8,6 +8,7 @@ import { SpinnerService } from 'src/app/services/spinner.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { Router } from '@angular/router';
 import { last, switchMap } from 'rxjs/operators';
+import { VibrationService } from 'src/app/services/vibration.service';
 
 @Component({
   selector: 'app-encuesta',
@@ -22,7 +23,7 @@ export class EncuestaPage implements OnInit {
   photoBase64:string;
   filePath:string 
   mostrarFoto = false;
-  countFotos:number = 0;
+  countFotos:number = 4;
   arrayPhotos = [];
   constructor(
     public modalController: ModalController,
@@ -31,7 +32,8 @@ export class EncuestaPage implements OnInit {
     public spinnerService:SpinnerService,    
     public alertService: AlertService,
     public router: Router,
-    private alert: AlertService
+    private alert: AlertService,
+    private vibrate: VibrationService
   ) {
     this.avatarUrl1 = null;
    }
@@ -39,19 +41,6 @@ export class EncuestaPage implements OnInit {
   ngOnInit() {
   }
 
-  
-  async presentModal() {
-    console.log("presento modal")
-    const modal = await this.modalController.create({
-      component: AvatarPage,
-      cssClass: 'upload-image',
-    });
-    modal.onDidDismiss().then((data) => {
-      this.avatarUrl1 = data['data']['avatarUrl'];
-      console.log(this.avatarUrl1);
-    });
-    return await modal.present();
-  }
   captureImage() {
     return  Camera.getPhoto({      
       source: CameraSource.Camera, 
@@ -86,7 +75,6 @@ export class EncuestaPage implements OnInit {
   }  
 
   async tomarFoto() {
-    console.log(this.countFotos)
     if(this.countFotos < 3){
 
     
@@ -106,12 +94,12 @@ export class EncuestaPage implements OnInit {
         this.mostrarFoto = true;
         this.countFotos = this.countFotos + 1;
         this.createUploadTask(this.filePath);
-        console.log("asd")
 
       }); 
     }
     else{
-      this.alert.showDanger('Alcanzaste el limite de subida de fotos','Error')
+      this.vibrate.on();
+      this.alert.showDanger('Alcanzaste el limite de subida de fotos','Error');
     }
   }
 
