@@ -8,12 +8,13 @@ import { EncuestaPageRoutingModule } from './encuesta-routing.module';
 
 import { EncuestaPage } from './encuesta.page';
 
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    EncuestaPageRoutingModule
+    EncuestaPageRoutingModule,
   ],
   declarations: [EncuestaPage]
 })
