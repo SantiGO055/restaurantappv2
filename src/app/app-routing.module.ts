@@ -43,24 +43,7 @@ const routes: Routes = [
   {
     path: 'registros',
     loadChildren: () => import('./pages/registros/registros.module').then( m => m.RegistrosPageModule)
-  },
-  {
-    path: 'menu',
-    loadChildren: () => import('./pages/menu/menu.module').then( m => m.MenuPageModule)
-  },
-  {
-    path: 'pagina-espera',
-    loadChildren: () => import('./pages/pagina-espera/pagina-espera.module').then( m => m.PaginaEsperaPageModule)
-  },
-  {
-    path: 'resumen-pedido',
-    loadChildren: () => import('./pages/resumen-pedido/resumen-pedido.module').then( m => m.ResumenPedidoPageModule)
-  },
-  {
-    path: 'pagina-espera-elaboracion',
-    loadChildren: () => import('./pages/pagina-espera-elaboracion/pagina-espera-elaboracion.module').then( m => m.PaginaEsperaElaboracionPageModule)
-  },
-  
+  }, 
 
 
 ];

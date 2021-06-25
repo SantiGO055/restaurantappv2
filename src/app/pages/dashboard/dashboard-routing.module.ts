@@ -40,6 +40,26 @@ const routes: Routes = [
         loadChildren: () => import('../asignacion-mesa/asignacion-mesa.module').then( m => m.AsignacionMesaPageModule)
       },
       {
+        path: 'menu',
+        loadChildren: () => import('../menu/menu.module').then( m => m.MenuPageModule)
+      },
+      {
+        path: 'pagina-espera',
+        loadChildren: () => import('../pagina-espera/pagina-espera.module').then( m => m.PaginaEsperaPageModule)
+      },
+      {
+        path: 'resumen-pedido',
+        loadChildren: () => import('../resumen-pedido/resumen-pedido.module').then( m => m.ResumenPedidoPageModule)
+      },
+      {
+        path: 'pagina-espera-elaboracion',
+        loadChildren: () => import('../pagina-espera-elaboracion/pagina-espera-elaboracion.module').then( m => m.PaginaEsperaElaboracionPageModule)
+      },
+      {
+        path: 'lista-elaboracion',
+        loadChildren: () => import('../lista-elaboracion/lista-elaboracion.module').then( m => m.ListaElaboracionPageModule)
+      },
+      {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full'
