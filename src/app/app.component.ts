@@ -20,7 +20,7 @@ export class AppComponent {
   initialiceApp(){
     SplashScreen.hide()
     this.platform.ready().then(()=>{
-      this.router.navigateByUrl('encuesta');
+      this.router.navigateByUrl('splash');
     });
   }
 }

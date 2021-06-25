@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { asapScheduler } from 'rxjs';
 import { User } from 'src/app/entities/user';
 import { Usuario } from 'src/app/entities/usuario';
@@ -32,7 +32,8 @@ export class HomePage implements OnInit {
     private modal: ModalController,
     public chatSvc:ChatService,
     public alerta: AlertService,
-    private userSvc: UsersService
+    private userSvc: UsersService,
+    public router: Router
     
     ) { 
     

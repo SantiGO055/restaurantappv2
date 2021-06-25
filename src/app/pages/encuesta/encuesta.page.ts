@@ -7,8 +7,12 @@ import { PhotoapiService } from 'src/app/services/photoapi.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { Router } from '@angular/router';
-import { last, switchMap } from 'rxjs/operators';
+import { first, last, switchMap } from 'rxjs/operators';
 import { VibrationService } from 'src/app/services/vibration.service';
+import { EncuestaService } from 'src/app/services/encuesta.service';
+import { Encuesta } from 'src/app/entities/encuesta';
+import { LoginService } from 'src/app/services/login.service';
+import { User } from 'src/app/entities/user';
 
 @Component({
   selector: 'app-encuesta',
@@ -33,21 +37,43 @@ export class EncuestaPage implements OnInit {
   atencionMozos: boolean;
   radioSi: boolean;
   radioNo: boolean;
-
+  input: string = '';
+  usuarioLogueado: User = new User();
   constructor(
     public modalController: ModalController,
     public storage: AngularFireStorage   ,
     public photoService:PhotoapiService ,     
     public spinnerService:SpinnerService,    
-    public alertService: AlertService,
     public router: Router,
     private alert: AlertService,
-    private vibrate: VibrationService
+    private vibrate: VibrationService,
+    private encuestaSvc: EncuestaService,
+    private loginSvc: LoginService
   ) {
     this.avatarUrl1 = null;
    }
 
   ngOnInit() {
+    this.spinnerService.mostrarSpinner();
+    this.loginSvc.usuarioLogueado.then(usr=>{
+      this.usuarioLogueado = usr;
+      console.log(this.usuarioLogueado);
+      this.encuestaSvc.getEncuestas().pipe(first())
+      .toPromise()
+      .then(encuestas=>{
+        encuestas.forEach(enc => {
+          if(enc.uidCliente == this.usuarioLogueado.uid){
+            this.spinnerService.ocultarSpinner();
+            this.alert.showDanger('Usted ya posee una encuesta cargada','Error!')
+            this.router.navigate(['dashboard/asignacion-mesa'])
+          }
+          else{
+            this.spinnerService.ocultarSpinner();
+          }
+        });
+      })
+    });
+
   }
 
   captureImage() {
@@ -124,7 +150,46 @@ export class EncuestaPage implements OnInit {
     console.log(this.ubicacionMesa)
     console.log("radio SI "+this.radioSi)
     console.log("radio NO "+this.radioNo)
+    let auxCalidad: string = '';
+    let auxUsabilidad: string = '';
+    let auxUbicacion: string = '';
+    let auxLimpieza: string = '';
+    let auxAtencion: string = '';
     
+    let encuestaAux: Encuesta = {
+      range: this.range,
+      radioSi: this.radioSi,
+      radioNo: this.radioNo,
+      input: this.input,
+      fotos: this.arrayPhotos,
+      calidad: this.calidadComida,
+      usabilidad: this.usabilidadApp,
+      ubicacion: this.ubicacionMesa,
+      limpieza: this.limpiezaLugar,
+      atencion: this.atencionMozos,
+      uidCliente: this.usuarioLogueado.uid
+    //   radioSi: boolean;
+    // radioNo: boolean;
+    // input: string;
+    // fotos: string[];
+    // calidad: boolean;
+    // usabilidad: boolean;
+    // ubicacion: boolean;
+    // limpieza: boolean;
+    // atencion: boolean;
+
+
+    }
+    console.log(encuestaAux);
+    try {
+      this.encuestaSvc.addEncuesta(encuestaAux).then(ok=>{
+        console.log(ok)
+        this.alert.showSucess('Encuesta enviada correctamente','Aviso','dashboard/asignacion-mesa');
+      });
+      
+    } catch (error) {
+      
+    }
   }
 
 
