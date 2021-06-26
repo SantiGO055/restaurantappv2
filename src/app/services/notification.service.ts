@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection,AngularFirestoreDocument} from '@angular/fire/firestore';
 
 import {Plugins,PushNotification,PushNotificationToken,PushNotificationActionPerformed,Capacitor} from '@capacitor/core';
+import { Platform } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { first, map, tap } from 'rxjs/operators';
 import { TokenNotification } from '../entities/tokennotification';
@@ -12,6 +13,7 @@ import { ToastService } from './toast.service';
 
 const { PushNotifications } = Plugins;
 
+
 const isPushNotificationsAvailable =
   Capacitor.isPluginAvailable('PushNotifications');
 
@@ -20,7 +22,7 @@ const isPushNotificationsAvailable =
 })
 export class NotificationService {
   token: PushNotificationToken;
-
+  mensaje: string = 'Notificación recibida';
   /** al momento de loguear un usuario, guardar en la base el token con la data del usuario logueado,
    * entonces cuando se quiera enviar una notificacion obtengo a que rol quiero enviarla y obtengo el token de ese celu segun el rol */
   tokenNotifCollection: AngularFirestoreCollection<TokenNotification>;
@@ -35,7 +37,8 @@ export class NotificationService {
     private toast: ToastService,
     public db: AngularFirestore,
     private loginSvc: LoginService,
-    private fireStore: AngularFirestore
+    private fireStore: AngularFirestore,
+    private platform: Platform
   ) {
     this.tokenNotifCollection = db.collection(this.dbpath);
     this.tokenNotif = this.tokenNotifCollection.snapshotChanges().pipe(
@@ -79,7 +82,8 @@ export class NotificationService {
       'pushNotificationReceived',
       async (notification: PushNotification) => {
         // console.log("notificacion recibida: " + JSON.stringify(notification));
-        this.toast.presentSuccess('Notificacion recibida');
+        
+        this.toast.presentSuccess(notification.body);
       }
     );
 
@@ -227,6 +231,14 @@ export class NotificationService {
   }
 
   public push(title: string, mensaje: string, rol: string) {
+    
+    if(this.platform.is('pwa')){
+      console.log("corriendo en web")
+    }
+    else{
+      console.log("corriendo en app")
+    }
+    this.mensaje = mensaje;
     this.tokenNotif
       .pipe(first())
       .toPromise()

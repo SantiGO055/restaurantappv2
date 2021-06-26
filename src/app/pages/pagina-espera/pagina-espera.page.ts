@@ -6,6 +6,7 @@ import { UsersService } from '../../services/users.service';
 import { Router } from '@angular/router';
 import { User } from '../../entities/user';
 import { LectorQRMesaService } from '../../services/lectorqrmesa.service';
+import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
   selector: 'app-pagina-espera',
@@ -20,6 +21,7 @@ export class PaginaEsperaPage implements OnInit {
     public loginService:LoginService,
     public userService:UsersService,
     public router:Router,
+    public chatSvc: ChatService
   ) {       
   }
 
@@ -59,6 +61,9 @@ export class PaginaEsperaPage implements OnInit {
   irAEncuesta(){
     //@todo en la version larga aca hiria a juegos
     this.router.navigateByUrl('/dashboard/encuesta');
+  }
+  presentModalChat(){
+    this.chatSvc.mostrarChat();
   }
 
 

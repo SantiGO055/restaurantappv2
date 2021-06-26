@@ -1,14 +1,14 @@
 <ion-content>
+  <ion-fab vertical="top" horizontal="start" slot="fixed">
+  
+    <ion-button (click)="dismiss()" color="tertiary">
+      Cerrar chat
+    </ion-button>
+  
+  </ion-fab>
   <div *ngIf="uid != null">
 
  
-<ion-fab vertical="top" horizontal="start" slot="fixed">
-
-  <ion-button (click)="dismiss()" color="tertiary">
-    Cerrar chat
-  </ion-button>
-
-</ion-fab>
   <div class="contenedorBotonYChat" >  
     <div >
       <div class="contenedor">
@@ -36,7 +36,7 @@
                     <span class="msg-name" *ngIf="mensj.usuario.rol == 'mozo'"><strong>Mozo:</strong></span>
                     <span class="msg-name" *ngIf="mensj.usuario.rol == 'cocinero'"><strong>Cocinero:</strong></span>
                     <span class="msg-name" *ngIf="mensj.usuario.rol == 'duenio'"><strong>Dueño:</strong></span>
-                    <span class="msg-name" *ngIf="mensj.usuario.rol == null"><strong>Mesa: {{mensj.usuario.mesa}}</strong></span>
+                    <span class="msg-name" *ngIf="mensj.usuario.rol == 'cliente'"><strong>Mesa: {{mensj.usuario.mesa}}</strong></span>
                     
                     <div class="messageContent">
                       {{ mensj.mensaje }}
@@ -70,11 +70,11 @@
   </div>
   
 </div>
+
+</div>
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
   <ion-fab-button (click)="enviarMensaje()">
     <ion-icon name="arrow-forward-circle"></ion-icon>
   </ion-fab-button>
 </ion-fab>
-    
-</div>
 </ion-content>
