@@ -15,7 +15,7 @@ export class ResumenPedidoPage implements OnInit {
 
 
   usuarioLogueado:User = new User();
-  pedido:Pedido;
+  pedido:Pedido = new Pedido();
 
   constructor(    
     public loginService:LoginService,
@@ -26,7 +26,11 @@ export class ResumenPedidoPage implements OnInit {
     this.loginService.usuarioLogueado.then(usr=>{
       this.usuarioLogueado = usr;            
        this.productoSvc.getPedidoByUId(this.usuarioLogueado.uid).then(pedido => {         
-          this.pedido = pedido;
+          if(!pedido){
+            this.router.navigateByUrl('dashboard/pagina-espera-elaboracion');
+          }else{
+            this.pedido = pedido;
+          }
        });       
     });
   }

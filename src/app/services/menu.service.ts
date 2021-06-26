@@ -68,6 +68,7 @@ export class MenuService {
       .toPromise()
       .then((pedidos) => {
         pedidos.forEach((pedido) => {                 
+          console.info(pedido.uid == uid);
           if (pedido.uid == uid) {
             aux = pedido;
           }

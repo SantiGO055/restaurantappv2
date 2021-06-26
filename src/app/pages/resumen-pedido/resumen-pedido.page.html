@@ -1,9 +1,15 @@
 <ion-content>
-<ion-grid >
-  <ion-row>    
+<ion-grid>  
+  <ion-row>
+    <ion-col>
+       <h1> Tu pedido</h1>
+    </ion-col>
+  </ion-row>
+  <ion-row>  
+    <!--@todo corregir esto -->  
     <ion-col>
      <ion-grid>
-       <ion-row *ngFor="let producto of this.pedido.producto ">
+       <ion-row *ngFor="let producto of this.pedido.producto">
          <ion-col>
            {{producto.nombre}}           
          </ion-col>
@@ -19,7 +25,7 @@
       Tiempo de elaboración Final
     </ion-col>
     <ion-col>
-      {{ this.pedido.tiempoElaboracionFinal}}
+      {{ this.pedido.tiempoElaboracionFinal}} min
     </ion-col>
   </ion-row>
   <ion-row>
