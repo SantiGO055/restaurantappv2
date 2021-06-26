@@ -1,9 +1,44 @@
-<ion-header>
+<ion-header [hidden]="lectorqrService.scanActive" >
   <ion-toolbar>
-    <ion-title>pagina-espera-elaboracion</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="first"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Ingreso</ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content [class]="lectorqrService.scanActive ? 'scan':'site'" >
+  <ion-grid [hidden]="lectorqrService.scanActive" >
+    <!-- encuesta -->
+    <ion-row>
+      <ion-col>      
+        <ion-button type="button" expand="block" color="tertiary" [hidden]="this.usuarioLogueado.completoEncuesta" (click)="irAEncuesta()" >Realizar encuesta</ion-button>                                            
+        <ion-button type="button" expand="block" color="tertiary" [hidden]="!this.usuarioLogueado.completoEncuesta" (click)="irAResultadosEncuesta()" >Realizar encuesta</ion-button>                                            
 
-<ion-content>
-
+        <ion-button type="button" expand="block" color="primary" (click)="testEscanearQRMesa1()" >Como si escaneo el QR de la mesa 1 </ion-button>
+      </ion-col>
+    </ion-row>    
+      <ion-row  >
+        <ion-col>          
+          <p> Escanea el QR de tu mesa para ver el estado de su pedido </p>          
+        </ion-col>
+      </ion-row>      
+    </ion-grid>
+    <div class="scanbox" [hidden]="!lectorqrService.scanActive">
+    </div>
 </ion-content>
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button fill="solid" class="scanear" size="large" expand="full" class="qrlista" (click)="escanearQr()" [hidden]="lectorqrService.scanActive">
+          <ion-icon name="qr-code-sharp" slot="start"></ion-icon>          
+          <ion-label>QR Mesa </ion-label>
+        </ion-button>
+        <ion-button fill="solid"  class="scanear"  size="large" expand="full"  (click)="deternerScaner()" [hidden]="!lectorqrService.scanActive" >
+          <ion-icon name="qr-code-sharp" slot="start"></ion-icon>          
+          <ion-label>Detener</ion-label>
+        </ion-button>            
+      </ion-col>
+    </ion-row>
+  </ion-grid>  
+</ion-footer>

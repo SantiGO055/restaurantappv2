@@ -2,7 +2,8 @@ import { Producto, ProductoTipo } from "./producto";
 import { User } from "./user";
 
 export class Pedido {
-    uid?: string;
+    id?: string;
+    uid: string;
     producto: Producto[];
     tiempoElaboracionFinal: number;
     estadoPedido: Estado;

@@ -1,3 +1,4 @@
+import { unescapeIdentifier } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
@@ -8,6 +9,7 @@ import { AlertService } from 'src/app/services/alert.service';
 import { ChatService } from 'src/app/services/chat.service';
 import { LoginService } from 'src/app/services/login.service';
 import { MenuService } from 'src/app/services/menu.service';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-menu',
@@ -29,8 +31,8 @@ export class MenuPage implements OnInit {
     private productoSvc:MenuService,
     public chatSvc:ChatService,
     public alerta: AlertService,
-    private loginSvc: LoginService
-
+    private loginSvc: LoginService,
+    private userSvc: UsersService
   ) {
     this.loginSvc.usuarioLogueado.then(usr=>{
       this.usuarioLogueado = usr;
@@ -134,18 +136,20 @@ export class MenuPage implements OnInit {
     console.log(this.tiempoElaboracion)
     console.log(this.productoAgregado);
   }
-  enviarPedido(){
 
+  enviarPedido(){
     this.pedido = {
       estadoPedido: Estado.PENDIENTE,
       producto: this.productoAgregado,
       tiempoElaboracionFinal: this.tiempoElaboracion,
-      precioFinal: this.total
+      precioFinal: this.total,
+      uid:this.usuarioLogueado.uid,
     }
-    console.log(this.productoAgregado);
-    this.alerta.showSucess('Tu pedido esta pendiente','Aviso!','dashboard/listadopedido')
-      this.productoSvc.addPedido(this.pedido);
-      
+    console.log(this.productoAgregado);   
+    this.productoSvc.addPedido(this.pedido).then( r => {
+      this.userSvc.moverAEsperandoPedido(this.usuarioLogueado);
+      this.alerta.showSucess('Tu pedido esta pendiente','Aviso!','dashboard/pagina-espera-elaboracion')
+    });
   }
 
 

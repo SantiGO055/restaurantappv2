@@ -14,18 +14,15 @@ export class RouterService {
     if(User.perteneceAEmpresa(usuario)){
       //si pertenece a la empresa
       route = '/dashboard/home';
-    }else if(User.puedeAccederMenu(usuario)){
-      //si es cliente ya tiene mesa y espera a que elaboren 
-      route = '/dashboard/menu';            
     }else if(User.puedeAccederEsperaElaboracion(usuario)){
       //si es cliente ya tiene mesa y espera a que elaboren 
       route = '/dashboard/pagina-espera-elaboracion';            
+    }else if(User.puedeAccederMenu(usuario)){
+      //si es cliente ya tiene mesa y espera a que elaboren 
+      route = '/dashboard/menu';            
     }else if(User.puedeAccederAsignarMesa(usuario)){
       //si es cliente  que ya paso  y puede asignarse mesa
       route = '/dashboard/asignacion-mesa';            
-    }else if(User.puedeAccederAListaEspera(usuario)){
-      //si es cliente  que ya paso la lista de espera
-      route = '/dashboard/pagina-ingreso';            
     }
     return route;
   }

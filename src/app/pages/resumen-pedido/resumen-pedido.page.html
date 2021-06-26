@@ -1,11 +1,36 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>resumen-pedido</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  
+<ion-grid >
+  <ion-row>    
+    <ion-col>
+     <ion-grid>
+       <ion-row *ngFor="let producto of this.pedido.producto ">
+         <ion-col>
+           {{producto.nombre}}           
+         </ion-col>
+         <ion-col>
+          {{producto.precio}} ARS
+        </ion-col>
+       </ion-row>
+     </ion-grid>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      Tiempo de elaboración Final
+    </ion-col>
+    <ion-col>
+      {{ this.pedido.tiempoElaboracionFinal}}
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      Precio final 
+    </ion-col>
+    <ion-col>
+      {{ this.pedido.precioFinal}}
+    </ion-col>
+  </ion-row>
+  </ion-grid>
   <!-- @todo  su pedido -->
     <!-- @todo  Detalle del pedido -->
     <!-- @todo  Boton para indicar quede ya lo recibio  -->

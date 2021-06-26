@@ -13,6 +13,7 @@ export class User {
   rol?: string;
   mesa?: string;
   estado?: string;
+  completoEncuesta?: boolean;
 
   static perteneceAEmpresa(user: User): boolean {
     return (
@@ -44,8 +45,7 @@ export class User {
   }
   static esMozo(user: User): boolean {
     return user.rol == Rol.MOZO;
-  }  
-  
+  }    
 
   static puedeAccederEsperaElaboracion(user: User): boolean {
     return (
@@ -84,7 +84,7 @@ export class User {
       email: user.email,
       emailVerified: user.emailVerified,
       photoURL,
-      rol,
+      rol,      
     } as User;
   }
 

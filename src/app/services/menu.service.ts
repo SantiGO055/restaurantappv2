@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, first } from 'rxjs/operators';
 import { Pedido } from '../entities/pedido';
 import { Producto } from '../entities/producto';
 import { AlertService } from './alert.service';
@@ -45,8 +45,7 @@ export class MenuService {
     }));
    }
 
-   getAllProductos(){
-     
+   getAllProductos(){     
      return this.productos;
    }
    addPedido(pedido: Pedido){
@@ -62,6 +61,19 @@ export class MenuService {
    }
 
 
-
+   async getPedidoByUId(uid: string): Promise<Pedido>{
+    let aux: Pedido;
+    await this.pedidos
+      .pipe(first())
+      .toPromise()
+      .then((pedidos) => {
+        pedidos.forEach((pedido) => {                 
+          if (pedido.uid == uid) {
+            aux = pedido;
+          }
+        });
+      });
+    return aux;
+  }
 
 }

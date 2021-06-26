@@ -52,13 +52,13 @@ export class LoginService {
     }
   }
 
-
-  get loguedUser(): Observable<User> {
-    return this.user$;
-  }
-
-  async  actualUser(): Promise<User> {
-    return this.fireAuth.currentUser.then( dbUser => { return this.usersService.getOne(dbUser.uid);} );   
+  async  actualUser(): Promise<User> {    
+    return this.fireAuth.currentUser.then( dbUser => {       
+      if(!dbUser){
+        return null;
+      }
+      return this.usersService.getOne(dbUser.uid);
+    } );   
   }
 
   isLoggedIn() {
