@@ -46,9 +46,10 @@ export class LoginService {
         password
       );    
       user.uid = authData.user.uid;       
+      //@todo tira un error que no puedo ubicar  por intentar loguearlo.
       return user;
     } catch (error) {
-      throw new SysError('Ocurrio al comunicarse con el servidor', error);
+      //throw new SysError('Ocurrio al comunicarse con el servidor', error);
     }
   }
 

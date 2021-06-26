@@ -37,6 +37,7 @@ export class RegistrosPage implements OnInit {
     this.spinnerService.mostrarSpinner();    
     this.registroService.save(registro, registro.id).then( response =>{      
       this.emailService.sendRegistro( registro, 'Bienvenido a Lo de tito! lamentamos tener que rechazar tu solicitud .');
+      console.log(registro.id);
       this.registroService.delete(registro.id);
       this.spinnerService.ocultarSpinner();
       this.toastService.presentSuccess('Se nego el usuario correctamente.');
@@ -51,11 +52,15 @@ export class RegistrosPage implements OnInit {
       .then((user) => {
         this.usersService
           .save(user, user.uid)
-          .then((response) => {            
-            this.emailService.sendEmail( user, 'Bienvenido a Lo de tito! ya tenes tu cuenta de usuario.');
-            this.registroService.delete(registro.id);
-            this.spinnerService.ocultarSpinner();
-            this.toastService.presentSuccess('El usuario se creo correctamente');
+          .then((response) => {                
+            console.log(registro.id)        ;
+            this.registroService.delete(registro.id).then( r=> {
+              this.emailService.sendEmail( user, 'Bienvenido a Lo de tito! ya tenes tu cuenta de usuario.');            
+              this.spinnerService.ocultarSpinner();
+              this.toastService.presentSuccess('El usuario se creo correctamente');
+            });
+            
+            
           })
           .catch((error) => {
             throw new SysError('No pudo crearse el usuario en base al registro.');
