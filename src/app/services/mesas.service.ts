@@ -100,7 +100,7 @@ export class MesasService {
       throw new SysError('No existe la mesa');
     }    
     //@todo revisar si esta mesa no es de otra persona 
-    if(mesa.uid.length > 0 && mesa.uid != cliente.uid){
+    if(mesa.uid && mesa.uid != cliente.uid){
       throw new SysError('La mesa se encuentra asignada a otro cliente');
     }           
     //asignar la mesa 

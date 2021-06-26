@@ -22,7 +22,8 @@ export class ResultadosEncuestaPage implements OnInit {
   barChartPopulation() {
     HighCharts.chart('barChart', {
       chart: {
-        type: 'column'
+        type: 'column',        
+        width:'340'
       }, 
       title:{
         text:null
@@ -39,7 +40,7 @@ export class ResultadosEncuestaPage implements OnInit {
       series: [{
         type: undefined,
         name: '2021',
-        data: [2, 2, 203, 635 ]
+        data: [2,30, 203, 635 ]
       }]
     });
   }
@@ -50,7 +51,8 @@ export class ResultadosEncuestaPage implements OnInit {
         plotBackgroundColor: null,
         plotBorderWidth: null,
         plotShadow: false,
-        type: 'pie'
+        type: 'pie',
+        width:'340'
       },
       title: {
         text: null

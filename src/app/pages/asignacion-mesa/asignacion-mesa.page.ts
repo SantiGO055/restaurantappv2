@@ -54,8 +54,14 @@ export class AsignacionMesaPage implements OnInit {
     this.loginService.loguedUser.subscribe(user => {
       const cliente  =  Cliente.fromUser(user);            
       try{        
-        this.mesaService.asignarMesa(mesaUid,cliente);
-        this.router.navigateByUrl('/dashboard/pagina-espera');
+        this.mesaService.asignarMesa(mesaUid,cliente).then(
+          response => {
+            this.router.navigateByUrl('/dashboard/pagina-espera');
+          },
+          error => {
+            this.toastService.presentDanger(error);    
+          }
+        );        
       }catch(error){ 
         // informar del error 
         this.toastService.presentDanger(error);
