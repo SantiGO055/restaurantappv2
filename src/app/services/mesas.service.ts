@@ -64,7 +64,7 @@ export class MesasService {
       .pipe(first())
       .toPromise()
       .then((mesas) => {
-        mesas.forEach((mesa) => {          
+        mesas.forEach((mesa) => {                 
           if (mesa.uid == uid) {
             aux = mesa;
           }
@@ -73,22 +73,36 @@ export class MesasService {
     return aux;
   }
 
+  async getOneById(id: string): Promise<Mesa>{
+    let aux: Mesa;
+    await this.mesas
+      .pipe(first())
+      .toPromise()
+      .then((mesas) => {
+        mesas.forEach((mesa) => {                 
+          if (mesa.id == id) {
+            aux = mesa;
+          }
+        });
+      });
+    return aux;
+  }
 
-  async asignarMesa(mesaUid:string, cliente:Cliente)
+
+  async asignarMesa(mesaId:string, cliente:Cliente)
   {
     //@todo revisar si no existe otra mesa para este usuario 
     if(Cliente.tieneMesa(cliente)){
       throw new SysError('Ya tiene una mesa asignada');
     }
-    let mesa =  await this.getOneByUId(mesaUid);    
+    let mesa =  await this.getOneById(mesaId);    
     if(!mesa){
       throw new SysError('No existe la mesa');
     }    
     //@todo revisar si esta mesa no es de otra persona 
-    if(mesa.uid.length > 0){
-      throw new SysError('La mesa se encuentra asignada');
-    }    
-       
+    if(mesa.uid.length > 0 && mesa.uid != cliente.uid){
+      throw new SysError('La mesa se encuentra asignada a otro cliente');
+    }           
     //asignar la mesa 
     mesa.uid = cliente.uid;
     this.save(mesa,mesa.id);

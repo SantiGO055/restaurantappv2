@@ -38,14 +38,11 @@ const routes: Routes = [
   {
     path: 'avatar',
     loadChildren: () => import('./pages/avatar/avatar.module').then( m => m.AvatarPageModule)
-  },
- 
+  }, 
   {
     path: 'registros',
     loadChildren: () => import('./pages/registros/registros.module').then( m => m.RegistrosPageModule)
-  }, 
-
-
+  }
 ];
 @NgModule({
   imports: [

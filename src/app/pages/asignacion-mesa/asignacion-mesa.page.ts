@@ -53,7 +53,7 @@ export class AsignacionMesaPage implements OnInit {
   protected solicitarAsignarMesa(mesaUid:string){
     this.loginService.loguedUser.subscribe(user => {
       const cliente  =  Cliente.fromUser(user);            
-      try{
+      try{        
         this.mesaService.asignarMesa(mesaUid,cliente);
         this.router.navigateByUrl('/dashboard/pagina-espera');
       }catch(error){ 
@@ -64,13 +64,13 @@ export class AsignacionMesaPage implements OnInit {
   }
 
   async suponerEscaneoMesa1()
-  { 
-      this.solicitarAsignarMesa('swUDyLwV8OFFxZnJORp5');
+  {
+      this.solicitarAsignarMesa('xkbC3DQSKxibJ9KzAOG2');
   }
 
   async suponerEscaneoMesa2()
   { 
-      this.solicitarAsignarMesa('xkbC3DQSKxibJ9KzAOG2');
+      this.solicitarAsignarMesa('swUDyLwV8OFFxZnJORp5');
   }
 
   deternerScaner(){

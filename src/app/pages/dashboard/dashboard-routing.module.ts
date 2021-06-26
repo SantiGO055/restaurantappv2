@@ -58,6 +58,14 @@ const routes: Routes = [
       {
         path: 'lista-elaboracion',
         loadChildren: () => import('../lista-elaboracion/lista-elaboracion.module').then( m => m.ListaElaboracionPageModule)
+      },   
+      {
+        path: 'pagina-espera-cierre',
+        loadChildren: () => import('../pagina-espera-cierre/pagina-espera-cierre.module').then( m => m.PaginaEsperaCierrePageModule)
+      },   
+      {
+        path: 'encuesta',
+        loadChildren: () => import('../encuesta/encuesta.module').then( m => m.EncuestaPageModule)
       },
       {
         path: '',

@@ -45,7 +45,7 @@ export class PaginaEsperaPage implements OnInit {
     }
   }
   testEscanearQRMesa1(){
-    this.solicitarMenuMesa('swUDyLwV8OFFxZnJORp5');
+    this.solicitarMenuMesa('xkbC3DQSKxibJ9KzAOG2');
   }
   
   protected solicitarMenuMesa(mesaId){
