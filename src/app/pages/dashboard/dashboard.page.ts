@@ -27,7 +27,7 @@ export class DashboardPage {
     this.accesosBartender = false;
     this.accesosCocinero = false;
     this.accesosMaitre= false;
-    this.loginService.loguedUser.subscribe(user=>{          
+    this.loginService.actualUser().then(user=>{          
       this.accesosDuenio = User.esDuenio(user);
       this.accesosMaitre= User.esMaitre(user);
       this.accesosCocinero= User.esCocinero(user);

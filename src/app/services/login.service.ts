@@ -57,6 +57,10 @@ export class LoginService {
     return this.user$;
   }
 
+  async  actualUser(): Promise<User> {
+    return this.fireAuth.currentUser.then( dbUser => { return this.usersService.getOne(dbUser.uid);} );   
+  }
+
   isLoggedIn() {
     return this.fireAuth.authState.pipe(first()).toPromise();
   }

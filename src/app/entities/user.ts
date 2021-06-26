@@ -45,6 +45,13 @@ export class User {
   static esMozo(user: User): boolean {
     return user.rol == Rol.MOZO;
   }  
+  
+
+  static puedeAccederEsperaElaboracion(user: User): boolean {
+    return (
+      user.rol == Rol.CLIENTE && user.estado == clienteEstado.ESPERANDO_PEDIDO
+    );
+  }
 
   static puedeAccederAListaEspera(user: User): boolean {
     return (
@@ -60,7 +67,13 @@ export class User {
 
   static puedeAccederMenu(user: User): boolean {    
     return (
-      user.rol == Rol.CLIENTE && user.estado == clienteEstado.SELECCIONANDO_MESA
+      user.rol == Rol.CLIENTE && user.estado == clienteEstado.MESA_SELECCIONADA
+    );
+  }
+
+  static puedePedirCuenta(user: User): boolean {    
+    return (
+      user.rol == Rol.CLIENTE && user.estado == clienteEstado.CONSUMIENDO
     );
   }
   

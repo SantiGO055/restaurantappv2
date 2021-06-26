@@ -6,6 +6,7 @@ import { User } from '../../entities/user';
 import { Cliente } from '../../entities/cliente';
 import { MesasService } from '../../services/mesas.service';
 import { ToastService } from '../../services/toast.service';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-asignacion-mesa',
@@ -21,6 +22,7 @@ export class AsignacionMesaPage implements OnInit {
     public mesaService : MesasService,
     public router:Router,
     public toastService:ToastService, 
+    public userService:UsersService,
   ) {   
   }
   
@@ -29,7 +31,7 @@ export class AsignacionMesaPage implements OnInit {
   }
 
   ngOnInit() {
-    this.loginService.loguedUser.subscribe(user=>{
+    this.loginService.actualUser().then(user=>{
       if(User.puedeAccederMenu(user)){
         // ya lo aceptaron
         this.router.navigateByUrl('/dashboard/menu');
@@ -51,12 +53,20 @@ export class AsignacionMesaPage implements OnInit {
   }
 
   protected solicitarAsignarMesa(mesaUid:string){
-    this.loginService.loguedUser.subscribe(user => {
+    this.loginService.actualUser().then(user => {
       const cliente  =  Cliente.fromUser(user);            
       try{        
         this.mesaService.asignarMesa(mesaUid,cliente).then(
           response => {
-            this.router.navigateByUrl('/dashboard/pagina-espera');
+            //asignar al cliente el estado 
+            this.userService.moverAMesaSelecionada(cliente).then(
+              response => {
+                this.router.navigateByUrl('/dashboard/pagina-espera');
+              }, 
+              error => {
+                this.toastService.presentDanger(error);    
+              }
+            );            
           },
           error => {
             this.toastService.presentDanger(error);    

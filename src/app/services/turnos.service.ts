@@ -11,7 +11,7 @@ import { Turno } from '../entities/turno';
 })
 export class TurnosService {
 
-  readonly COLLECTION = 'awaitList';
+  readonly COLLECTION = 'awaitLists';
 
   turnos: Observable<Turno[]>;
   private turnosCollection: AngularFirestoreCollection<Turno>;

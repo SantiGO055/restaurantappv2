@@ -58,6 +58,7 @@ export class EncuestaPage implements OnInit {
     this.loginSvc.usuarioLogueado.then(usr=>{
       this.usuarioLogueado = usr;
       console.log(this.usuarioLogueado);
+      /*
       this.encuestaSvc.getEncuestas().pipe(first())
       .toPromise()
       .then(encuestas=>{
@@ -71,7 +72,9 @@ export class EncuestaPage implements OnInit {
             this.spinnerService.ocultarSpinner();
           }
         });
+        
       })
+      */
     });
 
   }
@@ -110,9 +113,7 @@ export class EncuestaPage implements OnInit {
   }
 
   async tomarFoto() {
-    if(this.countFotos < 3){
-
-    
+    if(this.countFotos < 3){   
       const photo =  this.captureImage()
       .then(photo => {
         console.info(photo) ;

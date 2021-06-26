@@ -28,11 +28,7 @@ export class PaginaIngresoPage implements OnInit {
   //en esta pagina se ve los botones de encuesta o de scanear eq
 
   ngOnInit() {
-    this.loginService.loguedUser.subscribe(user=>{
-      if(User.puedeAccederAsignarMesa(user)){
-        this.redireccionAMesa();
-      }
-    })
+   
   }
 
   protected redireccionAMesa(){
@@ -64,15 +60,13 @@ export class PaginaIngresoPage implements OnInit {
   }
 
   protected agregarAListaEspera(){    
-    this.loginService.loguedUser.subscribe(
-      user => {
+    const user = this.loginService.actualUser().then( user => {
         const cliente = Cliente.fromUser(user);
         this.userService.moverAListaEspera(cliente);
         const turno = Turno.fromUser(cliente);
         this.turnosService.save(turno,null);
         this.redireccionAMesa();
-      }
-    );
+    });       
   }
 
 }

@@ -15,7 +15,7 @@ export class AutoLoginGuard implements CanLoad {
     ) {}
 
   async canLoad(): Promise<boolean> {
-    const user = await this.loginService.loguedUser.subscribe(
+    const user = await this.loginService.actualUser().then(
       user => {
         if (user) {            
           const route =   this.routes.definirRutaUsuario(user);            
