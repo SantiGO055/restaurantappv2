@@ -62,18 +62,14 @@ export class EncuestaPage implements OnInit {
       console.log(this.usuarioLogueado);      
       this.encuestaSvc.getEncuestas().pipe(first())
       .toPromise()
-      .then(encuestas=>{
+      .then(encuestas=>{        
         encuestas.forEach(enc => {
-          if(enc.uidCliente == this.usuarioLogueado.uid){
-            this.spinnerService.ocultarSpinner();
+          if(enc.uidCliente == this.usuarioLogueado.uid){            
             this.alert.showDanger('Usted ya posee una encuesta cargada','Error!')
             this.router.navigate(['dashboard/dashboard/pagina-espera-elaboracion'])
-          }
-          else{
-            this.spinnerService.ocultarSpinner();
-          }
+          }          
         });
-        
+        this.spinnerService.ocultarSpinner();          
       })
     });
 
