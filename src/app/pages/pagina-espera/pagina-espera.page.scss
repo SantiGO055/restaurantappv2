@@ -1,0 +1,38 @@
+ion-content.site{
+    --padding-top: 23%;        
+}
+ion-content.scan{
+    --background:#00000000;
+}
+ion-content ion-grid {    
+    text-align: center;
+}
+
+ion-fab-button.reload{
+    width: 30px !important ; 
+    height: 30px !important ;
+}
+
+ion-content ion-button.scanear{
+    --background:rgb(107, 223, 107);
+    height: 12vh;
+    margin-top:18px;    
+}
+
+ion-content ion-button.salir{    
+    height: 8vh;    
+}
+
+
+.scanbox{
+    border:2px solid #fff;
+    box-shadow: 0 0 0 100vmax rgba(0,0,0,0.5);
+    content:'';
+    display:block;
+    left: 50%;
+    height: 300px;
+    position:absolute;
+    top:50%;
+    transform: translate(-50%, -50%);
+    width:300px;
+}

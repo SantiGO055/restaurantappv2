@@ -3,7 +3,6 @@ import { LectorQRMesaService } from '../../services/lectorqrmesa.service';
 import { LoginService } from '../../services/login.service';
 import { Router } from '@angular/router';
 import { User } from '../../entities/user';
-import { Mesa } from '../../entities/mesa';
 import { Cliente } from '../../entities/cliente';
 import { MesasService } from '../../services/mesas.service';
 import { ToastService } from '../../services/toast.service';
@@ -54,10 +53,10 @@ export class AsignacionMesaPage implements OnInit {
   protected solicitarAsignarMesa(mesaUid:string){
     this.loginService.loguedUser.subscribe(user => {
       const cliente  =  Cliente.fromUser(user);            
-      try{
+      try{        
         this.mesaService.asignarMesa(mesaUid,cliente);
-        this.router.navigateByUrl('/dashboard/menu');
-      }catch(error){
+        this.router.navigateByUrl('/dashboard/pagina-espera');
+      }catch(error){ 
         // informar del error 
         this.toastService.presentDanger(error);
       }      
@@ -65,13 +64,13 @@ export class AsignacionMesaPage implements OnInit {
   }
 
   async suponerEscaneoMesa1()
-  { 
-      this.solicitarAsignarMesa('swUDyLwV8OFFxZnJORp5');
+  {
+      this.solicitarAsignarMesa('xkbC3DQSKxibJ9KzAOG2');
   }
 
   async suponerEscaneoMesa2()
   { 
-      this.solicitarAsignarMesa('xkbC3DQSKxibJ9KzAOG2');
+      this.solicitarAsignarMesa('swUDyLwV8OFFxZnJORp5');
   }
 
   deternerScaner(){

@@ -38,24 +38,11 @@ const routes: Routes = [
   {
     path: 'avatar',
     loadChildren: () => import('./pages/avatar/avatar.module').then( m => m.AvatarPageModule)
-  },
- 
+  }, 
   {
     path: 'registros',
     loadChildren: () => import('./pages/registros/registros.module').then( m => m.RegistrosPageModule)
   },
-  {
-    path: 'menu',
-    loadChildren: () => import('./pages/menu/menu.module').then( m => m.MenuPageModule)
-  },
-  {
-    path: 'encuesta',
-    loadChildren: () => import('./pages/encuesta/encuesta.module').then( m => m.EncuestaPageModule)
-  }
-
-  
-
-
 ];
 @NgModule({
   imports: [
