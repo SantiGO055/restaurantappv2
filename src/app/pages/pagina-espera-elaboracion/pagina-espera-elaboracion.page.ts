@@ -55,7 +55,7 @@ export class PaginaEsperaElaboracionPage implements OnInit {
    
 
   irAResultadosEncuesta(){    
-    this.router.navigateByUrl('/dashboard/resultado-encuesta');
+    this.router.navigateByUrl('/dashboard/resultados-encuesta');
   }
 
 

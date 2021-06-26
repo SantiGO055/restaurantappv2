@@ -12,4 +12,5 @@ export interface Encuesta {
     limpieza: boolean;
     atencion: boolean;
     uidCliente: string;
+    metodoConocimiento: string;
 }

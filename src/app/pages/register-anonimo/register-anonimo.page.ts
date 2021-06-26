@@ -99,7 +99,7 @@ export class RegisterAnonimoPage implements OnInit {
           async (res) => {
             this.spinnerService.ocultarSpinner();            
             this.resetForm();
-            this.router.navigateByUrl('dashboard/home');
+            this.router.navigateByUrl('dashboard/pagina-ingreso');
           },
           async (error) => {
             console.log(error);

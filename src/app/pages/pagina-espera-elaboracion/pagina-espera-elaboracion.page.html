@@ -12,7 +12,7 @@
     <ion-row>
       <ion-col>      
         <ion-button type="button" expand="block" color="tertiary" [hidden]="this.usuarioLogueado.completoEncuesta" (click)="irAEncuesta()" >Realizar encuesta</ion-button>                                            
-        <ion-button type="button" expand="block" color="tertiary" [hidden]="!this.usuarioLogueado.completoEncuesta" (click)="irAResultadosEncuesta()" >Realizar encuesta</ion-button>                                            
+        <ion-button type="button" expand="block" color="tertiary" [hidden]="!this.usuarioLogueado.completoEncuesta" (click)="irAResultadosEncuesta()" >Ver resultado de encuestas</ion-button>                                            
 
         <ion-button type="button" expand="block" color="primary" (click)="testEscanearQRMesa1()" >Como si escaneo el QR de la mesa 1 </ion-button>
       </ion-col>

@@ -50,6 +50,15 @@
       </ion-list>
     </ion-item>
     <ion-list>
+      <ion-item>
+        <ion-label>¿De que manera llegaste a conocernos?</ion-label>
+        <ion-select (ionChange)="changeMetodoConocimiento()" [(ngModel)]="metodoConocimiento">
+          <ion-select-option value="newsletter" >Newsletter</ion-select-option>
+          <ion-select-option value="internet" >Internet</ion-select-option>
+          <ion-select-option value="recomendacion" >Recomendación</ion-select-option>
+        </ion-select>
+      </ion-item>
+
       <ion-radio-group value="biff">
         <ion-list-header>
           <ion-label>¿ Recomendarías "Lo de Tito" a un amigo ?</ion-label>

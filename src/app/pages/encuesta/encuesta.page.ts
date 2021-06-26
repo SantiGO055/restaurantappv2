@@ -39,6 +39,7 @@ export class EncuestaPage implements OnInit {
   radioSi: boolean;
   radioNo: boolean;
   input: string = '';
+  metodoConocimiento: string = '';
   usuarioLogueado: User = new User();
   constructor(
     public modalController: ModalController,
@@ -164,7 +165,8 @@ export class EncuestaPage implements OnInit {
       ubicacion: this.ubicacionMesa,
       limpieza: this.limpiezaLugar,
       atencion: this.atencionMozos,
-      uidCliente: this.usuarioLogueado.uid
+      uidCliente: this.usuarioLogueado.uid,
+      metodoConocimiento: this.metodoConocimiento
     //   radioSi: boolean;
     // radioNo: boolean;
     // input: string;
@@ -191,6 +193,9 @@ export class EncuestaPage implements OnInit {
     } catch (error) {
       
     }
+  }
+  changeMetodoConocimiento(){
+    console.log(this.metodoConocimiento);
   }
 
 
