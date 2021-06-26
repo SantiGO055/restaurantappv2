@@ -13,6 +13,7 @@ import { EncuestaService } from 'src/app/services/encuesta.service';
 import { Encuesta } from 'src/app/entities/encuesta';
 import { LoginService } from 'src/app/services/login.service';
 import { User } from 'src/app/entities/user';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-encuesta',
@@ -48,7 +49,8 @@ export class EncuestaPage implements OnInit {
     private alert: AlertService,
     private vibrate: VibrationService,
     private encuestaSvc: EncuestaService,
-    private loginSvc: LoginService
+    private loginSvc: LoginService,
+    private userSvc : UsersService,
   ) {
     this.avatarUrl1 = null;
    }
@@ -57,8 +59,7 @@ export class EncuestaPage implements OnInit {
     this.spinnerService.mostrarSpinner();
     this.loginSvc.usuarioLogueado.then(usr=>{
       this.usuarioLogueado = usr;
-      console.log(this.usuarioLogueado);
-      /*
+      console.log(this.usuarioLogueado);      
       this.encuestaSvc.getEncuestas().pipe(first())
       .toPromise()
       .then(encuestas=>{
@@ -66,7 +67,7 @@ export class EncuestaPage implements OnInit {
           if(enc.uidCliente == this.usuarioLogueado.uid){
             this.spinnerService.ocultarSpinner();
             this.alert.showDanger('Usted ya posee una encuesta cargada','Error!')
-            this.router.navigate(['dashboard/asignacion-mesa'])
+            this.router.navigate(['dashboard/dashboard/pagina-espera-elaboracion'])
           }
           else{
             this.spinnerService.ocultarSpinner();
@@ -74,7 +75,6 @@ export class EncuestaPage implements OnInit {
         });
         
       })
-      */
     });
 
   }
@@ -184,8 +184,12 @@ export class EncuestaPage implements OnInit {
     console.log(encuestaAux);
     try {
       this.encuestaSvc.addEncuesta(encuestaAux).then(ok=>{
-        console.log(ok)
-        this.alert.showSucess('Encuesta enviada correctamente','Aviso','dashboard/asignacion-mesa');
+        this.userSvc.marcarEncuestaRealizada(this.usuarioLogueado).then(
+          r => {
+            console.log(ok)
+            this.alert.showSucess('Encuesta enviada correctamente','Aviso','dashboard/pagina-espera-elaboracion');
+          }
+        );        
       });
       
     } catch (error) {

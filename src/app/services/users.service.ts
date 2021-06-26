@@ -34,6 +34,11 @@ export class UsersService {
     );
   }
 
+  marcarEncuestaRealizada(cliente:Cliente):Promise<void>{
+    cliente.completoEncuesta = true;
+    return this.save(cliente,cliente.uid);
+   }
+
   async moverAListaEspera(user:User):Promise<void>{
     if(!User.esCliente(user)) {
       throw new SysError('Debe ser cliente para ingresar a la lista de espera.');
