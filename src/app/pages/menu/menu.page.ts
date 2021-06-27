@@ -144,6 +144,7 @@ export class MenuPage implements OnInit {
       tiempoElaboracionFinal: this.tiempoElaboracion,
       precioFinal: this.total,
       uid:this.usuarioLogueado.uid,
+      uidCliente: this.usuarioLogueado.uid
     }
     console.log(this.productoAgregado);   
     this.productoSvc.addPedido(this.pedido).then( r => {

@@ -23,15 +23,23 @@ export class ResumenPedidoPage implements OnInit {
     public productoSvc:MenuService,
     public router:Router,
   ) {
+    
     this.loginService.usuarioLogueado.then(usr=>{
       this.usuarioLogueado = usr;            
-       this.productoSvc.getPedidoByUId(this.usuarioLogueado.uid).then(pedido => {         
-          if(!pedido){
-            this.router.navigateByUrl('dashboard/pagina-espera-elaboracion');
-          }else{
-            this.pedido = pedido;
+      this.productoSvc.getAllPedidos().subscribe(pedidos=>{
+        pedidos.forEach(pedido=>{
+          if(pedido.uidCliente == this.usuarioLogueado.uid){
+            this.productoSvc.getPedidoByUId(pedido.uid).then(pedido => {         
+               if(!pedido){
+                 this.router.navigateByUrl('dashboard/pagina-espera-elaboracion');
+               }else{
+                 this.pedido = pedido;
+               }
+            });       
+
           }
-       });       
+        })
+      })
     });
   }
 
