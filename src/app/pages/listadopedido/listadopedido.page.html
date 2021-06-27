@@ -11,7 +11,7 @@
     <div approxItemHeight="320px">
       <div *ngFor="let pedido of pedidos">
 
-        <h1>Pedido de la mesa: </h1>
+        <h1>Pedido de la mesa: {{pedido.nombreMesa}}</h1>
 
         <div *ngFor="let pedidoDetalle of pedido.producto">
           <ion-item  >

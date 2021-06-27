@@ -8,6 +8,8 @@ export class Pedido {
     tiempoElaboracionFinal: number;
     estadoPedido: Estado;
     precioFinal:number;
+    uidMesa?:string;
+    nombreMesa?:string;
 }
 
 export enum Estado{

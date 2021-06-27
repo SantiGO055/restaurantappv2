@@ -9,6 +9,8 @@ import { AlertService } from 'src/app/services/alert.service';
 import { ChatService } from 'src/app/services/chat.service';
 import { LoginService } from 'src/app/services/login.service';
 import { MenuService } from 'src/app/services/menu.service';
+import { MesasService } from 'src/app/services/mesas.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { UsersService } from '../../services/users.service';
 
 @Component({
@@ -25,14 +27,17 @@ export class MenuPage implements OnInit {
   slideOptsOne: any;
   pedido: Pedido  = new Pedido();
   tiempoElaboracion: number = 0;
-
+  mesaUid:string = '';
+  nombreMesa:string = '';
   usuarioLogueado:User = new User();
   constructor(
     private productoSvc:MenuService,
     public chatSvc:ChatService,
     public alerta: AlertService,
     private loginSvc: LoginService,
-    private userSvc: UsersService
+    private userSvc: UsersService,
+    private push: NotificationService,
+    private mesaSvc: MesasService
   ) {
     this.loginSvc.usuarioLogueado.then(usr=>{
       this.usuarioLogueado = usr;
@@ -43,7 +48,16 @@ export class MenuPage implements OnInit {
     this.productoSvc.getAllProductos().pipe(first())
     .toPromise()
     .then(producto=>{
-      
+      this.mesaSvc.mesas.subscribe(mesas=>{
+        mesas.forEach(mesa=>{
+          if(this.usuarioLogueado.uid == mesa.uid){
+            this.mesaUid = mesa.id;
+            this.nombreMesa = mesa.nombre;
+            console.log(mesa.nombre)
+            console.log(this.mesaUid)
+          }
+        })
+      })
       this.productos = producto;
     })
     this.slideOptsOne = {
@@ -144,9 +158,14 @@ export class MenuPage implements OnInit {
       tiempoElaboracionFinal: this.tiempoElaboracion,
       precioFinal: this.total,
       uid:this.usuarioLogueado.uid,
-      uidCliente: this.usuarioLogueado.uid
+      uidCliente: this.usuarioLogueado.uid,
+      uidMesa: this.mesaUid,
+      nombreMesa: this.nombreMesa
     }
-    console.log(this.productoAgregado);   
+    this.productoAgregado.forEach(producto=>{
+      this.push.push('Pedido pendiente','El pedido ' + producto.nombre + ' esta pendiende de preparacion',producto.empleadoPrepara.rol)
+      producto.empleadoPrepara.rol
+    });   
     this.productoSvc.addPedido(this.pedido).then( r => {
       this.userSvc.moverAEsperandoPedido(this.usuarioLogueado);
       this.alerta.showSucess('Tu pedido esta pendiente','Aviso!','dashboard/pagina-espera-elaboracion')
