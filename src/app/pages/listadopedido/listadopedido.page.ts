@@ -38,6 +38,7 @@ export class ListadopedidoPage implements OnInit {
     
    }
    aceptarPedido(pedido: Pedido){
+     //TODO aca enviar notificacion a los cocineros/bartenders y mostrarle lista de productos que debe preparar
      pedido.estadoPedido = Estado.CONFIRMADO;
     this.pedidosSvc.updatePedido(pedido);
    }
