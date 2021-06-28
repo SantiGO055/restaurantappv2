@@ -11,6 +11,7 @@ import { LoginService } from 'src/app/services/login.service';
 import { MenuService } from 'src/app/services/menu.service';
 import { MesasService } from 'src/app/services/mesas.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { SpinnerService } from 'src/app/services/spinner.service';
 import { UsersService } from '../../services/users.service';
 
 @Component({
@@ -37,7 +38,8 @@ export class MenuPage implements OnInit {
     private loginSvc: LoginService,
     private userSvc: UsersService,
     private push: NotificationService,
-    private mesaSvc: MesasService
+    private mesaSvc: MesasService,
+    private spinner: SpinnerService
   ) {
     this.loginSvc.usuarioLogueado.then(usr=>{
       this.usuarioLogueado = usr;
@@ -152,6 +154,7 @@ export class MenuPage implements OnInit {
   }
 
   enviarPedido(){
+    this.spinner.mostrarSpinner();
     this.pedido = {
       estadoPedido: Estado.PENDIENTE,
       producto: this.productoAgregado,
@@ -167,8 +170,9 @@ export class MenuPage implements OnInit {
       producto.empleadoPrepara.rol
     });   
     this.productoSvc.addPedido(this.pedido).then( r => {
+      this.spinner.ocultarSpinner();
       this.userSvc.moverAEsperandoPedido(this.usuarioLogueado);
-      this.alerta.showSucess('Tu pedido esta pendiente','Aviso!','dashboard/pagina-espera-elaboracion')
+      this.alerta.showSucess('El mozo confirmara tu pedido','Aviso!','dashboard/pagina-espera-elaboracion')
     });
   }
 
