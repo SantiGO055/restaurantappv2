@@ -14,20 +14,25 @@ import { ChatService } from 'src/app/services/chat.service';
   styleUrls: ['./pagina-espera.page.scss'],
 })
 export class PaginaEsperaPage implements OnInit {
-
+  usuarioLogueado: User = new User();
  
   constructor(
     public lectorqrService:LectorQRMesaService,    
     public loginService:LoginService,
     public userService:UsersService,
     public router:Router,
-    public chatSvc: ChatService
+    public chatSvc: ChatService,
+    private loginSvc: LoginService
   ) {       
   }
 
   //en esta pagina se ve los botones de encuesta o de scanear eq
 
   ngOnInit() {    
+    this.loginSvc.usuarioLogueado.then(usr=>{
+      this.usuarioLogueado = usr;
+      console.log(this.usuarioLogueado);
+    });
   }
 
   protected redireccionAMesa(){
