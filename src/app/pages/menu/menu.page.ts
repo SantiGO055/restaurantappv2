@@ -165,13 +165,10 @@ export class MenuPage implements OnInit {
       uidMesa: this.mesaUid,
       nombreMesa: this.nombreMesa
     }
-    this.productoAgregado.forEach(producto=>{
-      this.push.push('Pedido pendiente','El pedido ' + producto.nombre + ' esta pendiende de preparacion',producto.empleadoPrepara.rol)
-      producto.empleadoPrepara.rol
-    });   
+    
     this.productoSvc.addPedido(this.pedido).then( r => {
       this.spinner.ocultarSpinner();
-      this.userSvc.moverAEsperandoPedido(this.usuarioLogueado);
+      this.push.push('Cocina','Pedidos pendientes de elaboración','cocinero')
       this.alerta.showSucess('El mozo confirmara tu pedido','Aviso!','dashboard/pagina-espera-elaboracion')
     });
   }

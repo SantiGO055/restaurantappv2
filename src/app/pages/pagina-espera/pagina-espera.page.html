@@ -10,9 +10,12 @@
   <ion-grid [hidden]="lectorqrService.scanActive" >
     <!-- encuesta -->
     <ion-row>
-      <ion-col>                    
-        <p> Conocé las opiniones acerca de nosotros </p>
-        <ion-button *ngIf="!usuarioLogueado.completoEncuesta" type="button" expand="block" color="tertiary" (click)="irAEncuesta()" >Realizar encuesta</ion-button>                                            
+      <ion-col>              
+        <div *ngIf="!usuarioLogueado.completoEncuesta">
+          <p> Completa una breve encuesta sobre el lugar </p>
+          <ion-button  type="button" expand="block" color="tertiary" (click)="irAEncuesta()" >Realizar encuesta</ion-button>                                            
+
+        </div>      
         <ion-button type="button" expand="block" color="primary" (click)="testEscanearQRMesa1()" >Como si escaneo el QR de la mesa 1 </ion-button>
         <ion-button type="button" expand="block" color="primary" (click)="presentModalChat()" >Consultar al mozo </ion-button>
       </ion-col>
