@@ -21,6 +21,10 @@ export class TurnosService {
     this.getTurnos();
   }
   
+valueChange(turnoId:string):Observable<Turno>{
+  return this.fireStore.doc<Turno>(`${this.COLLECTION}/${turnoId}`).valueChanges();
+}
+
   delete(turnoId: string): Promise<void> {
     return new Promise(
       waitForAsync((resolve, rejects) => {
@@ -57,7 +61,7 @@ export class TurnosService {
   save(turno: Turno, turnoId: string): Promise<void> {
     return new Promise((resolve, rejects) => {
         try {
-          const id = turnoId || this.fireStore.createId();
+          const id = turnoId ||this.getNewId();
           const data = { id, ...turno };
           const result = this.turnosCollection.doc(id).set(data);
           resolve(result);
@@ -65,6 +69,10 @@ export class TurnosService {
           rejects(err.message);
         }
       });
+  }
+
+  public getNewId():string{
+    return this.fireStore.createId();
   }
 
   private getTurnos(): void {

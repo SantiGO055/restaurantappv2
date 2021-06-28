@@ -48,32 +48,36 @@ export class LoginPage implements OnInit {
 
   async login() {
     try {      
-      this.SpinnerService.mostrarSpinner();
-      if (!this.ionicForm.valid) {
-        this.toastService.presentSuccess('Por favor revise los datos ingresados.');        
-      } else {
-        //revisar si existe desaprobado en registros         
-        this.loginService.login(this.ionicForm.value).then(
-          async (usuario:User) => {
-            this.SpinnerService.ocultarSpinner();            
-            const route = this.routerPage.definirRutaUsuario(usuario);            
-            this.router.navigateByUrl(route, { replaceUrl: true });
-          },
-          async (error) => {            
-            this.SpinnerService.ocultarSpinner();                                                
-            const registro = await this.registroService.getRegistroByEmail(this.username.value);            
-            if( !registro ){
-              this.toastService.presentDanger('Usuario o password incorrecto.');            
-            }else if(!registro.aprobado){
-              this.toastService.presentDanger('Su registro aun no fue aceptado.');            
+        this.SpinnerService.mostrarSpinner();
+        if (!this.ionicForm.valid) {
+          this.toastService.presentSuccess('Por favor revise los datos ingresados.');        
+        } else {
+          //revisar si existe desaprobado en registros         
+          this.loginService.login(this.ionicForm.value).then(
+            async (usuario:User) => {
+              this.SpinnerService.ocultarSpinner();            
+              const route = this.routerPage.definirRutaUsuario(usuario);            
+              this.router.navigateByUrl(route, { replaceUrl: true });
+            },
+            async (error) => {                          
+              this.probarRegistroPendiente();
             }
-          }
-        );
-      }
-    } catch (error) {      
-      throw new SysError(error);
+          );
+        }
+    } catch (error) {         
+      this.probarRegistroPendiente();      
     }
   }  
+
+  async probarRegistroPendiente(){
+      this.SpinnerService.ocultarSpinner();                                                
+      const registro = await this.registroService.getRegistroByEmail(this.username.value);            
+        if( !registro ){
+          this.toastService.presentDanger('Usuario o password incorrecto.');            
+        }else if(!registro.aprobado){
+          this.toastService.presentDanger('Su registro aun no fue aceptado.');            
+        }
+  }
   
   defineTester(selectedUserId: string) {
     const loginData = this.loginService.getUsuarioTest(selectedUserId);

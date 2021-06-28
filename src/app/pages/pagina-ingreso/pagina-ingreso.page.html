@@ -16,10 +16,16 @@
         <ion-button type="button" expand="block" color="tertiary" (click)="testQRValido()" >Como si escaneo el QR  de la puerta</ion-button>
       </ion-col>
     </ion-row>
-    <!-- lista de espera  -->
-      <ion-row  >
+    <!-- previo a asignar mesa  -->
+      <ion-row *ngIf="!this.enListaEspera"  >
         <ion-col>          
           <p> Agregate a lista de espera escaneando el QR que encontraras en la puerta  </p>          
+        </ion-col>
+      </ion-row>      
+      <!-- mesa a asignar -->
+      <ion-row *ngIf="this.enListaEspera"  >
+        <ion-col>          
+          <p> El maitre te hara saber cuando exista una mesa disponible </p>          
         </ion-col>
       </ion-row>      
     </ion-grid>

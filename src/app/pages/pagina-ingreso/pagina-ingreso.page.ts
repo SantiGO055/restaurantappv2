@@ -7,6 +7,10 @@ import { User } from '../../entities/user';
 import {  LectorQrListaEsperaService } from '../../services/lectorqrlistaespera.service';
 import { Router } from '@angular/router';
 import { UsersService } from '../../services/users.service';
+import { SysError } from '../../entities/sysError';
+import { Observable } from 'rxjs';
+import { ToastService } from '../../services/toast.service';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-pagina-ingreso',
@@ -15,14 +19,17 @@ import { UsersService } from '../../services/users.service';
 })
 export class PaginaIngresoPage implements OnInit {
   
+  enListaEspera:boolean;
 
   constructor(
     public lectorqrService:LectorQrListaEsperaService,
     public turnosService:TurnosService,
     public loginService:LoginService,
     public userService:UsersService,
-    public router:Router,
+    public router:Router,    
+    public alerta: AlertService,
   ) {       
+    this.enListaEspera = false;    
   }
 
   //en esta pagina se ve los botones de encuesta o de scanear eq
@@ -30,11 +37,11 @@ export class PaginaIngresoPage implements OnInit {
   ngOnInit() {
    
   }
-
+/*
   protected redireccionAMesa(){
     this.router.navigateByUrl('/dashboard/asignacion-mesa');
   }
-
+*/
   ngAfterViewInit() {
     this.lectorqrService.preapare();    
   }    
@@ -60,12 +67,27 @@ export class PaginaIngresoPage implements OnInit {
   }
 
   protected agregarAListaEspera(){    
+    
+    this.enListaEspera = true;
     const user = this.loginService.actualUser().then( user => {
         const cliente = Cliente.fromUser(user);
         this.userService.moverAListaEspera(cliente);
-        const turno = Turno.fromUser(cliente);
-        this.turnosService.save(turno,null);
-        this.redireccionAMesa();
+        const turno = Turno.fromUser(cliente);   
+        const turnoId = this.turnosService.getNewId();
+        this.turnosService.save(turno,turnoId).then(
+          r => {
+            this.turnosService.valueChange(turnoId).subscribe(
+              (turno:Turno) => {
+                if(turno.aceptado === true){
+                    this.enListaEspera = false;
+                    //cartel de que fue aceptado 
+                    this.alerta.showSucess(`Escanea el QR de la mesa ${turno.mesa}`,'Ya podes pasar','/dashboard/asignacion-mesa')
+                }
+              }
+            )
+          }
+        );        
+                
     });       
   }
 

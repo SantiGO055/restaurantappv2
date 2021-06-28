@@ -9,6 +9,8 @@ export class Turno {
     email: string;
     displayName: string;    
     photoURL?: string;  
+    aceptado?: boolean;  
+    mesa?: number;  
     
     static fromUser(cliente:Cliente) : Turno{        
         return {
@@ -16,7 +18,9 @@ export class Turno {
             email: cliente.email,
             displayName:cliente.displayName, 
             createdAt : Timestamp.now(), 
-            photoURL: cliente.photoURL
+            photoURL: cliente.photoURL,
+            mesa:null,
+            aceptado:false,
         } as Turno;
     }
     
