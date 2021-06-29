@@ -6,23 +6,33 @@
     </ion-col>
   </ion-row>
   <ion-row>  
-    <!--@todo corregir esto -->  
     <ion-col>
-     <ion-grid>
-       <ion-row *ngFor="let producto of this.pedido.producto">
-         <ion-col>
-           {{producto.nombre}}           
-         </ion-col>
-         <ion-col>
-          {{producto.precio}} ARS
-        </ion-col>
-       </ion-row>
-     </ion-grid>
+      <ion-list>
+        <ion-item *ngFor="let producto of this.pedido.producto"   >        
+          <ion-avatar slot="start">
+            <ion-img [src]="producto.fotos[0]" [alt]="producto.nombre" 
+            ></ion-img>
+          </ion-avatar>
+          <ion-label>                       
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  {{producto.nombre}} 
+                </ion-col>
+                <ion-col>
+                  <!-- @todo completar con el parametro que se le vaya a poner al producto para el estado -->
+                  PREPARANDO 
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-label>
+          </ion-item>
+      </ion-list>
     </ion-col>
   </ion-row>
   <ion-row>
     <ion-col>
-      Tiempo de elaboración Final
+      Elaborado en 
     </ion-col>
     <ion-col>
       {{ this.pedido.tiempoElaboracionFinal}} min
@@ -33,12 +43,8 @@
       Precio final 
     </ion-col>
     <ion-col>
-      {{ this.pedido.precioFinal}}
+      {{ this.pedido.precioFinal}} ARS
     </ion-col>
   </ion-row>
-  </ion-grid>
-  <!-- @todo  su pedido -->
-    <!-- @todo  Detalle del pedido -->
-    <!-- @todo  Boton para indicar quede ya lo recibio  -->
-    <!-- @todo  Boton para pedir la cuenta ?  -->
+  </ion-grid>    
 </ion-content>
