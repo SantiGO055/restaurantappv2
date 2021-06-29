@@ -41,6 +41,7 @@ export class HomePage implements OnInit {
   }
   ngOnInit() {
     this.loginSvc.usuarioLogueado.then(usr=>{
+      console.log(usr)
       this.usuarioLogueado = usr;
       console.log(this.usuarioLogueado)
     });
