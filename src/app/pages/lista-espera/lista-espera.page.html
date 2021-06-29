@@ -9,33 +9,36 @@
 <ion-content>  
 
   <ion-list>    
-      <ion-item *ngFor="let turno of this.turnos">        
+
+
+    <ion-item *ngFor="let turno of this.turnos"   >        
+      <ion-avatar slot="start">
+        <ion-img [src]="turno.photoURL" [alt]="turno.displayName" 
+        ></ion-img>
+      </ion-avatar>
+      <ion-label>
+        <h2>{{  turno.displayName }}</h2>
+        <h3> {{ turno.email }}</h3>                    
         <ion-grid>
           <ion-row>
-            <ion-col>              
-                <ion-img [src]="turno.photoURL" [alt]="turno.displayName" ></ion-img>                            
-            </ion-col>
-          </ion-row>
-          <ion-row>
             <ion-col>
-              nombre: {{ turno.displayName }}
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              email: {{ turno.email }}
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <ion-button  (click)="this.asignarMesa(turno)" expand="full" color="success" >Aceptar</ion-button>
+              <ion-button class="btnaccion" color="success" (click)="this.asignarMesa(turno)" expand="full" >
+                <ion-icon name="enter-outline"></ion-icon>
+              </ion-button>
             </ion-col>
             <ion-col>
-              <ion-button  (click)="this.eliminarCliente(turno)" expand="full" color="danger" >Rechazar</ion-button>
+              <ion-button color="danger" class="btnaccion" (click)="this.eliminarCliente(turno)" expand="full" >
+                <ion-icon name="close-outline"></ion-icon>
+              </ion-button>
             </ion-col>
           </ion-row>
         </ion-grid>
-      </ion-item>    
+        
+        
+      </ion-label>
+    </ion-item>
+
+
   </ion-list>
 
 </ion-content>

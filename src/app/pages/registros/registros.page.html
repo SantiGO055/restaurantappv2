@@ -3,26 +3,60 @@
     <ion-buttons slot="start">
       <ion-menu-button menu="first"></ion-menu-button>
     </ion-buttons>
-    <ion-title>Registro Clientes</ion-title>
+    <ion-title>Solicitudes de registro</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-list>
-    <ion-virtual-scroll [items]="this.registros|async" approxItemHeight="320px">
-      <ion-item *virtualItem="let registro"   >        
-          <ion-avatar slot="start" >
-            <ion-img [src]="registro.photoURL" [alt]="registro.displayName"
-            ></ion-img>
-          </ion-avatar>
-          <ion-label>
-            <h2>{{ registro.displayName }}</h2>
-            <h3>{{ registro.email }}</h3>
-            <div >
-              <ion-button  (click)="this.aceptarRegistro(registro)" expand="full">Aceptar</ion-button>
-              <ion-button  (click)="this.rechazarRegistro(registro)" expand="full">Rechazar</ion-button>
-            </div>            
-          </ion-label>      
+  <ion-list>      
+      <ion-item *ngfor="let registro of this.registros "   >        
+        <ion-avatar slot="start">
+          <ion-img [src]="registro.photoURL" [alt]="registro.displayName"
+          ></ion-img>
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ registro.displayName }}</h2>
+          <h3>>{{ registro.dni }}</h3>                              
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button color="success" (click)="this.aceptarRegistro(registro)" >
+                  <ion-icon name="add-outline"></ion-icon>
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button color="danger"  (click)="this.rechazarRegistro(registro)">
+                  <ion-icon name="close-outline"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-label>
       </ion-item>
-    </ion-virtual-scroll>
+
+
+      <ion-item *ngfor="let registro of this.registrosAsync|async "   >        
+        <ion-avatar slot="start">
+          <ion-img [src]="registro.photoURL" [alt]="registro.displayName"
+          ></ion-img>
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ registro.displayName }}</h2>
+          <h3>>{{ registro.dni }}</h3>                              
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button color="success" (click)="this.aceptarRegistro(registro)" >
+                  <ion-icon name="add-outline"></ion-icon>
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button color="danger"  (click)="this.rechazarRegistro(registro)">
+                  <ion-icon name="close-outline"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-label>
+      </ion-item>
   </ion-list>
 </ion-content>
