@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { Estado, Pedido } from 'src/app/entities/pedido';
-import { Producto } from 'src/app/entities/producto';
+import { EstadoProducto, Producto } from 'src/app/entities/producto';
 import { User } from 'src/app/entities/user';
 import { AlertService } from 'src/app/services/alert.service';
 import { ChatService } from 'src/app/services/chat.service';
@@ -78,7 +78,7 @@ export class MenuPage implements OnInit {
   agregarProductoLista(producto: Producto){
     
     this.disableBotonQuitar = false;
-    
+    producto.estadoProducto = EstadoProducto.PENDIENTE;
     this.productos.forEach(prod => {
       if(Object.is(prod,producto)){
         producto.cantidad +=1;
@@ -102,6 +102,7 @@ export class MenuPage implements OnInit {
     }
     this.productoAgregado.push(producto);
     this.total += producto.precio;
+    
     console.log(this.total)
     console.log(this.productoAgregado)
     console.log(this.tiempoElaboracion)
@@ -165,13 +166,10 @@ export class MenuPage implements OnInit {
       uidMesa: this.mesaUid,
       nombreMesa: this.nombreMesa
     }
-    this.productoAgregado.forEach(producto=>{
-      this.push.push('Pedido pendiente','El pedido ' + producto.nombre + ' esta pendiende de preparacion',producto.empleadoPrepara.rol)
-      producto.empleadoPrepara.rol
-    });   
+    
     this.productoSvc.addPedido(this.pedido).then( r => {
       this.spinner.ocultarSpinner();
-      this.userSvc.moverAEsperandoPedido(this.usuarioLogueado);
+      this.push.push('Cocina','Pedidos pendientes de elaboración','cocinero')
       this.alerta.showSucess('El mozo confirmara tu pedido','Aviso!','dashboard/pagina-espera-elaboracion')
     });
   }
