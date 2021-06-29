@@ -17,7 +17,7 @@ import { SpinnerService } from '../../services/spinner.service';
 })
 export class RegistrosPage implements OnInit {
 
-  registros:Registro[];    
+  registros:Registro[] = [];    
 
   constructor(
     public registroService: RegistrosService,
@@ -35,7 +35,8 @@ export class RegistrosPage implements OnInit {
   ngOnInit() {
     this.spinnerService.mostrarSpinner();    
     this.registroService.registros.subscribe( registros=> {
-      this.registros =  registros.filter( (registro:Registro)=> { return true; });      
+      this.registros =  registros;  
+      console.log(this.registros)    
       this.spinnerService.ocultarSpinner();
     });   
   }

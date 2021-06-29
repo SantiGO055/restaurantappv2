@@ -77,6 +77,33 @@ async presentAlert(header:string) {
   await alert.present();
   const { role } = await alert.onDidDismiss();    
 }
+showAlertYesNoHTML(title: string, html: string){
+  var retorno = false;
+  return Swal.fire({
+    title: '<strong> ' + title + ' </strong>',
+    icon: 'info',
+    html: html,
+    showCloseButton: true,
+    showCancelButton: true,
+    focusConfirm: false,
+    confirmButtonText:
+      '<i class="fa fa-thumbs-up"></i> Si',
+    confirmButtonAriaLabel: 'Thumbs up, great!',
+    cancelButtonText:
+      '<i class="fa fa-thumbs-down"></i> No',
+    cancelButtonAriaLabel: 'Thumbs down'
+  }).then(results=>{
+    if(results.isConfirmed){
+      retorno = true;
+    }
+    else{
+      retorno = false;
+    }
+    return retorno;
+  });
+  
+
+}
 
 
 

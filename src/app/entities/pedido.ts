@@ -10,11 +10,17 @@ export class Pedido {
     precioFinal:number;
     uidMesa?:string;
     nombreMesa?:string;
+    todoListo?: boolean;
 }
 
 export enum Estado{
-    ENPREPARACION = 'EN PREPARACION',
+    ENPREPARACION = 'ENPREPARACION',
     LISTO = "LISTO",
     PENDIENTE = "PENDIENTE",
-    CONFIRMADO = "CONFIRMADO"
+    CONFIRMADO = "CONFIRMADO",
+    PREPARADO = 'PREPARADO',
+    PAGADO = 'PAGADO',
+    ENTREGADO = 'ENTREGADO',
+    APAGAR = 'APAGAR',
+    PENDIENTEPAGO = 'PENDIENTEPAGO'
 }

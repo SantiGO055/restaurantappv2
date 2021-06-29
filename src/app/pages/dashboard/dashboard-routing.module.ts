@@ -66,6 +66,10 @@ const routes: Routes = [
       path: 'seleccionar-mesa/:id',
       loadChildren: () => import('../seleccionar-mesa/seleccionar-mesa.module').then( m => m.SeleccionarMesaPageModule)
     },
+    {
+      path: 'listado-pedido-cocinero',
+      loadChildren: () => import('../listado-pedido-cocinero/listado-pedido-cocinero.module').then( m => m.ListadoPedidoCocineroPageModule)
+    },
       {
         path: '',
         redirectTo: 'home',

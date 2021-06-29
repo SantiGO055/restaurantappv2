@@ -11,8 +11,8 @@ import { AlertService } from './alert.service';
 })
 export class MenuService {
 
-  private dbpath = '/productos';
-  private dbpathPedido = '/pedidos';
+  public dbpath = '/productos';
+  public dbpathPedido = '/pedidos';
   public productos: Observable<Producto[]>;
   public pedidos: Observable<Pedido[]>;
   productosCollection: AngularFirestoreCollection<Producto>;
