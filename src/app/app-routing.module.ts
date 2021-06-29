@@ -45,7 +45,7 @@ const routes: Routes = [
   },   {
     path: 'listado-pedido-cocinero',
     loadChildren: () => import('./pages/listado-pedido-cocinero/listado-pedido-cocinero.module').then( m => m.ListadoPedidoCocineroPageModule)
-  },
+  }
 
 ];
 @NgModule({

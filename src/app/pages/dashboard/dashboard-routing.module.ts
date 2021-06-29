@@ -70,6 +70,10 @@ const routes: Routes = [
       path: 'listado-pedido-cocinero',
       loadChildren: () => import('../listado-pedido-cocinero/listado-pedido-cocinero.module').then( m => m.ListadoPedidoCocineroPageModule)
     },
+    {
+      path: 'factura',
+      loadChildren: () => import('../factura/factura.module').then( m => m.FacturaPageModule)
+    },
       {
         path: '',
         redirectTo: 'home',
