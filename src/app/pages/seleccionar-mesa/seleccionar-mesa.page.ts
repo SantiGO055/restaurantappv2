@@ -46,19 +46,18 @@ export class SeleccionarMesaPage implements OnInit {
   ngOnInit() {
   }
 
-  asignarMesa(mesa:Mesa){    
-    this.mesasService.asignarMesaPorTurno(mesa,this.turno);
+  async asignarMesa(mesa:Mesa){        
+    try{
+      this.spinnerService.mostrarSpinner();      
+      await this.usersService.moverATomandoMesa(this.turno.uid);     
+      await this.mesasService.asignarMesaPorTurno(mesa,this.turno);
+      await this.turnosService.aceptarCliente(mesa,this.turno)
+      this.spinnerService.ocultarSpinner();        
+      this.toastService.presentSuccess('El usuario puede pasar a su mesa.');
+    }catch(error){
+      this.toastService.presentDanger(error);
+    }
   }
 
-  aceptarCliente(turno: Turno) {
-    this.spinnerService.mostrarSpinner();
-    this.turnosService.aceptarCliente(turno).then( turnos => {        
-        this.usersService.moverAListaEspera(turno.uid);        
-        this.spinnerService.ocultarSpinner();        
-        this.toastService.presentSuccess('El usuario fue movido a la lista de espera.');
-    }).catch((error) => {
-      throw new SysError('No pudo autenticarse al nuevo usuario.');
-    });    
-  }
 
 }

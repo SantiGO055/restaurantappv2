@@ -84,9 +84,8 @@ export class PaginaIngresoPage implements OnInit {
               (turno:Turno) => {
                 if(turno.aceptado === true){
                     this.enListaEspera = false;                    
-                    this.alerta.showSucess(`Escanea el QR de la mesa ${turno.mesa}`,'Ya podes pasar','/dashboard/asignacion-mesa')                    
-                    //dejar de escuchar el turno
                     a.unsubscribe();
+                    this.alerta.showSucess(`Le han asignado la mesa ${turno.mesa} por favor escane su QR`,'Ya podes pasar','/dashboard/asignacion-mesa')                    
                 }
               }
             )

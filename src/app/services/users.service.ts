@@ -39,6 +39,7 @@ export class UsersService {
     return this.save(cliente,cliente.uid);
    }
 
+
   async moverAListaEspera(uid:string):Promise<void>{
     const user = await this.getOne(uid);
     if(!User.esCliente(user)) {
@@ -47,13 +48,26 @@ export class UsersService {
     user.estado = clienteEstado.EN_LISTA_ESPERA;     
     return this.save(user,user.uid);                
   }
+
+
+  async moverATomandoMesa(uid:string):Promise<void>{
+    const user = await this.getOne(uid);
+    if(!User.esCliente(user)) {
+      throw new SysError('Debe ser cliente para ingresar a la lista de espera.');
+    } 
+    if(user.estado != clienteEstado.EN_LISTA_ESPERA){
+      throw new SysError('Debe haber seleccionando mesa');
+    }
+    user.estado = clienteEstado.TOMANDO_MESA;     
+    return this.save(user,user.uid);                
+  }
     
 
   async moverAMesaSelecionada(user:User):Promise<void>{
     if(!User.esCliente(user)) {
       throw new SysError('Debe ser cliente para ingresar a la lista de espera.');
     }
-    if(user.estado != clienteEstado.EN_LISTA_ESPERA){
+    if(user.estado != clienteEstado.TOMANDO_MESA){
       throw new SysError('Debe haber seleccionando mesa');
     }
     user.estado = clienteEstado.MESA_SELECCIONADA;

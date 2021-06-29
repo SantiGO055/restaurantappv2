@@ -105,7 +105,7 @@ export class MesasService {
   }
   
   async asignarMesaPorTurno(mesa:Mesa,turno:Turno){
-    mesa.uid = turno.uid ;
+    mesa.uid = turno.uid ;    
     this.save(mesa,mesa.id);
   }
 

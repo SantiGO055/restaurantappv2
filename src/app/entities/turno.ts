@@ -10,7 +10,7 @@ export class Turno {
     displayName: string;    
     photoURL?: string;  
     aceptado?: boolean;  
-    mesa?: number;  
+    mesa?: string;  
     
     static fromUser(cliente:Cliente) : Turno{        
         return {

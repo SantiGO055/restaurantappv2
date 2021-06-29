@@ -5,6 +5,7 @@ import { map, first } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import {  waitForAsync } from '@angular/core/testing';
 import { Turno } from '../entities/turno';
+import { Mesa } from '../entities/mesa';
 
 @Injectable({
   providedIn: 'root',
@@ -61,8 +62,9 @@ valueChange(turnoId:string):Observable<Turno>{
   }
 
 
-  aceptarCliente(turno:Turno):Promise<void>{
+  aceptarCliente(mesa:Mesa,turno:Turno):Promise<void>{
     turno.aceptado = true;
+    turno.mesa = mesa.id;
     return this.save(turno,turno.id);  
   }
   
