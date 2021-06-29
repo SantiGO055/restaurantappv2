@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="usuarioLogueado.rol != 'cocinero'">
 <ion-button (click)="pruebaPush('duenio')">
   Prueba envio push dueño
 </ion-button>
@@ -26,4 +26,9 @@ Mostrar Chat
 <ion-button (click)="router.navigate(['dashboard/encuesta'])">
   Completar encuesta
 </ion-button>
+</ion-content>
+<ion-content *ngIf="usuarioLogueado.rol == 'cocinero'">
+  <ion-button (click)="router.navigate(['dashboard/listado-pedido-cocinero'])">
+    Elaborar productos
+  </ion-button>
 </ion-content>

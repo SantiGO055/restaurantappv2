@@ -42,7 +42,11 @@ const routes: Routes = [
   {
     path: 'registros',
     loadChildren: () => import('./pages/registros/registros.module').then( m => m.RegistrosPageModule)
-  }, 
+  },   {
+    path: 'listado-pedido-cocinero',
+    loadChildren: () => import('./pages/listado-pedido-cocinero/listado-pedido-cocinero.module').then( m => m.ListadoPedidoCocineroPageModule)
+  },
+
 ];
 @NgModule({
   imports: [

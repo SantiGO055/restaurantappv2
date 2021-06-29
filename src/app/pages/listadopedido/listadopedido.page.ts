@@ -17,7 +17,7 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./listadopedido.page.scss'],
 })
 export class ListadopedidoPage implements OnInit {
-  usuarioLogueado: User;
+  usuarioLogueado: User = new User();
   mesa
   constructor(
     private pedidosSvc: MenuService,

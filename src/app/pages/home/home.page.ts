@@ -23,6 +23,7 @@ export class HomePage implements OnInit {
   
   public folder: string;
   mostrarChat: boolean = true;
+  usuarioLogueado: User = new User();
   constructor(
     private activatedRoute: ActivatedRoute,
     public spinnerService:SpinnerService,
@@ -39,7 +40,10 @@ export class HomePage implements OnInit {
     
   }
   ngOnInit() {
-    
+    this.loginSvc.usuarioLogueado.then(usr=>{
+      this.usuarioLogueado = usr;
+      console.log(this.usuarioLogueado)
+    });
     this.folder = this.activatedRoute.snapshot.paramMap.get('id');    
     
   }
