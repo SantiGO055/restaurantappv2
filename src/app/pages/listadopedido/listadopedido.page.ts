@@ -67,6 +67,31 @@ export class ListadopedidoPage implements OnInit {
 
     })
    }
+   confirmarPago(pedido: Pedido){
+     this.userSvc.getOne(pedido.uidCliente).then(usr=>{
+       this.alert.showAlertYesNoHTML('Confirmar pago','<div><p>El pedido de la mesa '+ pedido.nombreMesa+'</p><p>Precio: $'+ pedido.precioFinal +'</p><p>Cliente: '+ usr.displayName + '</p></div>').then(ok=>{
+        console.log(ok)
+        if(ok){
+          this.spinner.mostrarSpinner();
+          pedido.estadoPedido = Estado.PENDIENTEPAGO;
+          this.pedidosSvc.updatePedido(pedido).then(()=>{
+            this.spinner.ocultarSpinner();
+            this.alert.showSucess('El cliente ya puede realizar el pago','Aviso','dashboard/home')
+
+          })
+        }
+        else{
+
+        }
+       })
+        
+      
+      
+    })
+    
+    
+    
+   }
   
 
 }

@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { Estado, Pedido } from 'src/app/entities/pedido';
-import { Producto } from 'src/app/entities/producto';
+import { EstadoProducto, Producto } from 'src/app/entities/producto';
 import { User } from 'src/app/entities/user';
 import { AlertService } from 'src/app/services/alert.service';
 import { ChatService } from 'src/app/services/chat.service';
@@ -78,7 +78,7 @@ export class MenuPage implements OnInit {
   agregarProductoLista(producto: Producto){
     
     this.disableBotonQuitar = false;
-    
+    producto.estadoProducto = EstadoProducto.PENDIENTE;
     this.productos.forEach(prod => {
       if(Object.is(prod,producto)){
         producto.cantidad +=1;
@@ -102,6 +102,7 @@ export class MenuPage implements OnInit {
     }
     this.productoAgregado.push(producto);
     this.total += producto.precio;
+    
     console.log(this.total)
     console.log(this.productoAgregado)
     console.log(this.tiempoElaboracion)
