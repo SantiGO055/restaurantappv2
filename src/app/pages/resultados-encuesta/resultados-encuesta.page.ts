@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import * as HighCharts from 'highcharts';
 
 @Component({
@@ -10,7 +11,8 @@ import * as HighCharts from 'highcharts';
 export class ResultadosEncuestaPage implements OnInit {
 
   constructor(
-    public router:Router
+    public router:Router,
+    public navCtrl:NavController,
   ) { }
 
   ngOnInit() {
@@ -82,7 +84,8 @@ export class ResultadosEncuestaPage implements OnInit {
   }
   
   volverAPaginaPrevia(){
-    this.router.navigateByUrl('/dashboard/pagina-ingreso');
+    //this.router.navigateByUrl('/dashboard/pagina-ingreso');
+    this.navCtrl.pop();
   }
 
 }

@@ -8,10 +8,14 @@
 </ion-header>
 <ion-content>  
 
-  <ion-list>
-    <ion-virtual-scroll [items]="this.turnos|async" approxItemHeight="320px">
-      <ion-item *virtualItem="let turno">        
+  <ion-list>    
+      <ion-item *ngFor="let turno of this.turnos">        
         <ion-grid>
+          <ion-row>
+            <ion-col>              
+                <ion-img [src]="turno.photoURL" [alt]="turno.displayName" ></ion-img>                            
+            </ion-col>
+          </ion-row>
           <ion-row>
             <ion-col>
               nombre: {{ turno.displayName }}
@@ -24,13 +28,14 @@
           </ion-row>
           <ion-row>
             <ion-col>
-              <ion-button  (click)="this.asignarMesa(turno)" expand="full">Aceptar</ion-button>
-              <ion-button  (click)="this.eliminarCliente(turno)" expand="full">Rechazar</ion-button>
+              <ion-button  (click)="this.asignarMesa(turno)" expand="full" color="success" >Aceptar</ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button  (click)="this.eliminarCliente(turno)" expand="full" color="danger" >Rechazar</ion-button>
             </ion-col>
           </ion-row>
         </ion-grid>
-      </ion-item>
-    </ion-virtual-scroll>
+      </ion-item>    
   </ion-list>
 
 </ion-content>

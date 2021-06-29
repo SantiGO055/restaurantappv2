@@ -8,7 +8,8 @@ import { EmailService } from '../../services/email.service';
 import { ToastService } from '../../services/toast.service';
 import { SpinnerService } from '../../services/spinner.service';
 import { SysError } from '../../entities/sysError';
-import { NavigationExtras, Router } from '@angular/router';
+import { NavigationExtras, Router, ActivatedRoute } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-lista-espera',
@@ -17,7 +18,7 @@ import { NavigationExtras, Router } from '@angular/router';
 })
 export class ListaEsperaPage implements OnInit {
 
-  turnos:Observable<Turno[]>;
+  turnos:Turno[];
 
   constructor(
     public turnosService: TurnosService,
@@ -27,19 +28,19 @@ export class ListaEsperaPage implements OnInit {
     public toastService:ToastService,
     private spinnerService:SpinnerService,    
     public router:Router,
+    public acRouter:ActivatedRoute,
   ) { 
-    this.turnos = this.turnosService.turnos;    
+    this.turnosService.turnos.subscribe( turnos=> {
+      this.turnos =  turnos.filter( (turnos:Turno)=> { return turnos.aceptado == null  || turnos.aceptado == undefined});      
+    });        
   }
 
   ngOnInit() {
   }
 
   asignarMesa(turno:Turno){        
-    this.router.navigate(['dashboard/asignar-mesa'], {
-      queryParams: {
-        turno: JSON.stringify(turno)
-      }
-    });
+    const id = turno.id;    
+    this.router.navigate(['dashboard/seleccionar-mesa/',id]);
   }
 
   eliminarCliente(turno: Turno) {

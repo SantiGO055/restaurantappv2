@@ -6,8 +6,6 @@
     <ion-title>Asignar mesa</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>  
-
 <ion-content>
   <ion-grid>
     <ion-row *ngFor="let mesa of this.mesas|async">
@@ -19,3 +17,14 @@
     </ion-row>
   </ion-grid>
 </ion-content>
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button fill="solid"  (click)="this.volverALista()" >          
+          <ion-label>Volver</ion-label>
+        </ion-button>            
+      </ion-col>
+    </ion-row>
+  </ion-grid>  
+</ion-footer>

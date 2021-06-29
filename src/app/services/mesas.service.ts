@@ -100,7 +100,7 @@ export class MesasService {
     if(mesa.uid && mesa.uid != cliente.uid){
       throw new SysError('La mesa se encuentra asignada a otro cliente');
     }else if(Cliente.tieneMesa(cliente)){
-      throw new SysError('Ya tiene una mesa asignada');
+      throw new SysError('Esta no es la mesa que tiene asignada.');
     }   
   }
   

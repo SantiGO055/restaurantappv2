@@ -23,6 +23,9 @@ export class RouterService {
     }else if(User.puedeAccederAsignarMesa(usuario)){
       //si es cliente  que ya paso  y puede asignarse mesa
       route = '/dashboard/asignacion-mesa';            
+    }else if(User.puedeAccederAListaEspera(usuario)){
+      //si es cliente  que ya paso  y puede asignarse mesa
+      route = '/dashboard/pagina-ingreso';            
     }
     return route;
   }

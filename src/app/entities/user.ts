@@ -55,13 +55,14 @@ export class User {
 
   static puedeAccederAListaEspera(user: User): boolean {
     return (
-      user.rol == Rol.CLIENTE &&  user.estado == null 
+      user.rol == Rol.CLIENTE && ( user.estado == null || user.estado == clienteEstado.EN_LISTA_ESPERA ) 
     );
   }
 
+
   static puedeAccederAsignarMesa(user: User): boolean {    
     return (
-      user.rol == Rol.CLIENTE && user.estado == clienteEstado.EN_LISTA_ESPERA
+      user.rol == Rol.CLIENTE && user.estado == clienteEstado.TOMANDO_MESA
     );
   }
 

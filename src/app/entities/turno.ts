@@ -20,7 +20,7 @@ export class Turno {
             createdAt : Timestamp.now(), 
             photoURL: cliente.photoURL,
             mesa:null,
-            aceptado:false,
+            aceptado:null,
         } as Turno;
     }
     

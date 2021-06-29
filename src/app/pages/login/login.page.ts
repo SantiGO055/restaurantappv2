@@ -74,8 +74,10 @@ export class LoginPage implements OnInit {
       const registro = await this.registroService.getRegistroByEmail(this.username.value);            
         if( !registro ){
           this.toastService.presentDanger('Usuario o password incorrecto.');            
+        }else if(registro.aprobado == null){
+          this.toastService.presentDanger('Lamentamos informarle que su pedido de registro ha sido rechazado.');            
         }else if(!registro.aprobado){
-          this.toastService.presentDanger('Su registro aun no fue aceptado.');            
+          this.toastService.presentDanger('Lamentamos informarle que su pedido de registro ha sido rechazado.');            
         }
   }
   

@@ -33,17 +33,23 @@ export class SeleccionarMesaPage implements OnInit {
     private route: Router,
     private mesasService:MesasService,
   ) { 
-    this.routeAct.queryParams.subscribe(params => {
-      if (params && params.turno) {
-        this.turno = JSON.parse(params.turno) as Turno;
-      }else{
-        this.route.navigateByUrl('dashboard/lista-espera');
-      }
+    this.turno = null;    
+     this.routeAct.params.subscribe(params => {
+      const id = params['id']; 
+      this.cargarTurno(id);
     });
+    //
     this.mesas = this.mesasService.mesas;
   }
 
+  async cargarTurno(turnoId:string){
+    this.turno = await this.turnosService.getOneById(turnoId);
+  }
   ngOnInit() {
+  }
+  
+  volverALista(){
+    this.route.navigateByUrl('/dashboard/lista-espera');
   }
 
   async asignarMesa(mesa:Mesa){        

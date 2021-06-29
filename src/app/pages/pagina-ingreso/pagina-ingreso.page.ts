@@ -13,6 +13,7 @@ import { ToastService } from '../../services/toast.service';
 import { AlertService } from '../../services/alert.service';
 import { takeUntil } from 'rxjs/operators';
 import { ThrowStmt } from '@angular/compiler';
+import { MesasService } from '../../services/mesas.service';
 
 @Component({
   selector: 'app-pagina-ingreso',
@@ -29,6 +30,7 @@ export class PaginaIngresoPage implements OnInit {
     public turnosService:TurnosService,
     public loginService:LoginService,
     public userService:UsersService,
+    public mesasService:MesasService,
     public router:Router,    
     public alerta: AlertService,
   ) {       
@@ -37,14 +39,9 @@ export class PaginaIngresoPage implements OnInit {
 
   //en esta pagina se ve los botones de encuesta o de scanear eq
 
-  ngOnInit() {
-   
+  ngOnInit() {   
   }
-/*
-  protected redireccionAMesa(){
-    this.router.navigateByUrl('/dashboard/asignacion-mesa');
-  }
-*/
+
   ngAfterViewInit() {
     this.lectorqrService.preapare();    
   }    
@@ -69,30 +66,27 @@ export class PaginaIngresoPage implements OnInit {
     this.router.navigateByUrl('/dashboard/resultados-encuesta');
   }
 
-  protected agregarAListaEspera(){    
-    
-    this.enListaEspera = true;
-    
-    const user = this.loginService.actualUser().then( user => {
-        const cliente = Cliente.fromUser(user);
-        this.userService.moverAListaEspera(cliente.uid);
-        const turno = Turno.fromUser(cliente);   
-        const turnoId = this.turnosService.getNewId();
-        this.turnosService.save(turno,turnoId).then(
-          r => {
-            const a = this.turnosService.valueChange(turnoId).subscribe(
-              (turno:Turno) => {
-                if(turno.aceptado === true){
-                    this.enListaEspera = false;                    
-                    a.unsubscribe();
-                    this.alerta.showSucess(`Le han asignado la mesa ${turno.mesa} por favor escane su QR`,'Ya podes pasar','/dashboard/asignacion-mesa')                    
-                }
+  async agregarAListaEspera(){        
+    this.enListaEspera = true;    
+    const user = await this.loginService.actualUser(); 
+    const cliente = Cliente.fromUser(user);
+    this.userService.moverAListaEspera(cliente.uid);
+    const turno = Turno.fromUser(cliente);   
+    const turnoId = this.turnosService.getNewId();
+    this.turnosService.save(turno,turnoId).then(
+      r => {
+          const a = this.turnosService.valueChange(turnoId).subscribe(
+            async (turno:Turno) => {
+              if(turno.aceptado === true){
+                  this.enListaEspera = false;                    
+                  a.unsubscribe();
+                  const mesa = await this.mesasService.getOneById(turno.mesa);
+                  this.alerta.showSucess(`Le han asignado la mesa ${mesa.nombre} por favor escane su QR`,'Ya podes pasar','/dashboard/asignacion-mesa')                    
               }
-            )
-          }
-        );        
-                
-    });       
+            }
+          )
+        }
+      );        
   }
 
 }

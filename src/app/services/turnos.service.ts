@@ -56,6 +56,20 @@ valueChange(turnoId:string):Observable<Turno>{
     return aux;
   }
 
+  async getOneById(id: string): Promise<Turno>{
+    let aux: Turno;
+    await this.turnos
+      .pipe(first())
+      .toPromise()
+      .then((turnos) => {
+        turnos.forEach((turno) => {          
+          if (turno.id == id) {
+            aux = turno;
+          }
+        });
+      });
+    return aux;
+  }
 
   sacarCliente(turno:Turno):Promise<void>{
     return  this.turnosCollection.doc(turno.id).delete();;      

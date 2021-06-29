@@ -132,7 +132,8 @@ export class RegisterPage implements OnInit {
           displayName: formData.name,
           emailVerified: false,
           photoURL: this.avatarUrl,
-          password: formData.password          
+          password: formData.password, 
+          aprobado:null
         } as Registro;        
         this.registrosService.save(registro, null).then(
           async (res) => {
