@@ -14,6 +14,7 @@ import { AlertService } from '../../services/alert.service';
 import { takeUntil } from 'rxjs/operators';
 import { ThrowStmt } from '@angular/compiler';
 import { MesasService } from '../../services/mesas.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-pagina-ingreso',
@@ -33,6 +34,7 @@ export class PaginaIngresoPage implements OnInit {
     public mesasService:MesasService,
     public router:Router,    
     public alerta: AlertService,
+    private push: NotificationService
   ) {       
     this.enListaEspera = false;    
   }
@@ -75,6 +77,7 @@ export class PaginaIngresoPage implements OnInit {
     const turnoId = this.turnosService.getNewId();
     this.turnosService.save(turno,turnoId).then(
       r => {
+          this.push.push('Lista de espera','El cliente ' + user.displayName + ' se encuentra en lista de espera','maitre')
           const a = this.turnosService.valueChange(turnoId).subscribe(
             async (turno:Turno) => {
               if(turno.aceptado === true){
