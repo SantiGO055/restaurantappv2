@@ -51,12 +51,31 @@ export class AsignacionMesaPage implements OnInit {
       }
     );                       
   }
+  async  tomarMesa(mesaUid:string){
+    const user = await this.loginService.actualUser();
+    const cliente  =  Cliente.fromUser(user);       
+    this.mesaService.tomarMesa(mesaUid,cliente).then(
+      response => {        
+        this.userService.moverAMesaSelecionada(cliente).then(
+          response => {
+            this.router.navigateByUrl('/dashboard/pagina-espera');
+          }, 
+          error => {
+            this.toastService.presentDanger(error);    
+          }
+        );            
+      },
+      error => {
+        this.toastService.presentDanger(error);    
+      }
+    );        
+  }
 
   protected solicitarAsignarMesa(mesaUid:string){
     this.loginService.actualUser().then(user => {
       const cliente  =  Cliente.fromUser(user);            
       try{        
-        this.mesaService.asignarMesa(mesaUid,cliente).then(
+        this.mesaService.tomarMesa(mesaUid,cliente).then(
           response => {
             //asignar al cliente el estado 
             this.userService.moverAMesaSelecionada(cliente).then(

@@ -8,6 +8,7 @@ import { EmailService } from '../../services/email.service';
 import { ToastService } from '../../services/toast.service';
 import { SpinnerService } from '../../services/spinner.service';
 import { SysError } from '../../entities/sysError';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-lista-espera',
@@ -25,6 +26,7 @@ export class ListaEsperaPage implements OnInit {
     public emailService: EmailService,
     public toastService:ToastService,
     private spinnerService:SpinnerService,    
+    public router:Router,
   ) { 
     this.turnos = this.turnosService.turnos;    
   }
@@ -32,6 +34,13 @@ export class ListaEsperaPage implements OnInit {
   ngOnInit() {
   }
 
+  asignarMesa(turno:Turno){        
+    this.router.navigate(['dashboard/asignar-mesa'], {
+      queryParams: {
+        turno: JSON.stringify(turno)
+      }
+    });
+  }
 
   eliminarCliente(turno: Turno) {
     this.spinnerService.mostrarSpinner();

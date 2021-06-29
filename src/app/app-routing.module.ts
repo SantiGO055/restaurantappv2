@@ -42,7 +42,7 @@ const routes: Routes = [
   {
     path: 'registros',
     loadChildren: () => import('./pages/registros/registros.module').then( m => m.RegistrosPageModule)
-  },
+  }, 
 ];
 @NgModule({
   imports: [

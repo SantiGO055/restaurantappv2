@@ -36,8 +36,7 @@ export class RegistrosPage implements OnInit {
   rechazarRegistro(registro: Registro) {
     this.spinnerService.mostrarSpinner();    
     this.registroService.save(registro, registro.id).then( response =>{      
-      this.emailService.sendRegistro( registro, 'Bienvenido a Lo de tito! lamentamos tener que rechazar tu solicitud .');
-      console.log(registro.id);
+      this.emailService.sendRegistro( registro, 'Bienvenido a Lo de tito! lamentamos tener que rechazar tu solicitud .');      
       this.registroService.delete(registro.id);
       this.spinnerService.ocultarSpinner();
       this.toastService.presentSuccess('Se nego el usuario correctamente.');

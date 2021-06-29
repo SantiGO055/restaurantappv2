@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import {  waitForAsync } from '@angular/core/testing';
 import { Cliente } from '../entities/cliente';
 import { SysError } from '../entities/sysError';
+import { Turno } from '../entities/turno';
 
 @Injectable({
   providedIn: 'root',
@@ -89,12 +90,8 @@ export class MesasService {
   }
 
 
-  async asignarMesa(mesaId:string, cliente:Cliente)
-  {
-    //@todo revisar si no existe otra mesa para este usuario 
-    if(Cliente.tieneMesa(cliente)){
-      throw new SysError('Ya tiene una mesa asignada');
-    }
+  async tomarMesa(mesaId:string, cliente:Cliente)
+  {    
     let mesa =  await this.getOneById(mesaId);    
     if(!mesa){
       throw new SysError('No existe la mesa');
@@ -102,9 +99,14 @@ export class MesasService {
     //@todo revisar si esta mesa no es de otra persona 
     if(mesa.uid && mesa.uid != cliente.uid){
       throw new SysError('La mesa se encuentra asignada a otro cliente');
-    }           
-    //asignar la mesa 
-    mesa.uid = cliente.uid;
+    }else if(Cliente.tieneMesa(cliente)){
+      throw new SysError('Ya tiene una mesa asignada');
+    }   
+  }
+  
+  async asignarMesaPorTurno(mesa:Mesa,turno:Turno){
+    mesa.uid = turno.uid ;
     this.save(mesa,mesa.id);
   }
+
 }

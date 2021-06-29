@@ -39,7 +39,8 @@ export class UsersService {
     return this.save(cliente,cliente.uid);
    }
 
-  async moverAListaEspera(user:User):Promise<void>{
+  async moverAListaEspera(uid:string):Promise<void>{
+    const user = await this.getOne(uid);
     if(!User.esCliente(user)) {
       throw new SysError('Debe ser cliente para ingresar a la lista de espera.');
     } 

@@ -1,5 +1,5 @@
 export enum clienteEstado {    
-    EN_LISTA_ESPERA = 'enlistaEspera',    
+    EN_LISTA_ESPERA = 'enlistaEspera',        
     MESA_SELECCIONADA = 'mesaSeleccionada',
     ESPERANDO_PEDIDO = 'esperandoPedido',    
     CONSUMIENDO = 'consumiendo',

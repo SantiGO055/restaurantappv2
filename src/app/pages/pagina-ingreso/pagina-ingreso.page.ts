@@ -72,9 +72,10 @@ export class PaginaIngresoPage implements OnInit {
   protected agregarAListaEspera(){    
     
     this.enListaEspera = true;
+    
     const user = this.loginService.actualUser().then( user => {
         const cliente = Cliente.fromUser(user);
-        this.userService.moverAListaEspera(cliente);
+        this.userService.moverAListaEspera(cliente.uid);
         const turno = Turno.fromUser(cliente);   
         const turnoId = this.turnosService.getNewId();
         this.turnosService.save(turno,turnoId).then(

@@ -25,6 +25,8 @@ valueChange(turnoId:string):Observable<Turno>{
   return this.fireStore.doc<Turno>(`${this.COLLECTION}/${turnoId}`).valueChanges();
 }
 
+
+
   delete(turnoId: string): Promise<void> {
     return new Promise(
       waitForAsync((resolve, rejects) => {
@@ -57,6 +59,13 @@ valueChange(turnoId:string):Observable<Turno>{
   sacarCliente(turno:Turno):Promise<void>{
     return  this.turnosCollection.doc(turno.id).delete();;      
   }
+
+
+  aceptarCliente(turno:Turno):Promise<void>{
+    turno.aceptado = true;
+    return this.save(turno,turno.id);  
+  }
+  
 
   save(turno: Turno, turnoId: string): Promise<void> {
     return new Promise((resolve, rejects) => {
