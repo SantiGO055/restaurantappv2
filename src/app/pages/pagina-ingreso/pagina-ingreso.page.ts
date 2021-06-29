@@ -8,9 +8,11 @@ import {  LectorQrListaEsperaService } from '../../services/lectorqrlistaespera.
 import { Router } from '@angular/router';
 import { UsersService } from '../../services/users.service';
 import { SysError } from '../../entities/sysError';
-import { Observable } from 'rxjs';
+import { ObjectUnsubscribedError, Observable } from 'rxjs';
 import { ToastService } from '../../services/toast.service';
 import { AlertService } from '../../services/alert.service';
+import { takeUntil } from 'rxjs/operators';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-pagina-ingreso',
@@ -20,6 +22,7 @@ import { AlertService } from '../../services/alert.service';
 export class PaginaIngresoPage implements OnInit {
   
   enListaEspera:boolean;
+  turno:Observable<Turno>;
 
   constructor(
     public lectorqrService:LectorQrListaEsperaService,
@@ -76,12 +79,13 @@ export class PaginaIngresoPage implements OnInit {
         const turnoId = this.turnosService.getNewId();
         this.turnosService.save(turno,turnoId).then(
           r => {
-            this.turnosService.valueChange(turnoId).subscribe(
+            const a = this.turnosService.valueChange(turnoId).subscribe(
               (turno:Turno) => {
                 if(turno.aceptado === true){
-                    this.enListaEspera = false;
-                    //cartel de que fue aceptado 
-                    this.alerta.showSucess(`Escanea el QR de la mesa ${turno.mesa}`,'Ya podes pasar','/dashboard/asignacion-mesa')
+                    this.enListaEspera = false;                    
+                    this.alerta.showSucess(`Escanea el QR de la mesa ${turno.mesa}`,'Ya podes pasar','/dashboard/asignacion-mesa')                    
+                    //dejar de escuchar el turno
+                    a.unsubscribe();
                 }
               }
             )

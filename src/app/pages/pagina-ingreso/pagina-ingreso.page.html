@@ -12,14 +12,14 @@
     <ion-row>
       <ion-col>                    
         <p> Conocé las opiniones acerca de nosotros </p>
-        <ion-button type="button" expand="block" color="tertiary" (click)="irAResultadosEncuestas()" >Ver resultados de encuesta</ion-button>                                            
-        <ion-button type="button" expand="block" color="tertiary" (click)="testQRValido()" >Como si escaneo el QR  de la puerta</ion-button>
+        <ion-button type="button" expand="block" color="tertiary" (click)="irAResultadosEncuestas()" >Ver resultados de encuesta</ion-button>                                                    
       </ion-col>
     </ion-row>
     <!-- previo a asignar mesa  -->
       <ion-row *ngIf="!this.enListaEspera"  >
         <ion-col>          
           <p> Agregate a lista de espera escaneando el QR que encontraras en la puerta  </p>          
+          <ion-button type="button" expand="block" color="tertiary" (click)="testQRValido()" >Como si escaneo el QR  de la puerta</ion-button>
         </ion-col>
       </ion-row>      
       <!-- mesa a asignar -->

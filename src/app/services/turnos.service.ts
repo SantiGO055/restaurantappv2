@@ -22,7 +22,7 @@ export class TurnosService {
   }
   
 valueChange(turnoId:string):Observable<Turno>{
-  return this.fireStore.doc<Turno>(`${this.COLLECTION}/${turnoId}`).valueChanges();
+  return this.fireStore.doc<Turno>(`${this.COLLECTION}/${turnoId}`);
 }
 
   delete(turnoId: string): Promise<void> {
