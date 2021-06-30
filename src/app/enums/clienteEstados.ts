@@ -5,5 +5,6 @@ export enum clienteEstado {
     ESPERANDO_PEDIDO = 'esperandoPedido',    
     CONSUMIENDO = 'consumiendo',
     ESPERANDO_CUENTA = 'esperandocuenta',    
+    VISITO_HOY = 'visitohoy',    
 }
 //null seria sin haber escaneado 

@@ -2,13 +2,11 @@ import { Injectable } from '@angular/core';
 import { LectorqrService } from './lectorqr.service';
 import { SupportedFormat } from '@capacitor-community/barcode-scanner';
 import { AlertService } from './alert.service';
-import { SysError } from '../entities/sysError';
-import { DNIQRResponse } from '../entities/DNIQRResponse';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LectorQrDniService  extends LectorqrService{
+export class LectorQrPropinaService  extends LectorqrService{
 
   constructor(
     alertService:AlertService
@@ -17,19 +15,18 @@ export class LectorQrDniService  extends LectorqrService{
   }
 
   protected traerFormatosAceptados(): [SupportedFormat] {
-    return [SupportedFormat.PDF_417];
+    return [SupportedFormat.QR_CODE];
   }
 
-  
-  async escanear():Promise<DNIQRResponse>{
+  async escanear(){
     try{
-      const codigo = await super.scan();      
-      return DNIQRResponse.fromQR(codigo);        
-    }catch( error ){
-      throw new SysError('Codigo QR invalido')
-    }
+      const codigo = await super.scan();    
+      const propinaJson = JSON.parse( codigo);        
+      return parseInt(propinaJson.propina);
+    }catch( error ){      
+      return false;
+    }    
   }
 
-  
   
 }
