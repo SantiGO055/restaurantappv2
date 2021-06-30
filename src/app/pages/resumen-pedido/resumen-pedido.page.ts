@@ -4,7 +4,11 @@ import { UsersService } from '../../services/users.service';
 import { MenuService } from '../../services/menu.service';
 import { Router } from '@angular/router';
 import { User } from '../../entities/user';
-import { Pedido } from '../../entities/pedido';
+import { Estado, Pedido } from '../../entities/pedido';
+import { EstadoProducto } from 'src/app/entities/producto';
+import { AlertService } from 'src/app/services/alert.service';
+import { MesasService } from 'src/app/services/mesas.service';
+import { clienteEstado } from 'src/app/enums/clienteEstados';
 
 @Component({
   selector: 'app-resumen-pedido',
@@ -16,12 +20,15 @@ export class ResumenPedidoPage implements OnInit {
 
   usuarioLogueado:User = new User();
   pedido:Pedido = new Pedido();
+  
 
   constructor(    
     public loginService:LoginService,
     public userService:UsersService,
     public productoSvc:MenuService,
     public router:Router,
+    private pedidoSvc: MenuService,
+    private alert: AlertService,
   ) {
     
     this.loginService.usuarioLogueado.then(usr=>{
@@ -42,8 +49,20 @@ export class ResumenPedidoPage implements OnInit {
       })
     });
   }
+  public get Estado(): typeof Estado {
+    return Estado; 
+  }
 
   ngOnInit() {
+  }
+  confirmarPedido(){
+    this.pedido.estadoPedido = Estado.CONFIRMADO;
+    this.usuarioLogueado.estado = clienteEstado.CONSUMIENDO;
+    this.pedidoSvc.updatePedido(this.pedido).then(()=>{
+      this.userService.update(this.usuarioLogueado);
+      this.alert.showSucess('','Disfruta de tu pedido','dashboard/pagina-espera-cierre');
+    })
+    
   }
 
 }

@@ -21,8 +21,7 @@
                 </ion-col>
                 <ion-col>
                   <!-- @todo completar con el parametro que se le vaya a poner al producto para el estado -->
-
-                  PREPARANDO 
+                  {{producto.estadoProducto}}
                   
                 </ion-col>
               </ion-row>
@@ -30,6 +29,14 @@
           </ion-label>
           </ion-item>
       </ion-list>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      Estado del pedido
+    </ion-col>
+    <ion-col>
+      {{ this.pedido.estadoPedido}}
     </ion-col>
   </ion-row>
   <ion-row>
@@ -49,4 +56,15 @@
     </ion-col>
   </ion-row>
   </ion-grid>    
+  <div *ngIf="pedido.estadoPedido == Estado.ENTREGADO">
+    <ion-row>
+      <ion-col>          
+        <p> El mozo ya está trayendo tu pedido, cuando lo deje en tu mesa por favor avisanos que lo recibiste </p>          
+      </ion-col>
+    </ion-row> 
+    <ion-button type="submit" expand="block" color="tertiary" (click)="confirmarPedido()">Confirmar pedido</ion-button>
+
+  </div>
+  
+  
 </ion-content>

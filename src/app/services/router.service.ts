@@ -27,6 +27,10 @@ export class RouterService {
       //si es cliente  que ya paso  y puede asignarse mesa
       route = '/dashboard/pagina-ingreso';            
     }
+    else if(User.puedeAccederEsperaCierre(usuario)){
+      //si es cliente  esta consumiendo va a la ruta espera cierre
+      route = '/dashboard/pagina-espera-cierre'; 
+    }
     return route;
   }
 }

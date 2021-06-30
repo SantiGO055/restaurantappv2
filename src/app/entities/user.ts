@@ -52,6 +52,11 @@ export class User {
       user.rol == Rol.CLIENTE && user.estado == clienteEstado.ESPERANDO_PEDIDO
     );
   }
+  static puedeAccederEsperaCierre(user: User): boolean {
+    return (
+      user.rol == Rol.CLIENTE && user.estado == clienteEstado.CONSUMIENDO
+    );
+  }
 
   static puedeAccederAListaEspera(user: User): boolean {
     return (

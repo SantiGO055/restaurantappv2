@@ -63,7 +63,7 @@ export class ListadopedidoPage implements OnInit {
     pedido.estadoPedido = Estado.ENTREGADO;
     this.pedidosSvc.updatePedido(pedido).then(()=>{
       this.spinner.ocultarSpinner();
-      this.alert.showSucess('Aviso','Pedido entregado al cliente','dashboard/home')
+      this.alert.showSucess('Pedido entregado al cliente','Aviso','dashboard/home')
 
     })
    }

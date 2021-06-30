@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {AngularFirestore,AngularFirestoreCollection, } from '@angular/fire/firestore';
+import {AngularFirestore,AngularFirestoreCollection, AngularFirestoreDocument, } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { waitForAsync } from '@angular/core/testing';
 import { User } from '../entities/user';
@@ -15,6 +15,7 @@ export class UsersService {
 
   usuarios: Observable<User[]>;
   private usuariosCollection: AngularFirestoreCollection<User>;
+  usuariosDoc: AngularFirestoreDocument<User> | undefined;
 
   constructor(private readonly fireStore: AngularFirestore) {
     this.usuariosCollection = fireStore.collection<User>(this.COLLECTION);
@@ -32,6 +33,10 @@ export class UsersService {
         }
       })
     );
+  }
+  update(usuario: User){
+    this.usuariosDoc = this.fireStore.doc(`users/${usuario.uid}`);
+    return this.usuariosDoc.update(usuario);
   }
 
   marcarEncuestaRealizada(cliente:Cliente):Promise<void>{

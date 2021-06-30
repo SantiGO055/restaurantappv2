@@ -5,6 +5,7 @@ import { first } from 'rxjs/operators';
 import { Estado, Pedido } from 'src/app/entities/pedido';
 import { EstadoProducto, Producto } from 'src/app/entities/producto';
 import { User } from 'src/app/entities/user';
+import { clienteEstado } from 'src/app/enums/clienteEstados';
 import { AlertService } from 'src/app/services/alert.service';
 import { ChatService } from 'src/app/services/chat.service';
 import { LoginService } from 'src/app/services/login.service';
@@ -166,7 +167,8 @@ export class MenuPage implements OnInit {
       uidMesa: this.mesaUid,
       nombreMesa: this.nombreMesa
     }
-    
+    this.usuarioLogueado.estado = clienteEstado.ESPERANDO_PEDIDO;
+    this.userSvc.update(this.usuarioLogueado);
     this.productoSvc.addPedido(this.pedido).then( r => {
       this.spinner.ocultarSpinner();
       this.push.push('Cocina','Pedidos pendientes de elaboración','cocinero')
