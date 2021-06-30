@@ -50,11 +50,7 @@ const routes: Routes = [
       {
         path: 'pagina-espera-elaboracion',
         loadChildren: () => import('../pagina-espera-elaboracion/pagina-espera-elaboracion.module').then( m => m.PaginaEsperaElaboracionPageModule)
-      },
-      {
-        path: 'lista-elaboracion',
-        loadChildren: () => import('../lista-elaboracion/lista-elaboracion.module').then( m => m.ListaElaboracionPageModule)
-      },   
+      }, 
       {
         path: 'pagina-espera-cierre',
         loadChildren: () => import('../pagina-espera-cierre/pagina-espera-cierre.module').then( m => m.PaginaEsperaCierrePageModule)
