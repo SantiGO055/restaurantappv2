@@ -2,7 +2,7 @@
   <ion-grid>  
     <ion-row>
       <ion-col>
-         <h1> Tu pedido</h1>
+         <h1> Tu factura</h1>
       </ion-col>
     </ion-row>
     <ion-row>  
@@ -17,11 +17,10 @@
               <ion-grid>
                 <ion-row>
                   <ion-col>
-                    {{producto.nombre}} 
+                    {{producto.nombre}}  x {{producto.cantidad}}
                   </ion-col>
                   <ion-col>
-                    <!-- @todo completar con el parametro que se le vaya a poner al producto para el estado -->
-                    PREPARANDO 
+                    {{producto.precio}}  ARS
                   </ion-col>
                 </ion-row>
               </ion-grid>
