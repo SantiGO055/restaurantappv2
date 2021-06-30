@@ -83,8 +83,7 @@ export class ResultadosEncuestaPage implements OnInit {
     });
   }
   
-  volverAPaginaPrevia(){
-    //this.router.navigateByUrl('/dashboard/pagina-ingreso');
+  volverAPaginaPrevia(){ 
     this.navCtrl.pop();
   }
 
