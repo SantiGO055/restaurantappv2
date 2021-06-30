@@ -26,19 +26,15 @@ export const USUARIOS_TEST :LoginTestData[]= [
     "password":"1q2w3e4r5t6y"    
   },
   {
-    "username":"dluyqyxuzw@the23app.com",
-    "password":"123456"    
-  },
-  {
-    "username":"gpikd3bw9k@inscriptio.in",
-    "password":"1q2w3e4r5t6y"    
-  },
-  {
     "username":"avillucas+manycliente@gmail.com",
     "password":"1q2w3e4r5t6y"    
   },  
   {
     "username":"avillucas+rechazado@gmail.com",
     "password":"1q2w3e4r5t6y"    
+  }, 
+  {
+    "username":"j0bbkhdlr6@coffeetimer24.com",
+    "password":"123456"    
   }, 
 ];

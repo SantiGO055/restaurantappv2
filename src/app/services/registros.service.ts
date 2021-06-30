@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Registro } from '../entities/registro';
-import { AngularFirestore, AngularFirestoreCollection,} from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument,} from '@angular/fire/firestore';
 import { map, filter, first } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import {  waitForAsync } from '@angular/core/testing';
@@ -13,7 +13,7 @@ export class RegistrosService {
 
   registros: Observable<Registro[]>;
   private registrosCollection: AngularFirestoreCollection<Registro>;
-
+  registrosDoc: AngularFirestoreDocument<Registro> | undefined;
   constructor(private readonly fireStore: AngularFirestore) {
     this.registrosCollection = fireStore.collection<Registro>(this.COLLECTION);
     this.getRegistros();
@@ -45,6 +45,10 @@ export class RegistrosService {
         }
       });
   }
+  updateRegistro(registro: Registro){
+    this.registrosDoc = this.fireStore.doc(`registers/${registro.id}`);
+    return this.registrosDoc.update(registro);
+   }
 
   async getRegistroByEmail(email: string):Promise<Registro>{
     return await this.getByEmail(email);    
