@@ -50,7 +50,7 @@
         Propina
       </ion-col>
       <ion-col>
-        {{ this.propina}} ARS
+        {{ this.propina }} ARS
       </ion-col>
     </ion-row>
     <ion-row>
@@ -66,10 +66,19 @@
     </div>
   </ion-content>
   <ion-footer>
-    <ion-grid>
+    <ion-grid *ngIf="this.propinaAsignada">
       <ion-row>
         <ion-col>
-<!-- @todo eliminar tras el test -->
+          <ion-button color="success" (click)="this.pedirCuenta()" expand="full" >
+            Pedir Cuenta
+          </ion-button>          
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="this.propinaAsignada">
+      <ion-row>
+        <ion-col>
+      <!-- @todo eliminar tras el test -->
           <ion-button color="success" (click)="this.testEscanearQRMalo()" expand="full" >
             Test EXCELENTE
           </ion-button>

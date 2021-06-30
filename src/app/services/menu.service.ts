@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map, first } from 'rxjs/operators';
-import { Pedido } from '../entities/pedido';
+import { Estado, Pedido } from '../entities/pedido';
 import { Producto } from '../entities/producto';
 import { AlertService } from './alert.service';
 
@@ -75,6 +75,11 @@ export class MenuService {
         });
       });
     return aux;
+  }
+
+  marcarAPagar(pedido:Pedido){
+    pedido.estadoPedido = Estado.APAGAR;
+    this.updatePedido(pedido);
   }
 
 }

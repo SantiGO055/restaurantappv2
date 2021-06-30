@@ -5,7 +5,6 @@ import { LoginService } from '../../services/login.service';
 import { UsersService } from '../../services/users.service';
 import { MenuService } from '../../services/menu.service';
 import { Router } from '@angular/router';
-import { LectorQRMesaService } from '../../services/lectorqrmesa.service';
 import { LectorQrPropinaService } from '../../services/lectorqrpropina.service';
 
 @Component({
@@ -14,13 +13,13 @@ import { LectorQrPropinaService } from '../../services/lectorqrpropina.service';
   styleUrls: ['./factura.page.scss'],
 })
 export class FacturaPage implements OnInit {
-  public montoPropina:number;  
-
+ 
   usuarioLogueado:User = new User();
   pedido:Pedido = new Pedido();
   subtotal:number;  
   propina:number;
   total:number;
+  propinaAsignada:boolean;
 
   
   constructor(    
@@ -33,6 +32,7 @@ export class FacturaPage implements OnInit {
     this.propina = 0;
     this.subtotal = 0;
     this.total = 0;
+    this.propinaAsignada = false;
   }
 
   ngAfterViewInit() {
@@ -43,14 +43,17 @@ export class FacturaPage implements OnInit {
   {
     try{
       const propina = await this.lectorqrService.escanear();                       
-      this.asignarPropina(propina)
+      this.asignarPropina(propina);
     }catch(error){
       throw error;
     }    
   }
 
   asignarPropina(propina:number){
-    this.montoPropina = this.pedido.precioFinal*(propina/100)
+    console.log(propina);
+    this.propina = this.pedido.precioFinal*(propina/100)
+    this.total = this.subtotal+this.propina;
+    this.propinaAsignada= true;
   }
 
   ngOnInit() {    
@@ -94,4 +97,12 @@ export class FacturaPage implements OnInit {
     this.lectorqrService.stopScan();
   }  
 
+/**
+ * solicitar la cuenta 
+ */
+  pedirCuenta(){    
+    this.productoSvc.marcarAPagar(this.pedido);    
+    this.userService.moverEsperandoFactura(this.usuarioLogueado);
+    this.router.navigateByUrl('/dashboard/espera-cierre');
+  }
 }

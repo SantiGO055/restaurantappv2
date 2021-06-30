@@ -85,6 +85,41 @@ export class UsersService {
     return this.save(user,user.uid);      
   }
 
+
+  async moverAConsumiendo(user:User):Promise<void>{
+    if(!User.esCliente(user)) {
+      throw new SysError('Debe ser cliente para ingresar a la lista de espera.');
+    }
+    if(user.estado != clienteEstado.ESPERANDO_PEDIDO){
+      throw new SysError('Debe haber solicitado el pedido');
+    }
+    user.estado = clienteEstado.CONSUMIENDO;
+    return this.save(user,user.uid);      
+  }
+
+  moverEsperandoFactura(user:User){
+    if(!User.esCliente(user)) {
+      throw new SysError('Debe ser cliente para solicitar el pago.');
+    }
+    if(user.estado != clienteEstado.CONSUMIENDO){
+      throw new SysError('Debe haber confirmado al recepción del pedido');
+    }
+    user.estado = clienteEstado.ESPERANDO_CUENTA;
+    return this.save(user,user.uid);      
+  }
+
+  moverEsperandoVisitoHoy(user:User){
+    if(!User.esCliente(user)) {
+      throw new SysError('Debe ser cliente para solicitar el pago.');
+    }
+    if(user.estado != clienteEstado.ESPERANDO_CUENTA){
+      throw new SysError('Debe haber pedido la cuenta');
+    }
+    user.estado = clienteEstado.VISITO_HOY;
+    return this.save(user,user.uid);      
+  }
+
+
   async getUser(uid: string) {
     return this.getOne(uid);
   }
