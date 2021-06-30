@@ -49,11 +49,11 @@ export class FacturaPage implements OnInit {
     }    
   }
 
-  asignarPropina(propina:number){
-    console.log(propina);
+  asignarPropina(propina:number){    
     this.propina = this.pedido.precioFinal*(propina/100)
     this.total = this.subtotal+this.propina;
     this.propinaAsignada= true;
+    this.productoSvc.agregarPropina(this.pedido,propina);    
   }
 
   ngOnInit() {    
@@ -68,8 +68,9 @@ export class FacturaPage implements OnInit {
                }else{
                  this.pedido = pedido;                 
                  this.subtotal = this.pedido.precioFinal;
-                 this.propina = 0;                 
+                 this.propina = this.pedido.propina;                 
                  this.total = this.subtotal+this.propina;
+                 this.propinaAsignada = (this.pedido.propina != null);
                }
             });       
           }

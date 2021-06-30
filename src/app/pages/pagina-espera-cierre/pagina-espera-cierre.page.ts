@@ -63,29 +63,24 @@ export class PaginaEsperaCierrePage implements OnInit {
 
   async escanearQr()
   {
-    const mesaId = await this.lectorqrService.escanear();                   
-    //esto si bien tras el resultado de la mesa esta asociado al uid del usuario en la mesa 
-    if(mesaId){    
-      this.solicitarMenuMesa(mesaId);
-    }
+    const mesaId = await this.lectorqrService.escanear();
+    this.redireccionarAFactura();
   }
   testEscanearQRMesa1(){
-    this.solicitarMenuMesa('xkbC3DQSKxibJ9KzAOG2');
+    this.redireccionarResumenPedido();
   }
-  
-  protected solicitarMenuMesa(mesaId){
-    console.log(mesaId)
-    this.mesaSvc.getOneById(mesaId).then(mesa=>{
-      if(mesa.uid != null){
-        this.router.navigateByUrl('/dashboard/menu');
-        
-      }
-      else{
-        this.toast.presentDanger('La mesa no se puede ocupar');
-      }
-    })
+  testEscanearQRMesa2(){
+    this.redireccionarResumenPedido();
+  }
+  testEscanearQRMesa3(){
+    this.redireccionarResumenPedido();
   }
 
+  redireccionarAFactura(){
+    this.router.navigateByUrl('/dashboard/factura');
+  }
+  
+  
   deternerScaner(){
     this.lectorqrService.stopScan();
   }  

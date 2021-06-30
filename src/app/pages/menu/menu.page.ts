@@ -165,7 +165,8 @@ export class MenuPage implements OnInit {
       uid:this.usuarioLogueado.uid,
       uidCliente: this.usuarioLogueado.uid,
       uidMesa: this.mesaUid,
-      nombreMesa: this.nombreMesa
+      nombreMesa: this.nombreMesa,
+      propina:null,
     }
     this.usuarioLogueado.estado = clienteEstado.ESPERANDO_PEDIDO;
     this.userSvc.update(this.usuarioLogueado);

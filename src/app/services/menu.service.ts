@@ -49,7 +49,7 @@ export class MenuService {
      return this.productos;
    }
    addPedido(pedido: Pedido){
-     pedido.uid = this.db.createId();
+     pedido.uid = this.db.createId();     
     return this.pedidosCollection.add(JSON.parse(JSON.stringify(pedido)));
    }
    getAllPedidos(){
@@ -78,7 +78,12 @@ export class MenuService {
   }
 
   marcarAPagar(pedido:Pedido){
-    pedido.estadoPedido = Estado.APAGAR;
+    pedido.estadoPedido = Estado.PENDIENTEPAGO;
+    this.updatePedido(pedido);
+  }
+
+  agregarPropina(pedido:Pedido,propina:number){
+    pedido.propina = propina;
     this.updatePedido(pedido);
   }
 

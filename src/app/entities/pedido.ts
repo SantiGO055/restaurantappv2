@@ -11,6 +11,7 @@ export class Pedido {
     uidMesa?:string;
     nombreMesa?:string;
     todoListo?: boolean;
+    propina?: number;
 }
 
 export enum Estado{
