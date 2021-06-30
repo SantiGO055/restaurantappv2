@@ -30,8 +30,7 @@ export abstract class LectorqrService {
     const allow = this.checkPermition();
     if(allow){   
       this.scanActive = true;
-      const { BarcodeScanner } = Plugins;  
-      //BarcodeScanner.hideBackground();
+      const { BarcodeScanner } = Plugins;        
       const result = await BarcodeScanner.startScan({ targetedFormats: this.traerFormatosAceptados() });      
       if (result.hasContent) {                
         this.scanActive = false;      

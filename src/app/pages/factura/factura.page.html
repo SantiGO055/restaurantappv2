@@ -1,8 +1,16 @@
-<ion-content>
-  <ion-grid>  
+<ion-header [hidden]="lectorqrService.scanActive" >
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="first"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Escanea tu mesa</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [class]="lectorqrService.scanActive ? 'scan':'site'" >
+  <ion-grid [hidden]="lectorqrService.scanActive" >  
     <ion-row>
       <ion-col>
-         <h1> Tu pedido</h1>
+         <h1> Tu Factura</h1>
       </ion-col>
     </ion-row>
     <ion-row>  
@@ -17,11 +25,11 @@
               <ion-grid>
                 <ion-row>
                   <ion-col>
-                    {{producto.nombre}} 
+                    {{producto.nombre}} x {{producto.cantidad}} 
                   </ion-col>
                   <ion-col>
                     <!-- @todo completar con el parametro que se le vaya a poner al producto para el estado -->
-                    PREPARANDO 
+                    {{producto.precio}} ARS
                   </ion-col>
                 </ion-row>
               </ion-grid>
@@ -29,23 +37,62 @@
             </ion-item>
         </ion-list>
       </ion-col>
+    </ion-row>    
+    <ion-row>
+      <ion-col>
+        Subtotal
+      </ion-col>
+      <ion-col>
+        {{ this.subtotal}} ARS
+      </ion-col>
+    </ion-row>   
+    <ion-row>
+      <ion-col>
+        Propina
+      </ion-col>
+      <ion-col>
+        {{ this.propina}} ARS
+      </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        Elaborado en 
+        Total
       </ion-col>
       <ion-col>
-        {{ this.pedido.tiempoElaboracionFinal}} min
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        Precio final 
-      </ion-col>
-      <ion-col>
-        {{ this.pedido.precioFinal}} ARS
+        {{ this.total}} ARS
       </ion-col>
     </ion-row>
     </ion-grid>    
+    <div class="scanbox" [hidden]="!lectorqrService.scanActive">
+    </div>
   </ion-content>
-  
+  <ion-footer>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+<!-- @todo eliminar tras el test -->
+          <ion-button color="success" (click)="this.testEscanearQRMalo()" expand="full" >
+            Test EXCELENTE
+          </ion-button>
+          <ion-button color="success" (click)="this.testEscanearQRMuyBueno()" expand="full" >
+            Test MUY BUENO  
+          </ion-button>
+          <ion-button color="success" (click)="this.testEscanearQRBueno()" expand="full" >
+            Test BUENO 
+          </ion-button>
+          <ion-button color="success" (click)="this.testEscanearQRMalo()" expand="full" >
+            Test MALO 
+          </ion-button>
+<!-- @todo eliminar tras el test -->          
+          <ion-button fill="solid" class="scanear" size="large" expand="full" class="qrlista" (click)="escanearQr()" [hidden]="lectorqrService.scanActive">
+            <ion-icon name="qr-code-sharp" slot="start"></ion-icon>          
+            <ion-label>Escanea la propina </ion-label>
+          </ion-button>
+          <ion-button fill="solid"  class="scanear"  size="large" expand="full"  (click)="deternerScaner()" [hidden]="!lectorqrService.scanActive" >
+            <ion-icon name="qr-code-sharp" slot="start"></ion-icon>          
+            <ion-label>Detener</ion-label>
+          </ion-button>            
+        </ion-col>
+      </ion-row>
+    </ion-grid>  
+  </ion-footer>
