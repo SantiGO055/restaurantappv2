@@ -14,9 +14,10 @@
         <div *ngIf="!usuarioLogueado.completoEncuesta">
           <p> Completa una breve encuesta sobre el lugar </p>
           <ion-button  type="button" expand="block" color="tertiary" (click)="irAEncuesta()" >Realizar encuesta</ion-button>                                            
-
         </div>      
         <ion-button type="button" expand="block" color="primary" (click)="testEscanearQRMesa1()" >Como si escaneo el QR de la mesa 1 </ion-button>
+        <ion-button type="button" expand="block" color="primary" (click)="testEscanearQRMesa2()" >Como si escaneo el QR de la mesa 2 </ion-button>
+        <ion-button type="button" expand="block" color="primary" (click)="testEscanearQRMesa3()" >Como si escaneo el QR de la mesa 3 </ion-button>
         <ion-button type="button" expand="block" color="primary" (click)="presentModalChat()" >Consultar al mozo </ion-button>
       </ion-col>
     </ion-row>    

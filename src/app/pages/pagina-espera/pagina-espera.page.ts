@@ -55,6 +55,14 @@ export class PaginaEsperaPage implements OnInit {
     this.solicitarMenuMesa('xkbC3DQSKxibJ9KzAOG2');
   }
   
+  testEscanearQRMesa2(){
+    this.solicitarMenuMesa('swUDyLwV8OFFxZnJORp5');
+  }
+  
+  testEscanearQRMesa3(){
+    this.solicitarMenuMesa('Jrgpl9d4bcmMM3ZWi3Q5');
+  }
+  
   protected solicitarMenuMesa(mesaId){
     this.router.navigateByUrl('/dashboard/menu');
   }

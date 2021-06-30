@@ -107,7 +107,12 @@ export class AsignacionMesaPage implements OnInit {
   { 
       this.solicitarAsignarMesa('swUDyLwV8OFFxZnJORp5');
   }
-
+  
+  async suponerEscaneoMesa3()
+  { 
+      this.solicitarAsignarMesa('Jrgpl9d4bcmMM3ZWi3Q5');
+  }
+  
   deternerScaner(){
     this.lectorqrService.stopScan();
   }  
