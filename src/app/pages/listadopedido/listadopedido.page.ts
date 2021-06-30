@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
+import { Mesa } from 'src/app/entities/mesa';
 import { Estado, Pedido } from 'src/app/entities/pedido';
 import { User } from 'src/app/entities/user';
 import { Rol } from 'src/app/enums/rol';
@@ -9,6 +10,7 @@ import { MenuService } from 'src/app/services/menu.service';
 import { MesasService } from 'src/app/services/mesas.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
+import { ToastService } from 'src/app/services/toast.service';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -18,7 +20,7 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class ListadopedidoPage implements OnInit {
   usuarioLogueado: User = new User();
-  mesa
+  mesa : Mesa;
   constructor(
     private pedidosSvc: MenuService,
     private loginSvc: LoginService,
@@ -26,7 +28,8 @@ export class ListadopedidoPage implements OnInit {
     private mesaSvc: MesasService,
     private push: NotificationService,
     private spinner: SpinnerService,
-    private alert: AlertService
+    private alert: AlertService,
+    private toastService: ToastService
   ) { }
   public get Estado(): typeof Estado {
     return Estado; 
@@ -73,10 +76,10 @@ export class ListadopedidoPage implements OnInit {
         console.log(ok)
         if(ok){
           this.spinner.mostrarSpinner();
-          pedido.estadoPedido = Estado.PENDIENTEPAGO;
+          pedido.estadoPedido = Estado.PAGADO;
           this.pedidosSvc.updatePedido(pedido).then(()=>{
             this.spinner.ocultarSpinner();
-            this.alert.showSucess('El cliente ya puede realizar el pago','Aviso','dashboard/home')
+            this.alert.showSucess('El pedido se encuentra pago','Pago','dashboard/home')
 
           })
         }
@@ -91,6 +94,24 @@ export class ListadopedidoPage implements OnInit {
     
     
     
+   }
+   liberarMesa(pedido: Pedido){
+    
+     console.log(pedido.uidMesa)
+    this.mesaSvc.getOneById(pedido.uidMesa).then(mesa=>{
+      pedido.uidMesa = null;
+      let mesaAux: Mesa = {
+        id: mesa.id,
+        nombre: mesa.nombre,
+        uid: null
+
+      }
+
+      this.mesaSvc.updateMesa(mesaAux).then(()=>{
+        this.toastService.presentSuccess('La mesa se libero correctamente');
+      });
+      this.pedidosSvc.updatePedido(pedido);
+    })
    }
   
 

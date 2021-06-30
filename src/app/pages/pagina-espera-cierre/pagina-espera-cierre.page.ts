@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { Estado, Pedido } from 'src/app/entities/pedido';
 import { MenuService } from 'src/app/services/menu.service';
 import { AlertService } from 'src/app/services/alert.service';
+import { MesasService } from 'src/app/services/mesas.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-pagina-espera-cierre',
@@ -21,7 +23,9 @@ export class PaginaEsperaCierrePage implements OnInit {
     public userService:UsersService,
     public router:Router,
     private pedidoSvc : MenuService,
-    private alertSvc: AlertService
+    private alertSvc: AlertService,
+    private mesaSvc: MesasService,
+    private toast: ToastService
   ) {       
   }
   public get Estado(): typeof Estado {
@@ -70,7 +74,16 @@ export class PaginaEsperaCierrePage implements OnInit {
   }
   
   protected solicitarMenuMesa(mesaId){
-    this.router.navigateByUrl('/dashboard/menu');
+    console.log(mesaId)
+    this.mesaSvc.getOneById(mesaId).then(mesa=>{
+      if(mesa.uid != null){
+        this.router.navigateByUrl('/dashboard/menu');
+        
+      }
+      else{
+        this.toast.presentDanger('La mesa no se puede ocupar');
+      }
+    })
   }
 
   deternerScaner(){
@@ -82,7 +95,7 @@ export class PaginaEsperaCierrePage implements OnInit {
     this.router.navigateByUrl('/dashboard/encuesta');
   }
   pedirCuenta(){
-    //TODO continuar
+    
     this.pedido.estadoPedido = Estado.APAGAR;
     this.pedidoSvc.updatePedido(this.pedido).then(()=>{
       this.alertSvc.showSucess('El mozo confirmara tu pago','Aviso','dashboard/factura');

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Mesa } from '../entities/mesa';
-import { AngularFirestore, AngularFirestoreCollection,} from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument,} from '@angular/fire/firestore';
 import { map, first } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import {  waitForAsync } from '@angular/core/testing';
@@ -17,7 +17,7 @@ export class MesasService {
 
   mesas: Observable<Mesa[]>;
   private mesasCollection: AngularFirestoreCollection<Mesa>;
-
+  mesasDoc: AngularFirestoreDocument<Mesa> | undefined;
   constructor(private readonly fireStore: AngularFirestore) {
     this.mesasCollection = fireStore.collection<Mesa>(this.COLLECTION);
     this.getMesas();
@@ -59,6 +59,11 @@ export class MesasService {
       );
   }
 
+  updateMesa(mesa:Mesa){
+    this.mesasDoc = this.fireStore.doc(`mesas/${mesa.id}`);
+    return this.mesasDoc.update(mesa);
+     
+  }
   async getOneByUId(uid: string): Promise<Mesa>{
     let aux: Mesa;
     await this.mesas
