@@ -11,6 +11,9 @@ export class RouterService {
   public definirRutaUsuario(usuario:User):string{
     //Si es cliente 
     let route = '/dashboard/pagina-ingreso';            
+
+console.log(usuario.rol  ,usuario.estado )
+
     if(User.perteneceAEmpresa(usuario)){
       //si pertenece a la empresa
       route = '/dashboard/home';
@@ -26,13 +29,11 @@ export class RouterService {
     }else if(User.puedeAccederAListaEspera(usuario)){
       //si es cliente  que ya paso  y puede asignarse mesa
       route = '/dashboard/pagina-ingreso';            
-    }
-    else if(User.puedeAccederAListaEspera(usuario)){
-      //si es cliente  que ya paso  y puede asignarse mesa
-      route = '/dashboard/pagina-ingreso';            
-    }    else if(User.puedeAccederEsperaCierre(usuario)){
+    }else if(User.puedeAccederEsperaCierre(usuario)){
       //si es cliente  esta consumiendo va a la ruta espera cierre
       route = '/dashboard/pagina-espera-cierre'; 
+    }    else if(User.puedeAccederAFactura(usuario)){      
+      route = '/dashboard/factura'; 
     }
     return route;
   }

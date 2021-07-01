@@ -66,7 +66,14 @@
     </div>
   </ion-content>
   <ion-footer>
-    <ion-grid *ngIf="this.propinaAsignada">
+    <ion-grid *ngIf="this.usuarioLogueado.estado == this.clienteEstado.ESPERANDO_CUENTA">
+      <ion-row>
+        <ion-col>
+          El mozo confirmará el pago de tu factura . 
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="this.usuarioLogueado.estado != this.clienteEstado.ESPERANDO_CUENTA">
       <ion-row>
         <ion-col>
           <ion-button color="success" (click)="this.pedirCuenta()" expand="full" >

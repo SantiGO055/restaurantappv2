@@ -102,19 +102,21 @@ export class FacturaPage implements OnInit {
   deternerScaner(){
     this.lectorqrService.stopScan();
   }  
-
+  public get clienteEstado(): typeof clienteEstado {
+    return clienteEstado; 
+  }
 /**
  * solicitar la cuenta 
  */
   pedirCuenta(){    
     this.productoSvc.marcarAPagar(this.pedido);    
-    this.usuarioLogueado.estado = clienteEstado.VISITO_HOY;
-    this.userService.update(this.usuarioLogueado)
     this.userService.moverEsperandoFactura(this.usuarioLogueado);    
     const a = this.menuService.valueChange(this.pedido.uid).subscribe(
       async (pedido:Pedido) => {
-        if(pedido.estadoPedido == Estado.PAGADO){            
+        if(pedido.estadoPedido == Estado.PAGADO){                        
             a.unsubscribe();            
+            this.usuarioLogueado.estado = clienteEstado.VISITO_HOY;
+            this.userService.update(this.usuarioLogueado)
             this.alerta.showSucess(`Tu pago fue confirmado, hemos liberado la mesa. ¡¡ GRACIAS POR VISITARNOS !!`,'Ya podes pasar','/dashboard/pagina-ingreso')                    
         }
       }
