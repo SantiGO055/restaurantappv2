@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { LectorQrPropinaService } from '../../services/lectorqrpropina.service';
 import { AlertController } from '@ionic/angular';
 import { AlertService } from '../../services/alert.service';
+import { clienteEstado } from 'src/app/enums/clienteEstados';
 
 @Component({
   selector: 'app-factura',
@@ -107,6 +108,8 @@ export class FacturaPage implements OnInit {
  */
   pedirCuenta(){    
     this.productoSvc.marcarAPagar(this.pedido);    
+    this.usuarioLogueado.estado = clienteEstado.VISITO_HOY;
+    this.userService.update(this.usuarioLogueado)
     this.userService.moverEsperandoFactura(this.usuarioLogueado);    
     const a = this.menuService.valueChange(this.pedido.uid).subscribe(
       async (pedido:Pedido) => {
