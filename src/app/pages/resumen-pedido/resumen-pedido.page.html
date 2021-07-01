@@ -55,6 +55,14 @@
       {{ this.pedido.precioFinal}} ARS
     </ion-col>
   </ion-row>
+  <ion-row *ngIf="pedido.estadoPedido != Estado.ENTREGADO">
+    <ion-col>
+      <ion-button type="button" expand="block" color="tertiary" [hidden]="this.usuarioLogueado.completoEncuesta" (click)="irAEncuesta()" >Realizar encuesta</ion-button>                                            
+      <ion-button type="button" expand="block" color="tertiary" [hidden]="!this.usuarioLogueado.completoEncuesta" (click)="irAResultadosEncuesta()" >Ver resultado de encuestas</ion-button>                                            
+      <ion-button type="submit" expand="block" color="tertiary" (click)="this.volverAEspera()">Volver</ion-button>
+    </ion-col>
+  </ion-row>
+
   </ion-grid>    
   <div *ngIf="pedido.estadoPedido == Estado.ENTREGADO">
     <ion-row>
@@ -63,7 +71,7 @@
       </ion-col>
     </ion-row> 
     <ion-button type="submit" expand="block" color="tertiary" (click)="confirmarPedido()">Confirmar pedido</ion-button>
-
+    
   </div>
   
   

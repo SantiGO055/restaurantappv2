@@ -60,9 +60,24 @@ export class ResumenPedidoPage implements OnInit {
     this.usuarioLogueado.estado = clienteEstado.CONSUMIENDO;
     this.pedidoSvc.updatePedido(this.pedido).then(()=>{
       this.userService.update(this.usuarioLogueado);
-      this.alert.showSucess('','Disfruta de tu pedido','dashboard/pagina-espera-cierre');
+      this.alert.showSucess('','Disfruta de tu pedido','/dashboard/pagina-espera-cierre');
     })
     
+  }
+
+
+
+  irAEncuesta(){    
+    this.router.navigateByUrl('/dashboard/encuesta');
+  }
+
+  irAResultadosEncuesta(){    
+    this.router.navigateByUrl('/dashboard/resultados-encuesta');
+  }
+
+
+  volverAEspera(){
+    this.router.navigateByUrl('/dashboard/pagina-espera-elaboracion');
   }
 
 }
