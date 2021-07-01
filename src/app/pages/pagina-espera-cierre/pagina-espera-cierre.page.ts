@@ -15,7 +15,7 @@ import { ToastService } from 'src/app/services/toast.service';
   styleUrls: ['./pagina-espera-cierre.page.scss'],
 })
 export class PaginaEsperaCierrePage implements OnInit {
-
+  mostrarEncuesta:boolean;
   pedido: Pedido = new Pedido();
   constructor(
     public lectorqrService:LectorQRMesaService,    
@@ -27,6 +27,7 @@ export class PaginaEsperaCierrePage implements OnInit {
     private mesaSvc: MesasService,
     private toast: ToastService
   ) {       
+    this.mostrarEncuesta = false;
   }
   public get Estado(): typeof Estado {
     return Estado; 
@@ -34,6 +35,8 @@ export class PaginaEsperaCierrePage implements OnInit {
 
 
   //en esta pagina se ve los botones de encuesta o de scanear eq
+
+
 
   ngOnInit() {  
     this.loginService.usuarioLogueado.then(usr=>{
@@ -44,7 +47,7 @@ export class PaginaEsperaCierrePage implements OnInit {
             console.log(pedido.uidCliente)
             console.log(usr.uid)
             this.pedido = pedido;
-
+            this.mostrarEncuesta = !usr.completoEncuesta;
           }
           break;
         }
@@ -89,6 +92,13 @@ export class PaginaEsperaCierrePage implements OnInit {
     //@todo en la version larga aca hiria a juegos
     this.router.navigateByUrl('/dashboard/encuesta');
   }
+  irAResultadosEncuesta(){
+    //@todo en la version larga aca hiria a juegos
+    this.router.navigateByUrl('/dashboard/resultado-encuesta');
+  }
+
+  
+
   pedirCuenta(){
     
     this.pedido.estadoPedido = Estado.APAGAR;
