@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { Pedido } from '../../entities/pedido';
+import { Estado, Pedido } from '../../entities/pedido';
 import { User } from '../../entities/user';
 import { LoginService } from '../../services/login.service';
 import { UsersService } from '../../services/users.service';
 import { MenuService } from '../../services/menu.service';
 import { Router } from '@angular/router';
 import { LectorQrPropinaService } from '../../services/lectorqrpropina.service';
+<<<<<<< HEAD
 import { clienteEstado } from 'src/app/enums/clienteEstados';
+=======
+import { AlertController } from '@ionic/angular';
+import { AlertService } from '../../services/alert.service';
+>>>>>>> c63393ced449fbee7fcae3221e91dbc497156084
 
 @Component({
   selector: 'app-factura',
@@ -29,6 +34,8 @@ export class FacturaPage implements OnInit {
     public productoSvc:MenuService,
     public router:Router,
     public lectorqrService:LectorQrPropinaService,    
+    public menuService:MenuService,
+    public alerta:AlertService,
   ) {
     this.propina = 0;
     this.subtotal = 0;
@@ -51,10 +58,10 @@ export class FacturaPage implements OnInit {
   }
 
   asignarPropina(propina:number){    
-    this.propina = this.pedido.precioFinal*(propina/100)
+    this.propina = this.subtotal*(propina/100)    
     this.total = this.subtotal+this.propina;
     this.propinaAsignada= true;
-    this.productoSvc.agregarPropina(this.pedido,propina);    
+    this.productoSvc.agregarPropina(this.pedido,this.propina);    
   }
 
   ngOnInit() {    
@@ -103,10 +110,17 @@ export class FacturaPage implements OnInit {
  * solicitar la cuenta 
  */
   pedirCuenta(){    
-    this.productoSvc.marcarAPagar(this.pedido); 
+    this.productoSvc.marcarAPagar(this.pedido);    
     this.usuarioLogueado.estado = clienteEstado.VISITO_HOY;
     this.userService.update(this.usuarioLogueado)
-    this.userService.moverEsperandoFactura(this.usuarioLogueado);
-    this.router.navigateByUrl('/dashboard/espera-cierre');
+    this.userService.moverEsperandoFactura(this.usuarioLogueado);    
+    const a = this.menuService.valueChange(this.pedido.uid).subscribe(
+      async (pedido:Pedido) => {
+        if(pedido.estadoPedido == Estado.PAGADO){            
+            a.unsubscribe();            
+            this.alerta.showSucess(`Tu pago fue confirmado, hemos liberado la mesa. GRACIAS POR VISITARNOS!!`,'Ya podes pasar','/dashboard/pagina-ingreso')                    
+        }
+      }
+    )
   }
 }

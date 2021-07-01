@@ -39,10 +39,12 @@ const routes: Routes = [
         path: 'asignacion-mesa',
         loadChildren: () => import('../asignacion-mesa/asignacion-mesa.module').then( m => m.AsignacionMesaPageModule)
       },
+      /*
       {
         path: 'pagina-espera',
         loadChildren: () => import('../pagina-espera/pagina-espera.module').then( m => m.PaginaEsperaPageModule)
       },
+      */
       {
         path: 'resumen-pedido',
         loadChildren: () => import('../resumen-pedido/resumen-pedido.module').then( m => m.ResumenPedidoPageModule)

@@ -58,7 +58,7 @@ export class AsignacionMesaPage implements OnInit {
       response => {        
         this.userService.moverAMesaSelecionada(cliente).then(
           response => {
-            this.router.navigateByUrl('/dashboard/pagina-espera');
+            this.router.navigateByUrl('/dashboard/menu');
           }, 
           error => {
             this.toastService.presentDanger(error);    
@@ -80,7 +80,7 @@ export class AsignacionMesaPage implements OnInit {
             //asignar al cliente el estado 
             this.userService.moverAMesaSelecionada(cliente).then(
               response => {
-                this.router.navigateByUrl('/dashboard/pagina-espera');
+                this.router.navigateByUrl('/dashboard/menu');
               }, 
               error => {
                 this.toastService.presentDanger(error);    
