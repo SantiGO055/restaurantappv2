@@ -6,12 +6,8 @@ import { UsersService } from '../../services/users.service';
 import { MenuService } from '../../services/menu.service';
 import { Router } from '@angular/router';
 import { LectorQrPropinaService } from '../../services/lectorqrpropina.service';
-<<<<<<< HEAD
-import { clienteEstado } from 'src/app/enums/clienteEstados';
-=======
 import { AlertController } from '@ionic/angular';
 import { AlertService } from '../../services/alert.service';
->>>>>>> c63393ced449fbee7fcae3221e91dbc497156084
 
 @Component({
   selector: 'app-factura',
