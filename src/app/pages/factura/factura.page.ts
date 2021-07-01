@@ -6,6 +6,7 @@ import { UsersService } from '../../services/users.service';
 import { MenuService } from '../../services/menu.service';
 import { Router } from '@angular/router';
 import { LectorQrPropinaService } from '../../services/lectorqrpropina.service';
+import { clienteEstado } from 'src/app/enums/clienteEstados';
 
 @Component({
   selector: 'app-factura',
@@ -102,7 +103,9 @@ export class FacturaPage implements OnInit {
  * solicitar la cuenta 
  */
   pedirCuenta(){    
-    this.productoSvc.marcarAPagar(this.pedido);    
+    this.productoSvc.marcarAPagar(this.pedido); 
+    this.usuarioLogueado.estado = clienteEstado.VISITO_HOY;
+    this.userService.update(this.usuarioLogueado)
     this.userService.moverEsperandoFactura(this.usuarioLogueado);
     this.router.navigateByUrl('/dashboard/espera-cierre');
   }
