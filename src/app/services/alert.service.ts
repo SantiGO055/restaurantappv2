@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SysError } from '../entities/sysError';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import Swal from'sweetalert2';
 
@@ -12,6 +12,7 @@ export class AlertService {
   constructor( 
     public alertController:AlertController,
     public router: Router,
+    public navCtrl:NavController,
   ) { }
 
 
@@ -24,7 +25,7 @@ export class AlertService {
     // });
   }
 
-  showSucess(message:string,title: string,ruta:string){
+  showSucess(message:string,title: string,ruta:string =null){
     console.log(message)
     console.log(title)
     Swal.fire({
@@ -33,7 +34,11 @@ export class AlertService {
       text: message,
     }).then(result=>{
       if(result.isConfirmed){
-        this.router.navigate([ruta])
+        if(ruta == null){
+          this.navCtrl.pop();
+        }else{
+          this.router.navigate([ruta])
+        }
       }
     })
   }

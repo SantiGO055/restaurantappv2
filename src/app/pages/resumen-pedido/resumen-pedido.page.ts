@@ -80,4 +80,8 @@ export class ResumenPedidoPage implements OnInit {
     this.router.navigateByUrl('/dashboard/pagina-espera-elaboracion');
   }
 
+  volverAEsperaCierre(){
+    this.router.navigateByUrl('/dashboard/pagina-espera-cierre');
+  }
+  
 }

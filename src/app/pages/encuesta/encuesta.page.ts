@@ -185,7 +185,7 @@ export class EncuestaPage implements OnInit {
         this.userSvc.marcarEncuestaRealizada(this.usuarioLogueado).then(
           r => {
             console.log(ok)
-            this.alert.showSucess('Encuesta enviada correctamente','Aviso','dashboard/pagina-espera-elaboracion');
+            this.alert.showSucess('Encuesta enviada correctamente','Aviso',null);
           }
         );        
       });
