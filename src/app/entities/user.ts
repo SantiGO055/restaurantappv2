@@ -54,7 +54,7 @@ export class User {
   }
   static puedeAccederEsperaCierre(user: User): boolean {
     return (
-      user.rol == Rol.CLIENTE && user.estado == clienteEstado.CONSUMIENDO
+      user.rol == Rol.CLIENTE &&  ( user.estado == clienteEstado.CONSUMIENDO || user.estado == clienteEstado.ESPERANDO_CUENTA) 
     );
   }
 
