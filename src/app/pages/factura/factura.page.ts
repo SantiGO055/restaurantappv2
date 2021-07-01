@@ -112,7 +112,7 @@ export class FacturaPage implements OnInit {
       async (pedido:Pedido) => {
         if(pedido.estadoPedido == Estado.PAGADO){            
             a.unsubscribe();            
-            this.alerta.showSucess(`Tu pago fue confirmado, hemos liberado la mesa. GRACIAS POR VISITARNOS!!`,'Ya podes pasar','/dashboard/pagina-ingreso')                    
+            this.alerta.showSucess(`Tu pago fue confirmado, hemos liberado la mesa. ¡¡ GRACIAS POR VISITARNOS !!`,'Ya podes pasar','/dashboard/pagina-ingreso')                    
         }
       }
     )

@@ -15,6 +15,7 @@ import { takeUntil } from 'rxjs/operators';
 import { ThrowStmt } from '@angular/compiler';
 import { MesasService } from '../../services/mesas.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { clienteEstado } from '../../enums/clienteEstados';
 
 @Component({
   selector: 'app-pagina-ingreso',
@@ -25,6 +26,7 @@ export class PaginaIngresoPage implements OnInit {
   
   enListaEspera:boolean;
   turno:Observable<Turno>;
+  usuarioLogueado:User = new User();
 
   constructor(
     public lectorqrService:LectorQrListaEsperaService,
@@ -36,7 +38,10 @@ export class PaginaIngresoPage implements OnInit {
     public alerta: AlertService,
     private push: NotificationService
   ) {       
-    this.enListaEspera = false;    
+    this.enListaEspera = false;        
+    this.loginService.usuarioLogueado.then(usr=>{
+      this.usuarioLogueado = usr;
+    });
   }
 
   //en esta pagina se ve los botones de encuesta o de scanear eq
@@ -50,14 +55,20 @@ export class PaginaIngresoPage implements OnInit {
 
   async escanearQr()
   {
-    const resultado = await this.lectorqrService.escanear();                   
-    if(resultado){    
-      this.agregarAListaEspera();      
-    }
+    const resultado = await this.lectorqrService.escanear();                       
+    this.procesarLecturaQR();
   }
 
+protected procesarLecturaQR(){  
+  if(this.usuarioLogueado.estado == clienteEstado.VISITO_HOY ){
+      this.router.navigateByUrl('/dashboard/resultados-encuesta');
+  }else{
+    this.agregarAListaEspera();      
+  }      
+}
+
   async testQRValido(){
-    this.agregarAListaEspera();    
+    this.procesarLecturaQR();
   }
 
   deternerScaner(){
