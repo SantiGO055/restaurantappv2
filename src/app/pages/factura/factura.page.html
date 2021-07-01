@@ -72,26 +72,15 @@
           El mozo confirmará el pago de tu factura . 
         </ion-col>
       </ion-row>
-    </ion-grid>
-      
-
-
-    <ion-button color="success" (click)="this.pedirCuenta()" expand="full" >
-      Pedir Cuenta
-    </ion-button> 
-
-    
+    </ion-grid>   
     <ion-grid *ngIf="this.usuarioLogueado.estado != this.clienteEstado.ESPERANDO_CUENTA">
       <ion-row>
         <ion-col>
           <ion-button color="success" (click)="this.pedirCuenta()" expand="full" >
             Pedir Cuenta
-          </ion-button>        
-
-
+          </ion-button>   
         </ion-col>
       </ion-row>
-      
     </ion-grid>
     <ion-grid *ngIf="!this.propinaAsignada">
       <ion-row>
