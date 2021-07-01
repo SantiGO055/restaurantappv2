@@ -50,10 +50,10 @@ export class FacturaPage implements OnInit {
   }
 
   asignarPropina(propina:number){    
-    this.propina = this.pedido.precioFinal*(propina/100)
+    this.propina = this.subtotal*(propina/100)    
     this.total = this.subtotal+this.propina;
     this.propinaAsignada= true;
-    this.productoSvc.agregarPropina(this.pedido,propina);    
+    this.productoSvc.agregarPropina(this.pedido,this.propina);    
   }
 
   ngOnInit() {    

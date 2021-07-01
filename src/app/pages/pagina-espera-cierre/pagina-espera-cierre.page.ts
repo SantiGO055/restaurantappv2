@@ -92,19 +92,20 @@ export class PaginaEsperaCierrePage implements OnInit {
     //@todo en la version larga aca hiria a juegos
     this.router.navigateByUrl('/dashboard/encuesta');
   }
-  irAResultadosEncuesta(){
-    //@todo en la version larga aca hiria a juegos
-    this.router.navigateByUrl('/dashboard/resultado-encuesta');
+
+  irAResultadosEncuesta(){    
+    this.router.navigateByUrl('/dashboard/resultados-encuesta');
   }
 
-  
+  irAFactura(){
+    this.router.navigateByUrl('/dashboard/factura');
+  }
 
-  pedirCuenta(){
-    
+  pedirCuenta(){        
     this.pedido.estadoPedido = Estado.APAGAR;
-    this.pedidoSvc.updatePedido(this.pedido).then(()=>{
-      this.alertSvc.showSucess('El mozo confirmara tu pago','Aviso','dashboard/factura');
-    });
+    this.pedidoSvc.updatePedido(this.pedido).then(()=>{      
+      this.router.navigateByUrl('/dashboard/factura');
+    });  
   }
 
 }
