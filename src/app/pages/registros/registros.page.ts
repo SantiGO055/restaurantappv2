@@ -41,8 +41,7 @@ export class RegistrosPage implements OnInit {
     });   
   }
 
-  rechazarRegistro(registro: Registro) {
-  
+  rechazarRegistro(registro: Registro) {  
     registro.aprobado = false;
     this.registroService.save(registro, registro.id).then( response =>{      
       this.emailService.sendRegistro( registro, 'Lo de tito! Lamentamos tener que rechazar tu solicitud .');            

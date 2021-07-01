@@ -10,7 +10,7 @@
   <ion-list>   
      
       <ion-item *ngFor="let registro of this.registros">     
-        <div *ngIf="!registro.aprobado">
+        <div *ngIf="registro.aprobado == null">
 
           <ion-avatar slot="start">
             <ion-img [src]="registro.photoURL" [alt]="registro.displayName"
