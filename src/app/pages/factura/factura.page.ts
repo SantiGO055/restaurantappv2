@@ -111,8 +111,8 @@ export class FacturaPage implements OnInit {
   pedirCuenta(){    
     this.productoSvc.marcarAPagar(this.pedido);    
     this.userService.moverEsperandoFactura(this.usuarioLogueado);    
-    const a = this.menuService.valueChange(this.pedido.uid).subscribe(
-      async (pedido:Pedido) => {
+    const a = this.menuService.valueChange(this.pedido.uid).subscribe(      
+      async (pedido:Pedido) => {        
         if(pedido.estadoPedido == Estado.PAGADO){                        
             a.unsubscribe();            
             this.usuarioLogueado.estado = clienteEstado.VISITO_HOY;

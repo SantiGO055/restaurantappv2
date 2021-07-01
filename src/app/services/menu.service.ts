@@ -89,7 +89,7 @@ export class MenuService {
 
     
 valueChange(pedidoId:string):Observable<Pedido>{
-  return this.db.doc<Pedido>(`${this.dbpath}/${pedidoId}`).valueChanges();
+  return this.db.doc<Pedido>(`${this.dbpathPedido}/${pedidoId}`).valueChanges();
 }
 
 

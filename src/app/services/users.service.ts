@@ -106,9 +106,6 @@ export class UsersService {
     if(!User.esCliente(user)) {
       throw new SysError('Debe ser cliente para solicitar el pago.');
     }
-    if(user.estado != clienteEstado.CONSUMIENDO){
-      throw new SysError('Debe haber confirmado al recepción del pedido');
-    }
     user.estado = clienteEstado.ESPERANDO_CUENTA;
     return this.save(user,user.uid);      
   }
