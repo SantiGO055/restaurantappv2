@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { LectorQrPropinaService } from '../../services/lectorqrpropina.service';
 import { AlertController } from '@ionic/angular';
 import { AlertService } from '../../services/alert.service';
+import { clienteEstado } from 'src/app/enums/clienteEstados';
 
 @Component({
   selector: 'app-factura',
