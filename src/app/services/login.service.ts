@@ -80,7 +80,8 @@ export class LoginService {
       let user = User.fromAuth(authData.user, Rol.CLIENTE, photoURL);
       user.displayName = displayName;
       user.dni = dni;
-      this.usersService.save(user, user.uid);
+      this.usersService.save(user, user.uid);       
+      this.usuarioLogueado = this.usersService.getOne(user.uid);
       return user;
     } catch (error) {
       throw new SysError('Ocurrio al comunicarse con el servidor', error);
