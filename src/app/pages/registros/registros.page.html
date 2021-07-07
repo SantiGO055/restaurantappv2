@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="first"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Solicitudes de registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>   
+     
+      <ion-item *ngFor="let registro of this.registros">     
+        <div *ngIf="registro.aprobado == null">
+
+          <ion-avatar slot="start">
+            <ion-img [src]="registro.photoURL" [alt]="registro.displayName"
+            ></ion-img>
+          </ion-avatar>
+          <ion-label>
+            <h2>{{ registro.displayName }}</h2>
+            <h3>>{{ registro.dni }}</h3>                              
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <ion-button color="success" (click)="this.aceptarRegistro(registro)" >
+                    <ion-icon name="add-outline"></ion-icon>
+                  </ion-button>
+                </ion-col>
+                <ion-col>
+                  <ion-button color="danger"  (click)="this.rechazarRegistro(registro)">
+                    <ion-icon name="close-outline"></ion-icon>
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-label>
+        </div>   
+      </ion-item>
+
+
+      <!-- <ion-item *ngFor="let registro of this.registrosAsync|async "   >        
+        <ion-avatar slot="start">
+          <ion-img [src]="registro.photoURL" [alt]="registro.displayName"
+          ></ion-img>
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ registro.displayName }}</h2>
+          <h3>>{{ registro.dni }}</h3>                              
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button color="success" (click)="this.aceptarRegistro(registro)" >
+                  <ion-icon name="add-outline"></ion-icon>
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button color="danger"  (click)="this.rechazarRegistro(registro)">
+                  <ion-icon name="close-outline"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-label>
+      </ion-item> -->
+  </ion-list>
+</ion-content>

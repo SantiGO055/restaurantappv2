@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { SysError } from '../../entities/sysError';
+import { User } from '../../entities/user';
+import { RegistrosService } from '../../services/registros.service';
+import { RouterService } from '../../services/router.service';
 
 @Component({
   selector: 'app-login',
@@ -16,11 +19,13 @@ export class LoginPage implements OnInit {
   public ionicForm: FormGroup;
 
   constructor(
+    private registroService: RegistrosService,
     private toastService: ToastService,
     public loginService: LoginService,
     private router: Router,
     public formBuilder: FormBuilder,
-    public SpinnerService: SpinnerService
+    public SpinnerService: SpinnerService,
+    public routerPage: RouterService,
   ) {}
 
   ngOnInit() {
@@ -43,24 +48,37 @@ export class LoginPage implements OnInit {
 
   async login() {
     try {      
-      this.SpinnerService.mostrarSpinner();
-      if (!this.ionicForm.valid) {
-        this.toastService.presentSuccess('Por favor revise los datos ingresados.');        
-      } else {
-        this.loginService.login(this.ionicForm.value).then(
-          async (res) => {
-            this.SpinnerService.ocultarSpinner();
-            this.router.navigateByUrl('/dashboard/home', { replaceUrl: true });
-          },
-          async (error) => {            
-            this.SpinnerService.ocultarSpinner();
-            this.toastService.presentDanger('Usuario o password incorrecto.');            
-          }
-        );
-      }
-    } catch (error) {      
-      throw new SysError(error);
+        this.SpinnerService.mostrarSpinner();
+        if (!this.ionicForm.valid) {
+          this.toastService.presentSuccess('Por favor revise los datos ingresados.');        
+        } else {
+          //revisar si existe desaprobado en registros         
+          this.loginService.login(this.ionicForm.value).then(
+            async (usuario:User) => {
+              this.SpinnerService.ocultarSpinner();            
+              const route = this.routerPage.definirRutaUsuario(usuario);            
+              this.router.navigateByUrl(route, { replaceUrl: true });
+            },
+            async (error) => {                          
+              this.probarRegistroPendiente();
+            }
+          );
+        }
+    } catch (error) {         
+      this.probarRegistroPendiente();      
     }
+  }  
+
+  async probarRegistroPendiente(){
+      this.SpinnerService.ocultarSpinner();                                                
+      const registro = await this.registroService.getRegistroByEmail(this.username.value);            
+        if( !registro ){
+          this.toastService.presentDanger('Usuario o password incorrecto.');            
+        }else if(registro.aprobado == null){
+          this.toastService.presentDanger('Lamentamos informarle que su pedido de registro ha sido rechazado.');            
+        }else if(!registro.aprobado){
+          this.toastService.presentDanger('Lamentamos informarle que su pedido de registro ha sido rechazado.');            
+        }
   }
   
   defineTester(selectedUserId: string) {

@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="first"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Listado de pedidos</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <div approxItemHeight="320px">
+      <div *ngFor="let pedido of pedidos">
+        <div *ngIf="pedido.uidMesa != null">
+          
+        <h1>Pedido de la mesa: {{pedido.nombreMesa}}</h1>
+        <div *ngFor="let pedidoDetalle of pedido.producto">
+          
+          <ion-item  >
+
+            
+            <ion-avatar slot="start">
+              
+              <ion-img
+                [src]="pedidoDetalle.fotos[0]"
+                [alt]="pedidoDetalle.nombre"
+              ></ion-img>
+            </ion-avatar>
+            
+            <ion-label>
+              <h2>{{ pedidoDetalle.nombre }}</h2>
+              <h3>{{ pedidoDetalle.descripcion }}</h3>
+              Estado de pedido
+              <strong> {{pedido.estadoPedido}}</strong>
+            </ion-label>
+            
+              
+          </ion-item>
+        </div>
+        <div *ngFor=" let pedidoDetalle of pedido.producto | slice:0:1 ">
+          <div *ngIf=" usuarioLogueado.rol == 'mozo' ">
+            <!-- *ngIf="usuarioLogueado.rol == 'mozo'&&-->
+            <!-- <ion-button   expand="full"></ion-button> -->
+            
+            <ion-button *ngIf="pedido.estadoPedido === Estado.PENDIENTE" type="button" expand="block" color="tertiary" (click)="this.aceptarPedido(pedido)">Aceptar</ion-button>
+            <ion-button *ngIf="pedido.estadoPedido === Estado.PREPARADO" type="button" expand="block" color="tertiary" (click)="this.entregarPedido(pedido)">Entregar pedido</ion-button>
+            <ion-button *ngIf="pedido.estadoPedido === Estado.PENDIENTEPAGO" type="button" expand="block" color="tertiary" (click)="this.confirmarPago(pedido)">Confirmar pago</ion-button>
+            <ion-button *ngIf="pedido.estadoPedido === Estado.PAGADO" type="button" expand="block" color="tertiary" (click)="this.liberarMesa(pedido)">Liberar mesa</ion-button>
+            <!-- <ion-fab-button  >Aceptar</ion-fab-button> -->
+  
+  
+          </div>
+        </div>
+        
+        <ion-item>
+          </ion-item>
+        </div>
+          
+      </div>
+          
+    </div>
+  </ion-list>
+
+</ion-content>

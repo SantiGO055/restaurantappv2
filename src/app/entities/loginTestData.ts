@@ -1,7 +1,4 @@
-export interface LoginTestData{
-    uid:string
-    nombre:string
+export interface LoginTestData{        
     username:string
-    password:string
-    rol:string;
+    password:string    
 }

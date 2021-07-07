@@ -7,6 +7,9 @@ import { AvatarPage } from '../avatar/avatar.page';
 import { RegistrosService } from '../../services/registros.service';
 import { Registro } from '../../entities/registro';
 import { Router } from '@angular/router';
+import { NotificationService } from 'src/app/services/notification.service';
+import { LectorQrListaEsperaService } from '../../services/lectorqrlistaespera.service';
+import { LectorQrDniService } from '../../services/lectorqrdni.service';
 
 @Component({
   selector: 'app-register',
@@ -24,8 +27,9 @@ export class RegisterPage implements OnInit {
     public formBuilder: FormBuilder,
     public toastService: ToastService,
     public spinnerService: SpinnerService,
-    public modalController: ModalController,
-    private router: Router
+    public modalController: ModalController,    
+    private notification: NotificationService,
+    public lectorqrService:LectorQrDniService,
   ) {
     this.isSubmitted = false;
     this.avatarUrl = null;
@@ -36,14 +40,29 @@ export class RegisterPage implements OnInit {
     this.isSubmitted = false;
     this.ionicRegister = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(6)]],
-      username: [
-        '',
-        [Validators.required, Validators.minLength(6), Validators.email],
-      ],
+      dni: ['', [Validators.required, Validators.minLength(8)]],
+      username: ['',[Validators.required, Validators.minLength(6), Validators.email]],
       password: ['', [Validators.required, Validators.minLength(4)]],
       confirm: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
+
+
+  ngAfterViewInit() {
+    this.lectorqrService.preapare();    
+  }    
+
+  async escanearQr()
+  {
+    const resultado = await this.lectorqrService.escanear();                       
+    this.name.setValue(resultado.apellido+' '+resultado.nombre);    
+    this.dni.setValue(resultado.numero);    
+  }
+
+  deternerScaner(){
+    this.lectorqrService.stopScan();
+  }  
+
 
   checkPassSame() {
     let pass = this.ionicRegister.value.password;
@@ -72,7 +91,12 @@ export class RegisterPage implements OnInit {
     this.name.setValue('');
     this.username.setValue('');
     this.password.setValue('');
+    this.dni.setValue('');
     this.avatarUrl = null;
+  }
+  
+  get dni() {
+    return this.ionicRegister.get('dni');
   }
 
   get name() {
@@ -101,24 +125,25 @@ export class RegisterPage implements OnInit {
       } else {
         this.spinnerService.mostrarSpinner();
         const formData = this.ionicRegister.value;
-        const email = formData.username;
-        //@todo revisar si existe o capturar el error particular
+        const email = formData.username;        
         const registro = {
           email,
+          dni:formData.dni,
           displayName: formData.name,
           emailVerified: false,
           photoURL: this.avatarUrl,
-          password: formData.password,
-          aprobado: false,
-        } as Registro;
-        console.log(registro);
+          password: formData.password, 
+          aprobado:null
+        } as Registro;        
         this.registrosService.save(registro, null).then(
           async (res) => {
             this.spinnerService.ocultarSpinner();
             this.toastService.presentSuccess(
-              'Su registro fue creado con exito. Un supervisor se comunicara con usted'
+              'Su registro fue creado con exito. Un supervisor se comunicara con usted por email.'
             );
+            this.notification.push('Registro nuevo','Registro nuevo pendiende de aprobacion','duenio');
             this.ionicRegister.reset();
+            this.avatarUrl = null;
           },
           async (error) => {
             this.spinnerService.ocultarSpinner();

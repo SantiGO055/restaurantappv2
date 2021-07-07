@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="first"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Menu</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+
+
+    <ion-virtual-scroll [items]="this.productos" approxItemHeight="320px">
+
+
+    <ion-card *virtualItem="let producto">
+      <ion-card-header>
+        <ion-card-title><strong>{{ producto.nombre }}</strong></ion-card-title>
+       <ion-card-subtitle>{{ producto.descripcion }}</ion-card-subtitle>
+     </ion-card-header>
+
+      <ion-slides [options]="slideOptsOne" #slideWithNav>
+        <ion-slide *ngFor="let img of producto.fotos">
+            <img [src]="img">
+         </ion-slide>
+     </ion-slides>
+    
+      <ion-footer>
+        
+        <ion-item>
+          <ion-label>Precio: $ <strong>{{producto.precio}}</strong></ion-label>
+          <ion-fab-button size="small"><ion-icon name="add-circle-outline" (click)="agregarProductoLista(producto)"></ion-icon></ion-fab-button >
+            <ion-fab-button size="small"><ion-icon name="remove-outline" (click)="quitarProductoLista(producto)"></ion-icon></ion-fab-button>
+  
+        </ion-item>
+        <ion-item>
+          <ion-label>Cantidad: <strong>{{producto.cantidad}}</strong></ion-label>
+
+        </ion-item>
+      </ion-footer>
+        
+
+      </ion-card>
+      
+    </ion-virtual-scroll>
+    
+  </ion-list>
+  <ion-card>
+    
+  
+    <ion-card-content>
+      <br>
+    </ion-card-content>
+  </ion-card>
+  <div class="footerPrecio">
+    
+    <ion-footer >
+      <ion-toolbar>
+        <ion-title><strong>Total: $ {{total.toFixed(2)}}</strong></ion-title>
+        <ion-title><strong>Tiempo estimado: {{tiempoElaboracion}} min</strong></ion-title>
+        
+        <ion-button type="submit" expand="block" color="tertiary" (click)="enviarPedido()">Pedir</ion-button>
+        
+      </ion-toolbar> 
+    </ion-footer>
+  </div>
+  <ion-fab class="consultar" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="chatSvc.mostrarChat()">
+      <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

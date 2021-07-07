@@ -1,9 +1,14 @@
 <ion-content>
-
+  <ion-fab vertical="top" horizontal="start" slot="fixed">
   
-  <ion-button (click)="dismiss()" color="tertiary">
-    Cerrar chat
-  </ion-button>
+    <ion-button (click)="dismiss()" color="tertiary">
+      Cerrar chat
+    </ion-button>
+  
+  </ion-fab>
+  <div *ngIf="uid != null">
+
+ 
   <div class="contenedorBotonYChat" >  
     <div >
       <div class="contenedor">
@@ -24,14 +29,14 @@
                   </span>
                 </li>
                 <div class="chat-message">
-                  <div class="right-bubble" [ngClass]="{'right-bubble': mensj.usuario.uid === user.uid, 'left-bubble': mensj.usuario.uid !== user.uid}">
+                  <div class="right-bubble" [ngClass]="{'right-bubble': mensj.usuario.uid === this.uid, 'left-bubble': mensj.usuario.uid !== this.uid}">
                     
                     <!-- <span class="msg-name" *ngIf="mensaje.usuario.username === localStorageUsername">Yo</span> -->
                     <span class="msg-name" *ngIf="mensj.usuario.perfil !== localStorageUsername"><strong></strong></span>
                     <span class="msg-name" *ngIf="mensj.usuario.rol == 'mozo'"><strong>Mozo:</strong></span>
                     <span class="msg-name" *ngIf="mensj.usuario.rol == 'cocinero'"><strong>Cocinero:</strong></span>
                     <span class="msg-name" *ngIf="mensj.usuario.rol == 'duenio'"><strong>Dueño:</strong></span>
-                    <span class="msg-name" *ngIf="mensj.usuario.rol == null"><strong>Mesa: {{mensj.usuario.mesa}}</strong></span>
+                    <span class="msg-name" *ngIf="mensj.usuario.rol == 'cliente'"><strong>Mesa: {{mensj.usuario.mesa}}</strong></span>
                     
                     <div class="messageContent">
                       {{ mensj.mensaje }}
@@ -54,11 +59,6 @@
                 <span class="botonSubmit">
                   
                   <!-- <button type="submit" class="acceso-rapido-button" (click)="enviarMensaje()"><ion-icon size="large" name="arrow-redo-outline"></ion-icon></button> -->
-                  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-                    <ion-fab-button (click)="enviarMensaje()">
-                      <ion-icon name="arrow-forward-circle"></ion-icon>
-                    </ion-fab-button>
-                  </ion-fab>
                   
                 </span>
               </div>
@@ -70,4 +70,11 @@
   </div>
   
 </div>
+
+</div>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="enviarMensaje()">
+    <ion-icon name="arrow-forward-circle"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
 </ion-content>

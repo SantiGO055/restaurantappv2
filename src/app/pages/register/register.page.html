@@ -1,19 +1,11 @@
-<ion-content>
-  <form [formGroup]="ionicRegister" (ngSubmit)="register()" novalidate>
+<ion-content  [class]="lectorqrService.scanActive ? 'scan':'site'">
+  <form [formGroup]="ionicRegister" (ngSubmit)="register()" novalidate  [hidden]="lectorqrService.scanActive"  >
     <ion-grid>
       <ion-row>
         <ion-col>
-              <h1> Registrate en CLUB TITO </h1>
+              <h1> Registrate en CLUB TITO </h1>              
         </ion-col>
       </ion-row>
-      <ion-row>
-        <ion-col>
-            <p> Forma parte de nuestro club para entrar mas rapido a nuestro restaurante. 
-              <br/>Solicitá tu registro, un supervisor te informara su aprobación.
-            </p>
-        </ion-col>
-      </ion-row>
-
       <ion-row>
         <ion-col>
           <ion-img *ngIf="avatarUrl" [src]="avatarUrl" alt="Tomar foto"></ion-img>
@@ -31,6 +23,18 @@
         </ion-col>
       </ion-row>
       
+      <ion-row>
+        <ion-col>
+          <ion-label>DNI</ion-label>
+          <ion-input formControlName="dni" type="text" placeholder="DNI" required ></ion-input>
+          <!-- user error messages -->
+          <div *ngIf="(dni.dirty || dni.touched) && dni.errors" class="errors ion-padding" >
+            <span *ngIf="dni.errors?.required">El DNI es requerido.</span >
+            <span *ngIf="dni.errors?.minlength">El DNI debe tener al menos 8 caracteres.</span>            
+          </div>
+        </ion-col>
+      </ion-row>
+
       <ion-row>
         <ion-col>
           <ion-label>Nombre</ion-label>
@@ -89,3 +93,19 @@
     </ion-grid>
   </form>
 </ion-content>
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button fill="solid" class="scanear" size="large" expand="full" class="qrlista" (click)="escanearQr()" [hidden]="lectorqrService.scanActive">
+          <ion-icon name="qr-code-sharp" slot="start"></ion-icon>          
+          <ion-label>Scanear DNI </ion-label>
+        </ion-button>
+        <ion-button fill="solid"  class="scanear"  size="large" expand="full"  (click)="deternerScaner()" [hidden]="!lectorqrService.scanActive" >
+          <ion-icon name="qr-code-sharp" slot="start"></ion-icon>          
+          <ion-label>Detener</ion-label>
+        </ion-button>            
+      </ion-col>
+    </ion-row>
+  </ion-grid>  
+</ion-footer>

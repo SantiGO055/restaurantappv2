@@ -13,6 +13,8 @@ import { NotificationService } from 'src/app/services/notification.service';
 import { UsersService } from 'src/app/services/users.service';
 import { ModalController } from '@ionic/angular';
 import { NavParams } from '@ionic/angular';
+import { Rol } from 'src/app/enums/rol';
+import { MesasService } from 'src/app/services/mesas.service';
 
 @Component({
   selector: 'app-chat',
@@ -33,8 +35,9 @@ export class ChatComponent implements OnInit {
   localStorageUsername!: string;
   sala4a: string;
   sala4b: string;
+  mesaCliente: string;
   // $:any;
-  
+  uid:string = null;
 
   @ViewChild('scroller') private divMensaje!: ElementRef;
   items:Array<string>=[];
@@ -45,10 +48,13 @@ export class ChatComponent implements OnInit {
     public loginSvc: LoginService,
     private userSvc: UsersService,
     public viewCtrl: ModalController,
-    private spinner: SpinnerService
+    private spinner: SpinnerService,
+    private push: NotificationService,
+    private mesas: MesasService
     
     ) {
-
+      this.cargarMensajes();
+      // this.uid = localStorage.getItem('uidLogueado');
      }
   dismiss() {
   this.viewCtrl.dismiss();
@@ -63,25 +69,35 @@ export class ChatComponent implements OnInit {
 
     // $(document).ready(function(){
     //   $('[data-toggle="tooltip"]').tooltip();
-    //   });
-    this.cargarMensajes();
+    // });
+    // this.cargarMensajes();
+    
     this.loginSvc.isLoggedIn().then(logueado=>{
-    console.log(logueado);
     if(logueado != null){
+      
       let prom = this.userSvc.getUser(logueado.uid);
       prom.then(usr=>{
         console.log(usr)
+        this.mesas.mesas.subscribe(mesas=>{
+          mesas.forEach(mesa => {
+            if(mesa.uid == logueado.uid){
+              this.mesaCliente = mesa.nombre;
+            }
+          });
+        })
+        localStorage.setItem('uidLogueado',logueado.uid);
+        this.uid = logueado.uid;
         this.user = usr;
         if(this.user.email != null)
         this.ownEmail = this.user.email;
-        console.log(this.ownEmail);
+        // console.log(this.ownEmail);
         this.isOwnMessage = this.ownEmail === this.user.email;
       });
     }
   })
 
   this.chatSvc.getAllMensajes().snapshotChanges().subscribe(mensajes=>{
-    console.log(mensajes);
+    // console.log(mensajes);
   });
     
     
@@ -94,11 +110,11 @@ export class ChatComponent implements OnInit {
     this.mostrarChat = event;
   }
   scrollToBottom(): void {
-    
-    if(this.divMensaje != undefined){
+    console.log(this.divMensaje)
+    if(this.divMensaje.nativeElement != undefined){
 
-      this.divMensaje.nativeElement.scrollTop
-      = this.divMensaje.nativeElement.scrollHeight;
+      this.divMensaje.nativeElement.scrollTop = this.divMensaje.nativeElement.scrollHeight;
+      
 
     }
   }
@@ -125,6 +141,7 @@ export class ChatComponent implements OnInit {
         )
       ).subscribe(data => {
         this.listadoMensajes = data;
+        
         console.log(data)
         this.spinner.ocultarSpinner();
         
@@ -146,11 +163,16 @@ export class ChatComponent implements OnInit {
         console.info(this.mensaje);
         this.mensajeObj.mensaje = this.mensaje;
         this.mensajeObj.usuario = this.user;
+        
+        if(this.mensajeObj.usuario.rol == 'cliente'){
+          this.push.push('Aviso','Hay nuevos mensajes en el chat','mozo');
+          this.mensajeObj.usuario.mesa = this.mesaCliente;
+        }
         this.mensajeObj.hora = this.obtenerFechaHora();
-        console.log("envio");
+
         this.chatSvc.enviarMensaje(this.mensajeObj);
 
-        console.log(this.mensaje);
+        console.log(this.mensajeObj);
         // console.log(this.isOwnMessage);
       }
     this.mensaje = '';

@@ -12,24 +12,73 @@
         <ion-menu-toggle auto-hide="false" menu="first">
           <!-- alta dueño -->
           <ion-item
+           *ngIf="this.accesosAsociados"
             routerLink="/dashboard/home"
             routerDirection="root"
             routerLinkActive="active-item"
           >
             <ion-label>Home </ion-label> <ion-icon name="home-outline"></ion-icon>
           </ion-item>
-          <!-- alta empleado-->
+          <!-- registros de clientes -->
           <ion-item
-            routerLink="/dashboard/alta-duenio"
+            *ngIf="this.accesosDuenio"
+            routerLink="/dashboard/registros"
             routerDirection="root"
             routerLinkActive="active-item"
           >
-            <ion-label> Alta dueño </ion-label><ion-icon name="person-add-outline"></ion-icon>
+            <ion-label> Registros Solicitados </ion-label><ion-icon name="person-add-outline"></ion-icon>
           </ion-item>
+          <!-- Lista espera  -->
+          <ion-item
+          *ngIf="this.accesosMaitre"
+          routerLink="/dashboard/lista-espera"
+          routerDirection="root"
+          routerLinkActive="active-item"
+           >
+            <ion-label> Lista de espera </ion-label><ion-icon name="time-outline"></ion-icon>
+          </ion-item>
+          <!-- menu -->
+          <ion-item
+            *ngIf="this.accesosCliente"
+            routerLink="/dashboard/menu"
+            routerDirection="root"
+            routerLinkActive="active-item"
+          >
+            <ion-label> Menu </ion-label><ion-icon name="fast-food-outline"></ion-icon>
+          </ion-item>
+          <!-- Resultados encuesta -->
+          <ion-item
+            *ngIf="this.accesosCliente"
+            routerLink="/dashboard/resultados-encuesta"
+            routerDirection="root"
+            routerLinkActive="active-item"
+          >
+            <ion-label> Resultados encuesta </ion-label><ion-icon name="bar-chart-outline"></ion-icon>
+          </ion-item>
+          <!-- listado de pedidos -->
+          <ion-item
+            *ngIf="this.accesosMozo"
+            routerLink="/dashboard/listadopedido"
+            routerDirection="root"
+            routerLinkActive="active-item"
+          >
+            <ion-label> Pedidos solicitados </ion-label><ion-icon name="list-outline"></ion-icon>
+          </ion-item>
+          <!--listado de pedido para cocinero -->          
+          <ion-item
+            *ngIf="this.accesosCocinero"
+            routerLink="/dashboard/listado-pedido-cocinero"
+            routerDirection="root"
+            routerLinkActive="active-item"
+          >
+          <ion-label> Elaborar productos </ion-label><ion-icon name="fast-food-outline"></ion-icon>           
+          </ion-item>
+
           <!-- logout -->
           <ion-item (click)="logout()"  routerLinkActive="active-item" routerDirection="root" >            
             <ion-label> Cerrar sesion  </ion-label>  <ion-icon name="exit-outline"></ion-icon>
           </ion-item>
+          
         </ion-menu-toggle>
       </ion-list>
     </ion-content>

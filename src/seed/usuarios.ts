@@ -1,24 +1,40 @@
 import { User } from '../app/entities/user';
 import { LoginTestData } from '../app/entities/loginTestData';
-export const USUARIOS_TEST :LoginTestData[]= [{
-    "uid":'6fPGOIVZlVQDi3RHcv47chUYhKk2',
-    "nombre":"Dueño 1",
+export const USUARIOS_TEST :LoginTestData[]= [
+  {        
     "username":"avillucas+duenio1@gmail.com",
-    "password":"1q2w3e4r5t6y",
-    "rol" : 'dueño'
+    "password":"1q2w3e4r5t6y"    
+  },
+  {        
+    "username":"avillucas+supervisor1@gmail.com",
+    "password":"1q2w3e4r5t6y"    
   },
   {
-    "uid":'Sn2aoFr6IWbulJhs2SgFLiVvRX22',
-    "nombre":"Cocinero 1",
+    "username":"avillucas+maitre1@gmail.com",
+    "password":"1q2w3e4r5t6y",   
+  },
+  {
     "username":"avillucas+cocinero1@gmail.com",
-    "password":"1q2w3e4r5t6y",
-    "rol" : 'dueño'
+    "password":"1q2w3e4r5t6y",   
   },
   {
-    "uid":'Y73PxpMoEEUJqdaSEsA7xEdASqz2',
-    "nombre":"Mozo 1",
+    "username":"avillucas+bartender1@gmail.com",
+    "password":"1q2w3e4r5t6y",   
+  },
+  {
     "username":"avillucas+mozo1@gmail.com",
-    "password":"1q2w3e4r5t6y",
-    "rol" : 'dueño'
-  }
+    "password":"1q2w3e4r5t6y"    
+  },
+  {
+    "username":"avillucas+manycliente@gmail.com",
+    "password":"1q2w3e4r5t6y"    
+  },  
+  {
+    "username":"avillucas+rechazado@gmail.com",
+    "password":"1q2w3e4r5t6y"    
+  }, 
+  {
+    "username":"j0bbkhdlr6@coffeetimer24.com",
+    "password":"123456"    
+  }, 
 ];

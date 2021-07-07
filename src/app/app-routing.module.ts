@@ -11,29 +11,21 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () =>
-      import('./pages/login/login.module').then((m) => m.LoginPageModule),
-      canLoad:[AutoLoginGuard],
-  },
+    loadChildren: () => import('./pages/login/login.module').then((m) => m.LoginPageModule),
+    canLoad:[AutoLoginGuard],
+  },  
   {
     path: 'dashboard',
-    loadChildren: () =>
-      import('./pages/dashboard/dashboard.module').then(
-        (m) => m.DashboardPageModule
-      ),
-     canLoad:[AuthGuard],
+    loadChildren: () => import('./pages/dashboard/dashboard.module').then((m) => m.DashboardPageModule ),
+    canLoad:[AuthGuard],
   },
   {
     path: 'register',
-    loadChildren: () =>
-      import('./pages/register/register.module').then(
-        (m) => m.RegisterPageModule
-      ),
+    loadChildren: () => import('./pages/register/register.module').then((m) => m.RegisterPageModule ),
   },
   {
     path: 'olvido',
-    loadChildren: () =>
-      import('./pages/olvido/olvido.module').then((m) => m.OlividoPageModule),
+    loadChildren: () => import('./pages/olvido/olvido.module').then((m) => m.OlividoPageModule),
   },
   {
     path: 'splash',
@@ -46,7 +38,14 @@ const routes: Routes = [
   {
     path: 'avatar',
     loadChildren: () => import('./pages/avatar/avatar.module').then( m => m.AvatarPageModule)
-  },
+  }, 
+  {
+    path: 'registros',
+    loadChildren: () => import('./pages/registros/registros.module').then( m => m.RegistrosPageModule)
+  },   {
+    path: 'listado-pedido-cocinero',
+    loadChildren: () => import('./pages/listado-pedido-cocinero/listado-pedido-cocinero.module').then( m => m.ListadoPedidoCocineroPageModule)
+  }
 
 ];
 @NgModule({

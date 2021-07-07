@@ -1,0 +1,26 @@
+.botones{
+    display: flex;
+    flex-direction: row;
+}
+ion-footer{
+    position: fixed;
+    bottom: 1%;
+    width: 100%;
+    justify-content : center;
+    --border-color: rgb(0, 0, 0);
+    border-width: .01em;
+    border-style:solid;
+}
+.consultar{
+    bottom: 8%;
+
+}
+.footerPrecio{
+    --ion-background-color: #9a9fd1;
+    
+}
+ion-card{
+    --border-color: rgb(0, 0, 0);
+    border-width: .01em;
+    border-style:solid;
+}

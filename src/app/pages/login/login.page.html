@@ -46,12 +46,13 @@
   </form>
 </ion-content>
 
-
-<ion-fab vertical="top"  horizontal="end" >
-  <ion-fab-button color="tertiary" >Accesos</ion-fab-button>
-  <ion-fab-list side="bottom">    
-    <ion-fab-button  *ngFor="let usuario of loginService.getUsuariosTest()"  (click)="defineTester( usuario.uid)" color="tertiary">
-      {{ usuario.nombre}}
-    </ion-fab-button>
-  </ion-fab-list>    
-</ion-fab>
+<ion-footer class="ion-no-border ion-text-center">
+  <ion-list>
+    <ion-item>
+      <ion-label>Accesos</ion-label>
+      <ion-select [(ngModel)]="tester" (ionChange)="defineTester(tester)" okText="Seleccionar" cancelText="Cancelar">        
+        <ion-select-option *ngFor="let usuario of loginService.getUsuariosTest()"  value="{{ usuario.username}}">  {{ usuario.username }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+</ion-footer>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { asapScheduler } from 'rxjs';
 import { User } from 'src/app/entities/user';
 import { Usuario } from 'src/app/entities/usuario';
@@ -10,6 +10,9 @@ import { SpinnerService } from '../../services/spinner.service';
 import { ModalController } from '@ionic/angular';
 import { ChatComponent } from 'src/app/components/chat/chat.component';
 import { ChatService } from 'src/app/services/chat.service';
+import { AlertService } from 'src/app/services/alert.service';
+import { UsersService } from 'src/app/services/users.service';
+import { environment } from '../../../environments/environment';
 
 
 @Component({
@@ -21,6 +24,7 @@ export class HomePage implements OnInit {
   
   public folder: string;
   mostrarChat: boolean = true;
+  usuarioLogueado: User = new User();
   constructor(
     private activatedRoute: ActivatedRoute,
     public spinnerService:SpinnerService,
@@ -28,31 +32,26 @@ export class HomePage implements OnInit {
     public notification: NotificationService,
     private loginSvc: LoginService,
     private modal: ModalController,
-    public chatSvc:ChatService
+    public chatSvc:ChatService,
+    public alerta: AlertService,
+    private userSvc: UsersService,
+    public router: Router
+    
     ) { 
     
   }
+
+  get showTestButton():boolean{
+    return environment.testButtons;
+  }
+
   ngOnInit() {
-    
-    this.folder = this.activatedRoute.snapshot.paramMap.get('id');
-    this.notification.getAllTokens();
-    this.loginSvc.isLoggedIn().then(user=>{
-      console.log(user);
-      
-      // if(user.uid == '')
-      // let tokenObj:TokenNotification = {
-      //   token: token,
-      //   usuario: {
-      //     uid: user.uid,
-      //     displayName: user.displayName,
-      //     email: user.email,
-      //     emailVerified: user.emailVerified,
-      //     rol: user.
-      //   }
-      // }
-      // this.updateToken(tokenObj);
-    })
-    
+    this.loginSvc.usuarioLogueado.then(usr=>{
+      console.log(usr)
+      this.usuarioLogueado = usr;
+      console.log(this.usuarioLogueado)
+    });
+    this.folder = this.activatedRoute.snapshot.paramMap.get('id');    
     
   }
   enviarMail(){
@@ -61,6 +60,7 @@ export class HomePage implements OnInit {
       displayName: 'Santi Prueba',
       email: 'santigonzalez05@gmail.com',
       photoURL: 'asd',
+      dni:'12345678',
       emailVerified: true
     }
     this.emailjs.sendEmail(usuario,'El usuario ha sido activado');

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToastController } from '@ionic/angular';
+import { VibrationService } from './vibration.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ export class ToastService {
   readonly COLOR_DANGER  = 'danger';
 
   constructor(
-   private toastController:ToastController
+   private toastController:ToastController,
+   private vibrateService:VibrationService,
   ) { }
 
   presentSuccess(mensaje:string) {    
@@ -19,6 +21,7 @@ export class ToastService {
   
   presentDanger(mensaje:string) {    
     this.toast(mensaje, this.COLOR_DANGER);
+    this.vibrateService.on20Seconds();
   }
 
   async toast(mensaje:string, color:string){

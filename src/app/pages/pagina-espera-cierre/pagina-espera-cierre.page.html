@@ -1,0 +1,66 @@
+<ion-header [hidden]="lectorqrService.scanActive" >
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="first"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Disfruta de tu pedido</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [class]="lectorqrService.scanActive ? 'scan':'site'" >
+  <ion-grid [hidden]="lectorqrService.scanActive" >
+    <!-- encuesta -->
+    <ion-row>
+      <ion-col>                    
+        <p> Conocé las opiniones acerca de nosotros </p>
+        <ion-button type="button" expand="block" color="tertiary" *ngIf="this.mostrarEncuesta" (click)="this.irAEncuesta()" >Realizar encuesta</ion-button>                                            
+        <ion-button type="button" expand="block" color="tertiary" *ngIf="!this.mostrarEncuesta" (click)="irAResultadosEncuesta()" >Ver resultado de encuestas</ion-button>                                            
+
+        <ion-button type="button" expand="block" color="primary"  (click)="testEscanearQRMesa1()" >Como si escaneo el QR de la mesa 1 </ion-button>
+        <div *ngIf="pedido.estadoPedido == Estado.CONFIRMADO">
+          <ion-button type="button" expand="block" color="primary" (click)="pedirCuenta()" >Pedir cuenta </ion-button>
+        </div>
+        <div *ngIf="pedido.estadoPedido == Estado.APAGAR">
+          <ion-button type="button" expand="block" color="primary" (click)="pedirCuenta()" >Pedir cuenta </ion-button>
+        </div>
+      </ion-col>
+    </ion-row>    
+
+    <ion-row  *ngIf="this.pedido.estadoPedido == Estado.PENDIENTEPAGO">
+      <ion-col>          
+        <p> Podes solicitar la cuenta escaneando el qr en el detalle de tu factura  </p>          
+      </ion-col>
+    </ion-row>  
+
+    <ion-row  *ngIf="this.pedido.estadoPedido == Estado.PAGADO">
+      <ion-col>          
+        <p> Cuando el mozo traera tu cuenta  </p>          
+      </ion-col>
+    </ion-row>      
+
+    <ion-row  *ngIf="this.pedido.estadoPedido == Estado.PAGOCONFIRMADO">
+      <ion-col>          
+        <p> Cuando realices el pago el Mozo lo indicara y la mesa quedara liberada  </p>          
+      </ion-col>
+    </ion-row>      
+
+
+    </ion-grid>
+    <div class="scanbox" [hidden]="!lectorqrService.scanActive">
+    </div>
+</ion-content>
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button fill="solid" class="scanear" size="large" expand="full" class="qrlista" (click)="escanearQr()" [hidden]="lectorqrService.scanActive">
+          <ion-icon name="qr-code-sharp" slot="start"></ion-icon>          
+          <ion-label>QR Mesa  </ion-label>
+        </ion-button>
+        <ion-button fill="solid"  class="scanear"  size="large" expand="full"  (click)="deternerScaner()" [hidden]="!lectorqrService.scanActive" >
+          <ion-icon name="qr-code-sharp" slot="start"></ion-icon>          
+          <ion-label>Detener</ion-label>
+        </ion-button>            
+      </ion-col>
+    </ion-row>
+  </ion-grid>  
+</ion-footer>

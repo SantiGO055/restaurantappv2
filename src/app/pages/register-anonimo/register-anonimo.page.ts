@@ -6,6 +6,7 @@ import { SpinnerService } from '../../services/spinner.service';
 import { Router } from '@angular/router';
 import {  ModalController } from '@ionic/angular';
 import { AvatarPage } from '../avatar/avatar.page';
+import { LectorQrDniService } from '../../services/lectorqrdni.service';
 
 @Component({
   selector: 'app-register-anonimo',
@@ -26,18 +27,38 @@ export class RegisterAnonimoPage implements OnInit {
     public spinnerService: SpinnerService,
     public router: Router,
     public modalController: ModalController ,
+    public lectorqrService:LectorQrDniService,        
   ) {
     this.isSubmitted = false;
     this.avatarUrl = null;
   }
+ 
+
 
   ngOnInit() {
     this.errorMessage = '';
     this.isSubmitted = false;
     this.ionicRegister = this.formBuilder.group({
+      dni: ['',[Validators.required, Validators.minLength(8)]],
       nombre: ['',[Validators.required, Validators.minLength(6)]],
     });
   }
+
+  
+  ngAfterViewInit() {
+    this.lectorqrService.preapare();    
+  }    
+
+  async escanearQr()
+  {
+    const resultado = await this.lectorqrService.escanear();                       
+    this.nombre.setValue(resultado.apellido+' '+resultado.nombre);    
+    this.dni.setValue(resultado.numero);
+  }
+
+  deternerScaner(){
+    this.lectorqrService.stopScan();
+  }  
 
   async presentModal() {
     const modal = await this.modalController.create({
@@ -60,6 +81,11 @@ export class RegisterAnonimoPage implements OnInit {
     return this.ionicRegister.get('nombre');
   }
 
+  get dni() {
+    return this.ionicRegister.get('dni');
+  }
+  
+
   async register() {
     try {
       this.isSubmitted = true;
@@ -68,11 +94,12 @@ export class RegisterAnonimoPage implements OnInit {
       } else {
         this.spinnerService.mostrarSpinner();                
         const name =this.ionicRegister.get('nombre').value;
-        this.loginService.loginAnonimo(name, this.avatarUrl).then(
+        const dni = this.ionicRegister.get('dni').value;
+        this.loginService.loginAnonimo(name, dni, this.avatarUrl).then(
           async (res) => {
             this.spinnerService.ocultarSpinner();            
             this.resetForm();
-            this.router.navigateByUrl('dashboard/home');
+            this.router.navigateByUrl('/dashboard/pagina-ingreso');
           },
           async (error) => {
             console.log(error);

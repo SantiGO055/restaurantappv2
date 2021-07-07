@@ -1,0 +1,29 @@
+<ion-header >
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="first"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Lo que dicen de nosotros</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="ion-padding">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Nuestra atención </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div id="barChart" style="width:340px;height: 400px;"></div>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Limpieza</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div id="pieChart" style="width:340px; height:400px;"></div>
+      </ion-card-content>
+    </ion-card>
+    <ion-button type="button" expand="block" color="tertiary"  (click)="volverAPaginaPrevia()" >Volver</ion-button>           
+  </div>
+</ion-content>
