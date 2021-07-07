@@ -13,8 +13,9 @@ import { NotificationService } from 'src/app/services/notification.service';
 import { UsersService } from 'src/app/services/users.service';
 import { ModalController } from '@ionic/angular';
 import { NavParams } from '@ionic/angular';
-import { Rol } from 'src/app/enums/rol';
-import { MesasService } from 'src/app/services/mesas.service';
+import { Rol } from '../../enums/rol';
+import { MesasService } from '../../services/mesas.service';
+import { Content } from '@angular/compiler/src/render3/r3_ast';
 
 @Component({
   selector: 'app-chat',
@@ -22,6 +23,8 @@ import { MesasService } from 'src/app/services/mesas.service';
   styleUrls: ['./chat.component.scss'],
 })
 export class ChatComponent implements OnInit {
+  
+
   mensajeObj: Mensaje = new Mensaje();
   user: User;
   userAux: User;
@@ -41,7 +44,8 @@ export class ChatComponent implements OnInit {
 
   @ViewChild('scroller') private divMensaje!: ElementRef;
   items:Array<string>=[];
-
+  @ViewChild('content') private content: any;
+  contentAux: any;
 
 
   constructor(private chatSvc: ChatService,
@@ -53,6 +57,7 @@ export class ChatComponent implements OnInit {
     private mesas: MesasService
     
     ) {
+      var contentAux = this.content;
       this.cargarMensajes();
       // this.uid = localStorage.getItem('uidLogueado');
      }
@@ -63,10 +68,25 @@ export class ChatComponent implements OnInit {
     
       
   }
+  
+
+  scrollToBottomOnInit() {
+    setTimeout(() => {
+      if (this.content.scrollToBottom) {
+          this.content.scrollToBottom(400);
+          this.content.scrollToBottom = null;
+          
+      }
+
+      
+    }, 500);
+  }
+  
+
   ngOnInit(): void {
     
     
-
+    // this.scrollToBottomOnInit();
     // $(document).ready(function(){
     //   $('[data-toggle="tooltip"]').tooltip();
     // });
@@ -109,19 +129,22 @@ export class ChatComponent implements OnInit {
     
     this.mostrarChat = event;
   }
-  scrollToBottom(): void {
-    console.log(this.divMensaje)
-    if(this.divMensaje.nativeElement != undefined){
+  // scrollToBottom(duration?: number): void {
+  //   console.log(this.divMensaje)
+  //   if(this.divMensaje.nativeElement != undefined){
 
-      this.divMensaje.nativeElement.scrollTop = this.divMensaje.nativeElement.scrollHeight;
+  //     this.divMensaje.nativeElement.scrollTop = this.divMensaje.nativeElement.scrollHeight;
       
 
-    }
-  }
+  //   }
+  // }
   ngAfterViewChecked() {
+    this.scrollToBottomOnInit();
+    
+
     // console.log("afterviewchecked");
     // console.log(this.divMensaje.nativeElement.value);
-    this.scrollToBottom();
+    // this.scrollToBottom();
   }
   // ngAfterViewInit() {
   //   console.log("afterinit");
@@ -157,7 +180,7 @@ export class ChatComponent implements OnInit {
   // }
   enviarMensaje(){
     
-    
+    // this.content = this.contentAux;
       console.info(this.user);
       if(this.mensaje != ''){
         console.info(this.mensaje);

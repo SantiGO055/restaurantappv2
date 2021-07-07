@@ -1,7 +1,7 @@
-<ion-content>
+<ion-content padding #content>
   <ion-fab vertical="top" horizontal="start" slot="fixed">
   
-    <ion-button (click)="dismiss()" color="tertiary">
+    <ion-button (click)="dismiss()" color="secondary">
       Cerrar chat
     </ion-button>
   
@@ -9,7 +9,7 @@
   <div *ngIf="uid != null">
 
  
-  <div class="contenedorBotonYChat" >  
+  <!-- <div class="contenedorBotonYChat" >  
     <div >
       <div class="contenedor">
         <div class="">
@@ -18,7 +18,7 @@
             <div class="panel panel-primary">
               
               <div class="panel-body" #scroller>
-                <!-- <div *ngIf="this.sala4a === 'sala4a'"> -->
+                <div *ngIf="this.sala4a === 'sala4a'">
                   
                   <ul class="chat" *ngFor="let mensj of listadoMensajes; let i = index"
                   [class.scrollBody]="mensj != null"
@@ -31,7 +31,7 @@
                 <div class="chat-message">
                   <div class="right-bubble" [ngClass]="{'right-bubble': mensj.usuario.uid === this.uid, 'left-bubble': mensj.usuario.uid !== this.uid}">
                     
-                    <!-- <span class="msg-name" *ngIf="mensaje.usuario.username === localStorageUsername">Yo</span> -->
+                    <span class="msg-name" *ngIf="mensaje.usuario.username === localStorageUsername">Yo</span>
                     <span class="msg-name" *ngIf="mensj.usuario.perfil !== localStorageUsername"><strong></strong></span>
                     <span class="msg-name" *ngIf="mensj.usuario.rol == 'mozo'"><strong>Mozo:</strong></span>
                     <span class="msg-name" *ngIf="mensj.usuario.rol == 'cocinero'"><strong>Cocinero:</strong></span>
@@ -58,7 +58,7 @@
                 <ion-input id="btn-input" type="text" class="form-control input-sm" placeholder="Ingrese mensaje..." [(ngModel)]="mensaje"></ion-input>
                 <span class="botonSubmit">
                   
-                  <!-- <button type="submit" class="acceso-rapido-button" (click)="enviarMensaje()"><ion-icon size="large" name="arrow-redo-outline"></ion-icon></button> -->
+                  <button type="submit" class="acceso-rapido-button" (click)="enviarMensaje()"><ion-icon size="large" name="arrow-redo-outline"></ion-icon></button>
                   
                 </span>
               </div>
@@ -69,7 +69,7 @@
     </div>
   </div>
   
-</div>
+</div> -->
 
 </div>
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
@@ -77,4 +77,50 @@
     <ion-icon name="arrow-forward-circle"></ion-icon>
   </ion-fab-button>
 </ion-fab>
+
+
+
+<ion-list >    
+
+
+  <div *ngFor="let mensaje of this.listadoMensajes; let i = index"
+  [class.scrollBody]="mensaje != null"
+  [class.active]="i == currentIndex"
+  >
+  <div class="chat-message">
+
+  
+    <div class="right-bubble" [ngClass]="{'right-bubble': mensaje.usuario.uid === this.uid, 'left-bubble': mensaje.usuario.uid !== this.uid}">
+      
+      <!-- <span class="msg-name" *ngIf="mensaje.usuario.username === localStorageUsername">Yo</span> -->
+      <span class="msg-name" *ngIf="mensaje.usuario.perfil !== localStorageUsername"><strong></strong></span>
+      <span class="msg-name" *ngIf="mensaje.usuario.rol == 'mozo'"><strong>Mozo:</strong></span>
+      <span class="msg-name" *ngIf="mensaje.usuario.rol == 'cocinero'"><strong>Cocinero:</strong></span>
+      <span class="msg-name" *ngIf="mensaje.usuario.rol == 'duenio'"><strong>Dueño:</strong></span>
+      <span class="msg-name" *ngIf="mensaje.usuario.rol == 'maitre'"><strong>Maitre:</strong></span>
+      <span class="msg-name" *ngIf="mensaje.usuario.rol == 'cliente'"><strong>Mesa: {{mensaje.usuario.mesa}}</strong></span>
+      
+      <div class="messageContent">
+        {{ mensaje.mensaje }}
+      </div>
+      <span class="timestamp" >
+        {{ mensaje.hora | date:'medium' }}
+      </span> 
+      
+    </div>
+  </div>
+    
+    
+  </div>
+  
+  
+<ion-item vertical="bottom" slot="fixed">
+  <ion-input placeholder="Ingrese mensaje" [(ngModel)]="mensaje">
+
+  </ion-input>
+
+</ion-item>
+
+
+</ion-list>
 </ion-content>
