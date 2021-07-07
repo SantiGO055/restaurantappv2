@@ -64,10 +64,21 @@
           >
             <ion-label> Pedidos solicitados </ion-label><ion-icon name="list-outline"></ion-icon>
           </ion-item>
+          <!--listado de pedido para cocinero -->          
+          <ion-item
+            *ngIf="this.accesosCocinero"
+            routerLink="/dashboard/listado-pedido-cocinero"
+            routerDirection="root"
+            routerLinkActive="active-item"
+          >
+          <ion-label> Elaborar productos </ion-label><ion-icon name="fast-food-outline"></ion-icon>           
+          </ion-item>
+
           <!-- logout -->
           <ion-item (click)="logout()"  routerLinkActive="active-item" routerDirection="root" >            
             <ion-label> Cerrar sesion  </ion-label>  <ion-icon name="exit-outline"></ion-icon>
           </ion-item>
+          
         </ion-menu-toggle>
       </ion-list>
     </ion-content>

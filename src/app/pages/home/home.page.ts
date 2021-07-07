@@ -12,6 +12,7 @@ import { ChatComponent } from 'src/app/components/chat/chat.component';
 import { ChatService } from 'src/app/services/chat.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { UsersService } from 'src/app/services/users.service';
+import { environment } from '../../../environments/environment';
 
 
 @Component({
@@ -39,6 +40,11 @@ export class HomePage implements OnInit {
     ) { 
     
   }
+
+  get showTestButton():boolean{
+    return environment.testButtons;
+  }
+
   ngOnInit() {
     this.loginSvc.usuarioLogueado.then(usr=>{
       console.log(usr)
