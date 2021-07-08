@@ -1,11 +1,11 @@
 <ion-content  [class]="lectorqrService.scanActive ? 'scan':'site'">
-  <form [formGroup]="ionicRegister" (ngSubmit)="register()" novalidate  [hidden]="lectorqrService.scanActive"  >
+  <form class="background-gradient" [formGroup]="ionicRegister" (ngSubmit)="register()" novalidate  [hidden]="lectorqrService.scanActive"  >
     <ion-grid>      
       <ion-row>
         <ion-col>
           <ion-img *ngIf="avatarUrl" [src]="avatarUrl" alt="Tomar foto"></ion-img>
           <ion-img *ngIf="!avatarUrl" src="assets/avatar/noexist.png" alt="Tomar foto"></ion-img>          
-          <ion-button expand="block" class="foto"   color="tertiary" (click)="presentModal()" >
+          <ion-button shape="round" expand="block" class="foto"   color="tertiary" (click)="presentModal()" >
             <ion-icon slot="start" name="camera-outline"></ion-icon>
             Sacarme una foto
           </ion-button>          
@@ -47,12 +47,12 @@
               El nombre debe tener al menos cuatro caracteres.</span
             >
           </div>
-          <ion-button type="submit" expand="block" color="tertiary" [disabled]="!avatarUrl || ionicRegister.invalid">Solicitar cuenta</ion-button>          
         </ion-col>
-      </ion-row>            
+      </ion-row>           
       <ion-row>
-        <ion-col>                    
-          <ion-button type="button" expand="block" color="tertiary" [routerLink]="['/login']"  >¡ Volver  !</ion-button>
+        <ion-col>          
+          <ion-button shape="round" type="submit" expand="block" color="tertiary" [disabled]="!avatarUrl || ionicRegister.invalid">Solicitar cuenta</ion-button>          
+          <ion-button shape="round" type="button" expand="block" color="tertiary" [routerLink]="['/login']"  >¡ Volver  !</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -64,11 +64,11 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-button fill="solid" class="scanear" size="large" expand="full" class="qrlista" (click)="escanearQr()" [hidden]="lectorqrService.scanActive">
+        <ion-button shape="round" fill="solid" class="scanear" size="large" expand="full" class="qrlista" (click)="escanearQr()" [hidden]="lectorqrService.scanActive">
           <ion-icon name="qr-code-sharp" slot="start"></ion-icon>          
           <ion-label>Scanear DNI </ion-label>
         </ion-button>
-        <ion-button fill="solid"  class="scanear"  size="large" expand="full"  (click)="deternerScaner()" [hidden]="!lectorqrService.scanActive" >
+        <ion-button shape="round" fill="solid"  class="scanear"  size="large" expand="full"  (click)="deternerScaner()" [hidden]="!lectorqrService.scanActive" >
           <ion-icon name="qr-code-sharp" slot="start"></ion-icon>          
           <ion-label>Detener</ion-label>
         </ion-button>            

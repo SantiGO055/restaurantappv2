@@ -68,3 +68,21 @@ ion-content.scan{
     transform: translate(-50%, -50%);
     width:300px;
 }
+
+.background-gradient {
+    background: linear-gradient(-45deg, #3C5186, #9B72AA, #C6B4CE, #FFF5DE);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}

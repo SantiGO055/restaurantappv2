@@ -107,8 +107,8 @@
       <div  *ngIf="progress  > 0 && progress < 100">
         <ion-progress-bar  *ngIf="progress | async as percent" [value]="percent" max="100" ></ion-progress-bar>
         <ion-buttons>
-          <ion-button ion-button (click)="task.pause()" color="red" >Pausar</ion-button>
-          <ion-button ion-button (click)="task.resume()" color="green" >Continuar</ion-button>
+          <ion-button shape="round" ion-button (click)="task.pause()" color="red" >Pausar</ion-button>
+          <ion-button shape="round" ion-button (click)="task.resume()" color="green" >Continuar</ion-button>
         </ion-buttons>  
       </div>
       <!-- <ion-toolbar class="ion-no-border ion-text-center " *ngIf="photoBase64" >    
@@ -124,15 +124,15 @@
         </ion-grid>    
       </ion-toolbar> -->
     </ion-item>
-    <ion-button *ngIf="mostrarFoto" expand="block" class="foto"  color="tertiary" (click)="tomarFoto()" >
+    <ion-button shape="round" *ngIf="mostrarFoto" expand="block" class="foto"  color="tertiary" (click)="tomarFoto()" >
       <ion-icon slot="start" name="camera-outline"></ion-icon>
       Subir otra foto
     </ion-button>
-    <ion-button *ngIf="!mostrarFoto" expand="block" class="foto"  color="tertiary" (click)="tomarFoto()" >
+    <ion-button shape="round" *ngIf="!mostrarFoto" expand="block" class="foto"  color="tertiary" (click)="tomarFoto()" >
       <ion-icon slot="start" name="camera-outline"></ion-icon>
       Subir una foto
     </ion-button>
-    <ion-button *ngIf="mostrarFoto" expand="block" class="foto"  color="tertiary" (click)="enviarEncuesta()" >
+    <ion-button shape="round" *ngIf="mostrarFoto" expand="block" class="foto"  color="tertiary" (click)="enviarEncuesta()" >
       <ion-icon name="arrow-forward-circle-outline"></ion-icon>
       Enviar encuesta
     </ion-button>

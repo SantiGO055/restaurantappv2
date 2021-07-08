@@ -41,10 +41,10 @@
             <!-- *ngIf="usuarioLogueado.rol == 'mozo'&&-->
             <!-- <ion-button   expand="full"></ion-button> -->
             
-            <ion-button *ngIf="pedido.estadoPedido === Estado.PENDIENTE" type="button" expand="block" color="tertiary" (click)="this.aceptarPedido(pedido)">Aceptar</ion-button>
-            <ion-button *ngIf="pedido.estadoPedido === Estado.PREPARADO" type="button" expand="block" color="tertiary" (click)="this.entregarPedido(pedido)">Entregar pedido</ion-button>
-            <ion-button *ngIf="pedido.estadoPedido === Estado.PENDIENTEPAGO" type="button" expand="block" color="tertiary" (click)="this.confirmarPago(pedido)">Confirmar pago</ion-button>
-            <ion-button *ngIf="pedido.estadoPedido === Estado.PAGADO" type="button" expand="block" color="tertiary" (click)="this.liberarMesa(pedido)">Liberar mesa</ion-button>
+            <ion-button shape="round" *ngIf="pedido.estadoPedido === Estado.PENDIENTE" type="button" expand="block" color="tertiary" (click)="this.aceptarPedido(pedido)">Aceptar</ion-button>
+            <ion-button shape="round" *ngIf="pedido.estadoPedido === Estado.PREPARADO" type="button" expand="block" color="tertiary" (click)="this.entregarPedido(pedido)">Entregar pedido</ion-button>
+            <ion-button shape="round" *ngIf="pedido.estadoPedido === Estado.PENDIENTEPAGO" type="button" expand="block" color="tertiary" (click)="this.confirmarPago(pedido)">Confirmar pago</ion-button>
+            <ion-button shape="round" *ngIf="pedido.estadoPedido === Estado.PAGADO" type="button" expand="block" color="tertiary" (click)="this.liberarMesa(pedido)">Liberar mesa</ion-button>
             <!-- <ion-fab-button  >Aceptar</ion-fab-button> -->
   
   

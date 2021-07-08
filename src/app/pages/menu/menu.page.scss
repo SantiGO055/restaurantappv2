@@ -4,12 +4,9 @@
 }
 ion-footer{
     position: fixed;
-    bottom: 1%;
+    bottom: 0%;
     width: 100%;
     justify-content : center;
-    --border-color: rgb(0, 0, 0);
-    border-width: .01em;
-    border-style:solid;
 }
 .consultar{
     bottom: 8%;
@@ -19,8 +16,21 @@ ion-footer{
     --ion-background-color: #9a9fd1;
     
 }
-ion-card{
+ion-card, ion-toolbar{
     --border-color: rgb(0, 0, 0);
     border-width: .01em;
     border-style:solid;
+    background-color: transparent;
+}
+
+.footer{
+    width: 100%;
+}
+
+.toolbar{
+    padding: 5px;
+}
+
+.list{
+    margin-bottom: 110px;
 }

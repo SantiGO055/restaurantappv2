@@ -1,6 +1,5 @@
 <ion-content>  
-  
-  <form [formGroup]="ionicForm"  novalidate (ngSubmit)="login()">
+    <form class="background-gradient" [formGroup]="ionicForm"  novalidate (ngSubmit)="login()">
     <ion-grid>
       <ion-row>
         <ion-col>
@@ -32,20 +31,19 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-button type="submit" expand="block" color="tertiary" [disabled]="!ionicForm.valid" >Ingresar</ion-button>                              
+          <ion-button shape="round" type="submit" expand="block" color="tertiary" [disabled]="!ionicForm.valid" >Ingresar</ion-button>                              
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
           <hr/>
-          <ion-button type="button" expand="block" color="tertiary"  [routerLink]="['/register-anonimo']"  >Ingresar Anonimamente</ion-button>                              
-          <ion-button type="button" expand="block" color="tertiary"  [routerLink]="['/register']" >¡ Registrate en Club Tito !</ion-button>                        
+          <ion-button shape="round" type="button" expand="block" color="tertiary"  [routerLink]="['/register-anonimo']"  >Ingresar Anonimamente</ion-button>                              
+          <ion-button shape="round" type="button" expand="block" color="tertiary"  [routerLink]="['/register']" >¡ Registrate en Club Tito !</ion-button>                        
         </ion-col>
       </ion-row>
     </ion-grid>
-  </form>
+    </form>
 </ion-content>
-
 <ion-footer class="ion-no-border ion-text-center">
   <ion-list>
     <ion-item>

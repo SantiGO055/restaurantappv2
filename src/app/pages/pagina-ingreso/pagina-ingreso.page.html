@@ -12,14 +12,14 @@
     <ion-row>
       <ion-col>                    
         <p> Conocé las opiniones acerca de nosotros </p>
-        <ion-button type="button" expand="block" color="tertiary" (click)="irAResultadosEncuestas()" >Ver resultados de encuesta</ion-button>                                                    
+        <ion-button shape="round" type="button" expand="block" color="tertiary" (click)="irAResultadosEncuestas()" >Ver resultados de encuesta</ion-button>                                                    
       </ion-col>
     </ion-row>
     <!-- previo a asignar mesa  -->
       <ion-row *ngIf="!this.enListaEspera"  >
         <ion-col>          
           <p> Agregate a lista de espera escaneando el QR que encontraras en la puerta  </p>          
-          <ion-button type="button" expand="block" color="tertiary" (click)="testQRValido()" >Como si escaneo el QR  de la puerta</ion-button>
+          <ion-button shape="round" type="button" expand="block" color="tertiary" (click)="testQRValido()" >Como si escaneo el QR  de la puerta</ion-button>
         </ion-col>
       </ion-row>      
       <!-- mesa a asignar -->
@@ -36,11 +36,11 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-button fill="solid" class="scanear" size="large" expand="full" class="qrlista" (click)="escanearQr()" [hidden]="lectorqrService.scanActive">
+        <ion-button shape="round" fill="solid" class="scanear" size="large" expand="full" class="qrlista" (click)="escanearQr()" [hidden]="lectorqrService.scanActive">
           <ion-icon name="qr-code-sharp" slot="start"></ion-icon>          
           <ion-label>QR lista de espera </ion-label>
         </ion-button>
-        <ion-button fill="solid"  class="scanear"  size="large" expand="full"  (click)="deternerScaner()" [hidden]="!lectorqrService.scanActive" >
+        <ion-button shape="round" fill="solid"  class="scanear"  size="large" expand="full"  (click)="deternerScaner()" [hidden]="!lectorqrService.scanActive" >
           <ion-icon name="qr-code-sharp" slot="start"></ion-icon>          
           <ion-label>Detener</ion-label>
         </ion-button>            

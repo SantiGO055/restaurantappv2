@@ -12,15 +12,15 @@
     <ion-row>
       <ion-col>                    
         <p> Conocé las opiniones acerca de nosotros </p>
-        <ion-button type="button" expand="block" color="tertiary" *ngIf="this.mostrarEncuesta" (click)="this.irAEncuesta()" >Realizar encuesta</ion-button>                                            
-        <ion-button type="button" expand="block" color="tertiary" *ngIf="!this.mostrarEncuesta" (click)="irAResultadosEncuesta()" >Ver resultado de encuestas</ion-button>                                            
+        <ion-button shape="round" type="button" expand="block" color="tertiary" *ngIf="this.mostrarEncuesta" (click)="this.irAEncuesta()" >Realizar encuesta</ion-button>                                            
+        <ion-button shape="round" type="button" expand="block" color="tertiary" *ngIf="!this.mostrarEncuesta" (click)="irAResultadosEncuesta()" >Ver resultado de encuestas</ion-button>                                            
 
-        <ion-button type="button" expand="block" color="primary"  (click)="testEscanearQRMesa1()" >Como si escaneo el QR de la mesa 1 </ion-button>
+        <ion-button shape="round" type="button" expand="block" color="primary"  (click)="testEscanearQRMesa1()" >Como si escaneo el QR de la mesa 1 </ion-button>
         <div *ngIf="pedido.estadoPedido == Estado.CONFIRMADO">
-          <ion-button type="button" expand="block" color="primary" (click)="pedirCuenta()" >Pedir cuenta </ion-button>
+          <ion-button shape="round" type="button" expand="block" color="primary" (click)="pedirCuenta()" >Pedir cuenta </ion-button>
         </div>
         <div *ngIf="pedido.estadoPedido == Estado.APAGAR">
-          <ion-button type="button" expand="block" color="primary" (click)="pedirCuenta()" >Pedir cuenta </ion-button>
+          <ion-button shape="round" type="button" expand="block" color="primary" (click)="pedirCuenta()" >Pedir cuenta </ion-button>
         </div>
       </ion-col>
     </ion-row>    
@@ -52,11 +52,11 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-button fill="solid" class="scanear" size="large" expand="full" class="qrlista" (click)="escanearQr()" [hidden]="lectorqrService.scanActive">
+        <ion-button shape="round" fill="solid" class="scanear" size="large" expand="full" class="qrlista" (click)="escanearQr()" [hidden]="lectorqrService.scanActive">
           <ion-icon name="qr-code-sharp" slot="start"></ion-icon>          
           <ion-label>QR Mesa  </ion-label>
         </ion-button>
-        <ion-button fill="solid"  class="scanear"  size="large" expand="full"  (click)="deternerScaner()" [hidden]="!lectorqrService.scanActive" >
+        <ion-button shape="round" fill="solid"  class="scanear"  size="large" expand="full"  (click)="deternerScaner()" [hidden]="!lectorqrService.scanActive" >
           <ion-icon name="qr-code-sharp" slot="start"></ion-icon>          
           <ion-label>Detener</ion-label>
         </ion-button>            
