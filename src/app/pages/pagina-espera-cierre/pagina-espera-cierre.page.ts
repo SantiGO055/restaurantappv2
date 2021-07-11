@@ -8,6 +8,7 @@ import { MenuService } from 'src/app/services/menu.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { MesasService } from 'src/app/services/mesas.service';
 import { ToastService } from 'src/app/services/toast.service';
+import { environment } from '../../../environments/environment.prod';
 
 @Component({
   selector: 'app-pagina-espera-cierre',
@@ -87,6 +88,12 @@ export class PaginaEsperaCierrePage implements OnInit {
   deternerScaner(){
     this.lectorqrService.stopScan();
   }  
+
+
+  get showTestButton():boolean{
+    return environment.testButtons;
+  }
+
 
   irAEncuesta(){
     //@todo en la version larga aca hiria a juegos
