@@ -66,6 +66,12 @@ export class User {
 
   
 
+  static puedeEscanearQRListaEspera(user: User): boolean {
+    return (
+      user.rol == Rol.CLIENTE &&  user.estado == null 
+    );
+  }
+
   static puedeAccederAListaEspera(user: User): boolean {
     return (
       user.rol == Rol.CLIENTE && ( user.estado == null || user.estado == clienteEstado.EN_LISTA_ESPERA ) 

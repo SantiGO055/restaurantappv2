@@ -39,8 +39,11 @@ export class PaginaIngresoPage implements OnInit {
     private push: NotificationService
   ) {       
     this.enListaEspera = false;        
-    this.loginService.usuarioLogueado.then(usr=>{
+    this.loginService.usuarioLogueado.then((usr:User)=>{
       this.usuarioLogueado = usr;
+      if(!User.puedeEscanearQRListaEspera(usr)){
+        this.enListaEspera = true;
+      }
     });
   }
 
