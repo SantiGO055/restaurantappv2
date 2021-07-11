@@ -14,9 +14,9 @@
           <ion-button shape="round" type="button" expand="block" color="tertiary"  (click)="irAResultadosEncuestas()" >Ver resultados de encuesta</ion-button>                                            
 
           <!-- sacar al momento de test -->
-          <ion-button shape="round" type="button" expand="block" color="tertiary"  (click)="suponerEscaneoMesa1()" >Escanear QR Mesa 1</ion-button>                                                      
-          <ion-button shape="round" type="button" expand="block" color="tertiary"  (click)="suponerEscaneoMesa2()" >Escanear QR Mesa 2</ion-button>                                                      
-          <ion-button shape="round" type="button" expand="block" color="tertiary"  (click)="suponerEscaneoMesa3()" >Escanear QR Mesa 3</ion-button>                                            
+          <ion-button shape="round" *ngIf="this.showTestButton" type="button" expand="block" color="tertiary"  (click)="suponerEscaneoMesa1()" >Escanear QR Mesa 1</ion-button>                                                      
+          <ion-button shape="round" *ngIf="this.showTestButton" type="button" expand="block" color="tertiary"  (click)="suponerEscaneoMesa2()" >Escanear QR Mesa 2</ion-button>                                                      
+          <ion-button shape="round" *ngIf="this.showTestButton" type="button" expand="block" color="tertiary"  (click)="suponerEscaneoMesa3()" >Escanear QR Mesa 3</ion-button>                                            
           
 
 
