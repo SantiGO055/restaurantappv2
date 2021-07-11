@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { User } from '../../entities/user';
 import { Pedido } from '../../entities/pedido';
 import { MenuService } from '../../services/menu.service';
+import { environment } from '../../../environments/environment.prod';
 
 @Component({
   selector: 'app-pagina-espera-elaboracion',
@@ -57,6 +58,11 @@ export class PaginaEsperaElaboracionPage implements OnInit {
 
   irAResumenPedido(){    
     this.router.navigateByUrl('/dashboard/resumen-pedido');
+  }
+
+
+  get showTestButton():boolean{
+    return environment.testButtons;
   }
 
 }

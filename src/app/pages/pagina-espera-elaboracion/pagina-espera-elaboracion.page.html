@@ -11,7 +11,7 @@
     <!-- encuesta -->
     <ion-row>
       <ion-col>                      
-        <ion-button shape="round" type="button" expand="block" color="primary" (click)="testEscanearQRMesa1()" >Como si escaneo el QR de la mesa 1 </ion-button>
+        <ion-button shape="round"  *ngIf="this.showTestButton" type="button" expand="block" color="primary" (click)="testEscanearQRMesa1()" >Como si escaneo el QR de la mesa 1 </ion-button>
       </ion-col>
     </ion-row>    
       <ion-row  >
