@@ -21,9 +21,11 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { SysErrorHandler } from './services/sysErrorHandler';
 import { UserNamePipe } from './pipes/user-name.pipe';
 import { Vibration } from '@ionic-native/vibration/ngx';
+import { EstadoPedidoPipe } from './estado-pedido.pipe';
+import { PipesModule } from './pipes/pipes.module';
 
 @NgModule({
-  declarations: [AppComponent, UserNamePipe],
+  declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule, 
@@ -36,6 +38,7 @@ import { Vibration } from '@ionic-native/vibration/ngx';
     HttpClientModule,
     NgxSpinnerModule,
     AngularFireDatabaseModule,
+    PipesModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
