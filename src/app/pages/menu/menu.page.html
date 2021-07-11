@@ -38,7 +38,7 @@
       <ion-toolbar class="toolbar">
         <ion-title><strong>Total: $ {{total.toFixed(2)}}</strong></ion-title>
         <ion-title><strong>Tiempo estimado: {{tiempoElaboracion}} min</strong></ion-title>        
-        <ion-button shape="round" type="submit" expand="block" color="tertiary" (click)="enviarPedido()">Pedir</ion-button>        
+        <ion-button id="boton-pedir" shape="round" type="submit" expand="block" color="primary" (click)="enviarPedido()">Pedir</ion-button>        
       </ion-toolbar> 
     </ion-footer>
   </div>

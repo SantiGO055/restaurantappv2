@@ -1,5 +1,5 @@
 <ion-content  [class]="lectorqrService.scanActive ? 'scan':'site'">
-  <form class="background-gradient" [formGroup]="ionicRegister" (ngSubmit)="register()" novalidate  [hidden]="lectorqrService.scanActive"  >
+  <form [formGroup]="ionicRegister" (ngSubmit)="register()" novalidate  [hidden]="lectorqrService.scanActive"  >
     <ion-grid>      
       <ion-row>
         <ion-col>

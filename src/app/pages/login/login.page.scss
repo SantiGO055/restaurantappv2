@@ -1,7 +1,7 @@
 ion-content {
     --ion-grid-column-padding:        5px;
     --padding-top:0%;
-    --background: var(--ion-color-primary, #546192) ;
+    --background: linear-gradient(-45deg, #FFF5DE, #C6B4CE, #9B72AA, #3C5186);
     ion-img{
         width:50%;
         margin:0 25%;        
@@ -52,22 +52,4 @@ ion-fab-list ion-fab-button{
     width: 50px;
     height: 50px;
     font-size: 0.7em;
-}
-
-.background-gradient {
-    background: linear-gradient(-45deg, #3C5186, #9B72AA, #C6B4CE, #FFF5DE);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
-}
-
-@keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
 }
