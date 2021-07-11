@@ -7,34 +7,30 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-list>   
-     
-      <ion-item *ngFor="let registro of this.registros">     
-        <div *ngIf="registro.aprobado == null">
-
+  <ion-list>        
+      <ion-item *ngFor="let registro of this.registros">            
           <ion-avatar slot="start">
             <ion-img [src]="registro.photoURL" [alt]="registro.displayName"
             ></ion-img>
           </ion-avatar>
           <ion-label>
             <h2>{{ registro.displayName }}</h2>
-            <h3>>{{ registro.dni }}</h3>                              
+            <h3>{{ registro.dni }}</h3>                  
             <ion-grid>
               <ion-row>
                 <ion-col>
-                  <ion-button shape="round" color="success" (click)="this.aceptarRegistro(registro)" >
-                    <ion-icon name="add-outline"></ion-icon>
+                  <ion-button shape="round" class="btnaccion" color="success" (click)="this.aceptarRegistro(registro)" expand="full" >
+                    <ion-icon name="enter-outline"></ion-icon>
                   </ion-button>
                 </ion-col>
                 <ion-col>
-                  <ion-button shape="round" color="danger"  (click)="this.rechazarRegistro(registro)">
+                  <ion-button shape="round" color="danger" class="btnaccion" (click)="this.rechazarRegistro(registro)" expand="full" >
                     <ion-icon name="close-outline"></ion-icon>
                   </ion-button>
                 </ion-col>
               </ion-row>
-            </ion-grid>
-          </ion-label>
-        </div>   
+            </ion-grid>       
+          </ion-label>       
       </ion-item>
 
 

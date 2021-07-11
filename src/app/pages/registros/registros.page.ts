@@ -35,7 +35,7 @@ export class RegistrosPage implements OnInit {
   ngOnInit() {
     this.spinnerService.mostrarSpinner();    
     this.registroService.registros.subscribe( registros=> {
-      this.registros = registros;  
+      this.registros = registros.filter( registro => registro.aprobado == null);  
       console.log(this.registros)    
       this.spinnerService.ocultarSpinner();
     });   
