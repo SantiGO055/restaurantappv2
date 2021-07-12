@@ -22,7 +22,7 @@ export class EstadoPedidoPipe implements PipeTransform {
         result = 'Pendiente de pago';
         break;
       default:
-        result = value.toLocaleUpperCase() + value.substring(1).toLocaleLowerCase();
+        result = value[0].toLocaleUpperCase() + value.substring(1).toLocaleLowerCase();
     }
 
     return result;
