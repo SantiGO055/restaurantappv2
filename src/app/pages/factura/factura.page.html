@@ -3,7 +3,7 @@
     <ion-buttons shape="round" slot="start">
       <ion-menu-button menu="first"></ion-menu-button>
     </ion-buttons>
-    <ion-title>Escanea tu mesa</ion-title>
+    <ion-title>Tu factura</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content [class]="lectorqrService.scanActive ? 'scan':'site'" >
@@ -61,24 +61,23 @@
         {{ this.total}} ARS
       </ion-col>
     </ion-row>
+    <ion-row *ngIf="this.usuarioLogueado.estado == this.clienteEstado.ESPERANDO_CUENTA" class="mensajemozo">      
+      <ion-col>
+        El mozo fue informado de que solicitaste la cuenta .  <br/>A la brevedad se acercará para tomar el pago. 
+      </ion-col>
+    </ion-row>   
+
   </ion-grid>    
   <div class="scanbox" [hidden]="!lectorqrService.scanActive">
   </div>
 </ion-content>
 <ion-footer>
-    <ion-grid *ngIf="this.usuarioLogueado.estado == this.clienteEstado.ESPERANDO_CUENTA">
+    <ion-grid *ngIf="this.propinaAsignada">
       <ion-row>
-        <ion-col>
-          El mozo confirmará el pago de tu factura . 
-        </ion-col>
-      </ion-row>
-    </ion-grid>   
-    <ion-grid *ngIf="this.usuarioLogueado.estado != this.clienteEstado.ESPERANDO_CUENTA">
-      <ion-row>
-        <ion-col>
-          <ion-button shape="round" color="success" (click)="this.pedirCuenta()" expand="full" >
+        <ion-col>       
+          <ion-button *ngIf="this.propinaAsignada && this.usuarioLogueado.estado != this.clienteEstado.ESPERANDO_CUENTA "  shape="round"  class="pedircuenta" (click)="this.pedirCuenta()" expand="full" >
             Pedir Cuenta
-          </ion-button>   
+          </ion-button>                       
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -96,11 +95,14 @@
           </ion-button>
           <ion-button shape="round" *ngIf="this.showTestButton"  color="success" (click)="this.testEscanearQRMalo()" expand="full" >
             Test MALO 
-          </ion-button>
+          </ion-button>          
+
           <ion-button shape="round" fill="solid" class="scanear" size="large" expand="full" class="qrlista" (click)="escanearQr()" [hidden]="lectorqrService.scanActive">
             <ion-icon name="qr-code-sharp" slot="start"></ion-icon>          
             <ion-label>Escanea la propina </ion-label>
           </ion-button>
+
+          
           <ion-button shape="round" fill="solid"  class="scanear"  size="large" expand="full"  (click)="deternerScaner()" [hidden]="!lectorqrService.scanActive" >
             <ion-icon name="qr-code-sharp" slot="start"></ion-icon>          
             <ion-label>Detener</ion-label>
