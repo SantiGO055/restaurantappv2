@@ -108,7 +108,7 @@ export class AsignacionMesaPage implements OnInit {
   async suponerEscaneoMesa1()
   {
       this.solicitarAsignarMesa('xkbC3DQSKxibJ9KzAOG2');
-  }
+  }S
 
   async suponerEscaneoMesa2()
   { 

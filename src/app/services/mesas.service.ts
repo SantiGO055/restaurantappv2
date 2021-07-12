@@ -100,13 +100,13 @@ export class MesasService {
     let mesa =  await this.getOneById(mesaId);    
     if(!mesa){
       throw new SysError('No existe la mesa');
+    }            
+    if(mesa.uid == null){
+      throw new SysError('Esta mesa no es la que el Maitre le asigno.');
+    }
+    if(mesa.uid != cliente.uid){
+      throw new SysError('La mesa se encuentra asignada a otro cliente.');
     }    
-    //@todo revisar si esta mesa no es de otra persona 
-    if(mesa.uid && mesa.uid != cliente.uid){
-      throw new SysError('La mesa se encuentra asignada a otro cliente');
-    }else if(Cliente.tieneMesa(cliente)){
-      throw new SysError('Esta no es la mesa que tiene asignada.');
-    }   
   }
   
   async asignarMesaPorTurno(mesa:Mesa,turno:Turno){
