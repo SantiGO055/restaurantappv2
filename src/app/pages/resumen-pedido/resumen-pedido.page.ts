@@ -16,11 +16,9 @@ import { clienteEstado } from 'src/app/enums/clienteEstados';
   styleUrls: ['./resumen-pedido.page.scss'],
 })
 export class ResumenPedidoPage implements OnInit {
-
-
-  usuarioLogueado:User = new User();
-  pedido:Pedido = new Pedido();
   
+  usuarioLogueado:User = new User();
+  pedido:Pedido = new Pedido();  
 
   constructor(    
     public loginService:LoginService,
@@ -29,32 +27,33 @@ export class ResumenPedidoPage implements OnInit {
     public router:Router,
     private pedidoSvc: MenuService,
     private alert: AlertService,
-  ) {
-    
+  ) {        
     this.loginService.usuarioLogueado.then(usr=>{
-      this.usuarioLogueado = usr;            
+      this.usuarioLogueado = usr;                  
       this.productoSvc.getAllPedidos().subscribe(pedidos=>{
-        pedidos.forEach(pedido=>{
-          if(pedido.uidCliente == this.usuarioLogueado.uid){
-            this.productoSvc.getPedidoByUId(pedido.uid).then(pedido => {         
-               if(!pedido){
-                 this.router.navigateByUrl('dashboard/pagina-espera-elaboracion');
+        pedidos.forEach(pedido=>{          
+          if(pedido.uidCliente == this.usuarioLogueado.uid){         
+            this.productoSvc.getPedidoByUId(pedido.uid).then(pedido => {                                     
+               if(!pedido){                 
+                 console.log('reenviar a pagina-espera');
+                 this.router.navigateByUrl('/dashboard/pagina-espera-elaboracion');
                }else{
                  this.pedido = pedido;
                }
             });       
-
           }
         })
       })
     });
   }
+  
   public get Estado(): typeof Estado {
     return Estado; 
   }
 
   ngOnInit() {
   }
+
   confirmarPedido(){
     this.pedido.estadoPedido = Estado.CONFIRMADO;
     this.usuarioLogueado.estado = clienteEstado.CONSUMIENDO;

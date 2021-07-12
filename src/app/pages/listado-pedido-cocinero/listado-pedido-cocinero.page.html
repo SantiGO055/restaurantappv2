@@ -12,13 +12,10 @@
       <div *ngFor="let pedido of pedidos">
           <div *ngIf="pedido.estadoPedido == EstadoPedido.ENPREPARACION">
             <div *ngFor="let producto of pedido.producto">
-              <h1>Pedido: {{producto.nombre}}</h1>         
+              <h1>Pedido: {{producto.nombre}}  X {{producto.cantidad}} </h1>         
                 <ion-item>              
                   <ion-avatar slot="start">                
-                    <ion-img
-                      [src]="producto.fotos[0]"
-                      [alt]="producto.nombre"
-                    ></ion-img>
+                    <ion-img [src]="producto.fotos[0]" [alt]="producto.nombre" ></ion-img>
                   </ion-avatar>
                   <ion-label>
                     <h2>{{ producto.tiempoPromedioElaboracion }} minutos</h2>

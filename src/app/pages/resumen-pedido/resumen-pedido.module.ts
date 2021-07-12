@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ResumenPedidoPageRoutingModule } from './resumen-pedido-routing.module';
 
 import { ResumenPedidoPage } from './resumen-pedido.page';
-import { PipesModule } from 'src/app/pipes/pipes.module';
+import { PipesModule } from '../../pipes/pipes.module';
 
 @NgModule({
   imports: [

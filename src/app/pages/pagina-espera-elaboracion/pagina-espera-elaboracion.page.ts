@@ -53,13 +53,10 @@ export class PaginaEsperaElaboracionPage implements OnInit {
   deternerScaner(){
     this.lectorqrService.stopScan();
   }  
-   
 
-
-  irAResumenPedido(){    
-    this.router.navigateByUrl('/dashboard/resumen-pedido');
+  irAResumenPedido(){        
+    this.router.navigate(['/dashboard/resumen-pedido']);
   }
-
 
   get showTestButton():boolean{
     return environment.testButtons;

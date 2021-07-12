@@ -10,19 +10,16 @@
       <ion-list>
         <ion-item *ngFor="let producto of this.pedido.producto"   >        
           <ion-avatar slot="start">
-            <ion-img [src]="producto.fotos[0]" [alt]="producto.nombre" 
-            ></ion-img>
+            <ion-img [src]="producto.fotos[0]" [alt]="producto.nombre" ></ion-img>
           </ion-avatar>
           <ion-label>                       
             <ion-grid>
               <ion-row>
                 <ion-col>
-                  {{producto.nombre}} 
+                  {{producto.nombre}} x {{producto.cantidad}} 
                 </ion-col>
-                <ion-col>
-                  <!-- @todo completar con el parametro que se le vaya a poner al producto para el estado -->
-                  {{producto.estadoProducto}}
-                  
+                <ion-col>                  
+                  {{producto.estadoProducto | estado}}                  
                 </ion-col>
               </ion-row>
             </ion-grid>
@@ -36,7 +33,7 @@
       Estado del pedido
     </ion-col>
     <ion-col>
-      {{ this.pedido.estadoPedido | estado}}
+      {{ this.pedido.estadoPedido | estado }}
     </ion-col>
   </ion-row>
   <ion-row>
@@ -58,9 +55,7 @@
   <ion-row *ngIf="pedido.estadoPedido != Estado.ENTREGADO">
     <ion-col>
       <ion-button shape="round" type="button" expand="block" color="tertiary" [hidden]="this.usuarioLogueado.completoEncuesta" (click)="irAEncuesta()" >Realizar encuesta</ion-button>                                            
-      <ion-button shape="round" type="button" expand="block" color="tertiary" [hidden]="!this.usuarioLogueado.completoEncuesta" (click)="irAResultadosEncuesta()" >Ver resultado de encuestas</ion-button>                                            
-      
-      <ion-button shape="round" type="submit" expand="block" *ngIf="" color="tertiary" (click)="this.volverAEspera()">Volver</ion-button>      
+      <ion-button shape="round" type="button" expand="block" color="tertiary" [hidden]="!this.usuarioLogueado.completoEncuesta" (click)="irAResultadosEncuesta()" >Ver resultado de encuestas</ion-button>                                                        
     </ion-col>
   </ion-row>
 
@@ -73,9 +68,9 @@
     </ion-row> 
     <ion-button shape="round" type="submit" expand="block" color="tertiary" (click)="confirmarPedido()">Confirmar pedido</ion-button>    
   </div>
-
-  <div *ngIf="pedido.estadoPedido == Estado.CONFIRMADO">
-    <ion-button type="submit" expand="block" color="tertiary" (click)="this.volverAEsperaCierre()">Volver</ion-button>
+  
+  <div >
+    <ion-button shape="round" type="submit" expand="block" color="tertiary" (click)="this.volverAEsperaCierre()">Volver</ion-button>
   </div>
   
 

@@ -1,19 +1,38 @@
 ion-content {
     --ion-grid-column-padding:        5px;
-    --padding-top:0%;
-    --background: var(--ion-color-primary, #546192) ;
-    ion-grid{
-        color:white;
-    }
+    --padding-top:0%;            
+}
+ion-content.scan{
+    --background:#00000000;
+}
+.pedircuenta{ 
+    height: 10vh;
+}
+ion-content ion-button.scanear{
+    --background:rgb(107, 223, 107);
+    height: 12vh;
+    margin-top:18px;    
+}
 
-    ion-list{
-        --background: var(--ion-color-primary, #546192) 
-    }
-    ion-item{
-        --background: var(--ion-color-primary, #546192) 
-    }
-    ion-grid{
-        --padding-start:10%;
-        --padding-end:10%;
-    }
+ion-content ion-button.salir{    
+    height: 8vh;    
+}
+.mensajemozo{
+    text-align: center;
+    font-weight: bold;
+    margin-top: 5vh;
+    font-size: 1.2em;
+}
+
+.scanbox{
+    border:2px solid #fff;
+    box-shadow: 0 0 0 100vmax rgba(0,0,0,0.5);
+    content:'';
+    display:block;
+    left: 50%;
+    height: 300px;
+    position:absolute;
+    top:50%;
+    transform: translate(-50%, -50%);
+    width:300px;
 }

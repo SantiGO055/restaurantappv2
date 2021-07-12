@@ -57,9 +57,6 @@ export class PaginaEsperaCierrePage implements OnInit {
     });
   }
 
-  protected redireccionarResumenPedido(){
-    this.router.navigateByUrl('/dashboard/resumen-pedido');
-  }
 
   ngAfterViewInit() {
     this.lectorqrService.preapare();    
@@ -71,13 +68,13 @@ export class PaginaEsperaCierrePage implements OnInit {
     this.redireccionarAFactura();
   }
   testEscanearQRMesa1(){
-    this.redireccionarResumenPedido();
+    this.redireccionarAFactura();
   }
   testEscanearQRMesa2(){
-    this.redireccionarResumenPedido();
+    this.redireccionarAFactura();
   }
   testEscanearQRMesa3(){
-    this.redireccionarResumenPedido();
+    this.redireccionarAFactura();
   }
 
   redireccionarAFactura(){
