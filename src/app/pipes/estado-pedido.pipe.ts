@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Estado } from './entities/pedido';
+import { Estado } from '../entities/pedido';
 
 @Pipe({
   name: 'estado'

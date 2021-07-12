@@ -19,9 +19,7 @@ import { environment } from '../environments/environment';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { SysErrorHandler } from './services/sysErrorHandler';
-import { UserNamePipe } from './pipes/user-name.pipe';
 import { Vibration } from '@ionic-native/vibration/ngx';
-import { EstadoPedidoPipe } from './estado-pedido.pipe';
 import { PipesModule } from './pipes/pipes.module';
 
 @NgModule({

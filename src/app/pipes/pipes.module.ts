@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { EstadoPedidoPipe } from '../estado-pedido.pipe';
+import { EstadoPedidoPipe } from '../pipes/estado-pedido.pipe';
 import { UserNamePipe } from './user-name.pipe';
 
 
