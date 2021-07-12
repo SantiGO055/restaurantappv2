@@ -6,21 +6,23 @@ import { Estado } from '../entities/pedido';
 })
 export class EstadoPedidoPipe implements PipeTransform {
 
-  transform(value: any): string {
+  transform(value: string): string {
+    if (!value) {
+      return value;
+    }    
     let result = '';
-
     switch(value){
-      case Estado.ENPREPARACION:
+      case Estado.ENPREPARACION.toString():
         result = 'En preparación';
         break;
-      case Estado.PAGOCONFIRMADO:
+      case Estado.PAGOCONFIRMADO.toString():
         result = 'Pago confirmado';
         break;
-      case Estado.PENDIENTEPAGO:
+      case Estado.PENDIENTEPAGO.toString():
         result = 'Pendiente de pago';
         break;
       default:
-        result = value[0].toLocaleUpperCase() + value.substring(1).toLocaleLowerCase();
+        result = value.toLocaleUpperCase() + value.substring(1).toLocaleLowerCase();
     }
 
     return result;

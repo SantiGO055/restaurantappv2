@@ -61,11 +61,11 @@
         {{ this.total}} ARS
       </ion-col>
     </ion-row>
-    </ion-grid>    
-    <div class="scanbox" [hidden]="!lectorqrService.scanActive">
-    </div>
-  </ion-content>
-  <ion-footer>
+  </ion-grid>    
+  <div class="scanbox" [hidden]="!lectorqrService.scanActive">
+  </div>
+</ion-content>
+<ion-footer>
     <ion-grid *ngIf="this.usuarioLogueado.estado == this.clienteEstado.ESPERANDO_CUENTA">
       <ion-row>
         <ion-col>
@@ -84,8 +84,7 @@
     </ion-grid>
     <ion-grid *ngIf="!this.propinaAsignada">
       <ion-row>
-        <ion-col>
-      <!-- @todo eliminar tras el test -->
+        <ion-col>      
           <ion-button shape="round" *ngIf="this.showTestButton"  color="success" (click)="this.testEscanearQRMalo()" expand="full" >
             Test EXCELENTE
           </ion-button>
@@ -98,7 +97,6 @@
           <ion-button shape="round" *ngIf="this.showTestButton"  color="success" (click)="this.testEscanearQRMalo()" expand="full" >
             Test MALO 
           </ion-button>
-<!-- @todo eliminar tras el test -->          
           <ion-button shape="round" fill="solid" class="scanear" size="large" expand="full" class="qrlista" (click)="escanearQr()" [hidden]="lectorqrService.scanActive">
             <ion-icon name="qr-code-sharp" slot="start"></ion-icon>          
             <ion-label>Escanea la propina </ion-label>
