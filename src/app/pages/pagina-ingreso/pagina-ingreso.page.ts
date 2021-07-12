@@ -16,6 +16,7 @@ import { ThrowStmt } from '@angular/compiler';
 import { MesasService } from '../../services/mesas.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { clienteEstado } from '../../enums/clienteEstados';
+import { environment } from '../../../environments/environment.prod';
 
 @Component({
   selector: 'app-pagina-ingreso',
@@ -39,9 +40,17 @@ export class PaginaIngresoPage implements OnInit {
     private push: NotificationService
   ) {       
     this.enListaEspera = false;        
-    this.loginService.usuarioLogueado.then(usr=>{
+    this.loginService.usuarioLogueado.then((usr:User)=>{
       this.usuarioLogueado = usr;
+      if(!User.puedeEscanearQRListaEspera(usr)){
+        this.enListaEspera = true;
+      }
     });
+  }
+
+
+  get showTestButton():boolean{
+    return environment.testButtons;
   }
 
   //en esta pagina se ve los botones de encuesta o de scanear eq

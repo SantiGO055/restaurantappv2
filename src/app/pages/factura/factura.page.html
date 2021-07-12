@@ -1,6 +1,6 @@
 <ion-header [hidden]="lectorqrService.scanActive" >
   <ion-toolbar>
-    <ion-buttons slot="start">
+    <ion-buttons shape="round" slot="start">
       <ion-menu-button menu="first"></ion-menu-button>
     </ion-buttons>
     <ion-title>Escanea tu mesa</ion-title>
@@ -76,7 +76,7 @@
     <ion-grid *ngIf="this.usuarioLogueado.estado != this.clienteEstado.ESPERANDO_CUENTA">
       <ion-row>
         <ion-col>
-          <ion-button color="success" (click)="this.pedirCuenta()" expand="full" >
+          <ion-button shape="round" color="success" (click)="this.pedirCuenta()" expand="full" >
             Pedir Cuenta
           </ion-button>   
         </ion-col>
@@ -86,24 +86,24 @@
       <ion-row>
         <ion-col>
       <!-- @todo eliminar tras el test -->
-          <ion-button color="success" (click)="this.testEscanearQRMalo()" expand="full" >
+          <ion-button shape="round" *ngIf="this.showTestButton"  color="success" (click)="this.testEscanearQRMalo()" expand="full" >
             Test EXCELENTE
           </ion-button>
-          <ion-button color="success" (click)="this.testEscanearQRMuyBueno()" expand="full" >
+          <ion-button shape="round" *ngIf="this.showTestButton" color="success" (click)="this.testEscanearQRMuyBueno()" expand="full" >
             Test MUY BUENO  
           </ion-button>
-          <ion-button color="success" (click)="this.testEscanearQRBueno()" expand="full" >
+          <ion-button shape="round" *ngIf="this.showTestButton" color="success" (click)="this.testEscanearQRBueno()" expand="full" >
             Test BUENO 
           </ion-button>
-          <ion-button color="success" (click)="this.testEscanearQRMalo()" expand="full" >
+          <ion-button shape="round" *ngIf="this.showTestButton"  color="success" (click)="this.testEscanearQRMalo()" expand="full" >
             Test MALO 
           </ion-button>
 <!-- @todo eliminar tras el test -->          
-          <ion-button fill="solid" class="scanear" size="large" expand="full" class="qrlista" (click)="escanearQr()" [hidden]="lectorqrService.scanActive">
+          <ion-button shape="round" fill="solid" class="scanear" size="large" expand="full" class="qrlista" (click)="escanearQr()" [hidden]="lectorqrService.scanActive">
             <ion-icon name="qr-code-sharp" slot="start"></ion-icon>          
             <ion-label>Escanea la propina </ion-label>
           </ion-button>
-          <ion-button fill="solid"  class="scanear"  size="large" expand="full"  (click)="deternerScaner()" [hidden]="!lectorqrService.scanActive" >
+          <ion-button shape="round" fill="solid"  class="scanear"  size="large" expand="full"  (click)="deternerScaner()" [hidden]="!lectorqrService.scanActive" >
             <ion-icon name="qr-code-sharp" slot="start"></ion-icon>          
             <ion-label>Detener</ion-label>
           </ion-button>            

@@ -7,6 +7,7 @@ import { Cliente } from '../../entities/cliente';
 import { MesasService } from '../../services/mesas.service';
 import { ToastService } from '../../services/toast.service';
 import { UsersService } from '../../services/users.service';
+import { environment } from '../../../environments/environment.prod';
 
 @Component({
   selector: 'app-asignacion-mesa',
@@ -38,6 +39,12 @@ export class AsignacionMesaPage implements OnInit {
       }
     })
   }
+
+
+  get showTestButton():boolean{
+    return environment.testButtons;
+  }
+
 
   ngAfterViewInit() {
     this.lectorqrService.preapare();    
@@ -101,7 +108,7 @@ export class AsignacionMesaPage implements OnInit {
   async suponerEscaneoMesa1()
   {
       this.solicitarAsignarMesa('xkbC3DQSKxibJ9KzAOG2');
-  }
+  }S
 
   async suponerEscaneoMesa2()
   { 

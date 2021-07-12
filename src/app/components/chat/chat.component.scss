@@ -18,9 +18,14 @@
     flex-wrap: wrap;
     flex-flow: column wrap;
     margin-top: 5px;
-    background-color: #9a9fd1;
+    // background-color: #9a9fd1;
+    background: linear-gradient(-45deg, #FFF5DE, #C6B4CE, #9B72AA, #3C5186);
+
     
     
+}
+.input{
+    position:fixed;
 }
 
 
@@ -149,7 +154,7 @@ ion-content{
 
 .timestamp {
     font-size: 13px;
-    color: #555;
+    color: rgb(0, 0, 0);
     font-style: italic;
 }
 
@@ -255,5 +260,7 @@ border: 5px solid #efefef;
 ion-content{
     --ion-grid-column-padding:        5px;
     --padding-top:10%;
-    --background: var(--ion-color-primary, #546192) ;
+    
+    --background: linear-gradient(-45deg, #FFF5DE, #C6B4CE, #9B72AA, #3C5186);
+
 }

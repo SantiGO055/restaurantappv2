@@ -3,32 +3,32 @@
     <ion-buttons slot="start">
       <ion-menu-button menu="first"></ion-menu-button>
     </ion-buttons>
-    <ion-title>Home</ion-title>
+    <ion-title>Panel de control</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content *ngIf="this.showTestButton && usuarioLogueado.rol != 'cocinero'">
-  <ion-button (click)="pruebaPush('duenio')">
+  <ion-button shape="round" (click)="pruebaPush('duenio')">
     Prueba envio push dueño
   </ion-button>
-  <ion-button (click)="pruebaPush('cocinero')">
+  <ion-button shape="round" (click)="pruebaPush('cocinero')">
     Prueba envio push cocinero
   </ion-button>
-  <ion-button (click)="pruebaPush('mozo')">
+  <ion-button shape="round" (click)="pruebaPush('mozo')">
     Prueba envio push mozo
   </ion-button>
-  <ion-button (click)="enviarMail()">
+  <ion-button shape="round" (click)="enviarMail()">
     Prueba envio mail
   </ion-button>
-  <ion-button (click)="chatSvc.mostrarChat()">
+  <ion-button shape="round" (click)="chatSvc.mostrarChat()">
   Mostrar Chat
   </ion-button>
-  <ion-button (click)="router.navigate(['dashboard/encuesta'])">
+  <ion-button shape="round" (click)="router.navigate(['dashboard/encuesta'])">
     Completar encuesta
   </ion-button>
 </ion-content>
 <ion-content *ngIf="this.showTestButton && usuarioLogueado.rol == 'cocinero'">
-  <ion-button (click)="router.navigate(['dashboard/listado-pedido-cocinero'])">
+  <ion-button shape="round" (click)="router.navigate(['dashboard/listado-pedido-cocinero'])">
     Elaborar productos
   </ion-button>
 </ion-content>

@@ -9,6 +9,7 @@ import { LectorQrPropinaService } from '../../services/lectorqrpropina.service';
 import { AlertController } from '@ionic/angular';
 import { AlertService } from '../../services/alert.service';
 import { clienteEstado } from 'src/app/enums/clienteEstados';
+import { environment } from '../../../environments/environment.prod';
 
 @Component({
   selector: 'app-factura',
@@ -104,6 +105,11 @@ export class FacturaPage implements OnInit {
   }  
   public get clienteEstado(): typeof clienteEstado {
     return clienteEstado; 
+  }
+
+
+  get showTestButton():boolean{
+    return environment.testButtons;
   }
 /**
  * solicitar la cuenta 

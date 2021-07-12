@@ -222,8 +222,8 @@ export class ChatComponent implements OnInit {
     else{
         minString = "0"+fecha.getMinutes().toString();
     }
-    var fechaCompleta = (fecha.getMonth()+1)+ "/"+  fecha.getDate()  +  "/" + fecha.getFullYear();
+    var fechaCompleta = fecha.getDate()+ "/"+ (fecha.getMonth()+1)  +  "/" + fecha.getFullYear();
     // console.log(fechaCompleta + "-" + fecha.getHours() + ":" + fecha.getMinutes()+ ":" +  segString);
-    return fechaCompleta + "-" + fecha.getHours() + ":" + fecha.getMinutes()+ ":" +  segString;
+    return fechaCompleta + ", " + fecha.getHours() + ":" + fecha.getMinutes()+ ":" +  segString;
   }
 }

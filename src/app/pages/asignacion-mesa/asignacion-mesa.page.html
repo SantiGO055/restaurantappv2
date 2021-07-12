@@ -1,6 +1,6 @@
  <ion-header [hidden]="lectorqrService.scanActive" >
   <ion-toolbar>
-    <ion-buttons slot="start">
+    <ion-buttons shape="round" slot="start">
       <ion-menu-button menu="first"></ion-menu-button>
     </ion-buttons>
     <ion-title>Selecciona tu mesa</ion-title>
@@ -11,12 +11,12 @@
       <ion-row >
         <ion-col>          
           <p> Selecciona la mesa y escanea su QR </p>          
-          <ion-button type="button" expand="block" color="tertiary"  (click)="irAResultadosEncuestas()" >Ver resultados de encuesta</ion-button>                                            
+          <ion-button shape="round" type="button" expand="block" color="tertiary"  (click)="irAResultadosEncuestas()" >Ver resultados de encuesta</ion-button>                                            
 
           <!-- sacar al momento de test -->
-          <ion-button type="button" expand="block" color="tertiary"  (click)="suponerEscaneoMesa1()" >Escanear QR Mesa 1</ion-button>                                                      
-          <ion-button type="button" expand="block" color="tertiary"  (click)="suponerEscaneoMesa2()" >Escanear QR Mesa 2</ion-button>                                                      
-          <ion-button type="button" expand="block" color="tertiary"  (click)="suponerEscaneoMesa3()" >Escanear QR Mesa 3</ion-button>                                            
+          <ion-button shape="round" *ngIf="this.showTestButton" type="button" expand="block" color="tertiary"  (click)="suponerEscaneoMesa1()" >Escanear QR Mesa 1</ion-button>                                                      
+          <ion-button shape="round" *ngIf="this.showTestButton" type="button" expand="block" color="tertiary"  (click)="suponerEscaneoMesa2()" >Escanear QR Mesa 2</ion-button>                                                      
+          <ion-button shape="round" *ngIf="this.showTestButton" type="button" expand="block" color="tertiary"  (click)="suponerEscaneoMesa3()" >Escanear QR Mesa 3</ion-button>                                            
           
 
 
@@ -30,7 +30,7 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-button fill="solid" class="scanear" size="large" expand="full" class="qrlista" (click)="escanearQr()" [hidden]="lectorqrService.scanActive">
+        <ion-button shape="round" fill="solid" class="scanear" size="large" expand="full" class="qrlista" (click)="escanearQr()" [hidden]="lectorqrService.scanActive">
           <ion-icon name="qr-code-sharp" slot="start"></ion-icon>          
           <ion-label>Escanear QR </ion-label>
         </ion-button>
