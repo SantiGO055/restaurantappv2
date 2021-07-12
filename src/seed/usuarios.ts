@@ -25,4 +25,8 @@ export const USUARIOS_TEST :LoginTestData[]= [
     "username":"avillucas+rechazado@gmail.com",
     "password":"1q2w3e4r5t6y"    
   }, 
+  {
+    "username":"j0bbkhdlr6@coffeetimer24.com",
+    "password":"123456"    
+  }, 
 ];

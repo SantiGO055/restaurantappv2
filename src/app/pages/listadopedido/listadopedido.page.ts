@@ -3,6 +3,7 @@ import { first } from 'rxjs/operators';
 import { Mesa } from 'src/app/entities/mesa';
 import { Estado, Pedido } from 'src/app/entities/pedido';
 import { User } from 'src/app/entities/user';
+import { clienteEstado } from 'src/app/enums/clienteEstados';
 import { Rol } from 'src/app/enums/rol';
 import { AlertService } from 'src/app/services/alert.service';
 import { LoginService } from 'src/app/services/login.service';
@@ -106,6 +107,12 @@ export class ListadopedidoPage implements OnInit {
         uid: null
 
       }
+      this.userSvc.getOne(pedido.uidCliente).then(usr=>{
+        if(usr.uid == pedido.uidCliente){
+          usr.estado = clienteEstado.VISITO_HOY;
+          this.userSvc.update(usr);
+        }
+      });
 
       this.mesaSvc.updateMesa(mesaAux).then(()=>{
         this.toastService.presentSuccess('La mesa se libero correctamente');

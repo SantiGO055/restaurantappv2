@@ -11,5 +11,5 @@ export const environment = {
       measurementId: "G-SJ5WL6P57J",
       vapidKey: 'BCg5WV_dyK49YLm_lrfhOwh7PJ1mt9eDXvq8HrRfpJPfpke4fIJoXN63eqBUijlYlgG2Tt9id8kGgjSaQf6d1eM'
     },
-    testButtons:false
+    testButtons:true
   };
