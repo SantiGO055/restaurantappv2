@@ -49,7 +49,7 @@
     <ion-item>
       <ion-label>Accesos</ion-label>
       <ion-select [(ngModel)]="tester" (ionChange)="defineTester(tester)" okText="Seleccionar" cancelText="Cancelar">        
-        <ion-select-option *ngFor="let usuario of loginService.getUsuariosTest()"  value="{{ usuario.username}}">  {{ usuario.username }}</ion-select-option>
+        <ion-select-option *ngFor="let usuario of loginService.getUsuariosTest()"  value="{{ usuario.username}}">  {{ usuario.username | userName }}</ion-select-option>
       </ion-select>
     </ion-item>
   </ion-list>

@@ -8,7 +8,8 @@ export class UserNamePipe implements PipeTransform {
   readonly PRINCIPIO = 'avillucas';
   readonly FIN = '@gmail.com';
   
-  transform(value: string, ...args: unknown[]): unknown {
+ 
+  transform(value: any): string {    
     if (!value) {
       return value;
     }

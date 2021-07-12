@@ -1,5 +1,4 @@
 import { Producto, ProductoTipo } from "./producto";
-import { User } from "./user";
 
 export class Pedido {
     uid?: string;
