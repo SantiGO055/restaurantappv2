@@ -28,7 +28,9 @@
                     {{producto.nombre}}  
                   </ion-col>
                   <ion-col>
-                    {{producto.precio}}  ARS x {{producto.cantidad}}
+                    <strong>
+                      {{producto.precio}}  ARS x {{producto.cantidad}}
+                    </strong> 
                   </ion-col>
                 </ion-row>
               </ion-grid>
@@ -42,7 +44,7 @@
         Subtotal
       </ion-col>
       <ion-col>
-        {{ this.subtotal}} ARS
+        <strong>{{ this.subtotal}} ARS</strong> 
       </ion-col>
     </ion-row>   
     <ion-row>
@@ -50,7 +52,7 @@
         Propina
       </ion-col>
       <ion-col>
-        {{ this.propina }} ARS
+        <strong> {{ this.propina }} ARS</strong> 
       </ion-col>
     </ion-row>
     <ion-row>
@@ -58,12 +60,13 @@
         Total
       </ion-col>
       <ion-col>
-        {{ this.total}} ARS
+        <strong>{{ this.total}} ARS</strong> 
       </ion-col>
     </ion-row>
     <ion-row *ngIf="this.usuarioLogueado.estado == this.clienteEstado.ESPERANDO_CUENTA" class="mensajemozo">      
       <ion-col>
-        El mozo fue informado de que solicitaste la cuenta .  <br/>A la brevedad se acercará para tomar el pago. 
+        El mozo fue informado que solicitaste la cuenta. 
+        A la brevedad se acercará para tomar el pago. 
       </ion-col>
     </ion-row>   
 
