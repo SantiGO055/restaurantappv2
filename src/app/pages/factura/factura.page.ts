@@ -49,6 +49,7 @@ export class FacturaPage implements OnInit {
   {
     try{
       const propina = await this.lectorqrService.escanear();                       
+      console.log('propina', propina);
       this.asignarPropina(propina);
     }catch(error){
       throw error;

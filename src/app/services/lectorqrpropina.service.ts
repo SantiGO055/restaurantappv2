@@ -21,9 +21,11 @@ export class LectorQrPropinaService  extends LectorqrService{
 
   async escanear():Promise<number>{
     try{
-      const codigo = await super.scan();    
-      const propinaJson = JSON.parse( codigo);        
-      return parseInt(propinaJson.propina);
+      const codigo = await super.scan();   
+      console.log('codigo:',codigo) ;
+      const propinaJson = JSON.parse( codigo);
+      console.log('propinaJson:',propinaJson) ;        
+      return propinaJson.propina;
     }catch( error ){      
       throw new SysError('El codigo QR no puedo ser leido.');
     }        
