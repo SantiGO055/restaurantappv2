@@ -7,6 +7,9 @@ import { Router } from '@angular/router';
 import {  ModalController } from '@ionic/angular';
 import { AvatarPage } from '../avatar/avatar.page';
 import { LectorQrDniService } from '../../services/lectorqrdni.service';
+import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
+import { last, switchMap } from 'rxjs/operators';
+import { Camera, CameraDirection, CameraResultType, CameraSource } from '@capacitor/core';
 
 @Component({
   selector: 'app-register-anonimo',
@@ -19,6 +22,12 @@ export class RegisterAnonimoPage implements OnInit {
   ionicRegister: FormGroup;
   errorMessage: string;
   avatarUrl:string;
+  filePath:string 
+  photoBase64:string;
+  task: AngularFireUploadTask;
+  mostrarFoto = false;
+  progress: any;  // Observable 0 to 100
+  urlAux: string;
 
   constructor(
     private loginService: LoginService,
@@ -27,7 +36,9 @@ export class RegisterAnonimoPage implements OnInit {
     public spinnerService: SpinnerService,
     public router: Router,
     public modalController: ModalController ,
-    public lectorqrService:LectorQrDniService,        
+    public lectorqrService:LectorQrDniService,   
+    public storage: AngularFireStorage   ,
+
   ) {
     this.isSubmitted = false;
     this.avatarUrl = null;
@@ -71,6 +82,58 @@ export class RegisterAnonimoPage implements OnInit {
       console.log(this.avatarUrl);
   });
     return await modal.present();
+  }
+  async tomarFoto(){
+    const photo =  this.captureImage()
+      .then(photo => {
+        console.info(photo) ;
+        this.filePath = `img_${ new Date().getTime() }.`+photo.format;
+        this.photoBase64 = 'data:image/'+photo.format+';base64,' + photo.base64String;
+        
+      })
+      .catch(error => {
+        console.error(error);
+        if(!this.photoBase64){
+          this.router.navigateByUrl('dashboard');
+          }
+      }).then(()=>{
+        this.mostrarFoto = true;
+        this.createUploadTask(this.filePath);
+
+      }); 
+  }
+
+  async createUploadTask(filePath:string){             
+    this.spinnerService.mostrarSpinner()
+    const ref = this.storage.ref(filePath);  
+    this.task = ref.putString(this.photoBase64, 'data_url');   
+    this.progress = this.task.percentageChanges();           
+    this.task.snapshotChanges().pipe(
+      last(),
+      switchMap(() => ref.getDownloadURL())
+    ).subscribe(
+      url =>{
+        this.spinnerService.ocultarSpinner();
+        this.urlAux = url; 
+        this.avatarUrl = this.urlAux;   
+      }
+    );         
+  }
+
+  captureImage() {
+    return  Camera.getPhoto({      
+      source: CameraSource.Camera, 
+      allowEditing:true,      
+      resultType: CameraResultType.Base64 ,
+      promptLabelCancel	:'Cancelar'	,
+      promptLabelPhoto:'Foto',
+      promptLabelPicture:'Tomar una foto',
+      promptLabelHeader:'Foto',
+      quality: 100,
+      height:300,            
+      width:300,
+      direction:CameraDirection.Front
+    });    
   }
 
   resetForm(){

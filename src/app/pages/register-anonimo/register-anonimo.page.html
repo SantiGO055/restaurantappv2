@@ -5,7 +5,7 @@
         <ion-col>
           <ion-img *ngIf="avatarUrl" [src]="avatarUrl" alt="Tomar foto"></ion-img>
           <ion-img *ngIf="!avatarUrl" src="assets/avatar/noexist.png" alt="Tomar foto"></ion-img>          
-          <ion-button shape="round" expand="block" class="foto"   color="tertiary" (click)="presentModal()" >
+          <ion-button shape="round" expand="block" class="foto"   color="tertiary" (click)="tomarFoto()" >
             <ion-icon slot="start" name="camera-outline"></ion-icon>
             Sacarme una foto
           </ion-button>          
