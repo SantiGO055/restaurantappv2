@@ -20,9 +20,6 @@
   <ion-button shape="round" (click)="enviarMail()">
     Prueba envio mail
   </ion-button>
-  <ion-button shape="round" (click)="chatSvc.mostrarChat()">
-  Mostrar Chat
-  </ion-button>
   <ion-button shape="round" (click)="router.navigate(['dashboard/encuesta'])">
     Completar encuesta
   </ion-button>
@@ -31,4 +28,10 @@
   <ion-button shape="round" (click)="router.navigate(['dashboard/listado-pedido-cocinero'])">
     Elaborar productos
   </ion-button>
+</ion-content>
+<ion-content>
+  <ion-button shape="round" type="submit" expand="block" color="tertiary" (click)="chatSvc.mostrarChat()">
+  Mostrar Chat
+  </ion-button>
+
 </ion-content>

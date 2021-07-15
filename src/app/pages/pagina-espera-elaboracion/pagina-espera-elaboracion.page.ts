@@ -4,9 +4,10 @@ import { LoginService } from '../../services/login.service';
 import { LectorQRMesaService } from '../../services/lectorqrmesa.service';
 import { Router } from '@angular/router';
 import { User } from '../../entities/user';
-import { Pedido } from '../../entities/pedido';
+import { Estado, Pedido } from '../../entities/pedido';
 import { MenuService } from '../../services/menu.service';
 import { environment } from '../../../environments/environment.prod';
+import { clienteEstado } from 'src/app/enums/clienteEstados';
 
 @Component({
   selector: 'app-pagina-espera-elaboracion',
@@ -31,6 +32,10 @@ export class PaginaEsperaElaboracionPage implements OnInit {
   //en esta pagina se ve los botones de encuesta o de scanear eq
 
   ngOnInit() {    
+    if(this.usuarioLogueado.estado = clienteEstado.CONSUMIENDO){
+      this.router.navigate(['/dashboard/pagina-espera-cierre']);
+    }
+    
   }
 
   ngAfterViewInit() {
