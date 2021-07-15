@@ -32,7 +32,7 @@ export class PaginaEsperaElaboracionPage implements OnInit {
   //en esta pagina se ve los botones de encuesta o de scanear eq
 
   ngOnInit() {    
-    if(this.usuarioLogueado.estado = clienteEstado.CONSUMIENDO){
+    if(this.usuarioLogueado.estado == clienteEstado.CONSUMIENDO){
       this.router.navigate(['/dashboard/pagina-espera-cierre']);
     }
     
