@@ -19,7 +19,10 @@
       <ion-row *ngIf="!this.enListaEspera"  >
         <ion-col>          
           <p> Agregate a lista de espera escaneando el QR que encontraras en la puerta  </p>          
-          <ion-button shape="round" *ngIf="this.showTestButton" type="button" expand="block" color="tertiary" (click)="testQRValido()" >Como si escaneo el QR  de la puerta</ion-button>
+          <ion-button shape="round" *ngIf="this.showTestButton" type="button" expand="block" color="tertiary" (click)="testQRValido()" >Como si escaneo el QR  de la puerta</ion-button>          <!-- sacar al momento de test -->
+          <ion-button shape="round" *ngIf="this.showTestButton" type="button" expand="block" color="tertiary"  (click)="suponerEscaneoMesa1()" >Escanear QR Mesa 1</ion-button>                                                      
+          <ion-button shape="round" *ngIf="this.showTestButton" type="button" expand="block" color="tertiary"  (click)="suponerEscaneoMesa2()" >Escanear QR Mesa 2</ion-button>                                                      
+          <ion-button shape="round" *ngIf="this.showTestButton" type="button" expand="block" color="tertiary"  (click)="suponerEscaneoMesa3()" >Escanear QR Mesa 3</ion-button>                                            
         </ion-col>
       </ion-row>      
       <!-- mesa a asignar -->

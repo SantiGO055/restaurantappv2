@@ -64,20 +64,45 @@ export class PaginaIngresoPage implements OnInit {
 
   async escanearQr()
   {
-    const resultado = await this.lectorqrService.escanear();                       
-    this.procesarLecturaQR();
+    const resultado = await this.lectorqrService.escanear();    
+    this.procesarLecturaQR(resultado);
+
   }
 
-protected procesarLecturaQR(){  
-  if(this.usuarioLogueado.estado == clienteEstado.VISITO_HOY ){
+  protected procesarLecturaQR(resultado: string) {
+    const json = JSON.parse( resultado);        
+    if (json.mesaId) {
+      this.alerta.showDanger('No puede tomar una mesa sin estar en la lista de espera.','No puede tomar mesa');
+    }
+  if(json.agregarListaEspera == true) {    
+    if(this.usuarioLogueado.estado == clienteEstado.VISITO_HOY ){
       this.router.navigateByUrl('/dashboard/resultados-encuesta');
-  }else{
-    this.agregarAListaEspera();      
-  }      
+    }else{
+      this.agregarAListaEspera();      
+    }
+  }
+
+    
+}
+  
+  
+async suponerEscaneoMesa1()
+{
+    this.procesarLecturaQR('{"mesaId":"xkbC3DQSKxibJ9KzAOG2"}' );
+}S
+
+async suponerEscaneoMesa2()
+{ 
+    this.procesarLecturaQR('{"mesaId":"swUDyLwV8OFFxZnJORp5"}' );
+}
+
+async suponerEscaneoMesa3()
+{ 
+    this.procesarLecturaQR('{"mesaId":"Jrgpl9d4bcmMM3ZWi3Q5"}' );
 }
 
   async testQRValido(){
-    this.procesarLecturaQR();
+    this.procesarLecturaQR('{"agregarListaEspera":true}' );
   }
 
   deternerScaner(){
