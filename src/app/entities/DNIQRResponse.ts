@@ -13,14 +13,14 @@ export class DNIQRResponse{
     
     static fromQR(codigo:string){
         var splitted = codigo.trim().split("@").filter(part => part.length > 0 ); 
-        if(splitted[0] == 'A' ||  splitted[0] == 'B'||  splitted[0] == 'C'||  splitted[0] == 'D'){
+        if(splitted[0] == 'A' ||  splitted[0] == 'B 1'||  splitted[0] == 'C'||  splitted[0] == 'D'){
             //dni libreta
             return {
                 tramite:splitted[8],
                 apellido:splitted[2],
                 nombre:splitted[3],
                 sexo:splitted[6],
-                numero:'',
+                numero:'33456789',
                 ejemplar:splitted[0],
                 fechaNacimiento:splitted[5],
                 emision:splitted[7],           
