@@ -22,9 +22,10 @@ export class ListadopedidoPage implements OnInit {
 
   pedidos: Pedido[] = [];
   ngOnInit() {
-    this.loginSvc.usuarioLogueado.then(usr=>{
+    this.loginSvc.usuarioLogueado ? this.loginSvc.usuarioLogueado.then(usr=>{
       this.usuarioLogueado = usr;
-    });
+    }) : this.usuarioLogueado = null;
+    
     this.pedidosSvc.getAllPedidos().pipe(first())
     .toPromise()
     .then(pedidos=>{
